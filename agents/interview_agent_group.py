@@ -7,6 +7,7 @@ Contains multiple sub-agents for different aspects of information gathering.
 import json
 import os
 import sys
+from datetime import datetime
 from typing import Dict, List, Optional
 
 from langchain.agents import AgentExecutor, create_openai_tools_agent
@@ -19,6 +20,7 @@ from langchain_openai import ChatOpenAI
 # Add the utils directory to the Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'utils'))
 from prompt_manager import PromptManager
+from run_manager import DataSaver, RunManager
 
 
 class InterviewAgentGroup:
@@ -27,7 +29,7 @@ class InterviewAgentGroup:
     This group contains multiple sub-agents for comprehensive information gathering.
     """
     
-    def __init__(self, api_key: str, model_name: str = "gpt-4", prompts_dir: str = None):
+    def __init__(self, api_key: str, model_name: str = "gpt-4", prompts_dir: str = None, run_manager: RunManager = None):
         """
         Initialize the interview agent group.
         
@@ -35,6 +37,7 @@ class InterviewAgentGroup:
             api_key: OpenAI API key
             model_name: The LLM model to use
             prompts_dir: Path to the prompts directory. If None, will auto-detect.
+            run_manager: Run manager for data storage
         """
         self.llm = ChatOpenAI(
             api_key=api_key,
@@ -92,6 +95,16 @@ class InterviewAgentGroup:
         
         # Initialize sub-agents (can be expanded)
         self.sub_agents = self._initialize_sub_agents()
+        
+        # Initialize run manager and data saver
+        self.run_manager = run_manager
+        self.data_saver = DataSaver(run_manager) if run_manager else None
+        
+        # Legacy data directory paths (for backward compatibility only)
+        self.data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+        self.intermediate_dir = os.path.join(self.data_dir, "intermediate_results", "interview_agent_group")
+        
+        # Note: These legacy directories are deprecated. Use RunManager paths instead.
     
     def _initialize_sub_agents(self) -> Dict[str, any]:
         """
@@ -169,6 +182,21 @@ class InterviewAgentGroup:
                 # Default to assessment goals if unclear
                 self.interview_data["assessment_goals"].append(data)
             
+            # Save to new run-based structure if available
+            if self.data_saver:
+                timestamp = datetime.now().isoformat()
+                interview_data = {
+                    "timestamp": timestamp,
+                    "data": data,
+                    "source": "interview_agent_group",
+                    "run_id": self.run_manager.current_run_id if self.run_manager else None,
+                    "categorized_data": self.interview_data
+                }
+                
+                filepath = self.data_saver.save_interview_data(interview_data)
+                if filepath:
+                    return f"Assessment-related data saved to run directory: {filepath}"
+            
             return f"Assessment-related data saved: {data}"
         
         def get_interview_progress() -> str:
@@ -225,7 +253,24 @@ class InterviewAgentGroup:
     
     def get_interview_summary(self) -> Dict:
         """Get a summary of the collected interview data."""
-        return self.interview_data.copy()
+        summary = self.interview_data.copy()
+        
+        # Save summary to run directory if available
+        if self.data_saver:
+            timestamp = datetime.now().isoformat()
+            summary_data = {
+                "timestamp": timestamp,
+                "summary": summary,
+                "source": "interview_agent_group",
+                "run_id": self.run_manager.current_run_id if self.run_manager else None,
+                "is_complete": self.is_interview_complete()
+            }
+            
+            filepath = self.data_saver.save_interview_data(summary_data, "interview_summary.json")
+            if filepath:
+                print(f"Interview summary saved to: {filepath}")
+        
+        return summary
     
     def is_interview_complete(self) -> bool:
         """Check if sufficient empathy assessment information has been gathered."""

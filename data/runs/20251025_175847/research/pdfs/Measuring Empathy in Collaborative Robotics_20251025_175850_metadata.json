@@ -1,0 +1,19 @@
+{
+  "title": "Measuring Empathy in Collaborative Robotics",
+  "authors": [
+    "Alice Brown",
+    "Charlie Wilson"
+  ],
+  "year": 2022,
+  "venue": "IEEE Transactions on Robotics",
+  "download_timestamp": "20251025_175850",
+  "source": "direct_test",
+  "api_source": "arxiv",
+  "status": "metadata_only",
+  "error": "PDF download failed: 404 Client Error: Not Found for url: https://arxiv.org/pdf/2205.67890",
+  "pdf_url": "https://arxiv.org/pdf/2205.67890.pdf",
+  "paper_id": "test_002",
+  "citation_count": 32,
+  "abstract": "This work focuses on measuring empathy in collaborative robotics scenarios...",
+  "is_open_access": true
+}

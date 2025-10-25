@@ -1,0 +1,20 @@
+{
+  "title": "Empathy in Human-Robot Interaction: A Comprehensive Study",
+  "authors": [
+    "John Smith",
+    "Jane Doe"
+  ],
+  "year": 2023,
+  "venue": "Journal of Human-Robot Interaction",
+  "download_timestamp": "20251025_175847",
+  "source": "direct_test",
+  "api_source": "arxiv",
+  "status": "pdf_downloaded",
+  "pdf_file": "Empathy in Human-Robot Interaction A Comprehensive_20251025_175847.pdf",
+  "pdf_url": "https://arxiv.org/pdf/2301.12345.pdf",
+  "paper_id": "test_001",
+  "citation_count": 45,
+  "abstract": "This paper presents a comprehensive study of empathy in human-robot interaction...",
+  "is_open_access": true,
+  "file_size": 19216108
+}

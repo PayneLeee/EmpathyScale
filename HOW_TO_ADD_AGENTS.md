@@ -1,8 +1,9 @@
 # 如何添加新的Agent Group
 
 ## 当前状态
-目前项目中只有一个agent group：
+目前项目中有两个agent group：
 - `agents/interview_agent_group.py` ↔ `prompts/interview_agent_group.json`
+- `agents/research_agent_group.py` ↔ `prompts/research_agent_group.json`
 
 ## 命名约定
 每个agent group必须遵循严格的命名约定：
@@ -11,6 +12,7 @@
 
 例如：
 - `agents/interview_agent_group.py` ↔ `prompts/interview_agent_group.json`
+- `agents/research_agent_group.py` ↔ `prompts/research_agent_group.json`
 - `agents/analysis_agent_group.py` ↔ `prompts/analysis_agent_group.json`
 
 ## Agent Group架构
@@ -165,7 +167,7 @@ python debug_prompts.py
 3. **子Agent管理**: 每个agent group内部管理自己的子agent
 4. **统一Prompt管理**: 所有子agent的prompts都存储在同一个JSON文件中
 5. **独立功能领域**: 每个agent group专注于特定的功能领域
-6. **当前项目状态**: 目前只有interview_agent_group，其他agent group需要按需添加
+6. **当前项目状态**: 目前有interview_agent_group和research_agent_group，其他agent group需要按需添加
 
 ## 优势
 

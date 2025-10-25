@@ -1,16 +1,19 @@
 # Multi-Agent LLM Workflow for Human-Robot Collaboration Analysis
 
-A sophisticated multi-agent system built with LangChain for conducting interviews and analyzing human-robot collaboration scenarios.
+A sophisticated multi-agent system built with LangChain for conducting interviews, researching empathy scales, and analyzing human-robot collaboration scenarios.
 
 ## 🚀 Features
 
-- **Interview Agent**: Specialized agent for gathering information about human-robot collaboration scenarios
+- **Interview Agent Group**: Specialized agents for gathering information about human-robot collaboration scenarios
+- **Research Agent Group**: Advanced agents for academic paper research and empathy scale construction
+- **PDF Download System**: Automated paper collection for RAG (Retrieval-Augmented Generation) tasks
+- **Time-Stamped Data Storage**: Organized data storage with complete run history tracking
 - **Modular Architecture**: Designed for easy expansion with additional specialized agents
 - **Secure Configuration**: API keys stored in separate JSON configuration file
-- **Conversation Memory**: Maintains context throughout the interview process
-- **Interactive Interface**: User-friendly command-line interface
+- **Conversation Memory**: Maintains context throughout the workflow process
+- **Interactive Interface**: User-friendly command-line interface with multiple workflow modes
 - **External Prompt Management**: Prompts stored in separate JSON files for easy debugging and modification
-- **Prompt Debugging Tools**: Built-in utilities for testing and modifying prompts
+- **Comprehensive Testing**: Built-in test scripts for functionality verification
 
 ## 📋 Prerequisites
 
@@ -33,26 +36,59 @@ A sophisticated multi-agent system built with LangChain for conducting interview
 
 ## 🎯 Usage
 
-### Running the Interview Agent
+### Running the Complete Workflow
 
 ```bash
 python main.py
 ```
 
-This will start an interactive interview session where the agent will ask questions about:
-- Task descriptions and activities
-- Working environment
-- Robot platform details
-- Collaboration types
-- Current challenges
-- Specific requirements
+This will present you with three workflow options:
 
-### Direct Agent Usage
+1. **Interview only**: Conduct interviews to gather assessment scenario information
+2. **Complete workflow**: Run both interview and research phases sequentially
+3. **Research only**: Run research phase using existing interview data
 
-You can also run the interview agent group directly:
+### Workflow Modes
+
+#### Complete Workflow (Recommended)
+The complete workflow runs both phases:
+- **Phase 1: Interview**: Gathers information about human-robot collaboration scenarios
+- **Phase 2: Research**: Searches for academic papers and constructs empathy scales
+
+#### Interview Phase
+The interview agent will ask questions about:
+- Assessment context and scenarios
+- Robot platform characteristics
+- Collaboration patterns
+- Environmental settings
+- Assessment goals and requirements
+- Expected empathy forms
+- Measurement challenges
+
+#### Research Phase
+The research agent will:
+- Search for relevant academic papers
+- Analyze methodologies for empathy scale construction
+- Extract context-specific insights
+- Generate design recommendations
+- Download PDF papers for RAG tasks
+
+### Testing and Verification
+
+Use the comprehensive test scripts to verify functionality:
 
 ```bash
-python agents/interview_agent_group.py
+# Quick functionality check
+python checkscripts/quick_agent_check.py
+
+# Complete functionality test
+python checkscripts/test_agent_functionality.py
+
+# Test PDF download functionality
+python checkscripts/test_pdf_download.py
+
+# Test new data storage structure
+python checkscripts/test_new_data_storage.py
 ```
 
 ### Prompt Debugging Tool
@@ -68,7 +104,6 @@ This tool allows you to:
 - Test prompt formatting with different parameters
 - Reload all prompts or specific agent prompts
 - View prompt file paths for easy editing
-- Each agent's prompts are organized in separate files
 
 ## 🏗️ Architecture
 
@@ -86,22 +121,37 @@ This tool allows you to:
 EmpathyScale/
 ├── agents/                   # Agent group implementation files
 │   ├── __init__.py
-│   └── interview_agent_group.py    # Interview agent group (information gathering)
-├── utils/
+│   ├── interview_agent_group.py    # Interview agent group (information gathering)
+│   └── research_agent_group.py    # Research agent group (academic research)
+├── utils/                    # Utility modules
 │   ├── __init__.py
-│   └── prompt_manager.py     # Prompt management utilities
+│   ├── prompt_manager.py     # Prompt management utilities
+│   └── run_manager.py        # Data storage and run management
 ├── prompts/                  # Agent group-specific prompt files (1:1 mapping)
-│   └── interview_agent_group.json  # Interview agent group prompts
+│   ├── interview_agent_group.json  # Interview agent group prompts
+│   └── research_agent_group.json  # Research agent group prompts
+├── checkscripts/             # Testing and verification scripts
+│   ├── check_openai_key.py
+│   ├── quick_agent_check.py
+│   ├── test_agent_functionality.py
+│   ├── test_pdf_download.py
+│   └── test_new_data_storage.py
+├── data/                     # Data storage directory
+│   ├── runs/                 # Time-stamped run records
+│   ├── templates/            # Template files
+│   └── README.md             # Data structure documentation
 ├── main.py                   # Main application entry point
 ├── debug_prompts.py         # Prompt debugging tool
 ├── config.json              # Configuration file with API keys
 ├── requirements.txt         # Python dependencies
 ├── README.md               # This file
+├── RAG_PREPARATION_GUIDE.md # RAG integration guide
 └── HOW_TO_ADD_AGENTS.md    # Guide for adding new agent groups
 ```
 
 **命名约定**: 每个agent group的Python文件与对应的prompt文件名称完全一致
 - `agents/interview_agent_group.py` ↔ `prompts/interview_agent_group.json`
+- `agents/research_agent_group.py` ↔ `prompts/research_agent_group.json`
 
 **未来扩展**: 当添加新的agent group时，遵循相同的命名约定：
 - `agents/analysis_agent_group.py` ↔ `prompts/analysis_agent_group.json`
@@ -114,11 +164,15 @@ EmpathyScale/
 
 - **InterviewAgentGroup**: Conducts structured interviews about human-robot collaboration
   - Contains sub-agents: TaskCollectorAgent, EnvironmentAnalyzerAgent, PlatformSpecialistAgent, CollaborationExpertAgent
-- **MultiAgentWorkflow**: Orchestrates multiple agent groups
+- **ResearchAgentGroup**: Conducts academic research and empathy scale construction
+  - Contains sub-agents: PaperSearcherAgent, MethodologyAnalyzerAgent, ContextSpecialistAgent, ScaleDesignerAgent
+- **MultiAgentWorkflow**: Orchestrates multiple agent groups with complete workflow management
+- **RunManager**: Manages time-stamped data storage and run history tracking
+- **DataSaver**: Handles automatic data saving to organized directory structures
 - **PromptManager**: Manages prompts from external JSON configuration files organized by agent group
 - **Configuration Management**: Secure handling of API keys and settings
-- **Memory Management**: Conversation context preservation
-- **Debug Tools**: Utilities for testing and modifying prompts
+- **Memory Management**: Conversation context preservation across workflow phases
+- **Testing Framework**: Comprehensive test scripts for functionality verification
 
 ## 🔧 Configuration
 
@@ -133,6 +187,7 @@ The `config.json` file contains:
 ### Prompt Configuration
 The `prompts/` directory contains agent group-specific prompt files:
 - `interview_agent_group.json`: Interview agent group prompts (information gathering)
+- `research_agent_group.json`: Research agent group prompts (academic research)
 
 Each file contains prompts specific to that agent group and its sub-agents:
 ```json
@@ -156,10 +211,11 @@ Each file contains prompts specific to that agent group and its sub-agents:
 
 This architecture is designed to easily accommodate additional agents:
 
-- **Analysis Agent**: Process collected data and generate insights
-- **Report Agent**: Create structured reports from interview data
-- **Recommendation Agent**: Suggest improvements based on analysis
-- **Validation Agent**: Verify data quality and completeness
+- **Analysis Agent Group**: Process collected data and generate insights
+- **Report Agent Group**: Create structured reports from interview and research data
+- **Recommendation Agent Group**: Suggest improvements based on analysis
+- **Validation Agent Group**: Verify data quality and completeness
+- **RAG Agent Group**: Implement retrieval-augmented generation for enhanced research
 
 ## 🐛 Troubleshooting
 

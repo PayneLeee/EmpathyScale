@@ -1,0 +1,114 @@
+{
+  "semantic_scholar": {
+    "name": "Semantic Scholar",
+    "base_url": "https://api.semanticscholar.org/graph/v1/paper",
+    "search_url": "https://api.semanticscholar.org/graph/v1/paper/search",
+    "rate_limit": 100,
+    "enabled": true,
+    "description": "AI-powered research tool for scientific literature",
+    "domains": [
+      "computer science",
+      "robotics",
+      "human-computer interaction",
+      "AI"
+    ],
+    "api_key": null,
+    "notes": "Free, no API key required. Excellent for CS and AI papers."
+  },
+  "arxiv": {
+    "name": "arXiv",
+    "base_url": "http://export.arxiv.org/api/query",
+    "rate_limit": 3,
+    "enabled": true,
+    "description": "Open access repository of electronic preprints",
+    "domains": [
+      "cs",
+      "cs.RO",
+      "cs.HC",
+      "cs.AI",
+      "cs.CV",
+      "cs.CL"
+    ],
+    "api_key": null,
+    "notes": "Free, no API key required. Best for preprints in CS and robotics."
+  },
+  "pubmed": {
+    "name": "PubMed",
+    "base_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils",
+    "rate_limit": 3,
+    "enabled": true,
+    "description": "Database of biomedical literature",
+    "domains": [
+      "biomedical",
+      "healthcare",
+      "medical robotics"
+    ],
+    "api_key": null,
+    "notes": "Free, no API key required. Good for healthcare and medical robotics."
+  },
+  "crossref": {
+    "name": "Crossref",
+    "base_url": "https://api.crossref.org/works",
+    "rate_limit": 50,
+    "enabled": true,
+    "description": "DOI registration and metadata service",
+    "domains": [
+      "all academic fields"
+    ],
+    "api_key": null,
+    "notes": "Free, no API key required. Good for DOI resolution and metadata."
+  },
+  "openalex": {
+    "name": "OpenAlex",
+    "base_url": "https://api.openalex.org/works",
+    "rate_limit": 10,
+    "enabled": true,
+    "description": "Open catalog of the world's scholarly papers",
+    "domains": [
+      "all academic fields"
+    ],
+    "api_key": null,
+    "notes": "Free, no API key required. Comprehensive academic database."
+  },
+  "future_apis": {
+    "ieee_xplore": {
+      "name": "IEEE Xplore",
+      "base_url": "https://ieeexploreapi.ieee.org/api/v1/search/articles",
+      "rate_limit": 200,
+      "enabled": false,
+      "description": "IEEE digital library",
+      "domains": [
+        "engineering",
+        "computer science",
+        "robotics"
+      ],
+      "api_key": "YOUR_IEEE_API_KEY",
+      "notes": "Requires API key. Excellent for engineering and robotics papers."
+    },
+    "acm_digital_library": {
+      "name": "ACM Digital Library",
+      "base_url": "https://dl.acm.org/api/search",
+      "rate_limit": 100,
+      "enabled": false,
+      "description": "ACM digital library",
+      "domains": [
+        "computer science",
+        "human-computer interaction"
+      ],
+      "api_key": "YOUR_ACM_API_KEY",
+      "notes": "Requires API key. Good for HCI and CS papers."
+    },
+    "springer_nature": {
+      "name": "Springer Nature",
+      "base_url": "https://api.springernature.com/metadata/json",
+      "rate_limit": 5000,
+      "enabled": false,
+      "description": "Springer Nature publications",
+      "domains": [
+        "all academic fields"
+      ],
+      "api_key": "YOUR_SPRINGER_API_KEY",
+      "notes": "Requires API key. Good for multidisciplinary research."
+    }
+  }
+}
