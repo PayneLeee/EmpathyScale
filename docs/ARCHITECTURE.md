@@ -284,7 +284,7 @@ See [DATA_STORAGE.md](./DATA_STORAGE.md) for detailed structure.
 - `search_and_screen(queries)`: Search and filter papers
 - `extract_findings(papers)`: Extract structured findings
 - `download_pdfs(papers, run_id)`: Download and organize PDFs
-- `run_complete_search(interview_summary, run_id)`: Execute full workflow
+- `search_and_download(run_id, interview_summary)`: Execute full workflow
 
 ## Prompt Usage Patterns
 

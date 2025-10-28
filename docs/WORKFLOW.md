@@ -179,15 +179,16 @@ Literature Search Agent Group
     [findings]
     ↓ (download_pdfs())
     [downloaded_papers_with_paths]
-    ↓ (organize_findings())
+    ↓ (organize_results())
     {
-        "definitions": [...],
-        "behaviors": {
-            "speech_verbal": [...],
-            "tactile_haptic": [...],
-            ...
+        "empathy_definitions": [...],
+        "empathic_behaviors": {
+            "verbal": [...],
+            "nonverbal": [...],
+            "adaptive": [...]
         },
-        "measurement": [...]
+        "measurement_approaches": [...],
+        "existing_scales": [...]
     }
     ↓
 Data Storage (data/runs/{run_id}/)
@@ -202,7 +203,10 @@ The interview summary is automatically extracted and passed to the literature se
 ```python
 # In main.py
 interview_summary = interview_agent_group.get_interview_summary()
-literature_agent_group.run_complete_search(interview_summary, run_id)
+literature_results = literature_agent.search_and_download(
+    run_id,
+    interview_summary
+)
 ```
 
 **Critical Fields Passed**:

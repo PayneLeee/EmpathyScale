@@ -22,10 +22,8 @@ data/
         │   ├── summary.json          # Structured interview summary
         │   └── conversation.json     # Full conversation history
         └── literature_search_agent_group/  # Literature search phase data
-            ├── summary.json          # Search results summary
-            ├── conversation.json     # (if applicable)
-            ├── queries.json          # Generated search queries
-            ├── findings.json         # Extracted findings
+            ├── summary.json          # Search results summary (contains queries, findings, organized results)
+            ├── conversation.json     # (empty list - no conversation history)
             └── pdfs/                 # Downloaded PDFs
                 ├── definitions/      # Papers on empathy definitions
                 │   └── paper_XX_YYYY.pdf
@@ -120,58 +118,42 @@ Complete conversation history as an array of message objects:
 
 ### `literature_search_agent_group/summary.json`
 
-Summary of literature search results:
+Summary of literature search results (wrapped in a results object):
 
 ```json
 {
-  "queries": [
-    "robot empathy in healthcare collaboration",
-    "measuring perceived empathy in human-robot interaction",
-    "empathy scale construction for robots"
-  ],
-  "total_papers_searched": 120,
-  "papers_screened": 80,
-  "papers_downloaded": 15,
-  "findings_extracted": 15,
-  "categories": {
-    "definitions": 5,
-    "behaviors": 6,
-    "measurement": 4
+  "results": {
+    "search_queries": [
+      "robot empathy in healthcare collaboration",
+      "measuring perceived empathy in human-robot interaction"
+    ],
+    "total_papers_found": 120,
+    "screened_papers": 80,
+    "extracted_findings": 15,
+    "pdfs_downloaded": 15,
+    "organized_findings": {
+      "empathy_definitions": [...],
+      "empathic_behaviors": {
+        "verbal": [...],
+        "nonverbal": [...],
+        "adaptive": [...]
+      },
+      "measurement_approaches": [...],
+      "existing_scales": [...]
+    },
+    "downloaded_papers": [...],
+    "all_findings": [...]
+  },
+  "organized_findings": {
+    "empathy_definitions": [...],
+    "empathic_behaviors": {...},
+    "measurement_approaches": [...],
+    "existing_scales": [...]
   }
 }
 ```
 
-### `literature_search_agent_group/queries.json`
-
-Generated search queries with metadata:
-
-```json
-[
-  {
-    "query": "robot empathy scale construction methods",
-    "source": "generated",
-    "timestamp": "2025-10-28T19:43:00.123456"
-  }
-]
-```
-
-### `literature_search_agent_group/findings.json`
-
-Extracted findings from papers, organized by category:
-
-```json
-{
-  "definitions": [
-    {
-      "paper_title": "Empathy in Human-Robot Interaction",
-      "finding": "Robot empathy is defined as...",
-      "category": "definitions"
-    }
-  ],
-  "behaviors": [...],
-  "measurement": [...]
-}
-```
+**Note**: All literature search data (queries, findings, results) is contained within `summary.json`. The queries are in `results.search_queries`, findings are in `results.all_findings`, and organized findings are in `results.organized_findings`.
 
 ### `literature_search_agent_group/pdfs/`
 
