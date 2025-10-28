@@ -1,193 +1,152 @@
-# Multi-Agent LLM Workflow for Human-Robot Collaboration Analysis
+# EmpathyScale: Robot Empathy Assessment Framework
 
-A sophisticated multi-agent system built with LangChain for conducting interviews and analyzing human-robot collaboration scenarios.
+A multi-agent AI system for designing and evaluating scales that quantify perceived empathy in robots during human-robot collaboration scenarios.
 
-## 🚀 Features
+## 🎯 Project Objectives
 
-- **Interview Agent**: Specialized agent for gathering information about human-robot collaboration scenarios
-- **Modular Architecture**: Designed for easy expansion with additional specialized agents
-- **Secure Configuration**: API keys stored in separate JSON configuration file
-- **Conversation Memory**: Maintains context throughout the interview process
-- **Interactive Interface**: User-friendly command-line interface
-- **External Prompt Management**: Prompts stored in separate JSON files for easy debugging and modification
-- **Prompt Debugging Tools**: Built-in utilities for testing and modifying prompts
+This system enables researchers and developers to:
+- **Conduct structured interviews** about human-robot collaboration scenarios
+- **Identify key factors** influencing perceived robot empathy (interaction modalities, collaboration patterns, context)
+- **Search and synthesize literature** on robot empathy, scale construction, and measurement methods
+- **Generate comprehensive background** for creating validated empathy assessment scales
 
-## 📋 Prerequisites
+## 🚀 Quick Start
 
-- Python 3.8 or higher
+### Prerequisites
+- Python 3.8+
 - OpenAI API key
-- Internet connection for API calls
+- Internet connection for literature search
 
-## 🛠️ Installation
+### Installation
 
-1. **Clone or download the project files**
+```bash
+# Clone the repository
+git clone <repository-url>
+cd EmpathyScale
 
-2. **Install required dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+# Install dependencies
+pip install -r requirements.txt
 
-3. **Configure your OpenAI API key:**
-   - The `config.json` file is already set up with your API key
-   - For security, consider moving this to a more secure location in production
+# Configure API key in config.json
+```
 
-## 🎯 Usage
-
-### Running the Interview Agent
+### Run the Workflow
 
 ```bash
 python main.py
 ```
 
-This will start an interactive interview session where the agent will ask questions about:
-- Task descriptions and activities
-- Working environment
-- Robot platform details
-- Collaboration types
-- Current challenges
-- Specific requirements
+The system will:
+1. **Interview Agent**: Conduct an interactive interview about your robot collaboration scenario
+2. **Literature Search Agent**: Automatically search academic literature based on interview findings
+3. **Save Results**: Store all data in timestamped run directories
 
-### Direct Agent Usage
-
-You can also run the interview agent group directly:
-
-```bash
-python agents/interview_agent_group.py
-```
-
-### Prompt Debugging Tool
-
-Use the built-in prompt debugging tool to test and modify prompts:
-
-```bash
-python debug_prompts.py
-```
-
-This tool allows you to:
-- View all available agents and their prompts
-- Test prompt formatting with different parameters
-- Reload all prompts or specific agent prompts
-- View prompt file paths for easy editing
-- Each agent's prompts are organized in separate files
-
-## 🏗️ Architecture
-
-For detailed architecture documentation, see **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
-
-### Why This Design?
-
-1. **Modularity**: Each agent is a separate class that can be developed and tested independently
-2. **Scalability**: Easy to add new specialized agents (analysis, reporting, decision-making)
-3. **Security**: Sensitive configuration separated from code
-4. **Maintainability**: Clear separation of concerns and well-documented code
-5. **Extensibility**: Built on LangChain's flexible agent framework
-
-### Documentation
-
-- **[Architecture Guide](docs/ARCHITECTURE.md)**: Complete guide to agent groups, prompts, and system design
-- **[Adding Agents Guide](docs/HOW_TO_ADD_AGENTS.md)**: Step-by-step instructions for extending the system
-- **[Literature Search](docs/LITERATURE_SEARCH_IMPROVEMENTS.md)**: Details on literature search capabilities
-
-### Project Structure
+## 📁 Project Structure
 
 ```
 EmpathyScale/
-├── agents/                   # Agent group implementation files
-│   ├── __init__.py
-│   └── interview_agent_group.py    # Interview agent group (information gathering)
-├── utils/
-│   ├── __init__.py
-│   └── prompt_manager.py     # Prompt management utilities
-├── prompts/                  # Agent group-specific prompt files (1:1 mapping)
-│   └── interview_agent_group.json  # Interview agent group prompts
-├── main.py                   # Main application entry point
-├── debug_prompts.py         # Prompt debugging tool
-├── config.json              # Configuration file with API keys
-├── requirements.txt         # Python dependencies
-├── README.md               # This file
-└── docs/                    # Documentation directory
-    ├── README.md           # Documentation index
-    ├── ARCHITECTURE.md     # Agent group and prompt architecture guide
-    ├── HOW_TO_ADD_AGENTS.md # Guide for adding new agent groups
-    └── LITERATURE_SEARCH_IMPROVEMENTS.md # Literature search improvements
+├── agents/                    # Agent group implementations
+│   ├── interview_agent_group.py          # Information gathering
+│   └── literature_search_agent_group.py  # Literature search & synthesis
+├── prompts/                   # Agent prompts (JSON files)
+│   ├── interview_agent_group.json
+│   └── literature_search_agent_group.json
+├── utils/                     # Core utilities
+│   ├── prompt_manager.py      # Prompt loading & management
+│   ├── data_manager.py        # Data storage & run management
+│   └── research_api.py        # Academic database APIs
+├── docs/                      # Documentation
+│   ├── ARCHITECTURE.md        # System architecture
+│   ├── WORKFLOW.md            # Agent workflows & responsibilities
+│   ├── DATA_STORAGE.md        # Data storage structure
+│   └── HOW_TO_ADD_AGENTS.md   # Extension guide
+├── data/                      # Runtime data storage
+│   └── runs/                  # Timestamped run directories
+├── main.py                    # Main workflow orchestrator
+├── config.json                # API configuration
+└── requirements.txt           # Python dependencies
 ```
 
-**命名约定**: 每个agent group的Python文件与对应的prompt文件名称完全一致
-- `agents/interview_agent_group.py` ↔ `prompts/interview_agent_group.json`
+## 🔄 Workflow Overview
 
-**未来扩展**: 当添加新的agent group时，遵循相同的命名约定：
-- `agents/analysis_agent_group.py` ↔ `prompts/analysis_agent_group.json`
-- `agents/report_agent_group.py` ↔ `prompts/report_agent_group.json`
-- `agents/validation_agent_group.py` ↔ `prompts/validation_agent_group.json`
+### 1. Interview Phase
+The **Interview Agent Group** conducts a structured conversation to gather:
+- **Assessment Context**: What scenario are you evaluating?
+- **Robot Platform**: What type of robot and capabilities?
+- **Interaction Modalities**: Speech, touch, visual cues, etc.
+- **Collaboration Patterns**: How do humans and robots interact?
+- **Assessment Goals**: What empathy aspects to measure?
 
-**Agent Group架构**: 每个agent group包含多个子agent，专门处理特定功能领域
+### 2. Literature Search Phase
+The **Literature Search Agent Group** automatically:
+- Generates targeted search queries from interview findings
+- Searches arXiv and Semantic Scholar databases
+- Screens papers for relevance to robot empathy and scale construction
+- Downloads relevant PDFs organized by category
+- Extracts key findings on definitions, behaviors, and measurement methods
+- Organizes findings for scale design reference
 
-### Key Components
+### 3. Data Storage
+All data is saved in timestamped directories:
+- Interview summaries and conversations
+- Literature search queries and results
+- Downloaded PDFs organized by category
+- Extracted findings and organized insights
 
-- **InterviewAgentGroup**: Conducts structured interviews about human-robot collaboration
-  - Contains sub-agents: TaskCollectorAgent, EnvironmentAnalyzerAgent, PlatformSpecialistAgent, CollaborationExpertAgent
-- **MultiAgentWorkflow**: Orchestrates multiple agent groups
-- **PromptManager**: Manages prompts from external JSON configuration files organized by agent group
-- **Configuration Management**: Secure handling of API keys and settings
-- **Memory Management**: Conversation context preservation
-- **Debug Tools**: Utilities for testing and modifying prompts
+See [docs/DATA_STORAGE.md](docs/DATA_STORAGE.md) for detailed structure.
+
+## 📚 Documentation
+
+- **[Architecture Guide](docs/ARCHITECTURE.md)**: Agent groups, prompt management, design patterns
+- **[Workflow Guide](docs/WORKFLOW.md)**: Agent responsibilities, data flow, execution steps
+- **[Data Storage](docs/DATA_STORAGE.md)**: Run structure, file organization, data access
+- **[Adding Agents](docs/HOW_TO_ADD_AGENTS.md)**: Step-by-step extension guide
+
+## 🛠️ Additional Tools
+
+### Prompt Debugging
+```bash
+python debug_prompts.py
+```
+View, test, and reload agent prompts without code changes.
+
+### Testing
+```bash
+# Fast integration test (mocked operations)
+python tests/test_integration_fast.py
+
+# Full integration test (real API calls)
+python tests/test_integration.py
+```
+
+## 🏗️ Key Design Principles
+
+- **Modularity**: Each agent group is self-contained and independently testable
+- **Prompt Externalization**: All prompts in JSON files for easy iteration
+- **Timestamp Isolation**: Each run gets unique directory, no data conflicts
+- **Extensibility**: Clear patterns for adding new agent groups
+- **Robustness**: Comprehensive error handling and data validation
 
 ## 🔧 Configuration
 
-### API Configuration
-The `config.json` file contains:
+### API Keys
+Store in `config.json`:
 ```json
 {
-  "openai_api_key": "your-openai-api-key-here"
+  "openai_api_key": "your-api-key-here"
 }
 ```
 
-### Prompt Configuration
-The `prompts/` directory contains agent group-specific prompt files:
-- `interview_agent_group.json`: Interview agent group prompts (information gathering)
-
-Each file contains prompts specific to that agent group and its sub-agents:
-```json
-{
-  "system_prompt": "You are an expert interviewer...",
-  "opening_message": "Hello! I'm here to learn...",
-  "error_message": "I apologize, but I encountered an error...",
-  "task_collector_prompt": "Focus on gathering task information...",
-  "environment_analyzer_prompt": "Analyze the working environment..."
-}
+### Model Selection
+Modify agent initialization in `main.py`:
+```python
+InterviewAgentGroup(api_key=..., model_name="gpt-4")  # or "gpt-3.5-turbo"
 ```
-
-### Modifying Prompts
-1. Edit the specific agent group's JSON file in the `prompts/` directory
-2. Use the debug tool: `python debug_prompts.py`
-3. Reload prompts in the running application using the debug tool
-4. Each agent group's prompts are stored in separate files for better organization
-5. Sub-agent prompts are included within the agent group's prompt file
-
-## 🚀 Future Extensions
-
-This architecture is designed to easily accommodate additional agents:
-
-- **Analysis Agent**: Process collected data and generate insights
-- **Report Agent**: Create structured reports from interview data
-- **Recommendation Agent**: Suggest improvements based on analysis
-- **Validation Agent**: Verify data quality and completeness
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **API Key Error**: Ensure your OpenAI API key is valid and has sufficient credits
-2. **Import Errors**: Make sure all dependencies are installed with `pip install -r requirements.txt`
-3. **Configuration Error**: Verify `config.json` exists and contains valid JSON
-
-### Getting Help
-
-If you encounter issues:
-1. Check that all dependencies are installed
-2. Verify your OpenAI API key is correct
-3. Ensure you have an active internet connection
 
 ## 📝 License
 
 This project is designed for research and educational purposes in human-robot collaboration analysis.
+
+## 🤝 Contributing
+
+See [docs/HOW_TO_ADD_AGENTS.md](docs/HOW_TO_ADD_AGENTS.md) for guidelines on extending the system with new agent groups.

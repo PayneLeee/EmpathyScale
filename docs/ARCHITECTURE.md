@@ -1,47 +1,45 @@
-# Agent Group and Prompt Architecture
+# System Architecture
 
-This document describes the design and structure of the agent group system and prompt management in the EmpathyScale project.
-
-## Table of Contents
-
-1. [Overview](#overview)
-2. [Agent Group Architecture](#agent-group-architecture)
-3. [Prompt Management System](#prompt-management-system)
-4. [File Organization](#file-organization)
-5. [Agent Group Structure](#agent-group-structure)
-6. [Sub-Agent Pattern](#sub-agent-pattern)
-7. [Prompt Usage Patterns](#prompt-usage-patterns)
-8. [Adding New Agent Groups](#adding-new-agent-groups)
-9. [Best Practices](#best-practices)
-
----
+This document describes the core architecture, design patterns, and technical structure of the EmpathyScale project.
 
 ## Overview
 
-The EmpathyScale project uses a **multi-agent group architecture** where:
+EmpathyScale uses a **modular multi-agent architecture** with:
+- **Agent Groups**: High-level agents handling major workflow tasks
+- **Sub-Agents**: Specialized components within groups for focused tasks
+- **Externalized Prompts**: All prompts stored in JSON files for flexibility
+- **PromptManager**: Centralized prompt loading and management
+- **DataManager**: Timestamp-isolated data storage
 
-- **Agent Groups** are high-level agents that handle major workflow tasks (e.g., conducting interviews, searching literature)
-- **Sub-Agents** are specialized agents within a group that focus on specific aspects of the task
-- **Prompts** are externalized in JSON files, making them easy to modify, version control, and debug
-- **PromptManager** centralizes all prompt loading, formatting, and management
+## Architecture Principles
 
-This design enables:
-- ✅ **Modularity**: Each agent group is self-contained
-- ✅ **Flexibility**: Prompts can be modified without code changes
-- ✅ **Debuggability**: Prompts are visible and version-controlled
-- ✅ **Extensibility**: New agent groups can be added easily
-- ✅ **Specialization**: Sub-agents handle domain-specific tasks
+### 1. Separation of Concerns
+- **Prompts** (what agents say/think) are separate from **Code** (how agents work)
+- Prompts can be modified without code changes
+- Code can be refactored without changing prompts
 
----
+### 2. Externalization
+- All prompts in JSON files, not hardcoded
+- Enables easy iteration, version control, and non-developer modification
 
-## Agent Group Architecture
+### 3. Modularity
+- Each agent group is self-contained
+- Clear interfaces between components
+- Independent development and testing
 
-### Hierarchical Structure
+### 4. Consistency
+- Standardized initialization patterns
+- Consistent naming conventions
+- Uniform prompt structures
+
+## Agent Group Structure
+
+### Hierarchical Organization
 
 ```
 MultiAgentWorkflow (main.py)
 ├── InterviewAgentGroup
-│   ├── Main Agent (uses LangChain AgentExecutor)
+│   ├── Main Agent (LangChain AgentExecutor)
 │   ├── Tools (save_interview_data, get_interview_progress, delegate_to_sub_agent)
 │   └── Sub-Agents
 │       ├── TaskCollectorAgent
@@ -50,114 +48,16 @@ MultiAgentWorkflow (main.py)
 │       └── CollaborationExpertAgent
 │
 └── LiteratureSearchAgentGroup
-    ├── Main Agent (uses LLM directly)
+    ├── LLM Integration (direct ChatOpenAI calls)
     └── Methods (generate_queries, search_and_screen, extract_findings, etc.)
 ```
 
-### Agent Group Components
+### Base Agent Group Pattern
 
-Each agent group typically includes:
-
-1. **Main Agent Class** - The primary agent that orchestrates the workflow
-2. **PromptManager Integration** - Uses PromptManager to load prompts from JSON
-3. **LLM Instance** - ChatOpenAI instance for language model interactions
-4. **State Management** - Internal data structures to track progress
-5. **Tools (optional)** - LangChain tools for complex agent groups
-6. **Sub-Agents (optional)** - Specialized sub-agents for specific tasks
-
----
-
-## Prompt Management System
-
-### PromptManager Class
-
-The `PromptManager` (`utils/prompt_manager.py`) is the central system for managing all prompts:
-
-**Key Features:**
-- Auto-detects project root and prompts directory
-- Loads all prompts from JSON files on initialization
-- Provides methods to get, format, and reload prompts
-- Supports variable formatting in prompts using Python `.format()`
-
-**Key Methods:**
+All agent groups follow this structure:
 
 ```python
-# Get a specific prompt
-prompt_manager.get_agent_group_prompt("interview_agent_group", "system_prompt")
-
-# Format a prompt with variables
-prompt_manager.format_agent_group_prompt(
-    "literature_search_agent_group", 
-    "query_generation_prompt",
-    context="...",
-    platform="...",
-    interaction_modalities="..."
-)
-
-# Reload prompts for an agent group (hot-reload during development)
-prompt_manager.reload_agent_group_prompts("interview_agent_group")
-```
-
-### Prompt Directory Structure
-
-```
-prompts/
-├── interview_agent_group.json
-└── literature_search_agent_group.json
-```
-
-**Naming Convention:**
-- Each agent group has a corresponding JSON file: `{agent_group_name}.json`
-- The file name MUST match the agent group name exactly
-- File is loaded automatically when PromptManager initializes
-
----
-
-## File Organization
-
-### Agent Group Files
-
-```
-agents/
-├── interview_agent_group.py          # InterviewAgentGroup class
-└── literature_search_agent_group.py  # LiteratureSearchAgentGroup class
-```
-
-**Naming Convention:**
-- Agent group file: `{agent_group_name}.py`
-- Class name: `{AgentGroupName}` (PascalCase, underscores removed)
-
-### Prompt Files
-
-```
-prompts/
-├── interview_agent_group.json         # All prompts for InterviewAgentGroup
-└── literature_search_agent_group.json # All prompts for LiteratureSearchAgentGroup
-```
-
-**Structure of Prompt JSON:**
-
-```json
-{
-  "system_prompt": "Main system prompt for the agent...",
-  "opening_message": "Initial message to user...",
-  "error_message": "Error message template: {error}",
-  "completion_message": "Completion message...",
-  "sub_agent_name_prompt": "Prompt for specific sub-agent...",
-  "template_prompt": "Prompt with {variables} for formatting"
-}
-```
-
----
-
-## Agent Group Structure
-
-### Base Structure
-
-Every agent group follows this pattern:
-
-```python
-class ExampleAgentGroup:
+class AgentGroup:
     def __init__(self, api_key: str, model_name: str = "gpt-4", prompts_dir: str = None):
         # 1. Initialize LLM
         self.llm = ChatOpenAI(api_key=api_key, model_name=model_name)
@@ -168,431 +68,317 @@ class ExampleAgentGroup:
         # 3. Initialize agent-specific components
         # (memory, tools, sub-agents, state, etc.)
         
-        # 4. Load prompts and configure agent
+        # 4. Load prompts and configure
         self._initialize_from_prompts()
     
     def _initialize_from_prompts(self):
         """Load prompts and configure agent."""
         system_prompt = self.prompt_manager.get_agent_group_prompt(
-            "example_agent_group", 
+            "agent_group_name", 
             "system_prompt"
         )
-        # Configure agent with prompts...
+        # Configure agent...
 ```
 
-### Example: InterviewAgentGroup
+## File Organization
 
+### Naming Conventions
+
+**Agent Group Files**:
+- File: `agents/{name}_agent_group.py`
+- Class: `{Name}AgentGroup` (PascalCase)
+- Example: `interview_agent_group.py` → `InterviewAgentGroup`
+
+**Prompt Files**:
+- File: `prompts/{name}_agent_group.json`
+- Must match agent group name exactly
+- Example: `prompts/interview_agent_group.json`
+
+**1:1 Mapping**:
+```
+agents/interview_agent_group.py ↔ prompts/interview_agent_group.json
+agents/literature_search_agent_group.py ↔ prompts/literature_search_agent_group.json
+```
+
+## Prompt Management
+
+### PromptManager Class
+
+**Location**: `utils/prompt_manager.py`
+
+**Key Features**:
+- Auto-detects project root and prompts directory
+- Loads all prompts from JSON files on initialization
+- Provides get, format, and reload methods
+- Supports variable formatting using Python `.format()`
+
+**Usage**:
 ```python
-class InterviewAgentGroup:
-    def __init__(self, api_key: str, ...):
-        # LLM and PromptManager
-        self.llm = ChatOpenAI(...)
-        self.prompt_manager = PromptManager(prompts_dir)
-        
-        # State tracking
-        self.interview_data = {
-            "assessment_context": None,
-            "robot_platform": None,
-            "interaction_modalities": None,
-            # ...
-        }
-        
-        # Sub-agents
-        self.sub_agents = self._initialize_sub_agents()
-        
-        # LangChain components
-        self.prompt = ChatPromptTemplate.from_messages([...])
-        self.tools = self._create_tools()
-        self.agent_executor = AgentExecutor(...)
-    
-    def _get_system_prompt(self) -> str:
-        """Load system prompt from JSON."""
-        return self.prompt_manager.get_agent_group_prompt(
-            "interview_agent_group", 
-            "system_prompt"
-        )
+# Get a specific prompt
+prompt = prompt_manager.get_agent_group_prompt(
+    "interview_agent_group", 
+    "system_prompt"
+)
+
+# Format prompt with variables
+formatted = prompt_manager.format_agent_group_prompt(
+    "literature_search_agent_group",
+    "query_generation_prompt",
+    context="...",
+    platform="...",
+    interaction_modalities="..."
+)
+
+# Reload prompts (hot-reload during development)
+prompt_manager.reload_agent_group_prompts("interview_agent_group")
 ```
 
-### Example: LiteratureSearchAgentGroup
+### Prompt File Structure
 
-```python
-class LiteratureSearchAgentGroup:
-    def __init__(self, api_key: str, ...):
-        # LLM and PromptManager
-        self.llm = ChatOpenAI(api_key=api_key, model_name=model_name)
-        self.prompt_manager = PromptManager(prompts_dir)
-        
-        # State tracking
-        self.papers = []
-        self.screened_papers = []
-        self.extracted_findings = []
-    
-    def generate_queries(self, interview_summary: Dict) -> List[str]:
-        """Use prompt to generate search queries."""
-        template = self.prompt_manager.get_agent_group_prompt(
-            "literature_search_agent_group",
-            "query_generation_prompt"
-        )
-        prompt = template.format(
-            context=interview_summary.get('assessment_context', 'N/A'),
-            platform=interview_summary.get('robot_platform', 'N/A'),
-            interaction_modalities=interview_summary.get('interaction_modalities', 'N/A'),
-            goals=", ".join(interview_summary.get('assessment_goals', []))
-        )
-        response = self.llm.invoke(prompt)
-        # Parse and return queries...
+```json
+{
+  "system_prompt": "Main system prompt defining agent role...",
+  "opening_message": "Initial message to user...",
+  "error_message": "Error message template: {error}",
+  "completion_message": "Completion message...",
+  "sub_agent_name_prompt": "Prompt for specific sub-agent...",
+  "template_prompt": "Prompt with {variables} for formatting"
+}
 ```
 
----
+**Organization**:
+- Prompts grouped by purpose (system, messages, tools, sub-agents)
+- Descriptive keys (e.g., `query_generation_prompt`, not `prompt1`)
+- Variables clearly named (e.g., `{context}`, `{platform}`)
 
 ## Sub-Agent Pattern
 
 ### Purpose
+Sub-agents provide focused specialization within an agent group:
+- **Focus**: Each handles a narrow, well-defined domain
+- **Reusability**: Can be called multiple times
+- **Modularity**: Isolated logic, easier to test/modify
 
-Sub-agents allow an agent group to delegate specific tasks to specialized components. They provide:
-- **Focus**: Each sub-agent has a narrow, well-defined responsibility
-- **Reusability**: Sub-agents can be called multiple times with different inputs
-- **Modularity**: Sub-agent logic is isolated and easier to test/modify
-
-### Implementation Pattern
+### Implementation
 
 ```python
 class MainAgentGroup:
     def _initialize_sub_agents(self) -> Dict[str, any]:
-        """Initialize sub-agents."""
         return {
             "task_collector": TaskCollectorAgent(self.prompt_manager),
             "environment_analyzer": EnvironmentAnalyzerAgent(self.prompt_manager),
-            # ...
         }
     
     def _create_tools(self) -> List[Tool]:
-        """Create tools including delegation to sub-agents."""
         def delegate_to_sub_agent(sub_agent_name: str, task: str) -> str:
             if sub_agent_name in self.sub_agents:
                 return self.sub_agents[sub_agent_name].process_task(task)
             return f"Sub-agent {sub_agent_name} not found."
         
-        return [
-            Tool(
-                name="delegate_to_sub_agent",
-                description="Delegate specific tasks to specialized sub-agents",
-                func=delegate_to_sub_agent
-            ),
-            # ... other tools
-        ]
-```
+        return [Tool(name="delegate_to_sub_agent", ...), ...]
 
-### Sub-Agent Structure
-
-```python
 class TaskCollectorAgent:
-    """Sub-agent specialized in collecting task-related information."""
-    
     def __init__(self, prompt_manager: PromptManager):
         self.prompt_manager = prompt_manager
     
     def process_task(self, task_description: str) -> str:
-        """Process task-related information."""
         prompt = self.prompt_manager.get_agent_group_prompt(
-            "interview_agent_group",  # Parent agent group name
+            "interview_agent_group",  # Parent agent group
             "task_collector_prompt"    # Sub-agent prompt key
         )
-        return f"Task analysis: {prompt} - Processing: {task_description}"
+        # Process using prompt...
 ```
 
-**Key Points:**
-- Sub-agents are simple classes with a `process_task()` method
-- They receive the `PromptManager` to access prompts
-- Prompts are stored in the parent agent group's JSON file
-- Sub-agent prompts use keys like `{sub_agent_name}_prompt`
+**Key Points**:
+- Sub-agents are simple classes with `process_task()` method
+- Receive `PromptManager` to access prompts
+- Prompts stored in parent agent group's JSON file
+- Prompt keys: `{sub_agent_name}_prompt`
 
----
+## Data Management
+
+### DataManager Class
+
+**Location**: `utils/data_manager.py`
+
+**Purpose**: Handles timestamp-isolated data storage with agent group separation
+
+**Key Methods**:
+```python
+# Create new run
+run_id = data_manager.new_run()
+
+# Save agent group data
+data_manager.save_agent_group_data(
+    run_id, 
+    "interview_agent_group",
+    summary, 
+    conversation
+)
+
+# Complete run
+data_manager.complete_run(run_id, ["interview_agent_group", ...])
+
+# Load data
+data = data_manager.load_agent_group_data(run_id, "interview_agent_group")
+
+# Get latest run
+latest = data_manager.get_latest_run_id()
+```
+
+**Storage Structure**:
+```
+data/runs/YYYY-MM-DD_HHMMSS/
+├── metadata.json
+├── interview_agent_group/
+│   ├── summary.json
+│   └── conversation.json
+└── literature_search_agent_group/
+    ├── summary.json
+    └── pdfs/...
+```
+
+See [DATA_STORAGE.md](./DATA_STORAGE.md) for detailed structure.
+
+## Agent Group Implementations
+
+### InterviewAgentGroup
+
+**Type**: LangChain-based agent with tools
+
+**Components**:
+- `ChatOpenAI`: LLM integration
+- `AgentExecutor`: Manages agent execution
+- `ConversationBufferMemory`: Maintains conversation context
+- `Tools`: `save_interview_data`, `get_interview_progress`, `delegate_to_sub_agent`
+- `Sub-agents`: 4 specialized sub-agents
+
+**State Management**:
+- `interview_data`: Dictionary tracking collected information
+- `conversation_history`: List of message objects
+- Completion tracking
+
+**Key Methods**:
+- `start_interview()`: Returns opening message
+- `process_response(user_input)`: Processes user input, returns agent response
+- `is_interview_complete()`: Checks if sufficient data collected
+- `get_interview_summary()`: Returns structured summary
+
+### LiteratureSearchAgentGroup
+
+**Type**: Direct LLM integration (no LangChain tools)
+
+**Components**:
+- `ChatOpenAI`: LLM for query generation, screening, extraction
+- `ResearchAPIClient`: Interface to arXiv and Semantic Scholar
+- `PromptManager`: Prompt loading
+
+**State Management**:
+- `papers`: Raw search results
+- `screened_papers`: Relevance-filtered papers
+- `extracted_findings`: Processed findings
+- `downloaded`: PDF download status
+
+**Key Methods**:
+- `generate_queries(interview_summary)`: Generate search queries
+- `search_and_screen(queries)`: Search and filter papers
+- `extract_findings(papers)`: Extract structured findings
+- `download_pdfs(papers, run_id)`: Download and organize PDFs
+- `run_complete_search(interview_summary, run_id)`: Execute full workflow
 
 ## Prompt Usage Patterns
 
-### Pattern 1: System Prompt
-
-Used to define the agent's role, behavior, and capabilities:
-
+### 1. System Prompt
+Defines agent role and behavior:
 ```python
-# In agent group initialization
-system_prompt = self.prompt_manager.get_agent_group_prompt(
+system_prompt = prompt_manager.get_agent_group_prompt(
     "interview_agent_group",
     "system_prompt"
 )
-
-# Used in LangChain prompt template
-self.prompt = ChatPromptTemplate.from_messages([
-    ("system", system_prompt),
-    MessagesPlaceholder(variable_name="chat_history"),
-    ("human", "{input}"),
-])
 ```
 
-**In JSON:**
-```json
-{
-  "system_prompt": "You are an expert interviewer... Your goal is... IMPORTANT: You MUST..."
-}
-```
-
-### Pattern 2: Template Prompts with Variables
-
-Used when prompts need dynamic content:
-
+### 2. Template Prompts with Variables
+Dynamic content from context:
 ```python
-# Format prompt with variables
-prompt_template = self.prompt_manager.get_agent_group_prompt(
-    "literature_search_agent_group",
-    "query_generation_prompt"
-)
-formatted_prompt = prompt_template.format(
-    context=interview_summary.get('assessment_context', 'N/A'),
-    platform=interview_summary.get('robot_platform', 'N/A'),
-    interaction_modalities=interview_summary.get('interaction_modalities', 'N/A'),
-    goals=", ".join(interview_summary.get('assessment_goals', []))
+prompt = template.format(
+    context=interview_summary.get('assessment_context'),
+    platform=interview_summary.get('robot_platform'),
+    interaction_modalities=interview_summary.get('interaction_modalities')
 )
 ```
 
-**In JSON:**
-```json
-{
-  "query_generation_prompt": "Based on this interview summary...\n\nContext: {context}\nPlatform: {platform}\nModalities: {interaction_modalities}\nGoals: {goals}\n\nGenerate queries..."
-}
-```
-
-### Pattern 3: Error Messages
-
-Used for user-facing error messages:
-
+### 3. Error Messages
+User-facing error handling:
 ```python
-error_msg = self.prompt_manager.format_agent_group_prompt(
+error_msg = prompt_manager.format_agent_group_prompt(
     "interview_agent_group",
     "error_message",
     error=str(e)
 )
 ```
 
-**In JSON:**
-```json
-{
-  "error_message": "I apologize, but I encountered an error: {error}. Could you please rephrase?"
-}
-```
-
-### Pattern 4: Sub-Agent Prompts
-
-Used by sub-agents for specialized tasks:
-
+### 4. Sub-Agent Prompts
+Specialized task prompts:
 ```python
-# In sub-agent
-prompt = self.prompt_manager.get_agent_group_prompt(
-    "interview_agent_group",      # Parent agent group
-    "task_collector_prompt"        # Sub-agent specific prompt
+prompt = prompt_manager.get_agent_group_prompt(
+    "interview_agent_group",
+    "task_collector_prompt"
 )
 ```
 
-**In JSON:**
-```json
-{
-  "task_collector_prompt": "Focus on understanding the specific collaborative tasks...",
-  "environment_analyzer_prompt": "Analyze the environmental setting...",
-  "platform_specialist_prompt": "Focus on the robot platform characteristics..."
-}
-```
-
----
-
 ## Adding New Agent Groups
 
-### Step 1: Create Agent Group Class
+See [HOW_TO_ADD_AGENTS.md](./HOW_TO_ADD_AGENTS.md) for step-by-step guide.
 
-Create `agents/{agent_group_name}_agent_group.py`:
-
-```python
-from langchain_openai import ChatOpenAI
-from utils.prompt_manager import PromptManager
-
-class NewAgentGroup:
-    def __init__(self, api_key: str, model_name: str = "gpt-4", prompts_dir: str = None):
-        self.llm = ChatOpenAI(api_key=api_key, model_name=model_name)
-        self.prompt_manager = PromptManager(prompts_dir)
-        # Initialize your agent...
-    
-    def _get_system_prompt(self) -> str:
-        return self.prompt_manager.get_agent_group_prompt(
-            "new_agent_group",  # Must match filename
-            "system_prompt"
-        )
-```
-
-### Step 2: Create Prompt File
-
-Create `prompts/{agent_group_name}_agent_group.json`:
-
-```json
-{
-  "system_prompt": "You are a specialized agent for...",
-  "task_prompt": "Your task is to...",
-  "completion_message": "Task completed successfully."
-}
-```
-
-### Step 3: Register in Main Workflow
-
-Add to `main.py`:
-
-```python
-def _initialize_agents(self):
-    # Existing agents
-    self.agents['interview'] = InterviewAgentGroup(...)
-    self.agents['literature'] = LiteratureSearchAgentGroup(...)
-    
-    # New agent
-    self.agents['new_agent'] = NewAgentGroup(
-        api_key=self.config["openai_api_key"]
-    )
-```
-
-**Important:** The agent group name used in code must match the JSON filename (without `.json` extension).
-
----
+**Quick Checklist**:
+1. Create `agents/{name}_agent_group.py` with class following base pattern
+2. Create `prompts/{name}_agent_group.json` with all prompts
+3. Register in `main.py` `_initialize_agents()`
+4. Add to workflow execution if needed
 
 ## Best Practices
 
-### 1. Prompt Design
+### Prompt Design
+- **Be explicit**: Clearly state role, goals, constraints
+- **Use emphasis**: Use `**bold**` or ALL CAPS for critical instructions
+- **Include examples**: Show desired behavior
+- **Clear variables**: Descriptive names like `{context}`, not `{x}`
 
-- **Be Explicit**: Clearly state the agent's role, goals, and constraints
-- **Use Emphasis**: Use `**bold**` or ALL CAPS for critical instructions
-- **Include Examples**: Show desired behavior through examples in prompts
-- **Variable Names**: Use clear, descriptive variable names in templates (e.g., `{context}`, `{platform}`)
+### Agent Group Design
+- **Single responsibility**: One clear purpose per group
+- **Clear state**: Use well-defined data structures
+- **Error handling**: Graceful failures with user-friendly messages
+- **Prompt reloading**: Support hot-reload for development
 
-### 2. Prompt Organization
-
-- **Group by Function**: Organize prompts logically in JSON (system, tools, sub-agents, etc.)
-- **Use Descriptive Keys**: Use clear prompt keys like `query_generation_prompt`, not `prompt1`
-- **Document Prompts**: Add comments in code explaining what each prompt does
-
-### 3. Agent Group Design
-
-- **Single Responsibility**: Each agent group should have one clear purpose
-- **State Management**: Use clear data structures to track agent state
-- **Error Handling**: Always handle errors gracefully with user-friendly messages
-- **Prompt Reloading**: Support prompt reloading for development/debugging
-
-### 4. Sub-Agent Design
-
-- **Narrow Focus**: Each sub-agent should handle a specific domain (tasks, environment, platform)
-- **Simple Interface**: Sub-agents should have a simple `process_task()` method
-- **Prompt Integration**: Sub-agents should use prompts from the parent agent group's JSON file
-
-### 5. File Organization
-
-- **Naming Consistency**: Follow `{name}_agent_group.py` and `{name}_agent_group.json` pattern
-- **Project Structure**: Keep prompts external (in `prompts/`) and code in `agents/`
-- **Version Control**: Commit prompt changes so they're tracked in git history
-
----
-
-## Key Design Principles
-
-### 1. Separation of Concerns
-
-- **Prompts** (what the agent says/thinks) are separate from **Code** (how the agent works)
-- Prompts can be modified without changing code
-- Code can be refactored without changing prompts
-
-### 2. Externalization
-
-- All prompts are in JSON files, not hardcoded in Python
-- This enables:
-  - Easy prompt iteration and A/B testing
-  - Version control of prompt changes
-  - Non-developers to modify prompts
-  - Prompt debugging and inspection
-
-### 3. Hierarchical Organization
-
-- **Agent Groups** → Main workflow tasks
-- **Sub-Agents** → Specialized subtasks
-- **Prompts** → Organized by agent group and purpose
-
-### 4. Consistency
-
-- All agent groups follow the same initialization pattern
-- All prompts follow the same JSON structure
-- All sub-agents follow the same interface pattern
-
----
-
-## Example: Complete Agent Group Lifecycle
-
-```python
-# 1. Initialize
-agent = InterviewAgentGroup(api_key="...")
-
-# 2. Agent uses prompts from JSON automatically
-# System prompt loaded during initialization
-# Tools use prompts when invoked
-
-# 3. Process input
-response = agent.process_response("We want to evaluate robot empathy in healthcare")
-
-# 4. Agent uses save_interview_data tool
-# Tool uses prompts to categorize data
-
-# 5. Get results
-summary = agent.get_interview_summary()
-# Returns structured data based on prompts and tool usage
-
-# 6. Hot-reload prompts (during development)
-agent.reload_prompts()
-# System prompt and tools are updated with new prompts
-```
-
----
+### File Organization
+- **Naming consistency**: Follow `{name}_agent_group.{py,json}` pattern
+- **Project structure**: Keep prompts external, code in `agents/`
+- **Version control**: Commit prompt changes for history
 
 ## Troubleshooting
 
 ### Prompt Not Found
-
-**Error:** `KeyError: Prompt not found: interview_agent_group.system_prompt`
-
-**Solution:**
-- Check that `prompts/interview_agent_group.json` exists
-- Verify the JSON key exists: `"system_prompt"`
-- Ensure JSON is valid (use a JSON validator)
+- Verify JSON file exists: `prompts/{name}_agent_group.json`
+- Check JSON key exists and is valid
+- Validate JSON syntax
 
 ### Variable Format Error
-
-**Error:** `ValueError: Missing required variable for prompt formatting`
-
-**Solution:**
-- Check that all `{variable}` placeholders in the prompt have corresponding values
+- Ensure all `{variables}` have corresponding values
 - Verify variable names match exactly (case-sensitive)
 - Use `.get(key, 'default')` for optional variables
 
 ### Agent Group Not Found
-
-**Error:** `KeyError: Agent group 'new_agent_group' not found`
-
-**Solution:**
-- Verify the prompt file exists: `prompts/new_agent_group.json`
-- Check the agent group name matches the filename (without `.json`)
-- Ensure PromptManager loaded the file (check initialization)
-
----
+- Verify prompt file exists and name matches
+- Check PromptManager loaded file during initialization
+- Ensure agent group registered in `main.py`
 
 ## Summary
 
-The EmpathyScale project uses a well-structured, modular agent group architecture:
+The EmpathyScale architecture prioritizes:
+- **Modularity**: Independent, testable components
+- **Flexibility**: Externalized prompts enable rapid iteration
+- **Consistency**: Standardized patterns across all agent groups
+- **Maintainability**: Clear separation of concerns
+- **Extensibility**: Easy to add new agent groups following established patterns
 
-- **Agent Groups** handle major workflow tasks
-- **Sub-Agents** provide specialized capabilities
-- **PromptManager** centralizes prompt management
-- **JSON Files** externalize all prompts
-- **Consistent Patterns** ensure maintainability and extensibility
-
-This design enables rapid development, easy debugging, and seamless integration of new agent groups while maintaining code quality and prompt version control.
-
+This design enables rapid development, easy debugging, and seamless integration of new capabilities while maintaining code quality and prompt version control.
