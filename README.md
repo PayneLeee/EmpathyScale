@@ -72,6 +72,8 @@ This tool allows you to:
 
 ## 🏗️ Architecture
 
+For detailed architecture documentation, see **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
+
 ### Why This Design?
 
 1. **Modularity**: Each agent is a separate class that can be developed and tested independently
@@ -79,6 +81,12 @@ This tool allows you to:
 3. **Security**: Sensitive configuration separated from code
 4. **Maintainability**: Clear separation of concerns and well-documented code
 5. **Extensibility**: Built on LangChain's flexible agent framework
+
+### Documentation
+
+- **[Architecture Guide](docs/ARCHITECTURE.md)**: Complete guide to agent groups, prompts, and system design
+- **[Adding Agents Guide](docs/HOW_TO_ADD_AGENTS.md)**: Step-by-step instructions for extending the system
+- **[Literature Search](docs/LITERATURE_SEARCH_IMPROVEMENTS.md)**: Details on literature search capabilities
 
 ### Project Structure
 
@@ -97,7 +105,11 @@ EmpathyScale/
 ├── config.json              # Configuration file with API keys
 ├── requirements.txt         # Python dependencies
 ├── README.md               # This file
-└── HOW_TO_ADD_AGENTS.md    # Guide for adding new agent groups
+└── docs/                    # Documentation directory
+    ├── README.md           # Documentation index
+    ├── ARCHITECTURE.md     # Agent group and prompt architecture guide
+    ├── HOW_TO_ADD_AGENTS.md # Guide for adding new agent groups
+    └── LITERATURE_SEARCH_IMPROVEMENTS.md # Literature search improvements
 ```
 
 **命名约定**: 每个agent group的Python文件与对应的prompt文件名称完全一致
