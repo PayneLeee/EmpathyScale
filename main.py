@@ -178,15 +178,8 @@ class MultiAgentWorkflow:
             interview_summary
         )
         
-        # Save literature search results
-        self.data_manager.save_agent_group_data(
-            self.run_id,
-            "literature_search_agent_group",
-            {"results": literature_results, "organized_findings": literature_results.get("organized_findings", {})},
-            []  # No conversation history for literature agent
-        )
-        
-        # Update metadata
+        # Update metadata to record literature search completion
+        # Note: PDFs are saved directly to disk, no need to save JSON files
         metadata = self.data_manager.load_metadata(self.run_id)
         if metadata:
             if "interview_agent_group" not in metadata["agent_groups"]:

@@ -17,14 +17,12 @@ data/
 ├── latest_run.txt                    # Contains the latest run_id
 └── runs/                             # All run directories
     └── YYYY-MM-DD_HHMMSS/           # Timestamped run directory
-        ├── metadata.json             # Run metadata (start/end time, status)
+        ├── metadata.json             # Run metadata (start/end time, status, agent_groups)
         ├── interview_agent_group/    # Interview phase data
         │   ├── summary.json          # Structured interview summary
         │   └── conversation.json     # Full conversation history
         └── literature_search_agent_group/  # Literature search phase data
-            ├── summary.json          # Search results summary (contains queries, findings, organized results)
-            ├── conversation.json     # (empty list - no conversation history)
-            └── pdfs/                 # Downloaded PDFs
+            └── pdfs/                 # Downloaded PDFs (created by download_pdfs method)
                 ├── definitions/      # Papers on empathy definitions
                 │   └── paper_XX_YYYY.pdf
                 ├── behaviors/        # Papers on empathic behaviors
@@ -116,55 +114,28 @@ Complete conversation history as an array of message objects:
 - `"user"`: User input/response
 - `"system"`: System messages or tool invocations (if logged)
 
-### `literature_search_agent_group/summary.json`
-
-Summary of literature search results (wrapped in a results object):
-
-```json
-{
-  "results": {
-    "search_queries": [
-      "robot empathy in healthcare collaboration",
-      "measuring perceived empathy in human-robot interaction"
-    ],
-    "total_papers_found": 120,
-    "screened_papers": 80,
-    "extracted_findings": 15,
-    "pdfs_downloaded": 15,
-    "organized_findings": {
-      "empathy_definitions": [...],
-      "empathic_behaviors": {
-        "verbal": [...],
-        "nonverbal": [...],
-        "adaptive": [...]
-      },
-      "measurement_approaches": [...],
-      "existing_scales": [...]
-    },
-    "downloaded_papers": [...],
-    "all_findings": [...]
-  },
-  "organized_findings": {
-    "empathy_definitions": [...],
-    "empathic_behaviors": {...},
-    "measurement_approaches": [...],
-    "existing_scales": [...]
-  }
-}
-```
-
-**Note**: All literature search data (queries, findings, results) is contained within `summary.json`. The queries are in `results.search_queries`, findings are in `results.all_findings`, and organized findings are in `results.organized_findings`.
-
 ### `literature_search_agent_group/pdfs/`
 
-Downloaded PDF files organized by category:
+**Note**: The literature search agent does not save JSON files (`summary.json` or `conversation.json`). All search results and metadata are available through the `search_and_download()` return value. The primary output is the downloaded PDF files, organized by category.
+
+**Organization**:
 - `definitions/`: Papers on empathy definitions and frameworks
 - `behaviors/`: Papers on empathic robot behaviors
 - `measurement/`: Papers on measurement methods and scale construction
 
-**File Naming:** `paper_{index}_{year}.pdf`
+**File Naming:** `paper_{index:02d}_{year}.pdf` (zero-padded index, 2 digits)
 
-Example: `paper_01_2024.pdf`, `paper_02_2023.pdf`
+Examples: `paper_01_2024.pdf`, `paper_02_2023.pdf`, `paper_49_2024.pdf`
+
+**Accessing Results**: The `search_and_download()` method returns a dictionary containing:
+- `search_queries`: List of generated search queries
+- `total_papers_found`: Total number of papers found
+- `screened_papers`: Number of papers that passed relevance screening
+- `extracted_findings`: Number of findings extracted
+- `pdfs_downloaded`: Number of PDFs successfully downloaded
+- `organized_findings`: Structured findings organized by category
+- `downloaded_papers`: List of downloaded papers with file paths (`local_pdf_path`)
+- `all_findings`: Complete list of extracted findings
 
 ## Accessing Data
 
@@ -217,6 +188,7 @@ with open(summary_path, 'r', encoding='utf-8') as f:
 - Each agent group saves its data to `{run_id}/{agent_group_name}/`
 - Files are created incrementally as agents execute
 - Each agent group manages its own subdirectory structure
+- **Note**: Literature search agent only creates the `pdfs/` directory, not JSON files
 
 ### 3. Run Completion
 - `DataManager.complete_run()` updates `metadata.json`
