@@ -121,6 +121,40 @@ class MultiAgentWorkflow:
         print("Thank you for participating in the interview!")
         print("=" * 60)
     
+    def _save_literature_results(self, run_id: str, literature_results: Dict):
+        """Save minimal essential literature search results."""
+        import json
+        from pathlib import Path
+        
+        run_dir = self.data_manager.get_run_path(run_id)
+        lit_dir = run_dir / "literature_search_agent_group"
+        lit_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Save only essential information
+        essential_summary = {
+            "search_queries": literature_results.get("search_queries", []),
+            "statistics": {
+                "total_papers_found": literature_results.get("total_papers_found", 0),
+                "screened_papers": literature_results.get("screened_papers", 0),
+                "pdfs_downloaded": literature_results.get("pdfs_downloaded", 0)
+            },
+            "downloaded_papers": [
+                {
+                    "title": paper.get("title", ""),
+                    "category": paper.get("category", ""),
+                    "year": paper.get("year", ""),
+                    "local_pdf_path": paper.get("local_pdf_path", ""),
+                    "downloaded_at": paper.get("downloaded_at", "")
+                }
+                for paper in literature_results.get("downloaded_papers", [])
+                if paper.get("downloaded", False)
+            ]
+        }
+        
+        summary_path = lit_dir / "summary.json"
+        with open(summary_path, 'w', encoding='utf-8') as f:
+            json.dump(essential_summary, f, indent=2, ensure_ascii=False)
+    
     def _save_interview_data(self, interview_agent_group: InterviewAgentGroup):
         """Save interview data automatically."""
         if not self.run_id:
@@ -178,8 +212,10 @@ class MultiAgentWorkflow:
             interview_summary
         )
         
+        # Save minimal essential results (queries, downloaded papers with paths, stats)
+        self._save_literature_results(self.run_id, literature_results)
+        
         # Update metadata to record literature search completion
-        # Note: PDFs are saved directly to disk, no need to save JSON files
         metadata = self.data_manager.load_metadata(self.run_id)
         if metadata:
             if "interview_agent_group" not in metadata["agent_groups"]:

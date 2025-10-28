@@ -22,6 +22,7 @@ data/
         │   ├── summary.json          # Structured interview summary
         │   └── conversation.json     # Full conversation history
         └── literature_search_agent_group/  # Literature search phase data
+            ├── summary.json          # Minimal essential results (queries, downloaded papers, stats)
             └── pdfs/                 # Downloaded PDFs (created by download_pdfs method)
                 ├── definitions/      # Papers on empathy definitions
                 │   └── paper_XX_YYYY.pdf
@@ -114,9 +115,36 @@ Complete conversation history as an array of message objects:
 - `"user"`: User input/response
 - `"system"`: System messages or tool invocations (if logged)
 
-### `literature_search_agent_group/pdfs/`
+### `literature_search_agent_group/summary.json`
 
-**Note**: The literature search agent does not save JSON files (`summary.json` or `conversation.json`). All search results and metadata are available through the `search_and_download()` return value. The primary output is the downloaded PDF files, organized by category.
+Minimal essential results saved for reference:
+
+```json
+{
+  "search_queries": [
+    "robot empathy in healthcare collaboration",
+    "measuring perceived empathy in human-robot interaction"
+  ],
+  "statistics": {
+    "total_papers_found": 120,
+    "screened_papers": 80,
+    "pdfs_downloaded": 15
+  },
+  "downloaded_papers": [
+    {
+      "title": "Empathy in Human-Robot Interaction",
+      "category": "definitions",
+      "year": 2024,
+      "local_pdf_path": "data/runs/2025-10-28_194143/literature_search_agent_group/pdfs/definitions/paper_01_2024.pdf",
+      "downloaded_at": "2025-10-28T19:43:00.123456"
+    }
+  ]
+}
+```
+
+**Note**: Only essential information is saved (queries for reproducibility, downloaded papers list with paths for easy access, basic statistics). Detailed findings and organized results are available through the `search_and_download()` return value during execution.
+
+### `literature_search_agent_group/pdfs/`
 
 **Organization**:
 - `definitions/`: Papers on empathy definitions and frameworks
@@ -127,15 +155,9 @@ Complete conversation history as an array of message objects:
 
 Examples: `paper_01_2024.pdf`, `paper_02_2023.pdf`, `paper_49_2024.pdf`
 
-**Accessing Results**: The `search_and_download()` method returns a dictionary containing:
-- `search_queries`: List of generated search queries
-- `total_papers_found`: Total number of papers found
-- `screened_papers`: Number of papers that passed relevance screening
-- `extracted_findings`: Number of findings extracted
-- `pdfs_downloaded`: Number of PDFs successfully downloaded
-- `organized_findings`: Structured findings organized by category
-- `downloaded_papers`: List of downloaded papers with file paths (`local_pdf_path`)
-- `all_findings`: Complete list of extracted findings
+**Accessing Results**: 
+- **Saved to disk**: `summary.json` contains queries, statistics, and downloaded papers list
+- **During execution**: The `search_and_download()` method returns full results including `organized_findings` and `all_findings` for immediate use
 
 ## Accessing Data
 
@@ -188,7 +210,7 @@ with open(summary_path, 'r', encoding='utf-8') as f:
 - Each agent group saves its data to `{run_id}/{agent_group_name}/`
 - Files are created incrementally as agents execute
 - Each agent group manages its own subdirectory structure
-- **Note**: Literature search agent only creates the `pdfs/` directory, not JSON files
+- **Note**: Literature search agent saves minimal `summary.json` with essential results (queries, downloaded papers list, stats) plus the `pdfs/` directory
 
 ### 3. Run Completion
 - `DataManager.complete_run()` updates `metadata.json`
