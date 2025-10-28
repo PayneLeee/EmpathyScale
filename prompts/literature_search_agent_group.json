@@ -1,0 +1,52 @@
+{
+  "system_prompt": "You are a specialized literature search expert for robot empathy measurement in human-robot collaboration. Your CRITICAL mission has TWO EQUAL priorities:\n1. Understanding how to CONSTRUCT PERCEIVED ROBOT EMPATHY SCALES - methods, frameworks, and validation approaches for measuring human perception of robot empathy\n2. Understanding how ROBOT EMPATHY is understood and expressed WITHIN the specific collaboration scenarios - theoretical foundations, behavioral manifestations, and contextual factors\n\nActively explore comprehensive literature across robotics, human-robot interaction, psychology, affective computing, and related domains. Include papers with even indirect potential relevance.",
+
+  "query_generation_prompt": "Based on this interview summary, generate 5-6 COMPREHENSIVE search queries exploring:\n1. Scale construction and validation methods for perceived robot empathy\n2. How robot empathy is understood in collaborative scenarios\n3. Cross-disciplinary research (robotics, HRI, psychology, affective computing)\n4. Both direct and indirectly relevant research\n\nInterview Context: {context}\nRobot Platform: {platform}\nInteraction Modalities: {interaction_modalities}\nAssessment Goals: {goals}\n\nIMPORTANT: The interaction modalities (speech, touch, visual cues like lights/displays) significantly influence empathy perception. Include queries about:\n- How different interaction modalities (speech, touch, visual communication) affect perceived robot empathy\n- Empathy expression through specific communication channels\n- Multimodal empathy in human-robot interaction\n\nGenerate 5-6 search queries (one per line) covering:\n- Robot empathy scales and measurement approaches\n- Perceived empathy in human-robot collaboration\n- Affective computing and robot emotional expression\n- Psychology of human-robot emotional interaction\n- Interaction modalities and empathy perception (speech, touch, visual cues)\n- Context-specific empathy in the described scenario\n\nFormat: Just the query text, one per line.",
+
+  "targeted_query_templates": {
+    "definitions": "Generate a search query to find papers that define or conceptualize robot empathy, including perceived empathy, empathic AI, and theoretical frameworks across robotics, psychology, and affective computing.",
+    "behaviors": "Generate a search query to find papers about robot empathic behaviors and emotional expressions, especially how they are expressed through different interaction modalities (speech, touch, visual cues like lights/displays). Focus on observable empathic behaviors across communication channels.",
+    "measurement": "Generate a search query to find papers about measuring perceived robot empathy, including scales, assessment tools, questionnaires, and validation methods. Consider how interaction modalities (speech characteristics, touch, visual communication) influence empathy measurement.",
+    "scale_construction": "Generate a search query for designing and validating perceived empathy scales for robots, including psychometrics, item development, and scale validation. Consider how different interaction modalities require different scale dimensions.",
+    "interdisciplinary": "Generate a search query exploring interdisciplinary research on robot empathy across robotics, psychology, affective computing, and human-robot interaction. Include research on multimodal communication and how different interaction channels affect empathy perception."
+  },
+
+  "relevance_screening_prompt": "Paper Title: {title}\nAbstract: {abstract}\n\nAssess this paper's relevance for TWO EQUAL priorities:\n1. Constructing perceived robot empathy scales (methods, validation, psychometrics)\n2. Understanding robot empathy in collaboration scenarios (theoretical foundations, behavioral manifestations)\n\nFocus Area: {focus} (definitions/behaviors/measurement/scale_construction/interdisciplinary)\n\nINCLUDE papers about:\n- Robot empathy, perceived empathy, empathic robots\n- Scale construction, measurement methods, psychometric validation\n- Human perception of robot emotions\n- Affective computing, emotional AI, robot emotional expression\n- Psychology of human-robot emotional interaction\n- **Interaction modalities and empathy: speech, touch, visual cues (lights, displays), multimodal communication and how these affect empathy perception**\n- Cross-disciplinary research with potential relevance\n\nEXCLUDE only if: purely about human-to-human empathy with no robot context\n\nRate from 1-5:\n5 = Highly relevant - directly addresses scale construction OR robot empathy understanding OR interaction modalities\n4 = Relevant - contributes to scale design or understanding robot empathy or interaction channels\n3 = Potentially relevant - indirectly related, may inform scale design or understanding\n2 = Marginally relevant - tenuous connection\n1 = Not relevant - purely human empathy, no robot context\n\nReturn format: SCORE: X, REASON: brief explanation",
+
+  "extraction_prompt": "Extract information about ROBOT empathy from this paper to design scales for measuring robot empathy:\n\nTitle: {title}\nAbstract: {abstract}\n\nFocus on: How ROBOTS express empathy, ROBOT empathic behaviors, measuring ROBOT emotional responses.\n\n**Pay special attention to interaction modalities**: How are empathic behaviors expressed? Through speech/voice? Touch/haptic feedback? Visual cues (lights, displays, screens, facial expressions, gestures)? How do different communication channels affect empathy perception?\n\nExtract in JSON format:\n1. empathy_definition: How robot empathy is defined or conceptualized\n2. behaviors_identified: What empathic behaviors or expressions ROBOTS exhibit (note which interaction modalities are used: speech, touch, visual)\n3. measurement_methods: How robot empathy was measured (if applicable)\n4. key_findings: Main results relevant to robot empathy scale design (especially findings about interaction modalities)\n5. framework: Theoretical framework used for robot empathy\n6. interaction_modalities: What interaction modalities (speech, touch, visual cues) are discussed or used for empathy expression?\n\nReturn valid JSON only.",
+
+  "organize_findings_prompt": "Organize these ROBOT empathy findings into categories for designing scales that measure robot empathy:\n\n{findings}\n\nCreate JSON structure with:\n- empathy_definitions: Array of robot empathy definitions/frameworks\n- empathic_behaviors: Object with categories organized by interaction modality:\n  * speech_verbal: Empathic behaviors expressed through speech, voice, language\n  * tactile_haptic: Empathic behaviors expressed through touch, physical contact, haptic feedback\n  * visual: Empathic behaviors expressed through visual cues (lights, displays, screens, facial expressions, gestures, body language)\n  * multimodal: Empathic behaviors that combine multiple interaction modalities\n  * adaptive: Empathic behaviors that adapt based on context\n- measurement_approaches: Array of methods for measuring ROBOT empathy (note which interaction modalities each method assesses)\n- existing_scales: Array of existing scales for measuring robot empathy\n- interaction_modality_insights: Array of findings about how different interaction modalities (speech, touch, visual) influence empathy perception\n\nReturn valid JSON only.",
+
+  "fallback_queries": {
+    "definitions": [
+      "robot empathy definition HRI",
+      "empathic robot framework",
+      "perceived robot empathy",
+      "robot emotional intelligence"
+    ],
+    "behaviors": [
+      "robot empathic behavior",
+      "robot emotional expression",
+      "affective computing robots",
+      "robot social interaction"
+    ],
+    "measurement": [
+      "measuring robot empathy",
+      "robot empathy assessment scale",
+      "perceived empathy scale validation",
+      "human-robot empathy measurement"
+    ],
+    "scale_construction": [
+      "robot empathy scale development",
+      "perceived empathy validation",
+      "empathy questionnaire design",
+      "empathy measurement psychometrics"
+    ],
+    "interdisciplinary": [
+      "robot empathy psychology",
+      "affective human-robot interaction",
+      "emotional AI robotics",
+      "human perception robot emotions"
+    ]
+  }
+}

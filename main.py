@@ -6,11 +6,15 @@ Main application entry point.
 import os
 import sys
 from typing import Dict
+from datetime import datetime
 
-# Add the agents directory to the Python path
+# Add the agents and utils directories to the Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'agents'))
+sys.path.append(os.path.join(os.path.dirname(__file__), 'utils'))
 
 from interview_agent_group import InterviewAgentGroup, load_config
+from literature_search_agent_group import LiteratureSearchAgentGroup
+from data_manager import DataManager
 
 
 class MultiAgentWorkflow:
@@ -19,21 +23,28 @@ class MultiAgentWorkflow:
     Currently manages a single interview agent, but designed to be extensible.
     """
     
-    def __init__(self, config_path: str = "config.json"):
+    def __init__(self, config_path: str = None):
         """
         Initialize the multi-agent workflow.
         
         Args:
-            config_path: Path to the configuration file
+            config_path: Path to the configuration file. If None, will auto-detect.
         """
         self.config = load_config(config_path)
         self.agents = {}
+        self.data_manager = DataManager()
+        self.run_id = None
         self._initialize_agents()
     
     def _initialize_agents(self):
         """Initialize all available agent groups."""
         # Initialize the interview agent group
         self.agents['interview'] = InterviewAgentGroup(
+            api_key=self.config["openai_api_key"]
+        )
+        
+        # Initialize literature search agent group
+        self.agents['literature'] = LiteratureSearchAgentGroup(
             api_key=self.config["openai_api_key"]
         )
     
@@ -44,6 +55,10 @@ class MultiAgentWorkflow:
         print("=" * 60)
         print("\nThis system will conduct an interview to understand your")
         print("human-robot collaboration situation.\n")
+        
+        # Create new run for data storage
+        self.run_id = self.data_manager.new_run()
+        print(f"[Data] Started run: {self.run_id}\n")
         
         interview_agent_group = self.agents['interview']
         
@@ -77,6 +92,12 @@ class MultiAgentWorkflow:
         
         # Display summary
         self._display_interview_summary(interview_agent_group)
+        
+        # Save data automatically
+        self._save_interview_data(interview_agent_group)
+        
+        # Run literature search after interview
+        self._run_literature_search(interview_agent_group)
     
     def _display_interview_summary(self, interview_agent_group: InterviewAgentGroup):
         """Display the interview summary."""
@@ -92,13 +113,89 @@ class MultiAgentWorkflow:
                 print(f"\n{formatted_key}:")
                 if isinstance(value, list):
                     for item in value:
-                        print(f"  • {item}")
+                        print(f"  - {item}")
                 else:
                     print(f"  {value}")
         
         print("\n" + "=" * 60)
         print("Thank you for participating in the interview!")
         print("=" * 60)
+    
+    def _save_interview_data(self, interview_agent_group: InterviewAgentGroup):
+        """Save interview data automatically."""
+        if not self.run_id:
+            print("[WARNING] No run_id set, cannot save interview data")
+            return
+        
+        print("\n[Saving data...]")
+        
+        try:
+            # Get summary and conversation
+            summary = interview_agent_group.get_interview_summary()
+            conversation = interview_agent_group.get_conversation_history()
+            
+            # Save to data directory
+            self.data_manager.save_agent_group_data(
+                self.run_id,
+                "interview_agent_group",
+                summary,
+                conversation
+            )
+            
+            # Mark run as complete
+            self.data_manager.complete_run(self.run_id, ["interview_agent_group"])
+            
+            # Get path for user info
+            run_path = self.data_manager.get_run_path(self.run_id)
+            print(f"[Data] Saved to: {run_path}")
+            print(f"[Data] Latest run: {self.data_manager.get_latest_run_id()}")
+        except Exception as e:
+            print(f"[ERROR] Failed to save interview data: {e}")
+            import traceback
+            traceback.print_exc()
+            raise
+    
+    def _run_literature_search(self, interview_agent_group: InterviewAgentGroup):
+        """Run enhanced literature search using interview summary."""
+        if not self.run_id:
+            return
+        
+        literature_agent = self.agents.get('literature')
+        if not literature_agent:
+            print("\n[Literature] Agent not initialized, skipping literature search")
+            return
+        
+        print("\n" + "=" * 60)
+        print("STARTING ENHANCED LITERATURE SEARCH")
+        print("=" * 60)
+        
+        # Get interview summary
+        interview_summary = interview_agent_group.get_interview_summary()
+        
+        # Run enhanced literature search
+        literature_results = literature_agent.search_and_download(
+            self.run_id,
+            interview_summary
+        )
+        
+        # Save literature search results
+        self.data_manager.save_agent_group_data(
+            self.run_id,
+            "literature_search_agent_group",
+            {"results": literature_results, "organized_findings": literature_results.get("organized_findings", {})},
+            []  # No conversation history for literature agent
+        )
+        
+        # Update metadata
+        metadata = self.data_manager.load_metadata(self.run_id)
+        if metadata:
+            if "interview_agent_group" not in metadata["agent_groups"]:
+                metadata["agent_groups"].append("interview_agent_group")
+            if "literature_search_agent_group" not in metadata["agent_groups"]:
+                metadata["agent_groups"].append("literature_search_agent_group")
+            self.data_manager.save_metadata(self.run_id, metadata)
+        
+        print(f"\n[Literature] Enhanced search complete - {literature_results.get('pdfs_downloaded', 0)} PDFs downloaded")
 
 
 def main():

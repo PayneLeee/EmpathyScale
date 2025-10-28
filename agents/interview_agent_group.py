@@ -82,6 +82,7 @@ class InterviewAgentGroup:
         self.interview_data = {
             "assessment_context": None,
             "robot_platform": None,
+            "interaction_modalities": None,  # NEW: Emphasis on communication channels
             "collaboration_pattern": None,
             "environmental_setting": None,
             "assessment_goals": [],
@@ -92,6 +93,9 @@ class InterviewAgentGroup:
         
         # Initialize sub-agents (can be expanded)
         self.sub_agents = self._initialize_sub_agents()
+        
+        # Track conversation history for data storage
+        self.conversation_history = []
     
     def _initialize_sub_agents(self) -> Dict[str, any]:
         """
@@ -121,50 +125,122 @@ class InterviewAgentGroup:
             data_lower = data.lower()
             
             # Check each field in order of priority - more specific first
-            if "supervised" in data_lower or "following" in data_lower or "instruction" in data_lower:
-                self.interview_data["collaboration_pattern"] = data
-            elif "healthcare" in data_lower or "patient care" in data_lower or "nurse" in data_lower or "medical care" in data_lower:
+            # REORDERED: Check context and platform BEFORE interaction modalities to avoid over-capturing
+            
+            # 1. Assessment context (highest priority for scenario description)
+            if any(keyword in data_lower for keyword in ["healthcare", "patient care", "nurse", "medical care", "assembly", "manufacturing", "workers"]):
                 if not self.interview_data["assessment_context"]:
                     self.interview_data["assessment_context"] = data
                 else:
                     self.interview_data["assessment_goals"].append(data)
-            elif "hospital" in data_lower or "ward" in data_lower:
+            elif any(keyword in data_lower for keyword in ["hospital", "ward", "manufacturing floor", "factory", "assembly stations"]):
                 self.interview_data["environmental_setting"] = data
-            elif "environment" in data_lower or "setting" in data_lower or "workplace" in data_lower:
-                if not self.interview_data["environmental_setting"]:
-                    self.interview_data["environmental_setting"] = data
-                else:
-                    self.interview_data["assessment_goals"].append(data)
-            elif "humanoid" in data_lower or "facial" in data_lower or "voice" in data_lower:
-                self.interview_data["robot_platform"] = data
-            elif "goal" in data_lower or "objective" in data_lower:
-                self.interview_data["assessment_goals"].append(data)
-            elif "expect" in data_lower or "observe" in data_lower:
-                self.interview_data["expected_empathy_forms"].append(data)
-            elif "challenge" in data_lower or "difficult" in data_lower or "problem" in data_lower or "issue" in data_lower:
-                self.interview_data["assessment_challenges"].append(data)
-            elif "requirement" in data_lower or "capability" in data_lower or "measurement" in data_lower or "scale" in data_lower:
-                self.interview_data["measurement_requirements"].append(data)
-            elif "evaluate" in data_lower or "assess" in data_lower:
+            elif any(keyword in data_lower for keyword in ["evaluate", "assess"]) and ("robot" in data_lower or "scenario" in data_lower):
                 if not self.interview_data["assessment_context"]:
                     self.interview_data["assessment_context"] = data
                 else:
                     self.interview_data["assessment_goals"].append(data)
-            elif "task" in data_lower or "scenario" in data_lower or "context" in data_lower or "situation" in data_lower:
+            elif any(keyword in data_lower for keyword in ["task", "scenario", "context", "situation"]) and not any(modality_word in data_lower for modality_word in ["interaction modality", "modalities"]):
                 if not self.interview_data["assessment_context"]:
                     self.interview_data["assessment_context"] = data
                 else:
                     self.interview_data["assessment_goals"].append(data)
-            elif "robot" in data_lower or "platform" in data_lower or "embodiment" in data_lower or "appearance" in data_lower:
+            
+            # 2. Robot platform (before interaction modalities to capture platform first)
+            elif any(keyword in data_lower for keyword in ["humanoid", "dual-arm", "manipulator", "force feedback", "vision sensors"]) or ("robot" in data_lower and ("platform" in data_lower or "embodiment" in data_lower or "appearance" in data_lower)):
                 if not self.interview_data["robot_platform"]:
                     self.interview_data["robot_platform"] = data
                 else:
                     self.interview_data["assessment_goals"].append(data)
-            elif "collaboration" in data_lower or "interaction" in data_lower or "pattern" in data_lower or "mode" in data_lower:
+            
+            # 3. Environmental setting
+            elif any(keyword in data_lower for keyword in ["environment", "setting", "workplace"]) and not any(modality_word in data_lower for modality_word in ["interaction modality", "modalities"]):
+                if not self.interview_data["environmental_setting"]:
+                    self.interview_data["environmental_setting"] = data
+                else:
+                    self.interview_data["assessment_goals"].append(data)
+            
+            # 4. Collaboration pattern
+            elif any(keyword in data_lower for keyword in ["supervised", "following", "instruction", "peer-to-peer", "coordination", "shared workspace"]):
+                self.interview_data["collaboration_pattern"] = data
+            elif any(keyword in data_lower for keyword in ["collaboration", "pattern", "mode"]) and "interaction" not in data_lower:
                 if not self.interview_data["collaboration_pattern"]:
                     self.interview_data["collaboration_pattern"] = data
                 else:
                     self.interview_data["assessment_goals"].append(data)
+            
+            # 5. Assessment goals, empathy forms, challenges, requirements
+            elif any(keyword in data_lower for keyword in ["goal", "objective"]) and "assessment" in data_lower:
+                self.interview_data["assessment_goals"].append(data)
+            elif any(keyword in data_lower for keyword in ["expect", "observe"]) and ("empathy" in data_lower or "form" in data_lower):
+                self.interview_data["expected_empathy_forms"].append(data)
+            elif any(keyword in data_lower for keyword in ["challenge", "difficult", "problem", "issue"]) and ("assess" in data_lower or "evaluat" in data_lower):
+                self.interview_data["assessment_challenges"].append(data)
+            elif any(keyword in data_lower for keyword in ["requirement", "capability"]) and ("measurement" in data_lower or "scale" in data_lower):
+                self.interview_data["measurement_requirements"].append(data)
+            
+            # 6. Interaction modalities (NOW more specific, only when explicitly about modalities)
+            # Only capture if explicitly mentioning modalities OR specific modality types in context
+            elif "interaction modalit" in data_lower or "communication channel" in data_lower or "interaction channel" in data_lower:
+                if not self.interview_data["interaction_modalities"]:
+                    self.interview_data["interaction_modalities"] = data
+                else:
+                    self.interview_data["interaction_modalities"] += " " + data
+            elif any(keyword in data_lower for keyword in ["speech characteristic", "voice tone", "tone and pace", "calming voice", "empathetic language", "tactile feedback", "haptic feedback", "visual cue", "indicator light", "led display", "facial expression", "physical gesture", "body language", "nonverbal cue"]):
+                # Only capture specific modality phrases, not just any mention of these words
+                if not self.interview_data["interaction_modalities"]:
+                    self.interview_data["interaction_modalities"] = data
+                else:
+                    self.interview_data["interaction_modalities"] += " " + data
+            elif any(keyword in data_lower for keyword in ["touch", "haptic", "tactile", "physical contact", "hug", "pat"]) and ("express" in data_lower or "convey" in data_lower or "through" in data_lower or "gesture" in data_lower):
+                # Touch/haptic only if it's about expressing something
+                if not self.interview_data["interaction_modalities"]:
+                    self.interview_data["interaction_modalities"] = data
+                else:
+                    self.interview_data["interaction_modalities"] += " " + data
+            elif any(keyword in data_lower for keyword in ["indicator", "light", "led", "display", "screen"]) and ("visual" in data_lower or "cue" in data_lower or "communicat" in data_lower):
+                # Visual cues only if explicitly about communication
+                if not self.interview_data["interaction_modalities"]:
+                    self.interview_data["interaction_modalities"] = data
+                else:
+                    self.interview_data["interaction_modalities"] += " " + data
+            elif ("verbal" in data_lower or "nonverbal" in data_lower) and ("cue" in data_lower or "express" in data_lower or "through" in data_lower):
+                # Verbal/nonverbal only if about cues or expression
+                if not self.interview_data["interaction_modalities"]:
+                    self.interview_data["interaction_modalities"] = data
+                else:
+                    self.interview_data["interaction_modalities"] += " " + data
+            elif "gesture" in data_lower and ("show" in data_lower or "express" in data_lower or "care" in data_lower or "understanding" in data_lower):
+                # Physical gestures that show care/understanding
+                if not self.interview_data["interaction_modalities"]:
+                    self.interview_data["interaction_modalities"] = data
+                else:
+                    self.interview_data["interaction_modalities"] += " " + data
+            
+            # 7. Catch-all for remaining cases
+            elif any(keyword in data_lower for keyword in ["robot", "platform"]):
+                if not self.interview_data["robot_platform"]:
+                    self.interview_data["robot_platform"] = data
+                else:
+                    self.interview_data["assessment_goals"].append(data)
+            elif any(keyword in data_lower for keyword in ["collaboration", "interaction"]):
+                if not self.interview_data["collaboration_pattern"]:
+                    self.interview_data["collaboration_pattern"] = data
+                else:
+                    self.interview_data["assessment_goals"].append(data)
+            elif any(keyword in data_lower for keyword in ["evaluate", "assess"]):
+                if not self.interview_data["assessment_context"]:
+                    self.interview_data["assessment_context"] = data
+                else:
+                    self.interview_data["assessment_goals"].append(data)
+            elif any(keyword in data_lower for keyword in ["goal", "objective"]):
+                self.interview_data["assessment_goals"].append(data)
+            elif any(keyword in data_lower for keyword in ["expect", "observe"]):
+                self.interview_data["expected_empathy_forms"].append(data)
+            elif any(keyword in data_lower for keyword in ["challenge", "difficult", "problem", "issue"]):
+                self.interview_data["assessment_challenges"].append(data)
+            elif any(keyword in data_lower for keyword in ["requirement", "capability", "measurement", "scale"]):
+                self.interview_data["measurement_requirements"].append(data)
             else:
                 # Default to assessment goals if unclear
                 self.interview_data["assessment_goals"].append(data)
@@ -188,7 +264,7 @@ class InterviewAgentGroup:
         return [
             Tool(
                 name="save_interview_data",
-                description="ALWAYS use this tool after each user response to save the assessment-related information they provided. This is crucial for generating the interview summary. Use this tool to save any information about assessment context, robot platform, collaboration patterns, environmental settings, assessment goals, expected empathy forms, challenges, or measurement requirements.",
+                description="ALWAYS use this tool after each user response to save the assessment-related information they provided. This is crucial for generating the interview summary. Use this tool to save any information about assessment context, robot platform, INTERACTION MODALITIES (speech, touch, visual cues like lights/displays - VERY IMPORTANT), collaboration patterns, environmental settings, assessment goals, expected empathy forms, challenges, or measurement requirements.",
                 func=save_interview_data
             ),
             Tool(
@@ -205,7 +281,17 @@ class InterviewAgentGroup:
     
     def start_interview(self) -> str:
         """Start the interview with an opening question."""
-        return self.prompt_manager.get_agent_group_prompt("interview_agent_group", "opening_message")
+        opening_message = self.prompt_manager.get_agent_group_prompt("interview_agent_group", "opening_message")
+        
+        # Record opening message in conversation history
+        from datetime import datetime
+        self.conversation_history.append({
+            "timestamp": datetime.now().isoformat(),
+            "type": "agent",
+            "content": opening_message
+        })
+        
+        return opening_message
     
     def process_response(self, user_input: str) -> str:
         """
@@ -218,25 +304,58 @@ class InterviewAgentGroup:
             Agent's response/question
         """
         try:
+            # Record user input in conversation history
+            from datetime import datetime
+            self.conversation_history.append({
+                "timestamp": datetime.now().isoformat(),
+                "type": "user",
+                "content": user_input
+            })
+            
             response = self.agent_executor.invoke({"input": user_input})
-            return response["output"]
+            agent_response = response["output"]
+            
+            # Record agent response in conversation history
+            self.conversation_history.append({
+                "timestamp": datetime.now().isoformat(),
+                "type": "agent",
+                "content": agent_response
+            })
+            
+            return agent_response
         except Exception as e:
-            return self.prompt_manager.format_agent_group_prompt("interview_agent_group", "error_message", error=str(e))
+            error_msg = self.prompt_manager.format_agent_group_prompt("interview_agent_group", "error_message", error=str(e))
+            
+            # Record error in conversation history
+            from datetime import datetime
+            self.conversation_history.append({
+                "timestamp": datetime.now().isoformat(),
+                "type": "error",
+                "content": str(e)
+            })
+            
+            return error_msg
     
     def get_interview_summary(self) -> Dict:
         """Get a summary of the collected interview data."""
         return self.interview_data.copy()
     
+    def get_conversation_history(self) -> list:
+        """Get the full conversation history."""
+        return self.conversation_history.copy()
+    
     def is_interview_complete(self) -> bool:
         """Check if sufficient empathy assessment information has been gathered."""
-        required_fields = ["assessment_context", "robot_platform", "collaboration_pattern", "environmental_setting"]
+        required_fields = ["assessment_context", "robot_platform", "environmental_setting"]
+        important_fields = ["interaction_modalities", "collaboration_pattern"]  # Interaction modalities is important
         assessment_fields = ["assessment_goals", "expected_empathy_forms", "assessment_challenges", "measurement_requirements"]
         
         # Check if we have basic context AND at least some assessment-related data
         has_context = all(self.interview_data[field] for field in required_fields)
+        has_important_info = any(self.interview_data[field] for field in important_fields)
         has_assessment_data = any(self.interview_data[field] for field in assessment_fields)
         
-        return has_context and has_assessment_data
+        return has_context and (has_important_info or has_assessment_data)
     
     def reload_prompts(self):
         """Reload prompts for this agent group."""
@@ -318,6 +437,7 @@ def load_config(config_path: str = None) -> Dict:
     
     Args:
         config_path: Path to the configuration file. If None, will auto-detect.
+                    If a relative path is provided, will search from project root.
         
     Returns:
         Configuration dictionary
@@ -327,9 +447,16 @@ def load_config(config_path: str = None) -> Dict:
         current_dir = os.path.dirname(os.path.abspath(__file__))
         project_root = os.path.dirname(current_dir)
         config_path = os.path.join(project_root, "config.json")
+    elif not os.path.isabs(config_path) and not os.path.exists(config_path):
+        # If relative path doesn't exist in current directory, try project root
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(current_dir)
+        project_config_path = os.path.join(project_root, config_path)
+        if os.path.exists(project_config_path):
+            config_path = project_config_path
     
     try:
-        with open(config_path, 'r') as file:
+        with open(config_path, 'r', encoding='utf-8') as file:
             config = json.load(file)
         return config
     except FileNotFoundError:
