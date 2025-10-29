@@ -8,11 +8,16 @@ without requiring real user interaction.
 import os
 import sys
 import time
+from pathlib import Path
 
 # Add the agents directory to the Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'agents'))
 
+# Add utils directory to the Python path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'utils'))
+
 from interview_agent_group import InterviewAgentGroup, load_config
+from data_manager import DataManager
 
 
 def simulate_user_conversation():
@@ -146,9 +151,55 @@ def simulate_user_conversation():
         else:
             print(f"[MISSING] {field}: No data collected")
     
-    print("\n" + "=" * 80)
-    print("TEST COMPLETED")
-    print("=" * 80)
+    # Save data to runs directory
+    print("\n" + "=" * 60)
+    print("SAVING DATA TO RUNS DIRECTORY")
+    print("=" * 60)
+    
+    try:
+        # Use absolute path to ensure data is saved in project root
+        project_root = Path(__file__).parent.parent.resolve()
+        data_manager = DataManager(base_dir=str(project_root / "data"))
+        run_id = data_manager.new_run()
+        print(f"[OK] Created run: {run_id}")
+        
+        # Get summary and conversation
+        summary = agent_group.get_interview_summary()
+        conversation = agent_group.get_conversation_history()
+        
+        # Save data
+        data_manager.save_agent_group_data(
+            run_id,
+            "interview_agent_group",
+            summary,
+            conversation
+        )
+        print(f"[OK] Saved interview data to: data/runs/{run_id}/interview_agent_group/")
+        print(f"     - summary.json")
+        print(f"     - conversation.json")
+        
+        # Complete run
+        data_manager.complete_run(run_id, ["interview_agent_group"])
+        print(f"[OK] Marked run as complete")
+        
+        # Display run path for user reference
+        run_path = data_manager.get_run_path(run_id)
+        print(f"\n[INFO] Full path: {run_path / 'interview_agent_group'}")
+        
+        print("\n" + "=" * 80)
+        print("TEST COMPLETED")
+        print("=" * 80)
+        
+        return agent_group, run_id
+        
+    except Exception as e:
+        print(f"[ERROR] Failed to save data: {e}")
+        import traceback
+        traceback.print_exc()
+        print("\n" + "=" * 80)
+        print("TEST COMPLETED (with errors)")
+        print("=" * 80)
+        return agent_group, None
 
 def test_data_saving_functionality():
     """Test the data saving functionality directly."""
@@ -190,8 +241,11 @@ def main():
     """Main function to run all tests."""
     print("Starting Interview Agent Group Test Suite...")
     
-    # Run main conversation simulation
-    simulate_user_conversation()
+    # Run main conversation simulation (now saves data)
+    agent_group, run_id = simulate_user_conversation()
+    
+    if run_id:
+        print(f"\n[SUCCESS] Test data saved to run: {run_id}")
     
     # Run direct data saving test
     test_data_saving_functionality()
