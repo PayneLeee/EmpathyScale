@@ -139,6 +139,7 @@ config.json
 *.log
 temp/
 tmp/
+data/
 
 # Conda
 .conda/
