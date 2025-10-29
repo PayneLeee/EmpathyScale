@@ -323,13 +323,53 @@ class InterviewAgentGroup:
         
         return opening_message
     
+    def _infer_interaction_modalities(self, summary: Dict) -> Optional[str]:
+        """Infer interaction modalities from robot platform capabilities."""
+        robot_platform = summary.get("robot_platform", "")
+        if not robot_platform or robot_platform is None:
+            return None
+        
+        platform_lower = str(robot_platform).lower()
+        inferred_modalities = []
+        
+        # Voice/speech inference
+        if any(keyword in platform_lower for keyword in ["voice", "speech", "audio", "speaker", "microphone", "sound", "verbal", "speech understanding", "audio perception"]):
+            inferred_modalities.append("voice/speech")
+        
+        # Visual cues inference
+        if any(keyword in platform_lower for keyword in ["display", "screen", "led", "light", "indicator", "visual", "facial", "expression", "eye", "camera"]):
+            inferred_modalities.append("visual cues (lights/displays)")
+        
+        # Gesture/movement inference
+        if any(keyword in platform_lower for keyword in ["arm", "manipulator", "movement", "gesture", "motion", "dual-arm", "limb"]):
+            inferred_modalities.append("gestures/movements")
+        
+        # Haptic inference
+        if any(keyword in platform_lower for keyword in ["haptic", "touch", "tactile", "force feedback", "tactile feedback"]):
+            inferred_modalities.append("haptic feedback")
+        
+        if inferred_modalities:
+            return ", ".join(inferred_modalities)
+        return None
+    
     def _get_missing_required_fields(self) -> List[str]:
-        """Get list of missing required fields."""
+        """Get list of missing required fields, prioritizing interaction_modalities."""
         summary = self.get_interview_summary()
         missing = []
         
+        # Check interaction_modalities first (highest priority)
+        if not summary.get("interaction_modalities") or summary.get("interaction_modalities") is None:
+            # Try to infer from robot platform first
+            inferred = self._infer_interaction_modalities(summary)
+            if inferred:
+                # We can infer it, but user confirmation is preferred
+                # Still mark as missing to get explicit confirmation
+                missing.append("interaction_modalities")
+            else:
+                missing.append("interaction_modalities")
+        
         required_fields = ["assessment_context", "robot_platform", "environmental_setting"]
-        important_fields = ["interaction_modalities", "collaboration_pattern"]
+        important_fields = ["collaboration_pattern"]
         
         for field in required_fields:
             if not summary.get(field) or summary.get(field) is None:
@@ -343,14 +383,30 @@ class InterviewAgentGroup:
     
     def _generate_targeted_question(self, missing_field: str) -> str:
         """Generate a brief, targeted question for a missing field."""
+        summary = self.get_interview_summary()
+        
         questions = {
             "assessment_context": "What specific human-robot collaboration scenario are you evaluating? (Briefly describe the tasks humans and robots perform together.)",
             "robot_platform": "What type of robot is being used? (Briefly describe the robot's form, appearance, or capabilities.)",
             "environmental_setting": "Where does this collaboration take place? (Briefly describe the physical environment or setting.)",
-            "interaction_modalities": "How do humans and robots communicate? (Briefly list: speech, touch, visual cues, etc.)",
+            "interaction_modalities": self._generate_interaction_modalities_question(summary),
             "collaboration_pattern": "How do humans and robots interact? (Briefly: one-on-one, group, peer-to-peer, etc.)"
         }
         return questions.get(missing_field, f"Could you provide more information about {missing_field.replace('_', ' ')}?")
+    
+    def _generate_interaction_modalities_question(self, summary: Dict) -> str:
+        """Generate a targeted question about interaction modalities."""
+        robot_platform = summary.get("robot_platform", "")
+        
+        # Try to infer first
+        inferred = self._infer_interaction_modalities(summary)
+        
+        if inferred and robot_platform:
+            # We have inference, ask for confirmation/expansion
+            return f"Based on the robot's capabilities, I infer it might use {inferred}. Can the robot communicate or interact with humans? If yes, through which modalities? (e.g., voice/speech, gestures/movements, indicator lights, screen display, haptic feedback, or none)"
+        else:
+            # No inference possible, ask directly
+            return "Can the robot communicate or interact with humans? If yes, through which modalities? (e.g., voice/speech, gestures/movements, indicator lights, screen display, haptic feedback, or none)"
     
     def process_response(self, user_input: str) -> str:
         """
@@ -377,10 +433,27 @@ class InterviewAgentGroup:
             # Check for missing required fields and append targeted question if needed
             missing_fields = self._get_missing_required_fields()
             if missing_fields and not self.is_interview_complete():
-                # Add a brief, targeted follow-up question for the first missing field
-                targeted_question = self._generate_targeted_question(missing_fields[0])
-                if targeted_question not in agent_response:
-                    agent_response += f"\n\nAlso: {targeted_question}"
+                # Prioritize interaction_modalities if it's missing
+                first_missing = missing_fields[0]
+                
+                # Special handling for interaction_modalities - check if user explicitly said "no communication"
+                if first_missing == "interaction_modalities":
+                    user_input_lower = user_input.lower()
+                    # Check if user explicitly stated no communication
+                    if any(phrase in user_input_lower for phrase in ["no communication", "cannot communicate", "no interaction", "doesn't communicate", "has no", "no way to communicate"]):
+                        # User said no communication, set to explicit value
+                        self.interview_data["interaction_modalities"] = "No interactive communication"
+                        # Don't ask again
+                    else:
+                        # Continue asking about interaction modalities
+                        targeted_question = self._generate_targeted_question(first_missing)
+                        if targeted_question not in agent_response.lower():
+                            agent_response += f"\n\nAlso: {targeted_question}"
+                else:
+                    # For other fields, add targeted question
+                    targeted_question = self._generate_targeted_question(first_missing)
+                    if targeted_question not in agent_response.lower():
+                        agent_response += f"\n\nAlso: {targeted_question}"
             
             # Record agent response in conversation history
             self.conversation_history.append({
@@ -501,6 +574,12 @@ class InterviewAgentGroup:
                 summary[field] = keyword_summary[field]
             else:
                 summary[field] = None
+        
+        # Special handling for interaction_modalities: infer from robot platform if still missing
+        if (not summary.get("interaction_modalities") or summary.get("interaction_modalities") is None) and summary.get("robot_platform"):
+            inferred = self._infer_interaction_modalities(summary)
+            if inferred:
+                summary["interaction_modalities"] = inferred
         
         # For list fields, merge both sources
         for field in ["assessment_goals", "expected_empathy_forms", "assessment_challenges", "measurement_requirements"]:
@@ -753,6 +832,12 @@ class InterviewAgentGroup:
                 if summary["collaboration_pattern"].startswith("."):
                     summary["collaboration_pattern"] = summary["collaboration_pattern"][1:].strip()
         
+        # Final check: infer interaction_modalities from robot_platform if still missing after all processing
+        if (not summary.get("interaction_modalities") or summary.get("interaction_modalities") is None) and summary.get("robot_platform"):
+            inferred = self._infer_interaction_modalities(summary)
+            if inferred:
+                summary["interaction_modalities"] = inferred
+        
         return summary
     
     def get_conversation_history(self) -> list:
@@ -769,10 +854,20 @@ class InterviewAgentGroup:
         
         # Check if all required fields are present
         has_all_required = all(summary.get(field) for field in required_fields)
-        has_important = all(summary.get(field) for field in important_fields)
         
-        # Interview is complete if we have all required fields OR all required + important fields
-        return has_all_required and has_important
+        # For interaction_modalities, accept either explicit answer or inferred value
+        interaction_modalities = summary.get("interaction_modalities")
+        has_interaction_modalities = (
+            interaction_modalities and 
+            interaction_modalities not in [None, ""] and
+            interaction_modalities != "null"
+        )
+        
+        # Check other important field
+        has_collaboration_pattern = summary.get("collaboration_pattern") and summary.get("collaboration_pattern") not in [None, ""]
+        
+        # Interview is complete if we have all required fields AND interaction_modalities (even if inferred)
+        return has_all_required and has_interaction_modalities and has_collaboration_pattern
     
     def reload_prompts(self):
         """Reload prompts for this agent group."""
