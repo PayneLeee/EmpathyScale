@@ -407,8 +407,12 @@ class InterviewAgentGroup:
         summary = self.interview_data.copy()
         
         # Post-process to extract missing information from comprehensive fields
-        # Sometimes information ends up in environmental_setting that should be in other fields
+        # First, try to extract from environmental_setting if it has structured format
         env_setting = summary.get("environmental_setting", "")
+        
+        # Also check assessment_goals for items that should be in other fields
+        assessment_goals = summary.get("assessment_goals", [])
+        
         if env_setting and isinstance(env_setting, str):
             env_lower = env_setting.lower()
             
@@ -521,6 +525,93 @@ class InterviewAgentGroup:
                 # Only update if we removed some redundancy
                 if len(cleaned_goals) < len(summary["assessment_goals"]):
                     summary["assessment_goals"] = cleaned_goals
+        
+        # Additional post-processing: Extract from assessment_goals if fields are still missing
+        if assessment_goals and isinstance(assessment_goals, list):
+            goals_to_remove = []
+            
+            # Extract robot_platform from assessment_goals if missing
+            if not summary.get("robot_platform") or summary.get("robot_platform") is None:
+                for goal in assessment_goals:
+                    goal_str = str(goal).lower()
+                    if ("dual-arm" in goal_str or "manipulator" in goal_str or "haptic" in goal_str or 
+                        "force feedback" in goal_str or "vision sensor" in goal_str):
+                        if "robot" in goal_str or "platform" in goal_str:
+                            summary["robot_platform"] = goal
+                            goals_to_remove.append(goal)
+                            break
+            
+            # Extract collaboration_pattern from assessment_goals if missing
+            if not summary.get("collaboration_pattern") or summary.get("collaboration_pattern") is None:
+                for goal in assessment_goals:
+                    goal_str = str(goal).lower()
+                    if ("peer-to-peer" in goal_str or "collaboration" in goal_str or "coordination" in goal_str or
+                        "shared workspace" in goal_str or "task handoff" in goal_str):
+                        if "collaboration" in goal_str or "coordination" in goal_str:
+                            summary["collaboration_pattern"] = goal
+                            goals_to_remove.append(goal)
+                            break
+            
+            # Extract environmental_setting from assessment_goals if missing
+            if not summary.get("environmental_setting") or summary.get("environmental_setting") is None:
+                for goal in assessment_goals:
+                    goal_str = str(goal).lower()
+                    if ("manufacturing floor" in goal_str or "assembly station" in goal_str or 
+                        "environment" in goal_str or "factory" in goal_str or "quality control" in goal_str):
+                        summary["environmental_setting"] = goal
+                        goals_to_remove.append(goal)
+                        break
+            
+            # Extract assessment_challenges from assessment_goals if missing
+            if not summary.get("assessment_challenges") or len(summary.get("assessment_challenges", [])) == 0:
+                for goal in assessment_goals:
+                    goal_str = str(goal).lower()
+                    if ("challenge" in goal_str or ("measuring" in goal_str and ("trust" in goal_str or "quality" in goal_str))):
+                        if "challenge" in goal_str:
+                            summary["assessment_challenges"] = [goal]
+                            goals_to_remove.append(goal)
+                            break
+            
+            # Extract measurement_requirements from assessment_goals if missing
+            if not summary.get("measurement_requirements") or len(summary.get("measurement_requirements", [])) == 0:
+                for goal in assessment_goals:
+                    goal_str = str(goal).lower()
+                    if ("scale" in goal_str or "measurement" in goal_str or "capture" in goal_str):
+                        if "scale" in goal_str or "measurement" in goal_str:
+                            summary["measurement_requirements"] = [goal]
+                            goals_to_remove.append(goal)
+                            break
+            
+            # Extract expected_empathy_forms from assessment_goals if missing
+            if not summary.get("expected_empathy_forms") or len(summary.get("expected_empathy_forms", [])) == 0:
+                for goal in assessment_goals:
+                    goal_str = str(goal).lower()
+                    if ("expect" in goal_str or "observe" in goal_str) and ("adaptive" in goal_str or "behavior" in goal_str or "trust" in goal_str):
+                        if "expect" in goal_str or "observe" in goal_str:
+                            summary["expected_empathy_forms"] = [goal]
+                            goals_to_remove.append(goal)
+                            break
+            
+            # Remove extracted items from assessment_goals
+            if goals_to_remove:
+                remaining_goals = [g for g in assessment_goals if g not in goals_to_remove]
+                summary["assessment_goals"] = remaining_goals
+        
+        # Also check assessment_context for robot platform info if robot_platform is still null
+        if not summary.get("robot_platform") or summary.get("robot_platform") is None:
+            context = summary.get("assessment_context", "")
+            if context and isinstance(context, str):
+                context_lower = context.lower()
+                if ("dual-arm" in context_lower or "manipulator" in context_lower or "haptic" in context_lower or
+                    "force feedback" in context_lower or "vision sensor" in context_lower):
+                    # Extract robot platform description
+                    if "robot" in context_lower:
+                        # Try to extract the robot description sentence
+                        sentences = context.split(". ")
+                        for sentence in sentences:
+                            if "dual-arm" in sentence.lower() or "manipulator" in sentence.lower():
+                                summary["robot_platform"] = sentence.strip()
+                                break
         
         return summary
     
