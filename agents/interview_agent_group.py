@@ -322,6 +322,35 @@ class InterviewAgentGroup:
         
         return opening_message
     
+    def _get_missing_required_fields(self) -> List[str]:
+        """Get list of missing required fields."""
+        summary = self.get_interview_summary()
+        missing = []
+        
+        required_fields = ["assessment_context", "robot_platform", "environmental_setting"]
+        important_fields = ["interaction_modalities", "collaboration_pattern"]
+        
+        for field in required_fields:
+            if not summary.get(field) or summary.get(field) is None:
+                missing.append(field)
+        
+        for field in important_fields:
+            if not summary.get(field) or summary.get(field) is None:
+                missing.append(field)
+        
+        return missing
+    
+    def _generate_targeted_question(self, missing_field: str) -> str:
+        """Generate a brief, targeted question for a missing field."""
+        questions = {
+            "assessment_context": "What specific human-robot collaboration scenario are you evaluating? (Briefly describe the tasks humans and robots perform together.)",
+            "robot_platform": "What type of robot is being used? (Briefly describe the robot's form, appearance, or capabilities.)",
+            "environmental_setting": "Where does this collaboration take place? (Briefly describe the physical environment or setting.)",
+            "interaction_modalities": "How do humans and robots communicate? (Briefly list: speech, touch, visual cues, etc.)",
+            "collaboration_pattern": "How do humans and robots interact? (Briefly: one-on-one, group, peer-to-peer, etc.)"
+        }
+        return questions.get(missing_field, f"Could you provide more information about {missing_field.replace('_', ' ')}?")
+    
     def process_response(self, user_input: str) -> str:
         """
         Process user response and generate next question or summary.
@@ -343,6 +372,14 @@ class InterviewAgentGroup:
             
             response = self.agent_executor.invoke({"input": user_input})
             agent_response = response["output"]
+            
+            # Check for missing required fields and append targeted question if needed
+            missing_fields = self._get_missing_required_fields()
+            if missing_fields and not self.is_interview_complete():
+                # Add a brief, targeted follow-up question for the first missing field
+                targeted_question = self._generate_targeted_question(missing_fields[0])
+                if targeted_question not in agent_response:
+                    agent_response += f"\n\nAlso: {targeted_question}"
             
             # Record agent response in conversation history
             self.conversation_history.append({
@@ -621,16 +658,18 @@ class InterviewAgentGroup:
     
     def is_interview_complete(self) -> bool:
         """Check if sufficient empathy assessment information has been gathered."""
+        summary = self.get_interview_summary()
+        
+        # Required fields for completion
         required_fields = ["assessment_context", "robot_platform", "environmental_setting"]
-        important_fields = ["interaction_modalities", "collaboration_pattern"]  # Interaction modalities is important
-        assessment_fields = ["assessment_goals", "expected_empathy_forms", "assessment_challenges", "measurement_requirements"]
+        important_fields = ["interaction_modalities", "collaboration_pattern"]
         
-        # Check if we have basic context AND at least some assessment-related data
-        has_context = all(self.interview_data[field] for field in required_fields)
-        has_important_info = any(self.interview_data[field] for field in important_fields)
-        has_assessment_data = any(self.interview_data[field] for field in assessment_fields)
+        # Check if all required fields are present
+        has_all_required = all(summary.get(field) for field in required_fields)
+        has_important = all(summary.get(field) for field in important_fields)
         
-        return has_context and (has_important_info or has_assessment_data)
+        # Interview is complete if we have all required fields OR all required + important fields
+        return has_all_required and has_important
     
     def reload_prompts(self):
         """Reload prompts for this agent group."""

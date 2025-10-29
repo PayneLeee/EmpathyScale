@@ -70,7 +70,9 @@ class MultiAgentWorkflow:
             try:
                 user_input = input("\nYou: ").strip()
                 
+                # Check for exit command
                 if user_input.lower() in ["exit", "quit", "end", "stop"]:
+                    print("\n[Interview ended by user]")
                     break
                 
                 if not user_input:
@@ -79,11 +81,11 @@ class MultiAgentWorkflow:
                 
                 # Process the response
                 response = interview_agent_group.process_response(user_input)
-                print(f"\nAgent Group: {response}")
+                print(f"\nAgent: {response}")
                 
-                # Check if interview is complete
+                # Check if interview is complete (all required fields collected)
                 if interview_agent_group.is_interview_complete():
-                    print("\nInterview appears to be complete!")
+                    print("\n[All required information collected. Interview complete!]")
                     break
                     
             except EOFError:
