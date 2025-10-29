@@ -147,11 +147,19 @@ class InterviewAgentGroup:
                     self.interview_data["assessment_goals"].append(data)
             
             # 2. Robot platform (before interaction modalities to capture platform first)
-            elif any(keyword in data_lower for keyword in ["humanoid", "dual-arm", "manipulator", "force feedback", "vision sensors"]) or ("robot" in data_lower and ("platform" in data_lower or "embodiment" in data_lower or "appearance" in data_lower)):
+            elif "humanoid" in data_lower or ("robot" in data_lower and any(keyword in data_lower for keyword in ["humanoid", "dual-arm", "manipulator", "force feedback", "vision sensors", "expressive facial", "facial features", "appearance", "embodiment"])) or ("robot" in data_lower and ("platform" in data_lower or "embodiment" in data_lower or "appearance" in data_lower)):
                 if not self.interview_data["robot_platform"]:
                     self.interview_data["robot_platform"] = data
                 else:
-                    self.interview_data["assessment_goals"].append(data)
+                    # Append additional platform details if we already have a platform
+                    if data not in self.interview_data["robot_platform"]:
+                        self.interview_data["robot_platform"] += ". " + data
+                # Also check if this mentions facial expressions for interaction modalities
+                if ("facial" in data_lower or "expression" in data_lower) and ("expressive" in data_lower or "capabilities" in data_lower):
+                    if not self.interview_data["interaction_modalities"]:
+                        self.interview_data["interaction_modalities"] = "Facial expressions"
+                    elif "facial" not in self.interview_data["interaction_modalities"].lower():
+                        self.interview_data["interaction_modalities"] += ", facial expressions"
             
             # 3. Environmental setting
             elif any(keyword in data_lower for keyword in ["environment", "setting", "workplace"]) and not any(modality_word in data_lower for modality_word in ["interaction modality", "modalities"]):
@@ -161,8 +169,12 @@ class InterviewAgentGroup:
                     self.interview_data["assessment_goals"].append(data)
             
             # 4. Collaboration pattern
-            elif any(keyword in data_lower for keyword in ["supervised", "following", "instruction", "peer-to-peer", "coordination", "shared workspace"]):
-                self.interview_data["collaboration_pattern"] = data
+            elif any(keyword in data_lower for keyword in ["supervised", "following", "instruction", "peer-to-peer", "coordination", "shared workspace", "one-on-one", "one to one", "interacts with", "adaptive", "adapts", "based on"]) or (("adapt" in data_lower or "interact" in data_lower) and ("patient" in data_lower or "user" in data_lower or "state" in data_lower or "emotional" in data_lower)):
+                if not self.interview_data["collaboration_pattern"]:
+                    self.interview_data["collaboration_pattern"] = data
+                else:
+                    if data not in self.interview_data["collaboration_pattern"]:
+                        self.interview_data["collaboration_pattern"] += ". " + data
             elif any(keyword in data_lower for keyword in ["collaboration", "pattern", "mode"]) and "interaction" not in data_lower:
                 if not self.interview_data["collaboration_pattern"]:
                     self.interview_data["collaboration_pattern"] = data
@@ -186,12 +198,16 @@ class InterviewAgentGroup:
                     self.interview_data["interaction_modalities"] = data
                 else:
                     self.interview_data["interaction_modalities"] += " " + data
-            elif any(keyword in data_lower for keyword in ["speech characteristic", "voice tone", "tone and pace", "calming voice", "empathetic language", "tactile feedback", "haptic feedback", "visual cue", "indicator light", "led display", "facial expression", "physical gesture", "body language", "nonverbal cue"]):
+            elif any(keyword in data_lower for keyword in ["speech characteristic", "voice tone", "tone and pace", "calming voice", "empathetic language", "tactile feedback", "haptic feedback", "visual cue", "indicator light", "led display", "facial expression", "facial expressions", "expressive facial", "physical gesture", "body language", "nonverbal cue", "voice capabilities", "expressive features"]):
                 # Only capture specific modality phrases, not just any mention of these words
                 if not self.interview_data["interaction_modalities"]:
                     self.interview_data["interaction_modalities"] = data
                 else:
-                    self.interview_data["interaction_modalities"] += " " + data
+                    # Check if this modality is already mentioned
+                    if not any(modality_word in self.interview_data["interaction_modalities"].lower() for modality_word in data_lower.split() if len(modality_word) > 4):
+                        self.interview_data["interaction_modalities"] += ", " + data
+                    else:
+                        self.interview_data["interaction_modalities"] += " " + data
             elif any(keyword in data_lower for keyword in ["touch", "haptic", "tactile", "physical contact", "hug", "pat"]) and ("express" in data_lower or "convey" in data_lower or "through" in data_lower or "gesture" in data_lower):
                 # Touch/haptic only if it's about expressing something
                 if not self.interview_data["interaction_modalities"]:
@@ -215,7 +231,20 @@ class InterviewAgentGroup:
                 if not self.interview_data["interaction_modalities"]:
                     self.interview_data["interaction_modalities"] = data
                 else:
-                    self.interview_data["interaction_modalities"] += " " + data
+                    # Ensure facial expressions are also mentioned if they were mentioned in conversation
+                    modalities_lower = self.interview_data["interaction_modalities"].lower()
+                    if "facial" not in modalities_lower and "expression" not in modalities_lower:
+                        # Check if facial expressions were mentioned in the environmental_setting or assessment_context
+                        env_setting = self.interview_data.get("environmental_setting", "")
+                        if env_setting:
+                            env_lower = str(env_setting).lower()
+                            if "facial" in env_lower or ("expressive" in env_lower and "feature" in env_lower):
+                                self.interview_data["interaction_modalities"] += ", facial expressions"
+                    # Append gesture description
+                    if self.interview_data["interaction_modalities"][-1] not in ", ":
+                        self.interview_data["interaction_modalities"] += ", " + data
+                    else:
+                        self.interview_data["interaction_modalities"] += data
             
             # 7. Catch-all for remaining cases
             elif any(keyword in data_lower for keyword in ["robot", "platform"]):
@@ -338,7 +367,133 @@ class InterviewAgentGroup:
     
     def get_interview_summary(self) -> Dict:
         """Get a summary of the collected interview data."""
-        return self.interview_data.copy()
+        summary = self.interview_data.copy()
+        
+        # Post-process to extract missing information from comprehensive fields
+        # Sometimes information ends up in environmental_setting that should be in other fields
+        env_setting = summary.get("environmental_setting", "")
+        if env_setting and isinstance(env_setting, str):
+            env_lower = env_setting.lower()
+            
+            # Extract robot platform if missing
+            if not summary.get("robot_platform") or summary.get("robot_platform") is None:
+                if "robot platform:" in env_lower or "humanoid" in env_lower:
+                    # Check for structured format with "Robot Platform:" label
+                    if "robot platform:" in env_lower:
+                        # Extract the line after "Robot Platform:"
+                        lines = env_setting.split("\n")
+                        for i, line in enumerate(lines):
+                            line_lower = line.lower()
+                            if "robot platform:" in line_lower:
+                                # Get the content after the colon (could be on same line or next)
+                                if ":" in line:
+                                    platform_part = line.split(":", 1)[-1].strip()
+                                    if platform_part:
+                                        summary["robot_platform"] = platform_part
+                                        break
+                                # Or get the next non-empty line if current line is just the label
+                                if i + 1 < len(lines):
+                                    next_line = lines[i + 1].strip()
+                                    if next_line and not next_line.lower().endswith(":"):
+                                        summary["robot_platform"] = next_line
+                                        break
+                    # Fallback: find sentence mentioning humanoid robot
+                    if not summary.get("robot_platform"):
+                        sentences = env_setting.split(". ")
+                        for sentence in sentences:
+                            if "humanoid" in sentence.lower() and ("robot" in sentence.lower() or "expressive facial" in sentence.lower()):
+                                # Extract robot platform description
+                                if "expressive facial" in sentence.lower() or "voice capabilities" in sentence.lower():
+                                    summary["robot_platform"] = sentence.strip()
+                                    break
+                    # Final fallback: create from context
+                    if not summary.get("robot_platform"):
+                        if "expressive facial features" in env_lower and "voice capabilities" in env_lower:
+                            summary["robot_platform"] = "Humanoid robot with expressive facial features and voice capabilities"
+                        elif "humanoid" in env_lower:
+                            summary["robot_platform"] = "Humanoid robot"
+            
+            # Extract collaboration pattern if missing
+            if not summary.get("collaboration_pattern") or summary.get("collaboration_pattern") is None:
+                if "collaboration pattern:" in env_lower or "interacts with" in env_lower or "one-on-one" in env_lower or "adaptive" in env_lower:
+                    # Check for structured format with "Collaboration Pattern:" label
+                    if "collaboration pattern:" in env_lower:
+                        lines = env_setting.split("\n")
+                        for i, line in enumerate(lines):
+                            line_lower = line.lower()
+                            if "collaboration pattern:" in line_lower:
+                                # Get the content after the colon (could be on same line or next)
+                                if ":" in line:
+                                    pattern_part = line.split(":", 1)[-1].strip()
+                                    if pattern_part:
+                                        summary["collaboration_pattern"] = pattern_part
+                                        break
+                                # Or get the next non-empty line if current line is just the label
+                                if i + 1 < len(lines):
+                                    next_line = lines[i + 1].strip()
+                                    if next_line and not next_line.lower().endswith(":"):
+                                        summary["collaboration_pattern"] = next_line
+                                        break
+                    # Fallback: find sentence mentioning interaction pattern
+                    if not summary.get("collaboration_pattern"):
+                        sentences = env_setting.split(". ")
+                        for sentence in sentences:
+                            if "collaboration pattern:" in sentence.lower():
+                                pattern_part = sentence.split("Collaboration Pattern:", 1)[-1].strip()
+                                if pattern_part:
+                                    summary["collaboration_pattern"] = pattern_part
+                                    break
+                            elif ("interacts with" in sentence.lower() or "one-on-one" in sentence.lower() or 
+                                  ("adaptive" in sentence.lower() and ("response" in sentence.lower() or "patient" in sentence.lower()))):
+                                if "interaction" in sentence.lower() or "adaptive" in sentence.lower():
+                                    summary["collaboration_pattern"] = sentence.strip()
+                                    break
+            
+            # Enhance interaction modalities extraction
+            interaction_modalities = summary.get("interaction_modalities", "")
+            
+            # Extract from Interaction Modalities section if missing details
+            if "interaction modalit" in env_lower:
+                lines = env_setting.split("\n")
+                for i, line in enumerate(lines):
+                    line_lower = line.lower()
+                    if "interaction modalit" in line_lower:
+                        # Get the content after the colon (could be on same line or next)
+                        if ":" in line:
+                            modality_part = line.split(":", 1)[-1].strip()
+                            if modality_part:
+                                # If we don't have modalities yet, use this
+                                if not interaction_modalities:
+                                    summary["interaction_modalities"] = modality_part
+                                # Otherwise merge intelligently
+                                else:
+                                    # Check if this section has more comprehensive info
+                                    if len(modality_part) > len(interaction_modalities):
+                                        summary["interaction_modalities"] = modality_part
+                        # Or get the next non-empty line
+                        if not summary.get("interaction_modalities") or len(summary.get("interaction_modalities", "")) < 50:
+                            if i + 1 < len(lines):
+                                next_line = lines[i + 1].strip()
+                                if next_line and not next_line.lower().endswith(":") and len(next_line) > 20:
+                                    if not interaction_modalities:
+                                        summary["interaction_modalities"] = next_line
+                                    elif len(next_line) > len(interaction_modalities):
+                                        summary["interaction_modalities"] = next_line
+                        break
+            
+            # Ensure interaction modalities includes facial expressions if mentioned in platform
+            interaction_modalities = summary.get("interaction_modalities", "")
+            if interaction_modalities and isinstance(interaction_modalities, str):
+                modalities_lower = interaction_modalities.lower()
+                # Always ensure facial expressions are mentioned if robot has expressive facial features
+                if "facial" not in modalities_lower and "expression" not in modalities_lower:
+                    robot_platform = summary.get("robot_platform", "")
+                    if robot_platform and ("expressive facial" in str(robot_platform).lower() or "facial features" in str(robot_platform).lower()):
+                        summary["interaction_modalities"] = interaction_modalities + ", facial expressions" if interaction_modalities else "Facial expressions"
+                    elif "expressive facial" in env_lower or "facial features" in env_lower:
+                        summary["interaction_modalities"] = interaction_modalities + ", facial expressions" if interaction_modalities else "Facial expressions"
+        
+        return summary
     
     def get_conversation_history(self) -> list:
         """Get the full conversation history."""
