@@ -365,6 +365,43 @@ class InterviewAgentGroup:
             
             return error_msg
     
+    def _extract_section_content(self, text: str, section_label: str) -> str:
+        """Extract content from a structured section in the text."""
+        lines = text.split("\n")
+        for i, line in enumerate(lines):
+            line_lower = line.lower()
+            if section_label.lower() in line_lower:
+                # Check if content is on the same line after colon
+                if ":" in line:
+                    content = line.split(":", 1)[-1].strip()
+                    if content:
+                        # If there's more content on next line, include it
+                        if i + 1 < len(lines) and lines[i + 1].strip() and not lines[i + 1].strip().lower().endswith(":"):
+                            content += " " + lines[i + 1].strip()
+                        return content
+                # Or content is on the next line(s)
+                if i + 1 < len(lines):
+                    content_parts = []
+                    j = i + 1
+                    while j < len(lines):
+                        next_line = lines[j].strip()
+                        if not next_line:
+                            j += 1
+                            continue
+                        # Stop if we hit another section label
+                        if ":" in next_line and any(keyword in next_line.lower() for keyword in 
+                            ["assessment context:", "robot platform:", "interaction modalit", "collaboration pattern:", 
+                             "environmental setting:", "assessment goals:", "expected empathy", "measurement requirement"]):
+                            break
+                        content_parts.append(next_line)
+                        j += 1
+                        # Stop after collecting a reasonable amount
+                        if len(content_parts) >= 3:
+                            break
+                    if content_parts:
+                        return " ".join(content_parts)
+        return ""
+    
     def get_interview_summary(self) -> Dict:
         """Get a summary of the collected interview data."""
         summary = self.interview_data.copy()
@@ -377,35 +414,17 @@ class InterviewAgentGroup:
             
             # Extract robot platform if missing
             if not summary.get("robot_platform") or summary.get("robot_platform") is None:
-                if "robot platform:" in env_lower or "humanoid" in env_lower:
-                    # Check for structured format with "Robot Platform:" label
-                    if "robot platform:" in env_lower:
-                        # Extract the line after "Robot Platform:"
-                        lines = env_setting.split("\n")
-                        for i, line in enumerate(lines):
-                            line_lower = line.lower()
-                            if "robot platform:" in line_lower:
-                                # Get the content after the colon (could be on same line or next)
-                                if ":" in line:
-                                    platform_part = line.split(":", 1)[-1].strip()
-                                    if platform_part:
-                                        summary["robot_platform"] = platform_part
-                                        break
-                                # Or get the next non-empty line if current line is just the label
-                                if i + 1 < len(lines):
-                                    next_line = lines[i + 1].strip()
-                                    if next_line and not next_line.lower().endswith(":"):
-                                        summary["robot_platform"] = next_line
-                                        break
-                    # Fallback: find sentence mentioning humanoid robot
-                    if not summary.get("robot_platform"):
-                        sentences = env_setting.split(". ")
-                        for sentence in sentences:
-                            if "humanoid" in sentence.lower() and ("robot" in sentence.lower() or "expressive facial" in sentence.lower()):
-                                # Extract robot platform description
-                                if "expressive facial" in sentence.lower() or "voice capabilities" in sentence.lower():
-                                    summary["robot_platform"] = sentence.strip()
-                                    break
+                platform_content = self._extract_section_content(env_setting, "robot platform:")
+                if platform_content:
+                    summary["robot_platform"] = platform_content
+                # Fallback: find sentence mentioning humanoid robot
+                elif "humanoid" in env_lower:
+                    sentences = env_setting.split(". ")
+                    for sentence in sentences:
+                        if "humanoid" in sentence.lower() and ("robot" in sentence.lower() or "expressive facial" in sentence.lower()):
+                            if "expressive facial" in sentence.lower() or "voice capabilities" in sentence.lower():
+                                summary["robot_platform"] = sentence.strip()
+                                break
                     # Final fallback: create from context
                     if not summary.get("robot_platform"):
                         if "expressive facial features" in env_lower and "voice capabilities" in env_lower:
@@ -415,71 +434,26 @@ class InterviewAgentGroup:
             
             # Extract collaboration pattern if missing
             if not summary.get("collaboration_pattern") or summary.get("collaboration_pattern") is None:
-                if "collaboration pattern:" in env_lower or "interacts with" in env_lower or "one-on-one" in env_lower or "adaptive" in env_lower:
-                    # Check for structured format with "Collaboration Pattern:" label
-                    if "collaboration pattern:" in env_lower:
-                        lines = env_setting.split("\n")
-                        for i, line in enumerate(lines):
-                            line_lower = line.lower()
-                            if "collaboration pattern:" in line_lower:
-                                # Get the content after the colon (could be on same line or next)
-                                if ":" in line:
-                                    pattern_part = line.split(":", 1)[-1].strip()
-                                    if pattern_part:
-                                        summary["collaboration_pattern"] = pattern_part
-                                        break
-                                # Or get the next non-empty line if current line is just the label
-                                if i + 1 < len(lines):
-                                    next_line = lines[i + 1].strip()
-                                    if next_line and not next_line.lower().endswith(":"):
-                                        summary["collaboration_pattern"] = next_line
-                                        break
-                    # Fallback: find sentence mentioning interaction pattern
-                    if not summary.get("collaboration_pattern"):
-                        sentences = env_setting.split(". ")
-                        for sentence in sentences:
-                            if "collaboration pattern:" in sentence.lower():
-                                pattern_part = sentence.split("Collaboration Pattern:", 1)[-1].strip()
-                                if pattern_part:
-                                    summary["collaboration_pattern"] = pattern_part
-                                    break
-                            elif ("interacts with" in sentence.lower() or "one-on-one" in sentence.lower() or 
-                                  ("adaptive" in sentence.lower() and ("response" in sentence.lower() or "patient" in sentence.lower()))):
-                                if "interaction" in sentence.lower() or "adaptive" in sentence.lower():
-                                    summary["collaboration_pattern"] = sentence.strip()
-                                    break
+                pattern_content = self._extract_section_content(env_setting, "collaboration pattern:")
+                if pattern_content:
+                    summary["collaboration_pattern"] = pattern_content
+                # Fallback: find sentence mentioning interaction pattern
+                elif "interacts with" in env_lower or "one-on-one" in env_lower or "adaptive" in env_lower:
+                    sentences = env_setting.split(". ")
+                    for sentence in sentences:
+                        if ("interacts with" in sentence.lower() or "one-on-one" in sentence.lower() or 
+                            ("adaptive" in sentence.lower() and ("response" in sentence.lower() or "patient" in sentence.lower()))):
+                            if "interaction" in sentence.lower() or "adaptive" in sentence.lower():
+                                summary["collaboration_pattern"] = sentence.strip()
+                                break
             
             # Enhance interaction modalities extraction
             interaction_modalities = summary.get("interaction_modalities", "")
-            
-            # Extract from Interaction Modalities section if missing details
-            if "interaction modalit" in env_lower:
-                lines = env_setting.split("\n")
-                for i, line in enumerate(lines):
-                    line_lower = line.lower()
-                    if "interaction modalit" in line_lower:
-                        # Get the content after the colon (could be on same line or next)
-                        if ":" in line:
-                            modality_part = line.split(":", 1)[-1].strip()
-                            if modality_part:
-                                # If we don't have modalities yet, use this
-                                if not interaction_modalities:
-                                    summary["interaction_modalities"] = modality_part
-                                # Otherwise merge intelligently
-                                else:
-                                    # Check if this section has more comprehensive info
-                                    if len(modality_part) > len(interaction_modalities):
-                                        summary["interaction_modalities"] = modality_part
-                        # Or get the next non-empty line
-                        if not summary.get("interaction_modalities") or len(summary.get("interaction_modalities", "")) < 50:
-                            if i + 1 < len(lines):
-                                next_line = lines[i + 1].strip()
-                                if next_line and not next_line.lower().endswith(":") and len(next_line) > 20:
-                                    if not interaction_modalities:
-                                        summary["interaction_modalities"] = next_line
-                                    elif len(next_line) > len(interaction_modalities):
-                                        summary["interaction_modalities"] = next_line
-                        break
+            modality_content = self._extract_section_content(env_setting, "interaction modalit")
+            if modality_content:
+                # Use the more comprehensive version
+                if not interaction_modalities or len(modality_content) > len(interaction_modalities):
+                    summary["interaction_modalities"] = modality_content
             
             # Ensure interaction modalities includes facial expressions if mentioned in platform
             interaction_modalities = summary.get("interaction_modalities", "")
@@ -489,9 +463,64 @@ class InterviewAgentGroup:
                 if "facial" not in modalities_lower and "expression" not in modalities_lower:
                     robot_platform = summary.get("robot_platform", "")
                     if robot_platform and ("expressive facial" in str(robot_platform).lower() or "facial features" in str(robot_platform).lower()):
-                        summary["interaction_modalities"] = interaction_modalities + ", facial expressions" if interaction_modalities else "Facial expressions"
+                        summary["interaction_modalities"] = interaction_modalities + ", and facial expressions" if interaction_modalities else "Facial expressions"
                     elif "expressive facial" in env_lower or "facial features" in env_lower:
-                        summary["interaction_modalities"] = interaction_modalities + ", facial expressions" if interaction_modalities else "Facial expressions"
+                        summary["interaction_modalities"] = interaction_modalities + ", and facial expressions" if interaction_modalities else "Facial expressions"
+            
+            # Extract expected empathy forms if missing
+            if not summary.get("expected_empathy_forms") or len(summary.get("expected_empathy_forms", [])) == 0:
+                empathy_forms_content = self._extract_section_content(env_setting, "expected empathy")
+                if empathy_forms_content:
+                    # Split into sentences and add as list items
+                    sentences = [s.strip() for s in empathy_forms_content.split(". ") if s.strip() and len(s.strip()) > 20]
+                    if sentences:
+                        summary["expected_empathy_forms"] = sentences
+            
+            # Extract measurement requirements if missing
+            if not summary.get("measurement_requirements") or len(summary.get("measurement_requirements", [])) == 0:
+                measurement_content = self._extract_section_content(env_setting, "measurement requirement")
+                if measurement_content:
+                    # Split into sentences and add as list items if multiple
+                    sentences = [s.strip() for s in measurement_content.split(". ") if s.strip() and len(s.strip()) > 20]
+                    if len(sentences) > 1:
+                        summary["measurement_requirements"] = sentences
+                    elif measurement_content:
+                        summary["measurement_requirements"] = [measurement_content]
+            
+            # Clean up environmental_setting to only contain actual environmental information
+            # Extract just the Environmental Setting section
+            env_only_content = self._extract_section_content(env_setting, "environmental setting:")
+            if env_only_content:
+                summary["environmental_setting"] = env_only_content
+            # If no dedicated section, try to extract from context
+            elif "hospital" in env_lower or "ward" in env_lower or "setting" in env_lower:
+                # Keep original if we can't extract a cleaner version
+                pass
+            
+            # Clean up assessment_goals to remove redundant information
+            # Remove goals that are just duplicating other fields
+            if summary.get("assessment_goals"):
+                cleaned_goals = []
+                robot_platform = str(summary.get("robot_platform", "")).lower()
+                interaction_mods = str(summary.get("interaction_modalities", "")).lower()
+                
+                for goal in summary["assessment_goals"]:
+                    goal_lower = str(goal).lower()
+                    # Skip if it's just describing the robot platform
+                    if robot_platform and robot_platform in goal_lower and len(goal_lower) < len(robot_platform) * 1.5:
+                        continue
+                    # Skip if it's just describing interaction modalities without adding goals
+                    if interaction_mods and "interaction modalit" in goal_lower and "goal" not in goal_lower and "assess" not in goal_lower:
+                        continue
+                    # Skip if it's duplicating assessment_context
+                    context = str(summary.get("assessment_context", "")).lower()
+                    if context and goal_lower in context:
+                        continue
+                    cleaned_goals.append(goal)
+                
+                # Only update if we removed some redundancy
+                if len(cleaned_goals) < len(summary["assessment_goals"]):
+                    summary["assessment_goals"] = cleaned_goals
         
         return summary
     
