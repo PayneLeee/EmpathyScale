@@ -6,6 +6,7 @@ Contains multiple sub-agents for different aspects of information gathering.
 
 import json
 import os
+import re
 import sys
 from typing import Dict, List, Optional
 
@@ -439,9 +440,86 @@ class InterviewAgentGroup:
                         return " ".join(content_parts)
         return ""
     
+    def _extract_summary_from_conversation(self) -> Dict:
+        """Use LLM to extract structured summary from conversation history."""
+        if not self.conversation_history or len(self.conversation_history) < 2:
+            # Not enough conversation yet, return current data
+            return self.interview_data.copy()
+        
+        # Format conversation history for LLM
+        conversation_text = ""
+        for entry in self.conversation_history:
+            if entry.get("type") == "user":
+                conversation_text += f"User: {entry.get('content', '')}\n"
+            elif entry.get("type") == "agent":
+                conversation_text += f"Agent: {entry.get('content', '')}\n"
+        
+        # Get extraction prompt
+        extraction_prompt_template = self.prompt_manager.get_agent_group_prompt(
+            "interview_agent_group",
+            "summary_extraction_prompt"
+        )
+        
+        extraction_prompt = extraction_prompt_template.format(
+            conversation_history=conversation_text
+        )
+        
+        try:
+            # Use LLM to extract summary
+            response = self.llm.invoke(extraction_prompt)
+            content = response.content.strip()
+            
+            # Extract JSON from response
+            json_match = re.search(r'\{.*\}', content, re.DOTALL)
+            if json_match:
+                extracted_summary = json.loads(json_match.group())
+                return extracted_summary
+            else:
+                # Fallback to keyword-based extraction
+                return self.interview_data.copy()
+        except Exception as e:
+            # If LLM extraction fails, fallback to keyword-based
+            print(f"[WARNING] LLM summary extraction failed: {e}. Using keyword-based extraction.")
+            return self.interview_data.copy()
+    
     def get_interview_summary(self) -> Dict:
-        """Get a summary of the collected interview data."""
-        summary = self.interview_data.copy()
+        """Get a summary of the collected interview data, extracted from conversation history."""
+        # First, try LLM-based extraction from conversation history
+        llm_summary = self._extract_summary_from_conversation()
+        
+        # Merge with keyword-based data (as fallback/supplement)
+        keyword_summary = self.interview_data.copy()
+        
+        # Use LLM summary as primary, fill gaps from keyword summary
+        summary = {}
+        for field in ["assessment_context", "robot_platform", "interaction_modalities", 
+                     "collaboration_pattern", "environmental_setting"]:
+            # Prefer LLM-extracted value if it exists and is not null
+            if llm_summary.get(field) and llm_summary[field] not in [None, "null", ""]:
+                summary[field] = llm_summary[field]
+            elif keyword_summary.get(field) and keyword_summary[field] not in [None, ""]:
+                summary[field] = keyword_summary[field]
+            else:
+                summary[field] = None
+        
+        # For list fields, merge both sources
+        for field in ["assessment_goals", "expected_empathy_forms", "assessment_challenges", "measurement_requirements"]:
+            llm_list = llm_summary.get(field, [])
+            keyword_list = keyword_summary.get(field, [])
+            if isinstance(llm_list, list) and llm_list:
+                summary[field] = llm_list
+            elif isinstance(keyword_list, list) and keyword_list:
+                summary[field] = keyword_list
+            else:
+                summary[field] = []
+        
+        # Apply post-processing to fill any remaining gaps
+        summary = self._post_process_summary(summary)
+        
+        return summary
+    
+    def _post_process_summary(self, summary: Dict) -> Dict:
+        """Post-process summary to extract missing information from existing fields."""
         
         # Post-process to extract missing information from comprehensive fields
         # First, try to extract from environmental_setting if it has structured format
@@ -449,6 +527,9 @@ class InterviewAgentGroup:
         
         # Also check assessment_goals for items that should be in other fields
         assessment_goals = summary.get("assessment_goals", [])
+        
+        # Check assessment_context for information that might be mixed in
+        assessment_context = summary.get("assessment_context", "")
         
         if env_setting and isinstance(env_setting, str):
             env_lower = env_setting.lower()
@@ -636,19 +717,41 @@ class InterviewAgentGroup:
         
         # Also check assessment_context for robot platform info if robot_platform is still null
         if not summary.get("robot_platform") or summary.get("robot_platform") is None:
-            context = summary.get("assessment_context", "")
-            if context and isinstance(context, str):
-                context_lower = context.lower()
+            if assessment_context and isinstance(assessment_context, str):
+                context_lower = assessment_context.lower()
                 if ("dual-arm" in context_lower or "manipulator" in context_lower or "haptic" in context_lower or
                     "force feedback" in context_lower or "vision sensor" in context_lower):
                     # Extract robot platform description
                     if "robot" in context_lower:
                         # Try to extract the robot description sentence
-                        sentences = context.split(". ")
+                        sentences = assessment_context.split(". ")
                         for sentence in sentences:
                             if "dual-arm" in sentence.lower() or "manipulator" in sentence.lower():
                                 summary["robot_platform"] = sentence.strip()
                                 break
+        
+        # Clean up assessment_context if it contains robot platform info that should be separated
+        if assessment_context and summary.get("robot_platform"):
+            # Remove robot platform description from assessment_context if duplicated
+            context_lower = str(assessment_context).lower()
+            platform_lower = str(summary.get("robot_platform", "")).lower()
+            if platform_lower in context_lower and len(platform_lower) > 20:
+                # Remove the robot platform part from context
+                summary["assessment_context"] = assessment_context.replace(
+                    summary["robot_platform"], ""
+                ).replace("Assessment Context:", "").strip()
+                if not summary["assessment_context"]:
+                    summary["assessment_context"] = "Human-robot collaboration scenario"
+        
+        # Clean up collaboration_pattern if it contains robot platform info
+        if summary.get("collaboration_pattern") and summary.get("robot_platform"):
+            pattern = str(summary.get("collaboration_pattern", ""))
+            platform = str(summary.get("robot_platform", ""))
+            if platform in pattern:
+                # Remove robot platform part from collaboration pattern
+                summary["collaboration_pattern"] = pattern.replace(platform, "").strip()
+                if summary["collaboration_pattern"].startswith("."):
+                    summary["collaboration_pattern"] = summary["collaboration_pattern"][1:].strip()
         
         return summary
     
