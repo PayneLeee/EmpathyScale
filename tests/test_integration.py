@@ -224,8 +224,13 @@ class IntegrationTest:
                 print_progress(f"Assessment data collected: {len(filled_fields)}/{len(assessment_fields)} fields", "OK")
             
             print_progress("Interview summary validation complete", "OK")
-            print_progress(f"  Assessment Context: {summary.get('assessment_context', 'N/A')[:60]}...", "INFO")
-            print_progress(f"  Robot Platform: {summary.get('robot_platform', 'N/A')[:60]}...", "INFO")
+            context_val = summary.get('assessment_context', 'N/A')
+            context_preview = context_val[:60] + '...' if context_val and isinstance(context_val, str) else 'N/A'
+            print_progress(f"  Assessment Context: {context_preview}", "INFO")
+            
+            platform_val = summary.get('robot_platform', 'N/A')
+            platform_preview = platform_val[:60] + '...' if platform_val and isinstance(platform_val, str) else 'N/A'
+            print_progress(f"  Robot Platform: {platform_preview}", "INFO")
             
             return True
             
@@ -345,8 +350,11 @@ class IntegrationTest:
                 # Handle the data structure - could be dict with 'results' key or direct results dict
                 literature_data = literature_data_raw
                 if isinstance(literature_data, dict):
-                    # Check if 'results' key exists (as saved by main.py)
-                    if 'results' in literature_data:
+                    # New structure: direct keys at top level
+                    if 'search_queries' in literature_data:
+                        results = literature_data
+                        print_progress("Using new minimal summary structure", "INFO")
+                    elif 'results' in literature_data:
                         results = literature_data['results']
                         print_progress("Found 'results' key in saved data", "OK")
                     elif 'organized_findings' in literature_data:
@@ -357,11 +365,17 @@ class IntegrationTest:
                         results = literature_data
                         print_progress("Using direct data structure", "INFO")
                     
-                    # Now extract queries from results
+                    # Now extract queries and PDF count from results
                     if isinstance(results, dict):
                         queries = results.get('search_queries', [])
+                        # Check for pdfs_downloaded in statistics or at top level
+                        if 'statistics' in results and isinstance(results['statistics'], dict):
+                            pdfs_count = results['statistics'].get('pdfs_downloaded', 0)
+                        else:
+                            pdfs_count = results.get('pdfs_downloaded', 0)
                     else:
                         queries = []
+                        pdfs_count = 0
                     
                     if queries and isinstance(queries, list):
                         print_progress(f"Literature search generated {len(queries)} queries", "OK")
@@ -399,10 +413,7 @@ class IntegrationTest:
                             print_progress("Warning: Search queries may not match interview context", "WARN")
                         
                         # Connection verified if queries exist and PDFs were downloaded
-                        if isinstance(results, dict):
-                            pdfs_count = results.get('pdfs_downloaded', 0)
-                        else:
-                            pdfs_count = 0
+                        # (pdfs_count already extracted above)
                         print_progress(f"PDFs downloaded according to results: {pdfs_count}", "INFO")
                         
                         connection_ok = len(queries) > 0 and pdfs_count > 0
