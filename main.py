@@ -14,6 +14,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'utils'))
 
 from interview_agent_group import InterviewAgentGroup, load_config
 from literature_search_agent_group import LiteratureSearchAgentGroup
+from empathy_scale_generation_agent_group import EmpathyScaleGenerationAgentGroup
 from data_manager import DataManager
 
 
@@ -45,6 +46,11 @@ class MultiAgentWorkflow:
         
         # Initialize literature search agent group
         self.agents['literature'] = LiteratureSearchAgentGroup(
+            api_key=self.config["openai_api_key"]
+        )
+        
+        # Initialize empathy scale generation agent group
+        self.agents['scale_generation'] = EmpathyScaleGenerationAgentGroup(
             api_key=self.config["openai_api_key"]
         )
     
@@ -100,6 +106,9 @@ class MultiAgentWorkflow:
         
         # Run literature search after interview
         self._run_literature_search(interview_agent_group)
+        
+        # Run empathy scale generation after literature search
+        self._run_scale_generation()
     
     def _display_interview_summary(self, interview_agent_group: InterviewAgentGroup):
         """Display the interview summary."""
@@ -227,6 +236,23 @@ class MultiAgentWorkflow:
             self.data_manager.save_metadata(self.run_id, metadata)
         
         print(f"\n[Literature] Enhanced search complete - {literature_results.get('pdfs_downloaded', 0)} PDFs downloaded")
+
+    def _run_scale_generation(self):
+        """Run empathy scale generation using prior results and expert PDFs."""
+        if not self.run_id:
+            return
+        scale_agent = self.agents.get('scale_generation')
+        if not scale_agent:
+            print("\n[Scale] Agent not initialized, skipping scale generation")
+            return
+        print("\n" + "=" * 60)
+        print("GENERATING EMPATHY SCALE DRAFT")
+        print("=" * 60)
+        results = scale_agent.generate_scale(self.run_id)
+        if results.get("scale_draft_path"):
+            print(f"[Scale] Draft saved to: {results['scale_draft_path']}")
+        else:
+            print(f"[Scale] {results.get('error', 'Unknown error')}")
 
 
 def main():
