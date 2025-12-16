@@ -1,0 +1,120 @@
+Context-Adaptive Empathy Scales for HRI: A Multi-Agent
+LLM Approach
+Peiyan Li, Wentao Zhao, Donghua Cai
+Team Information and Expected contributions
+Peiyan Li(lpy25@mails.tsinghua.edu.cn) Overall Structure, Report Writing, and Presenting.
+Wentao Zhao(zhaowt25@mails.tsinghua.edu.cn) Construct Definition Agents, Item Generation Agents.
+Donghua Cai(cdh25@mails.tsinghua.edu.cn) Content Assessment Agents, Evaluation Agents.
+1. Motivation
+Empathy plays a foundational role in interactive AI systems, especially in human–robot interaction
+(HRI), where empathic behavior influences trust, cooperation, and long-term acceptance [3, 1]. Cru-
+cially, empathy in HRI is highly contextual: its expression—and users’ perception of it—varies widely
+across tasks, roles, and interaction settings. A collaborative robot in an assembly task may express
+empathy through adaptive task coordination (e.g., slowing down when a human hesitates), whereas a
+counseling-oriented conversational agent demonstrates empathy through reflective dialogue. A home
+service robot may instead convey empathy by anticipating user needs or adjusting behavior in response
+to frustration. Although all represent “empathy,” their forms differ sharply across platforms and use
+cases.
+This variability makes measurement difficult. Existing instruments such as RoPE [4] and PETS
+[12] provide useful baselines but are either too specialized or too general to capture scenario-dependent
+differences. As a result, researchers lack tools that reflect how empathy should appear within a specific
+interaction context.
+Developing scenario-specific empathy scales traditionally requires the full nine-step psychometric
+framework [2], including construct definition, item generation, expert review, pilot testing, and factor
+analysis. While rigorous, this process is slow, costly, and impractical to repeat for the diverse and rapidly
+expanding range of HRI scenarios.
+Advances in large language models (LLMs) offer a potential path toward scalable solutions. LLMs
+can generate psychometric items [7, 8] and perform structured evaluation tasks such as UX analysis
+[6]. Multi-agent LLM systems such as ChatDev [11] and MetaGPT [5] further show that coordinated,
+role-specialized agents can emulate complex expert workflows. These developments motivate exploring
+whether similar architectures can support rapid creation of scenario-sensitive empathy scales for HRI.
+This project aims to develop a lightweight, non-iterative multi-agent LLM prototype that generates
+scenario-specific empathy items and conducts preliminary evaluation using simulated “participants.”
+Comprehensive validation with human users is reserved for future work.
+2. Background & Related Work
+Empathy measurement in HRI. Prior studies highlight empathy’s importance for trust, acceptance,
+and interaction quality [13, 10]. RoPE [4] and PETS [12] represent important steps, but lack scenario
+sensitivity.
+1
+Scale development methodology. The widely adopted nine-step framework [2] requires expert
+review, item refinement, and multiple rounds of data collection; recent HCI work such as PETS[12] and
+PSC [9] follows this process. However, the required effort limits scalability.
+LLMs for item generation. Prior work demonstrates that LLMs can produce coherent, high-quality
+assessment items and reasoning-based evaluations [7, 8, 6]. However, applications to HRI empathy
+remain unexplored.
+Multi-agent LLM systems. Systems like ChatDev [11] and MetaGPT [5] show that role-specialized
+LLM agents can collaborate effectively, giving promise for automated scale development.
+3. Problem Formulation & Expected Outcomes
+Objective: Develop a multi-agent LLM system to generate scenario-sensitive empathy items and con-
+duct initial LLM-based evaluation.
+Research questions: (1) Can multi-agent LLMs generate coherent, scenario-specific empathy items?
+(2) Can LLM evaluation agents provide consistent preliminary judgments? (3) Do generated items ap-
+pear more contextually appropriate than baseline scales such as PETS?
+System components: Construct Definition Agents defines scenario-relevant empathy dimensions.
+Item Generation Agents produce diverse candidate items (6–12 per scenario). Content Assessment
+Agents refines wording and removes redundancy.Evaluation Agents simulate participant judgments of
+clarity, relevance, and scenario sensitivity.
+The system will produce two to three scenario-specific empathy scales (e.g., robot teammate, home
+robot, counseling agent). No factor analysis or human user evaluation is included in this phase.
+4. Planned Methods
+The prototype will be implemented in Python using LLM APIs. Given a scenario description, the Con-
+struct Definition Agent extracts relevant constructs. Multiple Item Generation Agents independently
+generate candidate items to increase diversity. A Content Assessment Agent performs wording improve-
+ments and content consolidation. Evaluation Agents simulate human participants by providing Likert
+ratings and short rationales for each item. All evaluations are LLM-based and treated as feasibility
+signals rather than formal psychometric evidence.
+No human data will be collected. Ethical considerations are limited, but any future real-user studies
+would require formal review.
+5. Evaluation Plan
+The system will be evaluated through LLM-based participant simulation. Evaluation agents will provide
+item-level clarity ratings, relevance ratings, scenario-sensitivity judgments, and concise justifications.
+Both SensEmoScale-generated items and baseline scales (PETS [12] and RoPE [4]) will be evaluated
+under identical procedures.
+Metrics include mean clarity, contextual relevance, differences across scenarios, and stability across
+repeated simulation runs. Ablations will compare single-agent versus multi-agent generation, with ver-
+sus without content refinement, and scenario-specific versus generic prompting. The evaluation is pre-
+liminary and does not constitute psychometric validation; full statistical analysis and user studies remain
+future work.
+2
+References
+[1] Timothy W Bickmore and Rosalind W Picard. Establishing and maintaining long-term human-
+computer relationships. ACM Transactions on Computer-Human Interaction (TOCHI), 12(2):293–
+327, 2005.
+[2] Godfred O Boateng, Torsten B Neilands, Edward A Frongillo, Hugo R Melgar-Qui ˜nonez, and
+Sera L Young. Best practices for developing and validating scales for health, social, and behavioral
+research: a primer. Frontiers in Public Health, 6:149, 2018.
+[3] Cynthia Breazeal. Designing sociable robots. MIT Press, 2004.
+[4] Laurianne Charrier, Alisa Rieger, Alexandre Galdeano, Am ´elie Cordier, Mathieu Lefort, and Sal-
+ima Hassas. The rope scale: a measure of how empathic a robot is perceived. In 2019 14th
+ACM/IEEE International Conference on Human-Robot Interaction (HRI), pages 656–657. IEEE,
+2019.
+[5] Sirui Hong, Mingchen Zhuge, Jonathan Chen, Xiawu Zheng, Yuheng Cheng, Ceyao Zhang, Jinlin
+Wang, Zili Wang, Steven Ka Shing Yau, Zijuan Lin, et al. Metagpt: Meta programming for a
+multi-agent collaborative framework. In International Conference on Learning Representations
+(ICLR), 2024.
+[6] Nien-Lin Hsueh, Hsuen-Jen Lin, and Lien-Chi Lai. Applying large language model to user expe-
+rience testing. Electronics, 13(23), 2024.
+[7] Antonio Laverghetta Jr and John Licato. Generating better items for cognitive assessments using
+large language models. InProceedings of the 18th Workshop on Innovative Use of NLP for Building
+Educational Applications (BEA 2023), pages 414–428, 2023.
+[8] Antonio Laverghetta Jr, Simone Luchini, Averie Linell, Roni Reiter-Palmon, and Roger Beaty. The
+creative psychometric item generator: A framework for item generation and validation using large
+language models. arXiv preprint arXiv:2409.00202, 2024.
+[9] Jan Leusmann, Steeven Villa, Burak Berberoglu, Chao Wang, and Sven Mayer. Developing and
+validating the perceived system curiosity scale (psc): Measuring users’ perceived curiosity of sys-
+tems. In Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems, pages
+1–18, 2025.
+[10] Harika Putta, Karl Daher, Mira El Kamali, Omar Abou Khaled, Denis Lalanne, and Elena
+Mugellini. Empathy scale adaptation for artificial agents: a review with a new subscale proposal. In
+2022 8th International Conference on Control, Decision and Information Technologies (CoDIT),
+volume 1, pages 699–704. IEEE, 2022.
+[11] Chen Qian, Wei Liu, Hongzhang Liu, Nuo Chen, Yufan Dang, Jiahao Li, Cheng Yang, Weize
+Chen, Yusheng Su, Xin Cong, et al. Chatdev: Communicative agents for software development. In
+Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume
+1: Long Papers), pages 15174–15186, 2024.
+[12] Matthias Schmidmaier, Jonathan Rupp, Darina Cvetanova, and Sven Mayer. Perceived empathy
+of technology scale (pets): Measuring empathy of systems toward the user. In Proceedings of the
+2024 CHI Conference on Human Factors in Computing Systems, pages 1–18, 2024.
+[13] ¨Ozge Nilay Yalc ¸ın. Evaluating empathy in artificial agents. In2019 8th International Conference
+on Affective Computing and Intelligent Interaction (ACII), pages 1–7. IEEE, 2019.
+3

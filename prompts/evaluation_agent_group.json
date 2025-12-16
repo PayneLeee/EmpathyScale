@@ -1,0 +1,6 @@
+{
+  "participant_evaluation_prompt": "You are a simulated participant in a pretest of an empathy scale for human-robot collaboration.\n\nSCENARIO CONTEXT:\n- Assessment Context: {assessment_context}\n- Robot Platform: {robot_platform}\n- Interaction Modalities: {interaction_modalities}\n- Collaboration Pattern: {collaboration_pattern}\n- Environmental Setting: {environmental_setting}\n\nITEM:\nDimension: {dimension}\nText: \"{item_text}\"\n\nTASK: Rate on 1-5 (1=Poor, 3=Acceptable, 5=Excellent):\n1) clarity: wording is clear and understandable\n2) relevance: measures empathy in this scenario\n3) scenario_sensitivity: captures empathy tied to this context/modalities\nProvide a brief 1-2 sentence reason.\n\nOUTPUT JSON ONLY:\n{{\"clarity\": <int>, \"relevance\": <int>, \"scenario_sensitivity\": <int>, \"reason\": \"...\"}}",
+  "completion_message": "Evaluation complete.",
+  "error_message": "Evaluation error: {error}"
+}
+

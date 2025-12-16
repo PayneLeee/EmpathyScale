@@ -1,0 +1,267 @@
+{
+  "n_items": 10,
+  "item_statistics": [
+    {
+      "dimension": "Dimension A: Cognitive Empathy",
+      "item_text": "The robot detects changes in my speech patterns indicating frustration.",
+      "clarity": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "relevance": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "scenario_sensitivity": {
+        "mean": 4.95,
+        "std": 0.22,
+        "min": 4.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "overall_mean": 4.98
+    },
+    {
+      "dimension": "Dimension A: Cognitive Empathy",
+      "item_text": "The robot recognizes my body language when I'm upset.",
+      "clarity": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "relevance": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "scenario_sensitivity": {
+        "mean": 4.15,
+        "std": 0.37,
+        "min": 4.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "overall_mean": 4.72
+    },
+    {
+      "dimension": "Dimension A: Cognitive Empathy",
+      "item_text": "The robot understands my needs without me having to explain.",
+      "clarity": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "relevance": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "scenario_sensitivity": {
+        "mean": 4.4,
+        "std": 0.5,
+        "min": 4.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "overall_mean": 4.8
+    },
+    {
+      "dimension": "Dimension B: Affective Empathy",
+      "item_text": "The robot uses calming gestures when I feel anxious.",
+      "clarity": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "relevance": {
+        "mean": 4.9,
+        "std": 0.31,
+        "min": 4.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "scenario_sensitivity": {
+        "mean": 4.05,
+        "std": 0.22,
+        "min": 4.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "overall_mean": 4.65
+    },
+    {
+      "dimension": "Dimension B: Affective Empathy",
+      "item_text": "The robot reassures me effectively through speech.",
+      "clarity": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "relevance": {
+        "mean": 4.9,
+        "std": 0.31,
+        "min": 4.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "scenario_sensitivity": {
+        "mean": 4.2,
+        "std": 0.41,
+        "min": 4.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "overall_mean": 4.7
+    },
+    {
+      "dimension": "Dimension B: Affective Empathy",
+      "item_text": "The robot provides comforting words when I am stressed.",
+      "clarity": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "relevance": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "scenario_sensitivity": {
+        "mean": 4.05,
+        "std": 0.22,
+        "min": 4.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "overall_mean": 4.68
+    },
+    {
+      "dimension": "Dimension B: Affective Empathy",
+      "item_text": "The robot shows sensitivity to my emotional state.",
+      "clarity": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "relevance": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "scenario_sensitivity": {
+        "mean": 4.0,
+        "std": 0.0,
+        "min": 4.0,
+        "max": 4.0,
+        "n": 20
+      },
+      "overall_mean": 4.67
+    },
+    {
+      "dimension": "Dimension C: Behavioral Empathy",
+      "item_text": "The robot senses when I could use a hand.",
+      "clarity": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "relevance": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "scenario_sensitivity": {
+        "mean": 4.4,
+        "std": 0.5,
+        "min": 4.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "overall_mean": 4.8
+    },
+    {
+      "dimension": "Dimension C: Behavioral Empathy",
+      "item_text": "The robot anticipates my needs without me asking.",
+      "clarity": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "relevance": {
+        "mean": 4.95,
+        "std": 0.22,
+        "min": 4.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "scenario_sensitivity": {
+        "mean": 4.9,
+        "std": 0.31,
+        "min": 4.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "overall_mean": 4.95
+    },
+    {
+      "dimension": "Dimension C: Behavioral Empathy",
+      "item_text": "The robot recognizes when I need assistance and acts.",
+      "clarity": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "relevance": {
+        "mean": 5.0,
+        "std": 0.0,
+        "min": 5.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "scenario_sensitivity": {
+        "mean": 4.6,
+        "std": 0.5,
+        "min": 4.0,
+        "max": 5.0,
+        "n": 20
+      },
+      "overall_mean": 4.87
+    }
+  ],
+  "low_performing_items": [],
+  "threshold": 3.5
+}

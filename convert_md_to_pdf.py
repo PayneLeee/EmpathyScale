@@ -96,3 +96,9 @@ if __name__ == "__main__":
         print("\nMake sure to install required packages:")
         print("  pip install markdown weasyprint")
 
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+{
+  "name": "home_service_robot",
+  "assessment_context": "home assistant supporting daily tasks",
+  "robot_platform": "mobile service robot",
+  "interaction_modalities": "speech + navigation cues",
+  "collaboration_pattern": "assistive",
+  "environmental_setting": "home",
+  "assessment_goals": [
+    "comfort",
+    "perceived care"
+  ],
+  "expected_empathy_forms": [
+    "detect frustration",
+    "offer reassurance"
+  ],
+  "measurement_requirements": [
+    "non-technical language"
+  ]
+}

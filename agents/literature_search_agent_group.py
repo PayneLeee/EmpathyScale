@@ -28,7 +28,7 @@ class LiteratureSearchAgentGroup:
     Supports targeted searches for empathy scale design.
     """
     
-    def __init__(self, api_key: str, model_name: str = "gpt-4", prompts_dir: str = None):
+    def __init__(self, api_key: str, model_name: str = "gpt-4o-mini", prompts_dir: str = None):
         """
         Initialize the enhanced literature search agent.
         

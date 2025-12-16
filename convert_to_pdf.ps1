@@ -114,3 +114,9 @@ Write-Host "  3. Use online tool: https://dillinger.io/" -ForegroundColor White
 Write-Host "  4. Install Python packages: pip install markdown weasyprint" -ForegroundColor White
 exit 1
 
+
+
+
+
+
+

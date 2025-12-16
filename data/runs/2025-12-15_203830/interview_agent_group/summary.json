@@ -1,0 +1,18 @@
+{
+  "name": "counseling_chatbot",
+  "assessment_context": "text-based counseling bot",
+  "robot_platform": "chatbot",
+  "interaction_modalities": "text chat",
+  "collaboration_pattern": "supportive dialogue",
+  "environmental_setting": "remote",
+  "assessment_goals": [
+    "emotional attunement"
+  ],
+  "expected_empathy_forms": [
+    "reflective listening",
+    "validation"
+  ],
+  "measurement_requirements": [
+    "short statements"
+  ]
+}
