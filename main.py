@@ -285,9 +285,18 @@ class MultiAgentWorkflow:
 
         eval_agent = EvaluationAgentGroup(api_key=self.config["openai_api_key"])
         print("\n" + "=" * 60)
-        print("LLM-SIMULATED PRETEST (PETS-style)")
+        print("LLM-SIMULATED ITEM TESTING (PETS-style with Personas)")
         print("=" * 60)
-        result = eval_agent.evaluate_items(self.run_id, items, interview_summary, n_participants=n_participants)
+        
+        # Extract scenario name from interview summary if available
+        scenario_id = interview_summary.get("name") if isinstance(interview_summary, dict) else None
+        if scenario_id:
+            print(f"[Eval] Using scenario_id: {scenario_id}")
+        else:
+            print(f"[Eval] No scenario_id found, generating temporary personas")
+        
+        print(f"[Eval] Each persona rates all {len(items)} items on system empathy (0-100 scale)")
+        result = eval_agent.evaluate_items(self.run_id, items, interview_summary, n_participants=n_participants, scenario_id=scenario_id)
         print(f"[Eval] Summary saved to: {result.get('summary_path')}")
 
         # Baseline evaluations (PETS / ROPE) if available

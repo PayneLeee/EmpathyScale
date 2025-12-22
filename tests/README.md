@@ -75,11 +75,75 @@ python quick_test.py
 - ✅ Displays organized summary
 - ✅ Quick completion status check
 
+### `test_single_scenario_quick.py`
+Quick end-to-end test for a single scenario's complete pipeline (generation → Phase 1 evaluation → statistical selection → Phase 2 validation).
+
+**Usage:**
+```bash
+# From project root
+python tests/test_single_scenario_quick.py
+
+# Or from tests folder
+cd tests
+python test_single_scenario_quick.py
+```
+
+**Features:**
+- ✅ Tests complete pipeline for one scenario
+- ✅ Uses reduced participants for speed (10 for Phase 1, 20 for Phase 2)
+- ✅ Uses 3 generators (instead of 5) for faster generation
+- ✅ Validates all pipeline steps
+- ✅ Saves test summary to `data/test_runs/{timestamp}/test_summary.json`
+- ✅ Full run data saved to `data/runs/{run_id}/`
+
+**Output:**
+- Test summary JSON with all results
+- Full run directory with all artifacts
+- Validation checks for each pipeline step
+
 **Output includes:**
 - Opening message
 - Simulated conversation (truncated)
 - Interview summary
 - Completion status
+
+### `test_factor_balance_with_history.py`
+Unit test for factor balance and item count control improvements using historical run data.
+
+**Usage:**
+```bash
+# From project root - use most recent complete run
+python tests/test_factor_balance_with_history.py
+
+# Or specify a specific run_id
+python tests/test_factor_balance_with_history.py 2025-12-22_142748
+```
+
+**Features:**
+- ✅ Tests improved factor balancing logic with real historical data
+- ✅ Re-runs statistical selection using modified code
+- ✅ Compares results before and after improvements
+- ✅ Validates factor balance improvement (imbalance ratio < 3:1)
+- ✅ Validates item count control (within target range 10-18)
+- ✅ Saves comparison results to `data/test_runs/factor_balance_test_{timestamp}/`
+
+**What it tests:**
+1. **Factor Balance**: Verifies that factor distribution is more balanced (e.g., from 35:2 to more balanced)
+2. **Item Count Control**: Verifies that item count is within target range (10-18 items)
+3. **CFA Logic**: Tests improved CFA item removal logic that prioritizes larger factors
+4. **Post-CFA Balancing**: Tests aggressive reduction and re-balancing after CFA
+
+**Output:**
+- Detailed comparison between historical and new results
+- Factor balance metrics (imbalance ratio, balance score)
+- Item count comparison
+- Improvement status for each metric
+- JSON comparison results saved to file
+
+**Requirements:**
+- Historical run with complete Phase 1 evaluation data
+- `evaluation_summary.json` and `participant_level_evaluations.json` in `evaluation_agent_group/selection/combined/`
+- `scale_draft.md` in `empathy_scale_generation_agent_group/`
 
 ## Test Data
 

@@ -102,6 +102,74 @@ See [docs/DATA_STORAGE.md](docs/DATA_STORAGE.md) for detailed structure.
 - **[Data Storage](docs/DATA_STORAGE.md)**: Run structure, file organization, data access
 - **[Adding Agents](docs/HOW_TO_ADD_AGENTS.md)**: Step-by-step extension guide
 
+## 🧪 Run Scripts
+
+The project includes several run scripts that implement the experiments described in the proposal:
+
+### Core Experiments
+
+#### 1. `run_predefined_scenarios.py` - Main Scale Generation
+**Purpose**: Generate scenario-specific empathy scales for 2-3 predefined scenarios
+
+**Features**:
+- Runs complete pipeline: generation → Phase 1 evaluation → statistical selection → Phase 2 validation
+- Scenarios: collab_robot_assembly, home_service_robot, counseling_chatbot
+- Two-phase evaluation with independent persona sets
+- Statistical item selection based on evaluation data
+
+**Usage**:
+```bash
+python run_predefined_scenarios.py
+```
+
+#### 2. `run_ablation_minimal.py` - Ablation Study
+**Purpose**: Compare different generation configurations (2x2 design)
+
+**Features**:
+- Single vs multi-agent generation
+- With vs without content assessment
+- Runs on collab_robot_assembly scenario
+- Generates ablation summary report
+
+**Usage**:
+```bash
+python run_ablation_minimal.py
+```
+
+#### 3. `run_baseline_comparison.py` - Baseline Comparison
+**Purpose**: Evaluate baseline scales (PETS and RoPE) using the same personas
+
+**Features**:
+- Evaluates PETS and RoPE baseline scales
+- Uses same personas as generated scales for fair comparison
+- Generates comparison reports for each scenario
+
+**Usage**:
+```bash
+python run_baseline_comparison.py
+```
+
+### Optional Tools
+
+#### 4. `run_statistical_item_selection.py` - Independent Selection Tool
+**Purpose**: Apply statistical selection to existing run results
+
+**Features**:
+- Can be used to apply statistical selection to previously generated scales
+- Supports multiple selection strategies (rating_threshold, percentile, dimension_balanced)
+
+**Usage**:
+```bash
+python run_statistical_item_selection.py --run-id <run_id> --strategy rating_threshold
+```
+
+### Development Tools
+
+Development tools are located in the `tools/` directory:
+- `tools/run_single_variant.py` - Re-run individual ablation variants (for debugging)
+
+For details on the evaluation process and persona configuration, see [docs/EVALUATION_PROCESS_UNIFICATION.md](docs/EVALUATION_PROCESS_UNIFICATION.md).
+
 ## 🛠️ Additional Tools
 
 ### Prompt Debugging

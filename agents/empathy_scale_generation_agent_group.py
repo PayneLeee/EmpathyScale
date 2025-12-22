@@ -136,26 +136,77 @@ class EmpathyScaleGenerationAgentGroup:
         expert_pdfs = self._list_expert_pdfs()
 
         # Step 1: construct definition
-        print("    [LLM Call] Defining empathy constructs...")
+        print("    [LLM Call] Defining empathy constructs...", flush=True)
         constructs = self._run_construct_definition(interview)
-        print(f"    [OK] Constructs defined: {len(self._extract_dimensions(constructs.get('raw', '')))} dimensions")
+        print(f"    [OK] Constructs defined: {len(self._extract_dimensions(constructs.get('raw', '')))} dimensions", flush=True)
 
         # Step 2: multi-generator candidates
-        print(f"    [LLM Call] Generating items with {self.num_item_generators} parallel generator(s)...")
+        print(f"    [LLM Call] Generating items with {self.num_item_generators} parallel generator(s)...", flush=True)
         candidates = self._run_multi_item_generation(constructs, interview)
-        print(f"    [OK] Generated {len(candidates)} candidate items")
+        # Calculate total number of items across all dimensions
+        total_items = sum(len(block.get("items", [])) for block in candidates)
+        print(f"    [OK] Generated {total_items} candidate items across {len(candidates)} dimensions", flush=True)
 
         # Step 3: content assessment (optional)
         if self.enable_content_assessment:
-            print("    [LLM Call] Running content assessment and refinement...")
+            print("    [LLM Call] Running content assessment and refinement...", flush=True)
             refined = self._run_content_assessment(candidates, interview)
-            print(f"    [OK] Refined to {len(refined)} items")
+            total_refined = sum(len(block.get("items", [])) for block in refined)
+            print(f"    [OK] Refined to {total_refined} items across {len(refined)} dimensions", flush=True)
         else:
             refined = candidates
-            print("    [SKIP] Content assessment disabled")
+            print("    [SKIP] Content assessment disabled", flush=True)
+
+        # Step 3.5: Semantic deduplication (remove semantically similar items before evaluation)
+        print("    [Semantic Dedup] Removing semantically similar items...", flush=True)
+        try:
+            from utils.pre_evaluation_semantic_deduplication import remove_semantic_duplicates_before_evaluation
+            
+            # Flatten refined items for deduplication
+            all_items = []
+            for block in refined:
+                dim = block.get("dimension") or "Unknown"
+                for item_text in block.get("items", []):
+                    all_items.append({"dimension": dim, "item_text": item_text})
+            
+            if all_items:
+                filtered_items, dedup_stats = remove_semantic_duplicates_before_evaluation(
+                    all_items,
+                    similarity_threshold=0.80,  # Same-dimension threshold
+                    cross_dimension_threshold=0.75,  # Stricter threshold for cross-dimension (ensure dimension distinction)
+                    use_sentence_transformers=True
+                )
+                
+                # Re-group by dimension
+                refined_by_dim = {}
+                for item in filtered_items:
+                    dim = item.get("dimension", "Unknown")
+                    if dim not in refined_by_dim:
+                        refined_by_dim[dim] = []
+                    refined_by_dim[dim].append(item.get("item_text", ""))
+                
+                refined = [{"dimension": dim, "items": items} for dim, items in refined_by_dim.items()]
+                
+                total_after_dedup = sum(len(block.get("items", [])) for block in refined)
+                print(f"    [OK] After semantic deduplication: {total_after_dedup} items (removed {dedup_stats['n_removed']} semantic duplicates)", flush=True)
+                
+                # Save deduplication stats
+                out_dir = PROJECT_ROOT / f"data/runs/{run_id}/empathy_scale_generation_agent_group"
+                out_dir.mkdir(parents=True, exist_ok=True)
+                dedup_stats_path = out_dir / "semantic_deduplication_stats.json"
+                with open(dedup_stats_path, 'w', encoding='utf-8') as f:
+                    json.dump(dedup_stats, f, indent=2, ensure_ascii=False)
+            else:
+                print("    [WARN] No items to deduplicate", flush=True)
+        except ImportError as e:
+            print(f"    [WARN] Semantic deduplication not available ({e}), skipping...", flush=True)
+        except Exception as e:
+            print(f"    [WARN] Semantic deduplication failed: {e}, continuing without it...", flush=True)
+            import traceback
+            traceback.print_exc()
 
         # Step 4: assemble markdown
-        print("    [Assembling] Creating scale draft markdown...")
+        print("    [Assembling] Creating scale draft markdown...", flush=True)
         scale_markdown = self._assemble_markdown(interview, literature, refined, expert_pdfs)
 
         # Save artifacts
@@ -200,7 +251,13 @@ class EmpathyScaleGenerationAgentGroup:
             for _ in range(self.num_item_generators)
         ]
         results = []
-        for g in gens:
+        import time
+        for idx, g in enumerate(gens):
+            # Add small delay between sequential calls to avoid rate limiting
+            # Even though calls are sequential, rapid successive calls can trigger rate limits
+            if idx > 0:
+                time.sleep(1)  # 1 second delay between calls
+            print(f"    [Generator {idx + 1}/{self.num_item_generators}] Generating items...", flush=True)
             results.append(g.generate_items(dimensions, scenario))
         return self._merge_item_candidates(results)
 
@@ -210,22 +267,56 @@ class EmpathyScaleGenerationAgentGroup:
         return self._parse_items_from_raw(refined.get("raw"))
 
     def _assemble_markdown(self, interview, literature, items, expert_pdfs) -> str:
-        system_prompt = self.prompt_manager.get_agent_group_prompt(
-            "empathy_scale_generation_agent_group", "system_prompt"
-        )
-        main_prompt = self._build_generation_prompt(interview, literature, expert_pdfs)
-        # Append item list as context hint
-        if items:
-            item_lines = []
-            for block in items:
-                dim = block.get("dimension") or block.get("name") or "Dimension"
-                for it in block.get("items", []):
-                    item_lines.append(f"- {dim}: {it}")
-            main_prompt += "\n\nPreselected items:\n" + "\n".join(item_lines)
-
-        prompt = f"{system_prompt}\n\n{main_prompt}"
-        response = retry_llm_call(lambda: self.llm.invoke(prompt))
-        return response.content.strip()
+        """
+        Assemble markdown directly from items without LLM selection.
+        This ensures all items are included in the final draft.
+        """
+        # Build context information
+        context_lines = [
+            f"assessment_context: {interview.get('assessment_context', '')}",
+            f"robot_platform: {interview.get('robot_platform', '')}",
+            f"interaction_modalities: {interview.get('interaction_modalities', '')}",
+            f"collaboration_pattern: {interview.get('collaboration_pattern', '')}",
+            f"environmental_setting: {interview.get('environmental_setting', '')}",
+        ]
+        
+        # Build markdown directly from items
+        md_lines = ["# Empathy Scale (Draft)", ""]
+        md_lines.append("## Purpose and Context")
+        md_lines.append(f"This empathy scale is designed to assess perceived empathy in the context: {interview.get('assessment_context', 'N/A')}.")
+        md_lines.append("")
+        md_lines.append("## Structure")
+        
+        # Collect dimensions
+        dimensions = {}
+        for block in items:
+            dim = block.get("dimension") or block.get("name") or "Unknown"
+            if dim not in dimensions:
+                dimensions[dim] = []
+            dimensions[dim].extend(block.get("items", []))
+        
+        dim_list = "、".join([f"**{d}**" for d in dimensions.keys()])
+        md_lines.append(f"- **Dimensions/Subscales**: {dim_list}")
+        md_lines.append("- **Response Format**: 5-point Likert scale (1 = Strongly Disagree, 5 = Strongly Agree)")
+        md_lines.append("- **Administration Notes**: Participants rate items based on their interaction experience.")
+        md_lines.append("")
+        md_lines.append("## Items by Dimension")
+        md_lines.append("")
+        
+        # Add items by dimension
+        item_num = 1
+        for dim, dim_items in dimensions.items():
+            md_lines.append(f"### {dim}")
+            for item_text in dim_items:
+                md_lines.append(f"- Item {item_num}: {item_text}")
+                item_num += 1
+            md_lines.append("")
+        
+        md_lines.append("## Scoring")
+        md_lines.append("Items will be scored on a Likert scale from 1 to 5. Subscale totals can be calculated by summing items within each dimension.")
+        md_lines.append("")
+        
+        return "\n".join(md_lines)
 
     # ---------- Helpers ----------
     def _extract_dimensions(self, raw: str) -> List[Dict[str, str]]:
@@ -245,14 +336,23 @@ class EmpathyScaleGenerationAgentGroup:
             return dims
 
     def _merge_item_candidates(self, results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """
+        Merge item candidates from multiple generators.
+        Uses set() for exact duplicate removal only - preserves all unique items.
+        """
         merged = {}
         for res in results:
             blocks = self._parse_items_from_raw(res.get("raw"))
             for blk in blocks:
                 dim = blk.get("dimension") or "Unknown"
-                merged.setdefault(dim, set())
+                # Normalize dimension name for consistent grouping
+                dim_normalized = dim.strip()
+                merged.setdefault(dim_normalized, set())
                 for it in blk.get("items", []):
-                    merged[dim].add(it)
+                    # Only remove exact duplicates (case-insensitive, whitespace-normalized)
+                    it_normalized = " ".join(it.strip().split())
+                    merged[dim_normalized].add(it_normalized)
+        # Return as list preserving all unique items
         return [{"dimension": d, "items": list(v)} for d, v in merged.items()]
 
     def _parse_items_from_raw(self, raw: str) -> List[Dict[str, Any]]:

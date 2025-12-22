@@ -15,8 +15,12 @@ This directory contains comprehensive documentation for the EmpathyScale project
 ### Development Guides
 - **[HOW_TO_ADD_AGENTS.md](./HOW_TO_ADD_AGENTS.md)**: Step-by-step guide for extending the system
 
-### Historical Documentation
-This documentation has been consolidated into the core guides above for better organization. See WORKFLOW.md for literature search agent capabilities.
+### Project-Specific Documentation
+- **[EVALUATION_PROCESS_UNIFICATION.md](./EVALUATION_PROCESS_UNIFICATION.md)**: Unified evaluation process configuration and persona management
+- **[EXPERIMENT_EXECUTION_PLAN.md](./EXPERIMENT_EXECUTION_PLAN.md)**: Experiment execution plan and methodology
+
+### Historical Analysis
+- **[analysis/](./analysis/)**: Historical analysis and troubleshooting documents (see [analysis/README.md](./analysis/README.md))
 
 ## Documentation Overview
 
