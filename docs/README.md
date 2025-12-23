@@ -17,7 +17,7 @@ This directory contains comprehensive documentation for the EmpathyScale project
 
 ### Project-Specific Documentation
 - **[EVALUATION_PROCESS_UNIFICATION.md](./EVALUATION_PROCESS_UNIFICATION.md)**: Unified evaluation process configuration and persona management
-- **[EXPERIMENT_EXECUTION_PLAN.md](./EXPERIMENT_EXECUTION_PLAN.md)**: Experiment execution plan and methodology
+- **[EXPERIMENT_EXECUTION_GUIDE.md](./EXPERIMENT_EXECUTION_GUIDE.md)**: Experiment execution guide and methodology
 
 ### Historical Analysis
 - **[analysis/](./analysis/)**: Historical analysis and troubleshooting documents (see [analysis/README.md](./analysis/README.md))
@@ -42,8 +42,8 @@ This directory contains comprehensive documentation for the EmpathyScale project
 **Purpose**: Understand how agents work together
 
 **Contents**:
-- Agent group responsibilities
-- Execution flow (interview → literature search)
+- Agent group responsibilities (Interview, Literature Search, Scale Generation, Evaluation, Item Selection)
+- Execution flow (interview → literature search → scale generation → evaluation → item selection)
 - Data flow between agents
 - Error handling strategies
 - Optimization approaches

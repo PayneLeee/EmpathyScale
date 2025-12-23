@@ -424,25 +424,23 @@ def run_baseline_comparison():
         
         scenario_id = scenario['name']
         
-        # Step 1: Load personas (use validation personas - base scenario name, 50 participants)
+        # Step 1: Load personas (use validation personas - base scenario name, phase="validation")
         print_step(1, 4, f"Loading validation personas for scenario '{scenario_id}'")
-        print_info(f"  → Using base scenario name '{scenario_id}' (same as validation phase)")
+        print_info(f"  → Using base scenario name '{scenario_id}' with phase='validation'")
         print_info(f"  → These personas are reusable for baseline comparison")
-        personas = load_personas(scenario_id)
+        personas = load_personas(scenario_id, phase="validation")
         if not personas:
-            print_warning(f"No personas found for scenario '{scenario_id}'. Will generate 50 personas.")
-            # Personas will be generated automatically by evaluate_items if not found
-            n_participants = 50
+            print_warning(f"No validation personas found for scenario '{scenario_id}'.")
+            print_info(f"  → Personas will be generated automatically by evaluate_items if not found")
+            print_info(f"  → Note: Should run run_predefined_scenarios.py first to generate validation personas")
+            n_participants = 200  # Will generate 200 if not found (100*2)
         else:
             n_participants = len(personas)
-            if n_participants < 50:
-                print_warning(f"Only {n_participants} personas found, but 50 expected for validation phase.")
+            print_info(f"  → Loaded {n_participants} validation personas")
+            # Use all available personas (should be 200 for Phase 2)
+            if n_participants < 200:
+                print_warning(f"Only {n_participants} personas found, but 200 expected for validation phase (100*2).")
                 print_info(f"  → Will use available {n_participants} personas")
-            else:
-                # Use first 50 if more are available
-                personas = personas[:50]
-                n_participants = 50
-                print_info(f"  → Using {n_participants} personas (validation phase standard)")
         print()
         
         # Step 2: Extract and evaluate PETS
@@ -469,8 +467,9 @@ def run_baseline_comparison():
                     run_id=run_id,
                     items=pets_items,
                     scenario_context=scenario,
-                    n_participants=50,  # Use 50 participants (validation phase standard)
+                    n_participants=n_participants,  # Use available personas count
                     scenario_id=scenario_id,  # Use base scenario name (reusable personas)
+                    phase="validation",  # Use validation phase
                     personas=personas if personas else None,  # Pass personas if loaded, otherwise let it generate
                     out_dir=output_dir
                 )
@@ -506,8 +505,9 @@ def run_baseline_comparison():
                     run_id=run_id,
                     items=rope_items,
                     scenario_context=scenario,
-                    n_participants=50,  # Use 50 participants (validation phase standard)
+                    n_participants=n_participants,  # Use available personas count
                     scenario_id=scenario_id,  # Use base scenario name (reusable personas)
+                    phase="validation",  # Use validation phase
                     personas=personas if personas else None,  # Pass personas if loaded, otherwise let it generate
                     out_dir=output_dir
                 )

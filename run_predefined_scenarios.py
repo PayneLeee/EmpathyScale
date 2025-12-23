@@ -41,6 +41,7 @@ from agents.evaluation_agent_group import EvaluationAgentGroup
 from utils.data_manager import DataManager
 from utils.prompt_manager import PromptManager
 from agents.item_selection_agent import ItemSelectionAgent
+from agents.persona_generation_agent import PersonaGenerationAgent
 
 
 def print_header(text: str, char: str = "="):
@@ -232,52 +233,124 @@ def run():
         print_info(f"  → Items saved to: {draft_path}")
         print()
 
-        # Step 5: Phase 1 - Evaluate all items (Selection Phase)
-        print_step(5, 7, "Phase 1: Evaluating all items (Selection Phase)")
-        print_info(f"  [5.1] Persona Management:")
-        print_info(f"    → Scenario ID: {scenario['name']}_selection")
-        print_info(f"    → Checking for existing personas...")
-        print_info(f"    → Will generate/load 200 personas for item selection")
+        # Step 5: Phase 1 - Evaluate all items (Selection Phase) - Dual Groups
+        print_step(5, 7, "Phase 1: Item Selection Evaluation (Dual Groups for EFA+CFA)")
+        print_info(f"  [5.1] Setup:")
+        print_info(f"    → Items to evaluate: {len(items)}")
+        print_info(f"    → Dual persona groups: empathic + non-empathic (following PETS methodology)")
+        print_info(f"    → Participants per group: 100, Total: 200 (for EFA - PETS used 324)")
+        print_info(f"    → Base scenario ID: {scenario['name']}")
         print_info(f"  [5.2] Participant Simulation:")
         print_info(f"    → Each persona will rate all {len(items)} items")
         print_info(f"    → Rating scale: 0-100 (strongly disagree to strongly agree)")
         print()
-        print_info(f"  [Progress] Starting scale generation for scenario: {scenario['name']}")
-        print()
+        
+        persona_agent = PersonaGenerationAgent(api_key=api_key, prompts_dir=prompt_manager.prompts_dir)
+        
         try:
             import json
-            eval_result_selection = eval_agent.evaluate_items(
-                run_id, items, scenario, 
-                n_participants=200,  # Phase 1: Selection personas (100*2 = 200 total, increased for EFA - PETS used 324)
-                scenario_id=f"{scenario['name']}_selection",
-                out_dir=dm.get_run_path(run_id) / "evaluation_agent_group" / "selection"
-            )
-            print_success("Phase 1 evaluation completed")
+            # Step 5.1: Load or generate personas for Phase 1 (selection)
+            scenario_id = scenario['name']
+            selection_personas = persona_agent.load_personas(scenario_id, phase="selection")
+            n_per_group = 100  # 100*2 = 200 total personas (100 empathic + 100 non-empathic)
             
-            # Show evaluation summary if available
-            eval_summary_path = dm.get_run_path(run_id) / "evaluation_agent_group" / "selection" / "evaluation_summary.json"
-            if eval_summary_path.exists():
-                summary = json.loads(eval_summary_path.read_text(encoding="utf-8"))
-                print_info("  [Phase 1 Summary Statistics]:")
-                if "overall_mean_rating" in summary and summary["overall_mean_rating"] is not None:
-                    overall_mean = summary["overall_mean_rating"]
-                    print_info(f"    → Overall mean rating: {overall_mean:.2f} (0-100 scale)")
-                if "low_rating_items" in summary and summary["low_rating_items"]:
-                    print_info(f"    → Low rating items (<50): {len(summary['low_rating_items'])}")
-                if "high_variance_items" in summary and summary["high_variance_items"]:
-                    print_info(f"    → High variance items (std>30): {len(summary['high_variance_items'])}")
-                if "persona_diversity" in summary:
-                    diversity = summary["persona_diversity"]
-                    print_info(f"    → Persona diversity:")
-                    if "age_distribution" in diversity and diversity["age_distribution"].get("mean"):
-                        age_mean = diversity["age_distribution"]["mean"]
-                        print_info(f"      - Age: mean={age_mean:.1f} years")
-                    if "gender_distribution" in diversity:
-                        gender_dist = diversity["gender_distribution"]
-                        print_info(f"      - Gender: {gender_dist}")
-                    if "ati_score_distribution" in diversity and diversity["ati_score_distribution"].get("mean"):
-                        ati_mean = diversity["ati_score_distribution"]["mean"]
-                        print_info(f"      - ATI score: mean={ati_mean:.2f}")
+            if selection_personas is None or len(selection_personas) < n_per_group * 2:
+                # Need to generate new personas
+                print_info(f"  [5.1] Generating {n_per_group * 2} personas for Phase 1...")
+                base_personas = persona_agent.generate_personas(scenario, n_personas=n_per_group)
+                
+                # Step 5.2: Create two groups with different interaction experiences
+                print_info(f"  [5.2] Creating dual persona groups (empathic + non_empathic)...")
+                personas_empathic = persona_agent.add_interaction_experiences(
+                    base_personas.copy(), scenario, interaction_type="empathic"
+                )
+                personas_non_empathic = persona_agent.add_interaction_experiences(
+                    base_personas.copy(), scenario, interaction_type="non_empathic"
+                )
+                
+                # Merge both groups into one list (both have empathy_condition field)
+                selection_personas = personas_empathic + personas_non_empathic
+                print_info(f"    → Total personas: {len(selection_personas)} (empathic: {len(personas_empathic)}, non_empathic: {len(personas_non_empathic)})")
+                
+                # Save merged personas to selection.json
+                persona_agent.save_personas(scenario_id, selection_personas, phase="selection")
+                print_info(f"    → Saved to {scenario_id}/selection.json")
+            else:
+                # Load existing personas and split them for evaluation
+                print_info(f"  [5.1] Loaded {len(selection_personas)} personas from {scenario_id}/selection.json")
+                personas_empathic = [p for p in selection_personas if p.get("empathy_condition") == "empathic"]
+                personas_non_empathic = [p for p in selection_personas if p.get("empathy_condition") == "non_empathic"]
+                print_info(f"    → Empathic: {len(personas_empathic)}, Non-empathic: {len(personas_non_empathic)}")
+                # Use first n_per_group from each
+                personas_empathic = personas_empathic[:n_per_group]
+                personas_non_empathic = personas_non_empathic[:n_per_group]
+            print()
+            
+            # Step 5.3: Evaluate with empathic personas
+            print_info(f"  [5.3] Evaluating with empathic personas...")
+            result_empathic = eval_agent.evaluate_items(
+                run_id, items, scenario,
+                n_participants=n_per_group,
+                scenario_id=scenario_id,
+                phase="selection",
+                personas=personas_empathic,
+                out_dir=dm.get_run_path(run_id) / "evaluation_agent_group" / "selection" / "empathic"
+            )
+            print_success(f"    → Empathic group evaluation completed")
+            
+            # Step 5.4: Evaluate with non-empathic personas
+            print_info(f"  [5.4] Evaluating with non-empathic personas...")
+            result_non_empathic = eval_agent.evaluate_items(
+                run_id, items, scenario,
+                n_participants=n_per_group,
+                scenario_id=scenario_id,
+                phase="selection",
+                personas=personas_non_empathic,
+                out_dir=dm.get_run_path(run_id) / "evaluation_agent_group" / "selection" / "non_empathic"
+            )
+            print_success(f"    → Non-empathic group evaluation completed")
+            print()
+            
+            # Step 5.5: Merge data for EFA/CFA
+            print_info(f"  [5.5] Merging evaluation data for EFA+CFA...")
+            combined_dir = dm.get_run_path(run_id) / "evaluation_agent_group" / "selection" / "combined"
+            combined_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Load participant data from both groups
+            empathic_participants_path = Path(result_empathic['summary_path']).parent / "participant_level_evaluations.json"
+            non_empathic_participants_path = Path(result_non_empathic['summary_path']).parent / "participant_level_evaluations.json"
+            
+            empathic_participants = json.loads(empathic_participants_path.read_text(encoding="utf-8"))
+            non_empathic_participants = json.loads(non_empathic_participants_path.read_text(encoding="utf-8"))
+            
+            # Merge participant data
+            combined_participants = empathic_participants + non_empathic_participants
+            
+            # Save merged participant data
+            combined_participants_path = combined_dir / "participant_level_evaluations.json"
+            with open(combined_participants_path, 'w', encoding='utf-8') as f:
+                json.dump(combined_participants, f, indent=2, ensure_ascii=False)
+            
+            # Generate merged evaluation summary using evaluation_agent's summarize method
+            combined_summary = eval_agent._summarize(combined_participants, items)
+            combined_summary["evaluation_groups"] = {
+                "empathic": {"n_participants": len(empathic_participants)},
+                "non_empathic": {"n_participants": len(non_empathic_participants)}
+            }
+            
+            combined_summary_path = combined_dir / "evaluation_summary.json"
+            with open(combined_summary_path, 'w', encoding='utf-8') as f:
+                json.dump(combined_summary, f, indent=2, ensure_ascii=False)
+            
+            print_success(f"    → Merged data: {len(combined_participants)} participants, {len(items)} items")
+            print_success("Phase 1 evaluation completed (dual groups merged)")
+            
+            # Show evaluation summary
+            print_info("  [Phase 1 Summary Statistics]:")
+            if combined_summary.get("overall_mean_rating") is not None:
+                print_info(f"    → Overall mean rating: {combined_summary['overall_mean_rating']:.2f} (0-100 scale)")
+            print_info(f"    → Items evaluated: {combined_summary['n_items']}")
+            print_info(f"    → Total participants: {combined_summary['n_participants']} (empathic: {len(empathic_participants)}, non-empathic: {len(non_empathic_participants)})")
         except Exception as e:
             print_error(f"Phase 1 evaluation failed: {e}")
             import traceback
@@ -287,12 +360,13 @@ def run():
         print()
 
         # Step 6: Statistical selection
-        print_step(6, 7, "Applying statistical selection")
+        print_step(6, 7, "Applying statistical selection (EFA+CFA)")
         try:
-            eval_summary_path = dm.get_run_path(run_id) / "evaluation_agent_group" / "selection" / "evaluation_summary.json"
+            # Use merged data from combined directory
+            eval_summary_path = dm.get_run_path(run_id) / "evaluation_agent_group" / "selection" / "combined" / "evaluation_summary.json"
             if not eval_summary_path.exists():
-                print_error("Phase 1 evaluation summary not found")
-                raise FileNotFoundError("Evaluation summary not found")
+                print_error("Phase 1 merged evaluation summary not found")
+                raise FileNotFoundError("Merged evaluation summary not found")
             
             eval_summary = json.loads(eval_summary_path.read_text(encoding="utf-8"))
             
@@ -311,26 +385,34 @@ def run():
                 "max_skewness": 1.0,  # PETS threshold (238/301 items pass this)
                 "max_kurtosis": 3.0,  # Adjusted: PETS uses 2.0, but data shows 3.0 is more appropriate
                 "max_inter_corr": 0.8,  # PETS threshold
-                "min_factor_loading": 0.75,  # PETS threshold (controls item count via statistical method)
+                "min_factor_loading": 0.75,  # Initial threshold (will be adjusted adaptively if needed)
                 "n_factors": None,  # Auto-detect using Kaiser criterion
                 "min_items_per_factor": 2,  # Technical constraint (each factor needs at least 2 items for CFA)
                 # CFA parameters (PETS Section 7.2)
                 "cfa_rmsea_threshold": 0.08,  # PETS threshold
                 "cfa_tli_threshold": 0.95,  # PETS threshold
                 "cfa_cfi_threshold": 0.95,  # PETS threshold
-                "cfa_srmr_threshold": 0.08  # PETS threshold
+                "cfa_srmr_threshold": 0.08,  # PETS threshold
+                # Adaptive adjustment parameters
+                "adaptive_factor_loading": True,  # Enable adaptive adjustment to reach target range
+                "max_adaptive_iterations": 8,  # Maximum iterations for adaptive adjustment
+                # Multi-factor iteration parameters (for better factor balance)
+                "try_multiple_n_factors": True,  # Enable multi-factor iteration
+                "max_n_factors_to_try": None,  # Max factor counts to try (None = auto-detect using Kaiser criterion, max 5)
+                "prefer_balanced_factors": True,  # Prefer balanced factor structures when selecting best result
+                # Factor balance parameters
+                "enable_factor_balance": True,  # Enable factor balancing after EFA and post-CFA
+                "max_items_per_factor": None  # Maximum items per factor (None = auto-calculate based on target range)
             }
             
             print_info(f"  Strategy: EFA+CFA (Exploratory + Confirmatory Factor Analysis) - PETS methodology")
-            print_info(f"  Item count control: Statistical method (factor loading >= {selection_config['min_factor_loading']})")
+            print_info(f"  Item count control: Adaptive adjustment to target range 10-18 items (dynamic adjustment based on gap)")
             print_info(f"  Parameters: min_item_total_corr={selection_config['min_item_total_corr']} (adjusted from 0.5), max_kurtosis={selection_config['max_kurtosis']} (adjusted from 2.0)")
-            print_info(f"  Parameters: min_factor_loading={selection_config['min_factor_loading']}")
+            print_info(f"  Parameters: min_factor_loading={selection_config['min_factor_loading']} (initial, will be adjusted adaptively)")
+            print_info(f"  Adaptive adjustment: Enabled (max {selection_config.get('max_adaptive_iterations', 8)} iterations)")
             print_info(f"  CFA thresholds: RMSEA<={selection_config['cfa_rmsea_threshold']}, TLI>={selection_config['cfa_tli_threshold']}, CFI>={selection_config['cfa_cfi_threshold']}, SRMR<={selection_config['cfa_srmr_threshold']}")
-            print_info(f"  Note: Thresholds adjusted based on diagnostic analysis (see utils/diagnose_selection_issue.py)")
-            print_info(f"  Note: Final item count will be determined by statistical methods, not preset targets")
             
-            # Perform selection (using EFA method)
-            eval_summary_path = dm.get_run_path(run_id) / "evaluation_agent_group" / "selection" / "evaluation_summary.json"
+            # Perform selection (using EFA method) - use merged data from combined directory
             selection_result = selection_agent.select_items(
                 items=items,
                 evaluation_summary=eval_summary,
@@ -386,48 +468,154 @@ def run():
         if not filtered_items:
             print_warning(f"No filtered items to validate, skipping Phase 2 for scenario {scenario['name']}")
         else:
-            print_step(7, 7, "Phase 2: Validating filtered items (Validation Phase)")
-            print_info(f"  [7.1] Persona Management:")
-            print_info(f"    → Scenario ID: {scenario['name']} (reusable for other scales)")
-            print_info(f"    → Checking for existing personas...")
-            print_info(f"    → Will generate/load 50 personas for validation")
+            print_step(7, 7, "Phase 2: Final Validation")
+            print_info(f"  [7.1] Setup:")
+            print_info(f"    → Filtered items: {len(filtered_items)}")
+            print_info(f"    → Dual persona groups: empathic + non-empathic (100*2 = 200 total)")
+            print_info(f"    → Scenario ID: {scenario['name']} (reusable)")
             print_info(f"  [7.2] Participant Simulation:")
             print_info(f"    → Each persona will rate {len(filtered_items)} filtered items")
             print_info(f"    → Rating scale: 0-100 (strongly disagree to strongly agree)")
             print()
+            
             try:
+                # Load or generate personas for Phase 2 (validation)
+                scenario_id = scenario['name']
+                validation_personas = persona_agent.load_personas(scenario_id, phase="validation")
+                n_per_group = 100  # 100*2 = 200 total personas
+                
+                if validation_personas is None or len(validation_personas) < n_per_group * 2:
+                    # Need to generate new personas
+                    print_info(f"  [7.1] Generating {n_per_group * 2} personas for Phase 2...")
+                    base_personas = persona_agent.generate_personas(scenario, n_personas=n_per_group)
+                    
+                    # Create dual groups
+                    print_info(f"  [7.2] Creating dual persona groups (empathic + non_empathic)...")
+                    personas_empathic = persona_agent.add_interaction_experiences(
+                        base_personas.copy(), scenario, interaction_type="empathic"
+                    )
+                    personas_non_empathic = persona_agent.add_interaction_experiences(
+                        base_personas.copy(), scenario, interaction_type="non_empathic"
+                    )
+                    
+                    # Merge and save
+                    validation_personas = personas_empathic + personas_non_empathic
+                    persona_agent.save_personas(scenario_id, validation_personas, phase="validation")
+                    print_info(f"    → Total personas: {len(validation_personas)} (empathic: {len(personas_empathic)}, non_empathic: {len(personas_non_empathic)})")
+                    print_info(f"    → Saved to {scenario_id}/validation.json")
+                else:
+                    # Load existing personas
+                    print_info(f"  [7.1] Loaded {len(validation_personas)} personas from {scenario_id}/validation.json")
+                    personas_empathic = [p for p in validation_personas if p.get("empathy_condition") == "empathic"]
+                    personas_non_empathic = [p for p in validation_personas if p.get("empathy_condition") == "non_empathic"]
+                    print_info(f"    → Empathic: {len(personas_empathic)}, Non-empathic: {len(personas_non_empathic)}")
+                    # Use first n_per_group from each if we have more
+                    if len(personas_empathic) > n_per_group:
+                        personas_empathic = personas_empathic[:n_per_group]
+                    if len(personas_non_empathic) > n_per_group:
+                        personas_non_empathic = personas_non_empathic[:n_per_group]
+                    validation_personas = personas_empathic + personas_non_empathic
+                print()
+                
+                # Evaluate with all validation personas
                 eval_result_validation = eval_agent.evaluate_items(
                     run_id, filtered_items, scenario,
-                    n_participants=50,
-                    scenario_id=scenario['name'],  # Use base scenario name for reusability
+                    n_participants=len(validation_personas),
+                    scenario_id=scenario_id,  # Use base scenario name for reusability
+                    phase="validation",
+                    personas=validation_personas,
                     out_dir=dm.get_run_path(run_id) / "evaluation_agent_group" / "validation"
                 )
                 print_success("Phase 2 validation completed")
                 
-                # Show evaluation summary if available
+                # Show Phase 2 summary and validation metrics
                 eval_summary_path = dm.get_run_path(run_id) / "evaluation_agent_group" / "validation" / "evaluation_summary.json"
+                participant_data_path = dm.get_run_path(run_id) / "evaluation_agent_group" / "validation" / "participant_level_evaluations.json"
+                
                 if eval_summary_path.exists():
                     summary = json.loads(eval_summary_path.read_text(encoding="utf-8"))
                     print_info("  [Phase 2 Summary Statistics]:")
                     if "overall_mean_rating" in summary and summary["overall_mean_rating"] is not None:
                         overall_mean = summary["overall_mean_rating"]
                         print_info(f"    → Overall mean rating: {overall_mean:.2f} (0-100 scale)")
-                    if "low_rating_items" in summary and summary["low_rating_items"]:
-                        print_info(f"    → Low rating items (<50): {len(summary['low_rating_items'])}")
-                    if "high_variance_items" in summary and summary["high_variance_items"]:
-                        print_info(f"    → High variance items (std>30): {len(summary['high_variance_items'])}")
-                    if "persona_diversity" in summary:
-                        diversity = summary["persona_diversity"]
-                        print_info(f"    → Persona diversity:")
-                        if "age_distribution" in diversity and diversity["age_distribution"].get("mean"):
-                            age_mean = diversity["age_distribution"]["mean"]
-                            print_info(f"      - Age: mean={age_mean:.1f} years")
-                        if "gender_distribution" in diversity:
-                            gender_dist = diversity["gender_distribution"]
-                            print_info(f"      - Gender: {gender_dist}")
-                        if "ati_score_distribution" in diversity and diversity["ati_score_distribution"].get("mean"):
-                            ati_mean = diversity["ati_score_distribution"]["mean"]
-                            print_info(f"      - ATI score: mean={ati_mean:.2f}")
+                    if "n_items" in summary:
+                        print_info(f"    → Items evaluated: {summary['n_items']}")
+                    
+                    # Calculate and display validation metrics (PETS-style)
+                    if participant_data_path.exists():
+                        participant_data = json.loads(participant_data_path.read_text(encoding="utf-8"))
+                        
+                        # Get factor_structure from selection results file if available
+                        factor_structure = None
+                        selection_config_path = dm.get_run_path(run_id) / "statistical_selection" / "selection_config.json"
+                        if selection_config_path.exists():
+                            try:
+                                selection_config_data = json.loads(selection_config_path.read_text(encoding="utf-8"))
+                                efa_cfa_results = selection_config_data.get("efa_cfa_results", {})
+                                if efa_cfa_results:
+                                    factor_structure_raw = efa_cfa_results.get("factor_structure", {})
+                                    if factor_structure_raw:
+                                        # Convert string keys to int (JSON serialization)
+                                        factor_structure = {}
+                                        for k, v in factor_structure_raw.items():
+                                            try:
+                                                item_id = int(k) if isinstance(k, str) else k
+                                                factor_idx = int(v) if isinstance(v, str) else v
+                                                factor_structure[item_id] = factor_idx
+                                            except (ValueError, TypeError):
+                                                continue
+                            except Exception as e:
+                                print_warning(f"    → Could not load factor_structure from selection results: {e}")
+                        
+                        # Recalculate summary with factor_structure to get validation_metrics
+                        summary_with_metrics = eval_agent._summarize(participant_data, filtered_items, factor_structure=factor_structure)
+                        
+                        # Update evaluation_summary.json with validation_metrics
+                        if "validation_metrics" in summary_with_metrics:
+                            summary["validation_metrics"] = summary_with_metrics["validation_metrics"]
+                            with open(eval_summary_path, 'w', encoding='utf-8') as f:
+                                json.dump(summary, f, indent=2, ensure_ascii=False)
+                            
+                            # Display validation metrics
+                            print_info("  [Phase 2 Validation Metrics (PETS-style)]:")
+                            validation_metrics = summary["validation_metrics"]
+                            
+                            # Discriminant ability
+                            if "discriminant_ability" in validation_metrics:
+                                da = validation_metrics["discriminant_ability"]
+                                print_info(f"    → Discriminant Ability (t-test):")
+                                print_info(f"      - Empathic mean: {da.get('empathic_mean', 'N/A')}")
+                                print_info(f"      - Non-empathic mean: {da.get('non_empathic_mean', 'N/A')}")
+                                print_info(f"      - t-statistic: {da.get('t_statistic', 'N/A')}")
+                                print_info(f"      - p-value: {da.get('p_value', 'N/A')}")
+                                print_info(f"      - Cohen's d: {da.get('cohens_d', 'N/A')}")
+                                if da.get('significant', False):
+                                    print_success(f"      - Significant: Yes (p < 0.001)")
+                                else:
+                                    print_info(f"      - Significant: No (p >= 0.001)")
+                            
+                            # Internal consistency
+                            if "internal_consistency" in validation_metrics:
+                                ic = validation_metrics["internal_consistency"]
+                                print_info(f"    → Internal Consistency (Cronbach's α):")
+                                print_info(f"      - Alpha: {ic.get('alpha', 'N/A')}")
+                                print_info(f"      - 95% CI: [{ic.get('ci_lower', 'N/A')}, {ic.get('ci_upper', 'N/A')}]")
+                                alpha_val = ic.get('alpha', 0)
+                                if alpha_val >= 0.9:
+                                    print_success(f"      - Quality: Excellent (α >= 0.9)")
+                                elif alpha_val >= 0.8:
+                                    print_info(f"      - Quality: Good (0.8 <= α < 0.9)")
+                                elif alpha_val >= 0.7:
+                                    print_warning(f"      - Quality: Acceptable (0.7 <= α < 0.8)")
+                                else:
+                                    print_warning(f"      - Quality: Poor (α < 0.7)")
+                            
+                            # Factor scores
+                            if "factor_scores" in validation_metrics:
+                                fs = validation_metrics["factor_scores"]
+                                print_info(f"    → Factor Scores (PETS Table 8 style):")
+                                for factor_name, scores in sorted(fs.items()):
+                                    print_info(f"      - {factor_name}: M={scores.get('mean', 'N/A')}, SD={scores.get('std', 'N/A')}, n_items={scores.get('n_items', 'N/A')}")
             except Exception as e:
                 print_error(f"Phase 2 validation failed: {e}")
                 import traceback
@@ -467,7 +655,8 @@ def run():
             try:
                 phase2_summary = json.loads(phase2_summary_path.read_text(encoding="utf-8"))
                 if phase2_summary.get("overall_mean_rating") is not None:
-                    print_info(f"Phase 2 mean rating (50 personas, reusable): {phase2_summary['overall_mean_rating']:.2f}")
+                    n_participants = phase2_summary.get("n_participants", 200)
+                    print_info(f"Phase 2 mean rating ({n_participants} personas, reusable): {phase2_summary['overall_mean_rating']:.2f}")
             except Exception:
                 pass
         

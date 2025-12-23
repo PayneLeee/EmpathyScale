@@ -46,28 +46,64 @@ The system will:
 ```
 EmpathyScale/
 ├── agents/                    # Agent group implementations
-│   ├── interview_agent_group.py          # Information gathering
-│   └── literature_search_agent_group.py  # Literature search & synthesis
+│   ├── interview_agent_group.py              # Information gathering
+│   ├── literature_search_agent_group.py      # Literature search & synthesis
+│   ├── empathy_scale_generation_agent_group.py  # Scale item generation
+│   ├── evaluation_agent_group.py             # LLM-based evaluation
+│   ├── item_selection_agent.py               # Item selection logic
+│   ├── persona_generation_agent.py           # Persona generation
+│   ├── scale_generation_agents.py            # Scale generation sub-agents
+│   └── expert_pdfs/                          # Reference PDFs for agents
 ├── prompts/                   # Agent prompts (JSON files)
 │   ├── interview_agent_group.json
-│   └── literature_search_agent_group.json
+│   ├── literature_search_agent_group.json
+│   ├── empathy_scale_generation_agent_group.json
+│   ├── evaluation_agent_group.json
+│   ├── persona_generation_agent.json
+│   └── scale_generation_support.json
 ├── utils/                     # Core utilities
 │   ├── prompt_manager.py      # Prompt loading & management
 │   ├── data_manager.py        # Data storage & run management
-│   └── research_api.py        # Academic database APIs
+│   ├── research_api.py        # Academic database APIs
+│   ├── semantic_deduplication.py  # Semantic deduplication
+│   ├── statistical_item_selection.py  # EFA/CFA item selection
+│   └── factor_analysis.py     # Factor analysis utilities
+├── tools/                     # Development and analysis tools
+│   ├── run_all_experiments.py # Run all experiments in sequence
+│   ├── analyze_all_results.py # Analysis scripts
+│   └── [other utility scripts]
+├── tests/                     # Test suite
+│   ├── test_integration.py    # Full integration tests
+│   ├── test_integration_fast.py  # Fast mocked tests
+│   └── [other test files]
 ├── docs/                      # Documentation
 │   ├── ARCHITECTURE.md        # System architecture
 │   ├── WORKFLOW.md            # Agent workflows & responsibilities
 │   ├── DATA_STORAGE.md        # Data storage structure
-│   └── HOW_TO_ADD_AGENTS.md   # Extension guide
+│   ├── HOW_TO_ADD_AGENTS.md   # Extension guide
+│   ├── EXPERIMENT_EXECUTION_GUIDE.md  # Experiment execution guide
+│   └── analysis/              # Analysis reports and findings
+├── presentation/              # Presentation materials
+│   ├── presentation_slides.md # Slide content
+│   ├── presentation_content.md # Detailed content
+│   ├── create_visualizations.py  # Visualization generation
+│   └── visualizations/        # Generated charts
 ├── data/                      # Runtime data storage
-│   └── runs/                  # Timestamped run directories
+│   ├── runs/                  # Timestamped run directories
+│   ├── ablation_studies/      # Ablation study results
+│   ├── baseline_comparison/   # Baseline comparison results
+│   └── personas/              # Generated personas
 ├── main.py                    # Main workflow orchestrator
+├── run_predefined_scenarios.py  # Main experiment script
+├── run_ablation_minimal.py    # Ablation study script
+├── run_baseline_comparison.py # Baseline comparison script
 ├── config.json                # API configuration
 └── requirements.txt           # Python dependencies
 ```
 
 ## 🔄 Workflow Overview
+
+The complete workflow consists of multiple phases:
 
 ### 1. Interview Phase
 The **Interview Agent Group** conducts a structured conversation to gather:
@@ -86,12 +122,35 @@ The **Literature Search Agent Group** automatically:
 - Extracts key findings on definitions, behaviors, and measurement methods
 - Organizes findings for scale design reference
 
-### 3. Data Storage
+### 3. Scale Generation Phase
+The **Empathy Scale Generation Agent Group**:
+- Generates scale items based on interview and literature findings
+- Performs semantic deduplication to remove redundant items
+- Organizes items by dimensions and constructs
+
+### 4. Evaluation Phase
+The **Evaluation Agent Group**:
+- **Phase 1 (Selection)**: Evaluates all generated items using LLM personas
+  - Generates empathic and non-empathic personas
+  - Scores items for discriminant ability and quality
+- **Phase 2 (Validation)**: Validates selected items using independent personas
+  - Computes internal consistency (Cronbach's α)
+  - Measures discriminant ability (Cohen's d)
+
+### 5. Item Selection Phase
+Statistical item selection using:
+- Exploratory Factor Analysis (EFA)
+- Confirmatory Factor Analysis (CFA)
+- Item-total correlations
+- Factor loadings
+
+### 6. Data Storage
 All data is saved in timestamped directories:
 - Interview summaries and conversations
 - Literature search queries and results
-- Downloaded PDFs organized by category
-- Extracted findings and organized insights
+- Generated scale drafts and selected items
+- Evaluation results and statistics
+- Final validated scales
 
 See [docs/DATA_STORAGE.md](docs/DATA_STORAGE.md) for detailed structure.
 
@@ -123,13 +182,16 @@ python run_predefined_scenarios.py
 ```
 
 #### 2. `run_ablation_minimal.py` - Ablation Study
-**Purpose**: Compare different generation configurations (2x2 design)
+**Purpose**: Compare different generation configurations against baseline
 
 **Features**:
-- Single vs multi-agent generation
-- With vs without content assessment
+- 3 ablation variants:
+  - `fewer_generators`: 1 generator vs 5 (baseline)
+  - `no_content`: Random selection vs content assessment (baseline)
+  - `fewer_generators_no_content`: Combined variant
 - Runs on collab_robot_assembly scenario
-- Generates ablation summary report
+- Compares against main experiment baseline (5 generators + content assessment + EFA/CFA)
+- Generates ablation summary report with metrics comparison
 
 **Usage**:
 ```bash
@@ -149,24 +211,11 @@ python run_ablation_minimal.py
 python run_baseline_comparison.py
 ```
 
-### Optional Tools
-
-#### 4. `run_statistical_item_selection.py` - Independent Selection Tool
-**Purpose**: Apply statistical selection to existing run results
-
-**Features**:
-- Can be used to apply statistical selection to previously generated scales
-- Supports multiple selection strategies (rating_threshold, percentile, dimension_balanced)
-
-**Usage**:
-```bash
-python run_statistical_item_selection.py --run-id <run_id> --strategy rating_threshold
-```
-
 ### Development Tools
 
 Development tools are located in the `tools/` directory:
 - `tools/run_single_variant.py` - Re-run individual ablation variants (for debugging)
+- `tools/run_statistical_item_selection.py` - Apply statistical selection to existing run results (optional tool)
 
 For details on the evaluation process and persona configuration, see [docs/EVALUATION_PROCESS_UNIFICATION.md](docs/EVALUATION_PROCESS_UNIFICATION.md).
 

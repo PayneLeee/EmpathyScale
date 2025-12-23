@@ -1,0 +1,215 @@
+{
+  "main_experiments": {
+    "collab_robot_assembly": {
+      "run_id": "2025-12-22_215026",
+      "run_dir": "data\\runs\\2025-12-22_215026",
+      "quality_score": 0.9968,
+      "metrics": {
+        "internal_consistency_alpha": 0.992,
+        "cohens_d": 4.634,
+        "n_selected_items": 16,
+        "n_original_items": 44,
+        "n_factors": 2
+      },
+      "interview_summary": {
+        "assessment_context": "factory assembly, human-robot teammate",
+        "robot_platform": "collaborative arm",
+        "interaction_modalities": "gesture + voice"
+      }
+    },
+    "home_service_robot": {
+      "run_id": "2025-12-22_210718",
+      "run_dir": "data\\runs\\2025-12-22_210718",
+      "quality_score": 0.9472,
+      "metrics": {
+        "internal_consistency_alpha": 0.993,
+        "cohens_d": 5.238,
+        "n_selected_items": 12,
+        "n_original_items": 158,
+        "n_factors": 3
+      },
+      "interview_summary": {
+        "assessment_context": "home assistant supporting daily tasks",
+        "robot_platform": "mobile service robot",
+        "interaction_modalities": "speech + navigation cues"
+      }
+    },
+    "counseling_chatbot": {
+      "run_id": "2025-12-22_212205",
+      "run_dir": "data\\runs\\2025-12-22_212205",
+      "quality_score": 0.9996,
+      "metrics": {
+        "internal_consistency_alpha": 0.999,
+        "cohens_d": 15.473,
+        "n_selected_items": 15,
+        "n_original_items": 105,
+        "n_factors": 2
+      },
+      "interview_summary": {
+        "assessment_context": "text-based counseling bot",
+        "robot_platform": "chatbot",
+        "interaction_modalities": "text chat"
+      }
+    }
+  },
+  "ablation_experiments": [
+    {
+      "variant": "single_no_content",
+      "scenario": "collab_robot_assembly",
+      "run_id": "2025-12-22_215303",
+      "run_dir": "data/runs/2025-12-22_215303",
+      "summary": {
+        "run_id": "2025-12-22_215303",
+        "num_generators": 1,
+        "enable_content": false,
+        "n_items": 57,
+        "n_selected_items": 13,
+        "evaluation": {
+          "overall_mean_rating": 46.26,
+          "n_participants": 200,
+          "rating_std": null
+        },
+        "validation_metrics": {
+          "discriminant_ability": {
+            "empathic_mean": 77.17,
+            "non_empathic_mean": 15.35,
+            "t_statistic": 80.88,
+            "p_value": 0.0,
+            "cohens_d": 3.174,
+            "significant": true,
+            "n_empathic": 1300,
+            "n_non_empathic": 1300
+          },
+          "internal_consistency": {
+            "alpha": 0.982,
+            "ci_lower": 0.778,
+            "ci_upper": 1.0,
+            "n_items": 13,
+            "n_participants": 200
+          }
+        }
+      }
+    },
+    {
+      "variant": "single_with_content",
+      "scenario": "collab_robot_assembly",
+      "run_id": "2025-12-22_215922",
+      "run_dir": "data/runs/2025-12-22_215922",
+      "summary": {
+        "run_id": "2025-12-22_215922",
+        "num_generators": 1,
+        "enable_content": true,
+        "n_items": 54,
+        "n_selected_items": 16,
+        "evaluation": {
+          "overall_mean_rating": 49.39,
+          "n_participants": 200,
+          "rating_std": null
+        },
+        "validation_metrics": {
+          "discriminant_ability": {
+            "empathic_mean": 69.51,
+            "non_empathic_mean": 29.27,
+            "t_statistic": 50.501,
+            "p_value": 0.0,
+            "cohens_d": 1.786,
+            "significant": true,
+            "n_empathic": 1600,
+            "n_non_empathic": 1600
+          },
+          "internal_consistency": {
+            "alpha": 0.968,
+            "ci_lower": 0.766,
+            "ci_upper": 1.0,
+            "n_items": 16,
+            "n_participants": 200
+          }
+        }
+      }
+    },
+    {
+      "variant": "multi_no_content",
+      "scenario": "collab_robot_assembly",
+      "run_id": "2025-12-22_220713",
+      "run_dir": "data/runs/2025-12-22_220713",
+      "summary": {
+        "run_id": "2025-12-22_220713",
+        "num_generators": 3,
+        "enable_content": false,
+        "n_items": 98,
+        "n_selected_items": 18,
+        "evaluation": {
+          "overall_mean_rating": 40.56,
+          "n_participants": 200,
+          "rating_std": null
+        },
+        "validation_metrics": {
+          "discriminant_ability": {
+            "empathic_mean": 71.47,
+            "non_empathic_mean": 9.66,
+            "t_statistic": 101.986,
+            "p_value": 0.0,
+            "cohens_d": 3.4,
+            "significant": true,
+            "n_empathic": 1800,
+            "n_non_empathic": 1800
+          },
+          "internal_consistency": {
+            "alpha": 0.99,
+            "ci_lower": 0.789,
+            "ci_upper": 1.0,
+            "n_items": 18,
+            "n_participants": 200
+          }
+        }
+      }
+    },
+    {
+      "variant": "multi_with_content",
+      "scenario": "collab_robot_assembly",
+      "run_id": "2025-12-22_222157",
+      "run_dir": "data/runs/2025-12-22_222157",
+      "summary": {
+        "run_id": "2025-12-22_222157",
+        "num_generators": 3,
+        "enable_content": true,
+        "n_items": 165,
+        "n_selected_items": 18,
+        "evaluation": {
+          "overall_mean_rating": 30.54,
+          "n_participants": 200,
+          "rating_std": null
+        },
+        "validation_metrics": {
+          "discriminant_ability": {
+            "empathic_mean": 60.52,
+            "non_empathic_mean": 0.56,
+            "t_statistic": 72.192,
+            "p_value": 0.0,
+            "cohens_d": 2.407,
+            "significant": true,
+            "n_empathic": 1800,
+            "n_non_empathic": 1800
+          },
+          "internal_consistency": {
+            "alpha": 0.978,
+            "ci_lower": 0.776,
+            "ci_upper": 1.0,
+            "n_items": 18,
+            "n_participants": 200
+          }
+        }
+      }
+    }
+  ],
+  "selection_criteria": {
+    "priority": "优先选择多因子结构（n_factors >= 2）的实验",
+    "quality_score_components": {
+      "internal_consistency": "40% (Cronbach's alpha)",
+      "discriminant_ability": "40% (Cohen's d)",
+      "item_count_reasonableness": "10% (15-20 items ideal)",
+      "statistical_significance": "10% (p < 0.05)"
+    },
+    "factor_structure_preference": "多因子结构（>=2个因子）优先于单因子结构"
+  }
+}

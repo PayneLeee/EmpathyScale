@@ -1,6 +1,9 @@
 """
 Run a single ablation variant for re-running failed experiments.
 
+NOTE: This is a debugging tool for re-running individual variants.
+For complete ablation study with full Phase 1/2 evaluation, use run_ablation_minimal.py instead.
+
 Usage:
     python run_single_variant.py multi_no_content
 """
@@ -155,17 +158,19 @@ def run_variant(variant_name: str, scenario: dict, api_key: str, dm: DataManager
     print_success(f"Parsed {len(items)} items")
     print()
     
-    # Step 4: Evaluation
-    print_info("  [4.1] Running LLM-based evaluation...")
+    # Step 4: Evaluation (simplified for debugging - use run_ablation_minimal.py for full Phase 1/2)
+    print_info("  [4.1] Running LLM-based evaluation (simplified for debugging)...")
+    print_info("  [NOTE] For full Phase 1/2 evaluation, use run_ablation_minimal.py instead")
     scenario_id = scenario.get('name', 'collab_robot_assembly')
     print_info(f"  [4.2] Using scenario_id: {scenario_id} (will reuse existing personas if available)")
-    print_info(f"  [4.3] Simulating 10 participants...")
+    print_info(f"  [4.3] Simulating 10 participants (reduced for quick debugging)...")
     eval_agent = EvaluationAgentGroup(api_key=api_key, prompts_dir=prompts.prompts_dir)
     try:
         eval_agent.evaluate_items(
             run_id, items, scenario, 
             n_participants=10,
-            scenario_id=scenario_id
+            scenario_id=scenario_id,
+            phase="selection"  # Use selection phase for consistency
         )
         print_success("Evaluation completed")
     except Exception as e:

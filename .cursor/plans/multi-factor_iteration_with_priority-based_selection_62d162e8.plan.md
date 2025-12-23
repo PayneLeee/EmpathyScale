@@ -310,4 +310,3 @@ flowchart TD
 ## 测试策略
 
 1. **单元测试**：测试`_calculate_factor_balance_score`函数
-2. **集成测试**：使用真实数据测试多因子迭代流程

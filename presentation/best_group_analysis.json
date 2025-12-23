@@ -1,0 +1,3524 @@
+{
+  "scenario": "collab_robot_assembly",
+  "runs": [
+    {
+      "run_id": "2025-12-22_215303",
+      "quality_score": 100,
+      "quality_reasons": [
+        "完整的数据流程",
+        "项目数合理(57项)",
+        "维度丰富(3个维度)",
+        "高内部一致性(α=0.982)",
+        "强区分性(d=3.17)",
+        "精选项目数合理(13项)"
+      ],
+      "n_items": 57,
+      "n_dimensions": 3
+    },
+    {
+      "run_id": "2025-12-22_220713",
+      "quality_score": 100,
+      "quality_reasons": [
+        "完整的数据流程",
+        "项目数合理(98项)",
+        "维度丰富(3个维度)",
+        "高内部一致性(α=0.990)",
+        "强区分性(d=3.40)",
+        "精选项目数合理(18项)"
+      ],
+      "n_items": 98,
+      "n_dimensions": 3
+    },
+    {
+      "run_id": "2025-12-22_222157",
+      "quality_score": 100,
+      "quality_reasons": [
+        "完整的数据流程",
+        "项目数合理(165项)",
+        "维度丰富(3个维度)",
+        "高内部一致性(α=0.978)",
+        "强区分性(d=2.41)",
+        "精选项目数合理(18项)"
+      ],
+      "n_items": 165,
+      "n_dimensions": 3
+    }
+  ],
+  "items_analysis": {
+    "total_items": 320,
+    "dimensions": {
+      "Emotional Recognition in Collaborative Assembly": [
+        {
+          "id": "1",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot recognized my need for reassurance."
+        },
+        {
+          "id": "2",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system recognized when I needed to slow down."
+        },
+        {
+          "id": "3",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot recognized when I felt stressed during assembly."
+        },
+        {
+          "id": "4",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot picked up on my signs of fatigue."
+        },
+        {
+          "id": "5",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot acknowledged my frustration while working together."
+        },
+        {
+          "id": "6",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system was aware of my emotional needs during tasks."
+        },
+        {
+          "id": "7",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system identified my need for a break."
+        },
+        {
+          "id": "8",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot noted my expressions of relief after completing a task."
+        },
+        {
+          "id": "9",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system showed awareness of my mood changes."
+        },
+        {
+          "id": "10",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system understood my emotional responses during collaboration."
+        },
+        {
+          "id": "11",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot expressed concern when I seemed uneasy."
+        },
+        {
+          "id": "12",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot sensed when I was overwhelmed."
+        },
+        {
+          "id": "13",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system demonstrated empathy towards my emotional challenges."
+        },
+        {
+          "id": "14",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot effectively recognized when I needed encouragement."
+        },
+        {
+          "id": "15",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system could tell when I was excited about progress."
+        },
+        {
+          "id": "16",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system adjusted its behavior when I appeared distressed."
+        },
+        {
+          "id": "17",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot recognized signs of my satisfaction with the work."
+        },
+        {
+          "id": "18",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot empathized with my feelings of doubt."
+        },
+        {
+          "id": "19",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot responded appropriately to my emotional state."
+        },
+        {
+          "id": "20",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system could tell when I was disengaged from the task."
+        },
+        {
+          "id": "21",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system noticed my hesitation in completing a task."
+        }
+      ],
+      "Proactive Assistance in Turn-Taking Interactions": [
+        {
+          "id": "22",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot offered reminders about task transitions."
+        },
+        {
+          "id": "23",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system provided timely feedback on my actions."
+        },
+        {
+          "id": "24",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot checked in with me before starting a new task."
+        },
+        {
+          "id": "25",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot prompted me when it was my turn to act."
+        },
+        {
+          "id": "26",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system provided help before I asked for it."
+        },
+        {
+          "id": "27",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot encouraged teamwork and collaboration effectively."
+        },
+        {
+          "id": "28",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system recognized when I was struggling and intervened."
+        },
+        {
+          "id": "29",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system reminded me of my goals for the task."
+        },
+        {
+          "id": "30",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system adjusted its assistance based on my confidence."
+        },
+        {
+          "id": "31",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot offered assistance during complex tasks."
+        },
+        {
+          "id": "32",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system initiated support when tasks became difficult."
+        },
+        {
+          "id": "33",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot assisted in managing the assembly workflow."
+        },
+        {
+          "id": "34",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system helped me stay organized during assembly."
+        },
+        {
+          "id": "35",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot offered insights during collaborative decision-making."
+        },
+        {
+          "id": "36",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system helped facilitate smooth turn-taking interactions."
+        },
+        {
+          "id": "37",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot suggested steps when I hesitated."
+        },
+        {
+          "id": "38",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot identified when I needed additional resources."
+        },
+        {
+          "id": "39",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system recognized when I needed a moment to think."
+        },
+        {
+          "id": "40",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot proactively adjusted its pace to match mine."
+        },
+        {
+          "id": "41",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system supported me in planning my next move."
+        }
+      ],
+      "Adaptive Communication for Safety Awareness": [
+        {
+          "id": "42",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The robot was clear in its communication about risks."
+        },
+        {
+          "id": "43",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system reinforced safety procedures through clear dialogue."
+        },
+        {
+          "id": "44",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The robot used situational context to guide its warnings."
+        },
+        {
+          "id": "45",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The robot used intuitive gestures to indicate safety hazards."
+        },
+        {
+          "id": "46",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The robot communicated effectively during high-stress moments."
+        },
+        {
+          "id": "47",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system adjusted its warnings based on my reactions."
+        },
+        {
+          "id": "48",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system provided timely safety reminders during assembly."
+        },
+        {
+          "id": "49",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system adjusted its instructions based on my level of understanding."
+        },
+        {
+          "id": "50",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The robot communicated potential hazards in advance."
+        },
+        {
+          "id": "51",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system adjusted its responses based on my feedback."
+        },
+        {
+          "id": "52",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system effectively conveyed urgency when necessary."
+        },
+        {
+          "id": "53",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system recognized when I needed clarification on safety."
+        },
+        {
+          "id": "54",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system showed flexibility in communication style as needed."
+        },
+        {
+          "id": "55",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system adapted its voice tone to suit the situation."
+        },
+        {
+          "id": "56",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system communicated adaptively during emergencies."
+        },
+        {
+          "id": "57",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The robot used both voice and gesture to enhance clarity."
+        }
+      ],
+      "Emotional Mirroring in Collaborative Assembly": [
+        {
+          "id": "1",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot's responses matched my emotional cues."
+        },
+        {
+          "id": "2",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot seemed to feel my frustration during the task."
+        },
+        {
+          "id": "3",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot mirrored my hesitations with appropriate gestures."
+        },
+        {
+          "id": "4",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot seemed to sense my anxiety during assembly."
+        },
+        {
+          "id": "5",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot offered encouragement when I felt uncertain."
+        },
+        {
+          "id": "6",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot responded to my stress with calming gestures."
+        },
+        {
+          "id": "7",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot expressed understanding through gestures when I was anxious."
+        },
+        {
+          "id": "8",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot demonstrated empathy through its physical presence."
+        },
+        {
+          "id": "9",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot mirrored my facial expressions during work."
+        },
+        {
+          "id": "10",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its actions to help me feel more at ease."
+        },
+        {
+          "id": "11",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized when I felt uncertain during assembly."
+        },
+        {
+          "id": "12",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot seemed to understand when I was hesitant."
+        },
+        {
+          "id": "13",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot offered reassurance when I expressed doubt."
+        },
+        {
+          "id": "14",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized my need for emotional support."
+        },
+        {
+          "id": "15",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot reacted with compassion when I expressed doubt."
+        },
+        {
+          "id": "16",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot reflected my stress through its pacing."
+        },
+        {
+          "id": "17",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot sensed when I needed a moment to regroup."
+        },
+        {
+          "id": "18",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized my need for reassurance during our task."
+        },
+        {
+          "id": "19",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot articulated understanding of my emotional challenges."
+        },
+        {
+          "id": "20",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot showed concern when I appeared overwhelmed."
+        },
+        {
+          "id": "21",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its tone when I seemed stressed."
+        },
+        {
+          "id": "22",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot expressed concern when I showed signs of distress."
+        },
+        {
+          "id": "23",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot demonstrated compassion through its vocal tone."
+        },
+        {
+          "id": "24",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its pace when I seemed overwhelmed."
+        },
+        {
+          "id": "25",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot offered supportive gestures when I hesitated."
+        },
+        {
+          "id": "26",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot displayed understanding when I showed fatigue."
+        },
+        {
+          "id": "27",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its voice tone to match my feelings."
+        },
+        {
+          "id": "28",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its speech when I expressed doubt."
+        },
+        {
+          "id": "29",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot showed enthusiasm when I had positive emotions."
+        },
+        {
+          "id": "30",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot demonstrated emotional awareness during our assembly."
+        },
+        {
+          "id": "1",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system connected with my emotional responses to tasks."
+        },
+        {
+          "id": "2",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It adjusted its feedback based on my emotional state."
+        },
+        {
+          "id": "3",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized when I felt unsure about my task."
+        },
+        {
+          "id": "4",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot responded to my emotional signals effectively."
+        },
+        {
+          "id": "5",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system picked up on my mood changes quickly."
+        },
+        {
+          "id": "6",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system seemed to understand when I felt overwhelmed."
+        },
+        {
+          "id": "7",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot expressed concern when I appeared frustrated."
+        },
+        {
+          "id": "8",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot mirrored my positive emotions when things went smoothly."
+        },
+        {
+          "id": "9",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system demonstrated awareness of my emotional ups and downs."
+        },
+        {
+          "id": "10",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system recognized when I needed reassurance."
+        },
+        {
+          "id": "11",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system acknowledged my emotional reactions to challenges."
+        },
+        {
+          "id": "12",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system interpreted my stress signals effectively."
+        },
+        {
+          "id": "13",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot expressed encouragement when I felt discouraged."
+        },
+        {
+          "id": "14",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It sensed my frustration and responded appropriately."
+        },
+        {
+          "id": "15",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system adjusted its approach based on my emotional state."
+        },
+        {
+          "id": "16",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot communicated support when I felt overwhelmed."
+        },
+        {
+          "id": "17",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized my fatigue and adjusted its pace."
+        },
+        {
+          "id": "18",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It expressed support when I appeared frustrated."
+        },
+        {
+          "id": "19",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system reflected my emotional state when I hesitated."
+        },
+        {
+          "id": "20",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It recognized my excitement when we completed a task."
+        },
+        {
+          "id": "21",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot acknowledged my stress during the assembly process."
+        },
+        {
+          "id": "22",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its behavior when I displayed anxiety."
+        },
+        {
+          "id": "23",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It seemed to understand my feelings during difficult tasks."
+        },
+        {
+          "id": "24",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system could tell when I needed a moment to think."
+        },
+        {
+          "id": "25",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system showed awareness of my mood changes during work."
+        },
+        {
+          "id": "26",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system acknowledged my emotional state without prompting."
+        },
+        {
+          "id": "27",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot validated my feelings during challenging tasks."
+        },
+        {
+          "id": "28",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its tone when I was overwhelmed."
+        },
+        {
+          "id": "29",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot seemed to sense my frustration with the assembly process."
+        },
+        {
+          "id": "30",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot responded to my hesitation with understanding."
+        },
+        {
+          "id": "31",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It recognized when I was eager to start a new task."
+        },
+        {
+          "id": "32",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system seemed to understand my emotional needs during assembly."
+        },
+        {
+          "id": "33",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot noticed when I hesitated and responded appropriately."
+        },
+        {
+          "id": "34",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system reacted to my emotional cues during our interaction."
+        },
+        {
+          "id": "35",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It seemed to share my relief after finishing a task."
+        },
+        {
+          "id": "36",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot comforted me when I expressed doubt."
+        },
+        {
+          "id": "37",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system appeared emotionally engaged in our collaboration."
+        },
+        {
+          "id": "38",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system responded with empathy when I encountered difficulties."
+        },
+        {
+          "id": "39",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It demonstrated an understanding of my emotional needs."
+        },
+        {
+          "id": "40",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It reflected my feelings when I was excited about a milestone."
+        },
+        {
+          "id": "41",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot responded appropriately to my signs of doubt."
+        },
+        {
+          "id": "42",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It recognized my sense of accomplishment during assembly."
+        },
+        {
+          "id": "43",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot reflected my excitement when I made progress."
+        },
+        {
+          "id": "44",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized my need for support in stressful moments."
+        },
+        {
+          "id": "45",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its behavior based on my stress level."
+        },
+        {
+          "id": "46",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot expressed empathy when I faced assembly difficulties."
+        },
+        {
+          "id": "47",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It seemed to understand my emotional state during our interaction."
+        },
+        {
+          "id": "48",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot seemed aware of the emotional atmosphere around us."
+        },
+        {
+          "id": "49",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system seemed to care about how I felt during work."
+        },
+        {
+          "id": "50",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system reflected my excitement when completing tasks."
+        },
+        {
+          "id": "51",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It seemed to sense when I needed a break."
+        },
+        {
+          "id": "52",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot mirrored my expressions when I felt confused."
+        },
+        {
+          "id": "53",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It recognized my need for encouragement during tough moments."
+        }
+      ],
+      "Proactive Support and Assistance": [
+        {
+          "id": "31",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot coordinated its actions to enhance our efficiency."
+        },
+        {
+          "id": "32",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot seamlessly integrated support into our workflow."
+        },
+        {
+          "id": "33",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot suggested tools before I had to ask."
+        },
+        {
+          "id": "34",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot adjusted its tasks to align with my priorities."
+        },
+        {
+          "id": "35",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot communicated intentions clearly as tasks evolved."
+        },
+        {
+          "id": "36",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot communicated its understanding of my needs effectively."
+        },
+        {
+          "id": "37",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered reminders for safety during assembly."
+        },
+        {
+          "id": "38",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot provided assistance proactively to enhance safety."
+        },
+        {
+          "id": "39",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot maintained a workflow that matched my needs."
+        },
+        {
+          "id": "40",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot identified potential risks before I noticed them."
+        },
+        {
+          "id": "41",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered suggestions that aligned with my goals."
+        },
+        {
+          "id": "42",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot proactively suggested improvements to my technique."
+        },
+        {
+          "id": "43",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot anticipated my needs before they arose."
+        },
+        {
+          "id": "44",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot effectively prioritized my needs during assembly."
+        },
+        {
+          "id": "45",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot recognized my efforts and offered praise."
+        },
+        {
+          "id": "46",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot helped me avoid potential errors in assembly."
+        },
+        {
+          "id": "47",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot provided feedback that enhanced my effectiveness."
+        },
+        {
+          "id": "48",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot remained attentive to my work pace."
+        },
+        {
+          "id": "49",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot modified its behavior to enhance my safety."
+        },
+        {
+          "id": "50",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot consistently checked in on my progress."
+        },
+        {
+          "id": "51",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot modified its behavior to enhance collaboration."
+        },
+        {
+          "id": "52",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot signaled when I needed to change my approach."
+        },
+        {
+          "id": "53",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot actively contributed to a smoother assembly process."
+        },
+        {
+          "id": "54",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot facilitated my task by providing necessary tools."
+        },
+        {
+          "id": "55",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot demonstrated foresight in anticipating my challenges."
+        },
+        {
+          "id": "56",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot adapted to my workflow without prompting."
+        },
+        {
+          "id": "57",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot recognized when I required additional guidance."
+        },
+        {
+          "id": "58",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot showed awareness of my preferences during tasks."
+        },
+        {
+          "id": "59",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot responded swiftly to my requests for help."
+        },
+        {
+          "id": "60",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot monitored my progress and offered assistance."
+        },
+        {
+          "id": "61",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot recognized and acted on my unexpressed needs."
+        },
+        {
+          "id": "62",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot predicted my actions and prepared accordingly."
+        },
+        {
+          "id": "63",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot predicted when I would need a break."
+        },
+        {
+          "id": "64",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered timely guidance during the assembly process."
+        },
+        {
+          "id": "65",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot took initiative to prevent potential problems."
+        },
+        {
+          "id": "66",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot adapted its actions based on my assembly pace."
+        },
+        {
+          "id": "67",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot proactively assisted me during complex tasks."
+        },
+        {
+          "id": "68",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot demonstrated understanding of my work patterns."
+        },
+        {
+          "id": "69",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered assistance when I looked confused."
+        },
+        {
+          "id": "70",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot showed initiative in offering help when needed."
+        },
+        {
+          "id": "71",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot recognized when to step back and let me lead."
+        },
+        {
+          "id": "54",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system offered to take on tasks I found difficult."
+        },
+        {
+          "id": "55",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot encouraged me to take the lead when appropriate."
+        },
+        {
+          "id": "56",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot adapted its guidance based on my performance."
+        },
+        {
+          "id": "57",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system offered timely support during complex tasks."
+        },
+        {
+          "id": "58",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot made recommendations based on my progress."
+        },
+        {
+          "id": "59",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot showed initiative in enhancing our collaborative efforts."
+        },
+        {
+          "id": "60",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It recognized my strengths and built on them proactively."
+        },
+        {
+          "id": "61",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system predicted my needs during our collaboration."
+        },
+        {
+          "id": "62",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot was quick to offer aid during critical moments."
+        },
+        {
+          "id": "63",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot checked in frequently to gauge my needs."
+        },
+        {
+          "id": "64",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It suggested solutions to problems before they escalated."
+        },
+        {
+          "id": "65",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It suggested adjustments to enhance our collaborative effort."
+        },
+        {
+          "id": "66",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It adjusted its suggestions based on my responses."
+        },
+        {
+          "id": "67",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It provided timely reminders to keep us on track."
+        },
+        {
+          "id": "68",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system tracked my progress and offered assistance as needed."
+        },
+        {
+          "id": "69",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot facilitated my tasks by preparing materials in advance."
+        },
+        {
+          "id": "70",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system highlighted potential issues before they arose."
+        },
+        {
+          "id": "71",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It offered support when I faced challenges with tasks."
+        },
+        {
+          "id": "72",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot predicted my needs during our collaboration."
+        },
+        {
+          "id": "73",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system actively checked on my comfort and well-being."
+        },
+        {
+          "id": "74",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It proactively offered assistance before I asked for it."
+        },
+        {
+          "id": "75",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot showed readiness to assist without waiting for requests."
+        },
+        {
+          "id": "76",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system encouraged me to share any concerns openly."
+        },
+        {
+          "id": "77",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It provided additional resources when I needed clarification."
+        },
+        {
+          "id": "78",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot suggested tools when it sensed I needed them."
+        },
+        {
+          "id": "79",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot adjusted its actions to support my workflow."
+        },
+        {
+          "id": "80",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It provided encouragement when I completed a step."
+        },
+        {
+          "id": "81",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot stepped in to assist before I could express a need."
+        },
+        {
+          "id": "82",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system provided relevant tips as I worked."
+        },
+        {
+          "id": "83",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot encouraged me to take breaks when needed."
+        },
+        {
+          "id": "84",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It initiated help when it sensed I was struggling."
+        },
+        {
+          "id": "85",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot anticipated my needs before I even asked."
+        },
+        {
+          "id": "86",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot provided timely assistance during complex tasks."
+        },
+        {
+          "id": "87",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot facilitated communication between us effectively."
+        },
+        {
+          "id": "88",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot provided timely feedback during assembly tasks."
+        },
+        {
+          "id": "89",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system recognized my workflow and offered helpful reminders."
+        },
+        {
+          "id": "90",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered timely assistance without disrupting my workflow."
+        },
+        {
+          "id": "91",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot suggested solutions before I expressed confusion."
+        },
+        {
+          "id": "92",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot preemptively adjusted its pace to match mine."
+        },
+        {
+          "id": "93",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system showed initiative in helping me with repairs."
+        },
+        {
+          "id": "94",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered reassurance during complex tasks."
+        },
+        {
+          "id": "95",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It proactively engaged me in problem-solving discussions."
+        },
+        {
+          "id": "96",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system supported me by simplifying complex instructions."
+        },
+        {
+          "id": "97",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system prompted me to review steps I was unsure of."
+        },
+        {
+          "id": "98",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It seamlessly integrated assistance into our workflow."
+        },
+        {
+          "id": "99",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered practical tips to improve efficiency."
+        },
+        {
+          "id": "100",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system provided solutions to potential problems I faced."
+        },
+        {
+          "id": "101",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It anticipated my reactions and adapted accordingly."
+        },
+        {
+          "id": "102",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system provided help just when I needed it."
+        },
+        {
+          "id": "103",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It was quick to recognize and address my concerns."
+        },
+        {
+          "id": "104",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system showed readiness to help without being prompted."
+        },
+        {
+          "id": "105",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot modified its actions based on my performance cues."
+        },
+        {
+          "id": "106",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system preemptively addressed issues before they arose."
+        },
+        {
+          "id": "107",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot indicated the next steps before I inquired."
+        },
+        {
+          "id": "108",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system recognized when I needed guidance and stepped in."
+        },
+        {
+          "id": "109",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It showed initiative in enhancing our teamwork."
+        },
+        {
+          "id": "110",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot highlighted potential hazards before I noticed them."
+        },
+        {
+          "id": "111",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system suggested adjustments to improve my workflow."
+        },
+        {
+          "id": "112",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered encouragement during challenging assembly tasks."
+        },
+        {
+          "id": "113",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system frequently checked in to ensure I was okay."
+        }
+      ],
+      "Trust and Safety Awareness": [
+        {
+          "id": "72",
+          "dimension": "Trust and Safety Awareness",
+          "text": "I trusted the robot to act in my best interest."
+        },
+        {
+          "id": "73",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot's actions made me feel respected and safe."
+        },
+        {
+          "id": "74",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot built trust through consistent and safe actions."
+        },
+        {
+          "id": "75",
+          "dimension": "Trust and Safety Awareness",
+          "text": "I felt safe working alongside the robot during assembly."
+        },
+        {
+          "id": "76",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot maintained transparency in its operations."
+        },
+        {
+          "id": "77",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot respected my personal space while assisting."
+        },
+        {
+          "id": "78",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot's reliability helped build trust in our partnership."
+        },
+        {
+          "id": "79",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot effectively communicated its safety protocols."
+        },
+        {
+          "id": "80",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot respected my boundaries during our collaboration."
+        },
+        {
+          "id": "81",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot maintained a safe distance during assembly tasks."
+        },
+        {
+          "id": "82",
+          "dimension": "Trust and Safety Awareness",
+          "text": "I felt secure knowing the robot could recognize hazards."
+        },
+        {
+          "id": "83",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot's gestures reassured me of its safety measures."
+        },
+        {
+          "id": "84",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot provided clear warnings when necessary."
+        },
+        {
+          "id": "85",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot adapted its behavior to ensure a secure environment."
+        },
+        {
+          "id": "86",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot responded appropriately to potential hazards."
+        },
+        {
+          "id": "87",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot demonstrated awareness of the factory's safety guidelines."
+        },
+        {
+          "id": "88",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot demonstrated reliability in its actions."
+        },
+        {
+          "id": "89",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot provided timely updates regarding task changes."
+        },
+        {
+          "id": "90",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot's actions were predictable and reliable."
+        },
+        {
+          "id": "91",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot communicated clearly to avoid misunderstandings."
+        },
+        {
+          "id": "92",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot's presence made me feel more secure during tasks."
+        },
+        {
+          "id": "93",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot showed commitment to maintaining a safe workspace."
+        },
+        {
+          "id": "94",
+          "dimension": "Trust and Safety Awareness",
+          "text": "I felt that the robot's actions were always well-considered."
+        },
+        {
+          "id": "95",
+          "dimension": "Trust and Safety Awareness",
+          "text": "I felt confident in the robot's ability to assist safely."
+        },
+        {
+          "id": "96",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot consistently communicated its next steps."
+        },
+        {
+          "id": "97",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot established clear protocols for our collaboration."
+        },
+        {
+          "id": "98",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot was transparent about its capabilities and limits."
+        }
+      ],
+      "Understanding Safety Concerns": [
+        {
+          "id": "114",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It checked for safety compliance throughout our collaboration."
+        },
+        {
+          "id": "115",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system adjusted its actions based on my safety feedback."
+        },
+        {
+          "id": "116",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot communicated safety protocols clearly to me."
+        },
+        {
+          "id": "117",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system respected safety protocols during our collaboration."
+        },
+        {
+          "id": "118",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system understood my need for a secure working environment."
+        },
+        {
+          "id": "119",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot provided reminders about safety compliance."
+        },
+        {
+          "id": "120",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot ensured its actions prioritized my safety."
+        },
+        {
+          "id": "121",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It provided reminders about safety practices during tasks."
+        },
+        {
+          "id": "122",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system continuously assessed risks during assembly tasks."
+        },
+        {
+          "id": "123",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It recognized my cues related to safety awareness."
+        },
+        {
+          "id": "124",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot warned me about potential risks during assembly."
+        },
+        {
+          "id": "125",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system expressed concern when I worked too close to hazards."
+        },
+        {
+          "id": "126",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot showed a commitment to maintaining a safe working environment."
+        },
+        {
+          "id": "127",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot encouraged me to voice any safety concerns."
+        },
+        {
+          "id": "128",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot ensured that I felt secure while working together."
+        },
+        {
+          "id": "129",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system respected my boundaries to ensure safety."
+        },
+        {
+          "id": "130",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It demonstrated a commitment to maintaining a safe workspace."
+        },
+        {
+          "id": "131",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It recognized potential hazards in our assembly tasks."
+        },
+        {
+          "id": "132",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot respected my personal space during operations."
+        },
+        {
+          "id": "133",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It understood the importance of safety and reliability."
+        },
+        {
+          "id": "134",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It acknowledged my concerns regarding safety without dismissing them."
+        },
+        {
+          "id": "135",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot emphasized the importance of safety in assembly."
+        },
+        {
+          "id": "136",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system verified that I understood safety measures before proceeding."
+        },
+        {
+          "id": "137",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system encouraged safe practices in every assembly step."
+        },
+        {
+          "id": "138",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot monitored the environment for safety risks."
+        },
+        {
+          "id": "139",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system showed awareness of potential hazards in our workspace."
+        },
+        {
+          "id": "140",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system demonstrated knowledge of safety guidelines."
+        },
+        {
+          "id": "141",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system ensured that I was aware of potential hazards."
+        },
+        {
+          "id": "142",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system acknowledged my safety-related concerns promptly."
+        },
+        {
+          "id": "143",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot communicated effectively about potential risks."
+        },
+        {
+          "id": "144",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot responded appropriately to my safety alarms."
+        },
+        {
+          "id": "145",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It facilitated discussions about safety procedures effectively."
+        },
+        {
+          "id": "146",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system ensured safety gear was properly used."
+        },
+        {
+          "id": "147",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It was proactive in identifying unsafe situations."
+        },
+        {
+          "id": "148",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It was quick to respond to any safety hazards I pointed out."
+        },
+        {
+          "id": "149",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It encouraged me to voice safety concerns without hesitation."
+        },
+        {
+          "id": "150",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system adapted to ensure safe collaboration in tight spaces."
+        },
+        {
+          "id": "151",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system maintained a safe distance during assembly."
+        },
+        {
+          "id": "152",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system considered my safety preferences in its operations."
+        },
+        {
+          "id": "153",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It recognized signs of discomfort related to safety."
+        },
+        {
+          "id": "154",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot adjusted its tasks to maintain a safe distance."
+        },
+        {
+          "id": "155",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot ensured that its actions did not compromise safety."
+        },
+        {
+          "id": "156",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It engaged in proactive safety checks during our assembly."
+        },
+        {
+          "id": "157",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It followed safety protocols to keep me secure."
+        },
+        {
+          "id": "158",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system ensured I felt secure in my workspace."
+        },
+        {
+          "id": "159",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system ensured that my safety was prioritized at all times."
+        },
+        {
+          "id": "160",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system confirmed my safety-related requests promptly."
+        },
+        {
+          "id": "161",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot monitored my movements to prevent accidents."
+        },
+        {
+          "id": "162",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot ensured that tools were used safely around me."
+        },
+        {
+          "id": "163",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot actively contributed to a secure working atmosphere."
+        },
+        {
+          "id": "164",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot engaged in discussions about safety improvements."
+        },
+        {
+          "id": "165",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It communicated safety measures clearly during our tasks."
+        }
+      ]
+    },
+    "item_characteristics": {
+      "emotional_focus": [
+        {
+          "id": "3",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot recognized when I felt stressed during assembly."
+        },
+        {
+          "id": "6",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system was aware of my emotional needs during tasks."
+        },
+        {
+          "id": "9",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system showed awareness of my mood changes."
+        },
+        {
+          "id": "10",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system understood my emotional responses during collaboration."
+        },
+        {
+          "id": "12",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot sensed when I was overwhelmed."
+        },
+        {
+          "id": "13",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system demonstrated empathy towards my emotional challenges."
+        },
+        {
+          "id": "15",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system could tell when I was excited about progress."
+        },
+        {
+          "id": "16",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system adjusted its behavior when I appeared distressed."
+        },
+        {
+          "id": "18",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot empathized with my feelings of doubt."
+        },
+        {
+          "id": "19",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot responded appropriately to my emotional state."
+        },
+        {
+          "id": "46",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The robot communicated effectively during high-stress moments."
+        },
+        {
+          "id": "1",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot's responses matched my emotional cues."
+        },
+        {
+          "id": "2",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot seemed to feel my frustration during the task."
+        },
+        {
+          "id": "6",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot responded to my stress with calming gestures."
+        },
+        {
+          "id": "8",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot demonstrated empathy through its physical presence."
+        },
+        {
+          "id": "10",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its actions to help me feel more at ease."
+        },
+        {
+          "id": "13",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot offered reassurance when I expressed doubt."
+        },
+        {
+          "id": "14",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized my need for emotional support."
+        },
+        {
+          "id": "15",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot reacted with compassion when I expressed doubt."
+        },
+        {
+          "id": "16",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot reflected my stress through its pacing."
+        },
+        {
+          "id": "19",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot articulated understanding of my emotional challenges."
+        },
+        {
+          "id": "20",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot showed concern when I appeared overwhelmed."
+        },
+        {
+          "id": "21",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its tone when I seemed stressed."
+        },
+        {
+          "id": "22",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot expressed concern when I showed signs of distress."
+        },
+        {
+          "id": "24",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its pace when I seemed overwhelmed."
+        },
+        {
+          "id": "27",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its voice tone to match my feelings."
+        },
+        {
+          "id": "28",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its speech when I expressed doubt."
+        },
+        {
+          "id": "29",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot showed enthusiasm when I had positive emotions."
+        },
+        {
+          "id": "30",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot demonstrated emotional awareness during our assembly."
+        },
+        {
+          "id": "73",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot's actions made me feel respected and safe."
+        },
+        {
+          "id": "92",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot's presence made me feel more secure during tasks."
+        },
+        {
+          "id": "1",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system connected with my emotional responses to tasks."
+        },
+        {
+          "id": "2",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It adjusted its feedback based on my emotional state."
+        },
+        {
+          "id": "4",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot responded to my emotional signals effectively."
+        },
+        {
+          "id": "5",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system picked up on my mood changes quickly."
+        },
+        {
+          "id": "6",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system seemed to understand when I felt overwhelmed."
+        },
+        {
+          "id": "7",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot expressed concern when I appeared frustrated."
+        },
+        {
+          "id": "8",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot mirrored my positive emotions when things went smoothly."
+        },
+        {
+          "id": "9",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system demonstrated awareness of my emotional ups and downs."
+        },
+        {
+          "id": "11",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system acknowledged my emotional reactions to challenges."
+        },
+        {
+          "id": "12",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system interpreted my stress signals effectively."
+        },
+        {
+          "id": "13",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot expressed encouragement when I felt discouraged."
+        },
+        {
+          "id": "15",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system adjusted its approach based on my emotional state."
+        },
+        {
+          "id": "16",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot communicated support when I felt overwhelmed."
+        },
+        {
+          "id": "18",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It expressed support when I appeared frustrated."
+        },
+        {
+          "id": "19",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system reflected my emotional state when I hesitated."
+        },
+        {
+          "id": "21",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot acknowledged my stress during the assembly process."
+        },
+        {
+          "id": "23",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It seemed to understand my feelings during difficult tasks."
+        },
+        {
+          "id": "25",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system showed awareness of my mood changes during work."
+        },
+        {
+          "id": "26",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system acknowledged my emotional state without prompting."
+        },
+        {
+          "id": "27",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot validated my feelings during challenging tasks."
+        },
+        {
+          "id": "28",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its tone when I was overwhelmed."
+        },
+        {
+          "id": "32",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system seemed to understand my emotional needs during assembly."
+        },
+        {
+          "id": "34",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system reacted to my emotional cues during our interaction."
+        },
+        {
+          "id": "36",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot comforted me when I expressed doubt."
+        },
+        {
+          "id": "37",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system appeared emotionally engaged in our collaboration."
+        },
+        {
+          "id": "38",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system responded with empathy when I encountered difficulties."
+        },
+        {
+          "id": "39",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It demonstrated an understanding of my emotional needs."
+        },
+        {
+          "id": "40",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It reflected my feelings when I was excited about a milestone."
+        },
+        {
+          "id": "41",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot responded appropriately to my signs of doubt."
+        },
+        {
+          "id": "44",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized my need for support in stressful moments."
+        },
+        {
+          "id": "45",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its behavior based on my stress level."
+        },
+        {
+          "id": "46",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot expressed empathy when I faced assembly difficulties."
+        },
+        {
+          "id": "47",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It seemed to understand my emotional state during our interaction."
+        },
+        {
+          "id": "48",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot seemed aware of the emotional atmosphere around us."
+        }
+      ],
+      "behavioral_focus": [
+        {
+          "id": "16",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system adjusted its behavior when I appeared distressed."
+        },
+        {
+          "id": "17",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot recognized signs of my satisfaction with the work."
+        },
+        {
+          "id": "19",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot responded appropriately to my emotional state."
+        },
+        {
+          "id": "22",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot offered reminders about task transitions."
+        },
+        {
+          "id": "23",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system provided timely feedback on my actions."
+        },
+        {
+          "id": "26",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system provided help before I asked for it."
+        },
+        {
+          "id": "30",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system adjusted its assistance based on my confidence."
+        },
+        {
+          "id": "31",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot offered assistance during complex tasks."
+        },
+        {
+          "id": "32",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system initiated support when tasks became difficult."
+        },
+        {
+          "id": "33",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot assisted in managing the assembly workflow."
+        },
+        {
+          "id": "34",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system helped me stay organized during assembly."
+        },
+        {
+          "id": "35",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot offered insights during collaborative decision-making."
+        },
+        {
+          "id": "36",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system helped facilitate smooth turn-taking interactions."
+        },
+        {
+          "id": "37",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot suggested steps when I hesitated."
+        },
+        {
+          "id": "40",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The robot proactively adjusted its pace to match mine."
+        },
+        {
+          "id": "41",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system supported me in planning my next move."
+        },
+        {
+          "id": "47",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system adjusted its warnings based on my reactions."
+        },
+        {
+          "id": "48",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system provided timely safety reminders during assembly."
+        },
+        {
+          "id": "49",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system adjusted its instructions based on my level of understanding."
+        },
+        {
+          "id": "51",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system adjusted its responses based on my feedback."
+        },
+        {
+          "id": "55",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system adapted its voice tone to suit the situation."
+        },
+        {
+          "id": "56",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system communicated adaptively during emergencies."
+        },
+        {
+          "id": "5",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot offered encouragement when I felt uncertain."
+        },
+        {
+          "id": "6",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot responded to my stress with calming gestures."
+        },
+        {
+          "id": "10",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its actions to help me feel more at ease."
+        },
+        {
+          "id": "13",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot offered reassurance when I expressed doubt."
+        },
+        {
+          "id": "14",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized my need for emotional support."
+        },
+        {
+          "id": "21",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its tone when I seemed stressed."
+        },
+        {
+          "id": "24",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its pace when I seemed overwhelmed."
+        },
+        {
+          "id": "25",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot offered supportive gestures when I hesitated."
+        },
+        {
+          "id": "27",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its voice tone to match my feelings."
+        },
+        {
+          "id": "28",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its speech when I expressed doubt."
+        },
+        {
+          "id": "31",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot coordinated its actions to enhance our efficiency."
+        },
+        {
+          "id": "32",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot seamlessly integrated support into our workflow."
+        },
+        {
+          "id": "33",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot suggested tools before I had to ask."
+        },
+        {
+          "id": "34",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot adjusted its tasks to align with my priorities."
+        },
+        {
+          "id": "37",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered reminders for safety during assembly."
+        },
+        {
+          "id": "38",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot provided assistance proactively to enhance safety."
+        },
+        {
+          "id": "41",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered suggestions that aligned with my goals."
+        },
+        {
+          "id": "42",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot proactively suggested improvements to my technique."
+        },
+        {
+          "id": "45",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot recognized my efforts and offered praise."
+        },
+        {
+          "id": "46",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot helped me avoid potential errors in assembly."
+        },
+        {
+          "id": "47",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot provided feedback that enhanced my effectiveness."
+        },
+        {
+          "id": "49",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot modified its behavior to enhance my safety."
+        },
+        {
+          "id": "51",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot modified its behavior to enhance collaboration."
+        },
+        {
+          "id": "54",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot facilitated my task by providing necessary tools."
+        },
+        {
+          "id": "56",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot adapted to my workflow without prompting."
+        },
+        {
+          "id": "59",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot responded swiftly to my requests for help."
+        },
+        {
+          "id": "60",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot monitored my progress and offered assistance."
+        },
+        {
+          "id": "62",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot predicted my actions and prepared accordingly."
+        },
+        {
+          "id": "64",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered timely guidance during the assembly process."
+        },
+        {
+          "id": "66",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot adapted its actions based on my assembly pace."
+        },
+        {
+          "id": "67",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot proactively assisted me during complex tasks."
+        },
+        {
+          "id": "69",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered assistance when I looked confused."
+        },
+        {
+          "id": "70",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot showed initiative in offering help when needed."
+        },
+        {
+          "id": "73",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot's actions made me feel respected and safe."
+        },
+        {
+          "id": "74",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot built trust through consistent and safe actions."
+        },
+        {
+          "id": "77",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot respected my personal space while assisting."
+        },
+        {
+          "id": "78",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot's reliability helped build trust in our partnership."
+        },
+        {
+          "id": "84",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot provided clear warnings when necessary."
+        },
+        {
+          "id": "85",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot adapted its behavior to ensure a secure environment."
+        },
+        {
+          "id": "86",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot responded appropriately to potential hazards."
+        },
+        {
+          "id": "88",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot demonstrated reliability in its actions."
+        },
+        {
+          "id": "89",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot provided timely updates regarding task changes."
+        },
+        {
+          "id": "90",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot's actions were predictable and reliable."
+        },
+        {
+          "id": "94",
+          "dimension": "Trust and Safety Awareness",
+          "text": "I felt that the robot's actions were always well-considered."
+        },
+        {
+          "id": "95",
+          "dimension": "Trust and Safety Awareness",
+          "text": "I felt confident in the robot's ability to assist safely."
+        },
+        {
+          "id": "2",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It adjusted its feedback based on my emotional state."
+        },
+        {
+          "id": "4",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot responded to my emotional signals effectively."
+        },
+        {
+          "id": "11",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system acknowledged my emotional reactions to challenges."
+        },
+        {
+          "id": "14",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It sensed my frustration and responded appropriately."
+        },
+        {
+          "id": "15",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system adjusted its approach based on my emotional state."
+        },
+        {
+          "id": "16",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot communicated support when I felt overwhelmed."
+        },
+        {
+          "id": "17",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized my fatigue and adjusted its pace."
+        },
+        {
+          "id": "18",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It expressed support when I appeared frustrated."
+        },
+        {
+          "id": "22",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its behavior when I displayed anxiety."
+        },
+        {
+          "id": "28",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its tone when I was overwhelmed."
+        },
+        {
+          "id": "30",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot responded to my hesitation with understanding."
+        },
+        {
+          "id": "33",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot noticed when I hesitated and responded appropriately."
+        },
+        {
+          "id": "34",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system reacted to my emotional cues during our interaction."
+        },
+        {
+          "id": "38",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system responded with empathy when I encountered difficulties."
+        },
+        {
+          "id": "41",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot responded appropriately to my signs of doubt."
+        },
+        {
+          "id": "44",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized my need for support in stressful moments."
+        },
+        {
+          "id": "45",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot adjusted its behavior based on my stress level."
+        },
+        {
+          "id": "47",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It seemed to understand my emotional state during our interaction."
+        },
+        {
+          "id": "54",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system offered to take on tasks I found difficult."
+        },
+        {
+          "id": "56",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot adapted its guidance based on my performance."
+        },
+        {
+          "id": "57",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system offered timely support during complex tasks."
+        },
+        {
+          "id": "62",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot was quick to offer aid during critical moments."
+        },
+        {
+          "id": "64",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It suggested solutions to problems before they escalated."
+        },
+        {
+          "id": "65",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It suggested adjustments to enhance our collaborative effort."
+        },
+        {
+          "id": "66",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It adjusted its suggestions based on my responses."
+        },
+        {
+          "id": "67",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It provided timely reminders to keep us on track."
+        },
+        {
+          "id": "68",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system tracked my progress and offered assistance as needed."
+        },
+        {
+          "id": "69",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot facilitated my tasks by preparing materials in advance."
+        },
+        {
+          "id": "71",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It offered support when I faced challenges with tasks."
+        },
+        {
+          "id": "74",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It proactively offered assistance before I asked for it."
+        },
+        {
+          "id": "75",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot showed readiness to assist without waiting for requests."
+        },
+        {
+          "id": "77",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It provided additional resources when I needed clarification."
+        },
+        {
+          "id": "78",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot suggested tools when it sensed I needed them."
+        },
+        {
+          "id": "79",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot adjusted its actions to support my workflow."
+        },
+        {
+          "id": "80",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It provided encouragement when I completed a step."
+        },
+        {
+          "id": "81",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot stepped in to assist before I could express a need."
+        },
+        {
+          "id": "82",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system provided relevant tips as I worked."
+        },
+        {
+          "id": "84",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It initiated help when it sensed I was struggling."
+        },
+        {
+          "id": "86",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot provided timely assistance during complex tasks."
+        },
+        {
+          "id": "87",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot facilitated communication between us effectively."
+        },
+        {
+          "id": "88",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot provided timely feedback during assembly tasks."
+        },
+        {
+          "id": "89",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system recognized my workflow and offered helpful reminders."
+        },
+        {
+          "id": "90",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered timely assistance without disrupting my workflow."
+        },
+        {
+          "id": "91",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot suggested solutions before I expressed confusion."
+        },
+        {
+          "id": "92",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot preemptively adjusted its pace to match mine."
+        },
+        {
+          "id": "93",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system showed initiative in helping me with repairs."
+        },
+        {
+          "id": "94",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered reassurance during complex tasks."
+        },
+        {
+          "id": "96",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system supported me by simplifying complex instructions."
+        },
+        {
+          "id": "98",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It seamlessly integrated assistance into our workflow."
+        },
+        {
+          "id": "99",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered practical tips to improve efficiency."
+        },
+        {
+          "id": "100",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system provided solutions to potential problems I faced."
+        },
+        {
+          "id": "101",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It anticipated my reactions and adapted accordingly."
+        },
+        {
+          "id": "102",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system provided help just when I needed it."
+        },
+        {
+          "id": "104",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system showed readiness to help without being prompted."
+        },
+        {
+          "id": "105",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot modified its actions based on my performance cues."
+        },
+        {
+          "id": "111",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system suggested adjustments to improve my workflow."
+        },
+        {
+          "id": "112",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered encouragement during challenging assembly tasks."
+        },
+        {
+          "id": "115",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system adjusted its actions based on my safety feedback."
+        },
+        {
+          "id": "119",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot provided reminders about safety compliance."
+        },
+        {
+          "id": "120",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot ensured its actions prioritized my safety."
+        },
+        {
+          "id": "121",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It provided reminders about safety practices during tasks."
+        },
+        {
+          "id": "144",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot responded appropriately to my safety alarms."
+        },
+        {
+          "id": "145",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It facilitated discussions about safety procedures effectively."
+        },
+        {
+          "id": "148",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It was quick to respond to any safety hazards I pointed out."
+        },
+        {
+          "id": "150",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system adapted to ensure safe collaboration in tight spaces."
+        },
+        {
+          "id": "154",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot adjusted its tasks to maintain a safe distance."
+        },
+        {
+          "id": "155",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot ensured that its actions did not compromise safety."
+        }
+      ],
+      "cognitive_focus": [
+        {
+          "id": "1",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot recognized my need for reassurance."
+        },
+        {
+          "id": "2",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system recognized when I needed to slow down."
+        },
+        {
+          "id": "3",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot recognized when I felt stressed during assembly."
+        },
+        {
+          "id": "5",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot acknowledged my frustration while working together."
+        },
+        {
+          "id": "6",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system was aware of my emotional needs during tasks."
+        },
+        {
+          "id": "9",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system showed awareness of my mood changes."
+        },
+        {
+          "id": "12",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot sensed when I was overwhelmed."
+        },
+        {
+          "id": "14",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot effectively recognized when I needed encouragement."
+        },
+        {
+          "id": "17",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The robot recognized signs of my satisfaction with the work."
+        },
+        {
+          "id": "21",
+          "dimension": "Emotional Recognition in Collaborative Assembly",
+          "text": "The system noticed my hesitation in completing a task."
+        },
+        {
+          "id": "28",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system recognized when I was struggling and intervened."
+        },
+        {
+          "id": "39",
+          "dimension": "Proactive Assistance in Turn-Taking Interactions",
+          "text": "The system recognized when I needed a moment to think."
+        },
+        {
+          "id": "49",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system adjusted its instructions based on my level of understanding."
+        },
+        {
+          "id": "53",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system recognized when I needed clarification on safety."
+        },
+        {
+          "id": "4",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot seemed to sense my anxiety during assembly."
+        },
+        {
+          "id": "7",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot expressed understanding through gestures when I was anxious."
+        },
+        {
+          "id": "11",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized when I felt uncertain during assembly."
+        },
+        {
+          "id": "12",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot seemed to understand when I was hesitant."
+        },
+        {
+          "id": "14",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized my need for emotional support."
+        },
+        {
+          "id": "17",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot sensed when I needed a moment to regroup."
+        },
+        {
+          "id": "18",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized my need for reassurance during our task."
+        },
+        {
+          "id": "19",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot articulated understanding of my emotional challenges."
+        },
+        {
+          "id": "26",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot displayed understanding when I showed fatigue."
+        },
+        {
+          "id": "30",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot demonstrated emotional awareness during our assembly."
+        },
+        {
+          "id": "36",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot communicated its understanding of my needs effectively."
+        },
+        {
+          "id": "40",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot identified potential risks before I noticed them."
+        },
+        {
+          "id": "45",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot recognized my efforts and offered praise."
+        },
+        {
+          "id": "57",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot recognized when I required additional guidance."
+        },
+        {
+          "id": "58",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot showed awareness of my preferences during tasks."
+        },
+        {
+          "id": "61",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot recognized and acted on my unexpressed needs."
+        },
+        {
+          "id": "68",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot demonstrated understanding of my work patterns."
+        },
+        {
+          "id": "71",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot recognized when to step back and let me lead."
+        },
+        {
+          "id": "82",
+          "dimension": "Trust and Safety Awareness",
+          "text": "I felt secure knowing the robot could recognize hazards."
+        },
+        {
+          "id": "87",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot demonstrated awareness of the factory's safety guidelines."
+        },
+        {
+          "id": "91",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot communicated clearly to avoid misunderstandings."
+        },
+        {
+          "id": "3",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized when I felt unsure about my task."
+        },
+        {
+          "id": "6",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system seemed to understand when I felt overwhelmed."
+        },
+        {
+          "id": "9",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system demonstrated awareness of my emotional ups and downs."
+        },
+        {
+          "id": "10",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system recognized when I needed reassurance."
+        },
+        {
+          "id": "11",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system acknowledged my emotional reactions to challenges."
+        },
+        {
+          "id": "12",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system interpreted my stress signals effectively."
+        },
+        {
+          "id": "14",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It sensed my frustration and responded appropriately."
+        },
+        {
+          "id": "17",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized my fatigue and adjusted its pace."
+        },
+        {
+          "id": "20",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It recognized my excitement when we completed a task."
+        },
+        {
+          "id": "21",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot acknowledged my stress during the assembly process."
+        },
+        {
+          "id": "23",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It seemed to understand my feelings during difficult tasks."
+        },
+        {
+          "id": "25",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system showed awareness of my mood changes during work."
+        },
+        {
+          "id": "26",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system acknowledged my emotional state without prompting."
+        },
+        {
+          "id": "29",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot seemed to sense my frustration with the assembly process."
+        },
+        {
+          "id": "30",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot responded to my hesitation with understanding."
+        },
+        {
+          "id": "31",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It recognized when I was eager to start a new task."
+        },
+        {
+          "id": "32",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The system seemed to understand my emotional needs during assembly."
+        },
+        {
+          "id": "33",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot noticed when I hesitated and responded appropriately."
+        },
+        {
+          "id": "39",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It demonstrated an understanding of my emotional needs."
+        },
+        {
+          "id": "42",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It recognized my sense of accomplishment during assembly."
+        },
+        {
+          "id": "44",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot recognized my need for support in stressful moments."
+        },
+        {
+          "id": "47",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It seemed to understand my emotional state during our interaction."
+        },
+        {
+          "id": "48",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "The robot seemed aware of the emotional atmosphere around us."
+        },
+        {
+          "id": "51",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It seemed to sense when I needed a break."
+        },
+        {
+          "id": "53",
+          "dimension": "Emotional Mirroring in Collaborative Assembly",
+          "text": "It recognized my need for encouragement during tough moments."
+        },
+        {
+          "id": "60",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It recognized my strengths and built on them proactively."
+        },
+        {
+          "id": "78",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot suggested tools when it sensed I needed them."
+        },
+        {
+          "id": "84",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It initiated help when it sensed I was struggling."
+        },
+        {
+          "id": "89",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system recognized my workflow and offered helpful reminders."
+        },
+        {
+          "id": "103",
+          "dimension": "Proactive Support and Assistance",
+          "text": "It was quick to recognize and address my concerns."
+        },
+        {
+          "id": "108",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The system recognized when I needed guidance and stepped in."
+        },
+        {
+          "id": "110",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot highlighted potential hazards before I noticed them."
+        },
+        {
+          "id": "123",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It recognized my cues related to safety awareness."
+        },
+        {
+          "id": "131",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It recognized potential hazards in our assembly tasks."
+        },
+        {
+          "id": "134",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It acknowledged my concerns regarding safety without dismissing them."
+        },
+        {
+          "id": "139",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system showed awareness of potential hazards in our workspace."
+        },
+        {
+          "id": "140",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system demonstrated knowledge of safety guidelines."
+        },
+        {
+          "id": "141",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system ensured that I was aware of potential hazards."
+        },
+        {
+          "id": "142",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system acknowledged my safety-related concerns promptly."
+        },
+        {
+          "id": "153",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It recognized signs of discomfort related to safety."
+        }
+      ],
+      "safety_focus": [
+        {
+          "id": "42",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The robot was clear in its communication about risks."
+        },
+        {
+          "id": "43",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system reinforced safety procedures through clear dialogue."
+        },
+        {
+          "id": "45",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The robot used intuitive gestures to indicate safety hazards."
+        },
+        {
+          "id": "48",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system provided timely safety reminders during assembly."
+        },
+        {
+          "id": "50",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The robot communicated potential hazards in advance."
+        },
+        {
+          "id": "53",
+          "dimension": "Adaptive Communication for Safety Awareness",
+          "text": "The system recognized when I needed clarification on safety."
+        },
+        {
+          "id": "37",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot offered reminders for safety during assembly."
+        },
+        {
+          "id": "38",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot provided assistance proactively to enhance safety."
+        },
+        {
+          "id": "40",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot identified potential risks before I noticed them."
+        },
+        {
+          "id": "49",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot modified its behavior to enhance my safety."
+        },
+        {
+          "id": "73",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot's actions made me feel respected and safe."
+        },
+        {
+          "id": "74",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot built trust through consistent and safe actions."
+        },
+        {
+          "id": "75",
+          "dimension": "Trust and Safety Awareness",
+          "text": "I felt safe working alongside the robot during assembly."
+        },
+        {
+          "id": "79",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot effectively communicated its safety protocols."
+        },
+        {
+          "id": "81",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot maintained a safe distance during assembly tasks."
+        },
+        {
+          "id": "82",
+          "dimension": "Trust and Safety Awareness",
+          "text": "I felt secure knowing the robot could recognize hazards."
+        },
+        {
+          "id": "83",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot's gestures reassured me of its safety measures."
+        },
+        {
+          "id": "85",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot adapted its behavior to ensure a secure environment."
+        },
+        {
+          "id": "86",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot responded appropriately to potential hazards."
+        },
+        {
+          "id": "87",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot demonstrated awareness of the factory's safety guidelines."
+        },
+        {
+          "id": "92",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot's presence made me feel more secure during tasks."
+        },
+        {
+          "id": "93",
+          "dimension": "Trust and Safety Awareness",
+          "text": "The robot showed commitment to maintaining a safe workspace."
+        },
+        {
+          "id": "95",
+          "dimension": "Trust and Safety Awareness",
+          "text": "I felt confident in the robot's ability to assist safely."
+        },
+        {
+          "id": "110",
+          "dimension": "Proactive Support and Assistance",
+          "text": "The robot highlighted potential hazards before I noticed them."
+        },
+        {
+          "id": "114",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It checked for safety compliance throughout our collaboration."
+        },
+        {
+          "id": "115",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system adjusted its actions based on my safety feedback."
+        },
+        {
+          "id": "116",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot communicated safety protocols clearly to me."
+        },
+        {
+          "id": "117",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system respected safety protocols during our collaboration."
+        },
+        {
+          "id": "118",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system understood my need for a secure working environment."
+        },
+        {
+          "id": "119",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot provided reminders about safety compliance."
+        },
+        {
+          "id": "120",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot ensured its actions prioritized my safety."
+        },
+        {
+          "id": "121",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It provided reminders about safety practices during tasks."
+        },
+        {
+          "id": "122",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system continuously assessed risks during assembly tasks."
+        },
+        {
+          "id": "123",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It recognized my cues related to safety awareness."
+        },
+        {
+          "id": "124",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot warned me about potential risks during assembly."
+        },
+        {
+          "id": "125",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system expressed concern when I worked too close to hazards."
+        },
+        {
+          "id": "126",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot showed a commitment to maintaining a safe working environment."
+        },
+        {
+          "id": "127",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot encouraged me to voice any safety concerns."
+        },
+        {
+          "id": "128",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot ensured that I felt secure while working together."
+        },
+        {
+          "id": "129",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system respected my boundaries to ensure safety."
+        },
+        {
+          "id": "130",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It demonstrated a commitment to maintaining a safe workspace."
+        },
+        {
+          "id": "131",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It recognized potential hazards in our assembly tasks."
+        },
+        {
+          "id": "133",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It understood the importance of safety and reliability."
+        },
+        {
+          "id": "134",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It acknowledged my concerns regarding safety without dismissing them."
+        },
+        {
+          "id": "135",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot emphasized the importance of safety in assembly."
+        },
+        {
+          "id": "136",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system verified that I understood safety measures before proceeding."
+        },
+        {
+          "id": "137",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system encouraged safe practices in every assembly step."
+        },
+        {
+          "id": "138",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot monitored the environment for safety risks."
+        },
+        {
+          "id": "139",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system showed awareness of potential hazards in our workspace."
+        },
+        {
+          "id": "140",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system demonstrated knowledge of safety guidelines."
+        },
+        {
+          "id": "141",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system ensured that I was aware of potential hazards."
+        },
+        {
+          "id": "142",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system acknowledged my safety-related concerns promptly."
+        },
+        {
+          "id": "143",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot communicated effectively about potential risks."
+        },
+        {
+          "id": "144",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot responded appropriately to my safety alarms."
+        },
+        {
+          "id": "145",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It facilitated discussions about safety procedures effectively."
+        },
+        {
+          "id": "146",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system ensured safety gear was properly used."
+        },
+        {
+          "id": "147",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It was proactive in identifying unsafe situations."
+        },
+        {
+          "id": "148",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It was quick to respond to any safety hazards I pointed out."
+        },
+        {
+          "id": "149",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It encouraged me to voice safety concerns without hesitation."
+        },
+        {
+          "id": "150",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system adapted to ensure safe collaboration in tight spaces."
+        },
+        {
+          "id": "151",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system maintained a safe distance during assembly."
+        },
+        {
+          "id": "152",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system considered my safety preferences in its operations."
+        },
+        {
+          "id": "153",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It recognized signs of discomfort related to safety."
+        },
+        {
+          "id": "154",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot adjusted its tasks to maintain a safe distance."
+        },
+        {
+          "id": "155",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot ensured that its actions did not compromise safety."
+        },
+        {
+          "id": "156",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It engaged in proactive safety checks during our assembly."
+        },
+        {
+          "id": "157",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It followed safety protocols to keep me secure."
+        },
+        {
+          "id": "158",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system ensured I felt secure in my workspace."
+        },
+        {
+          "id": "159",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system ensured that my safety was prioritized at all times."
+        },
+        {
+          "id": "160",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The system confirmed my safety-related requests promptly."
+        },
+        {
+          "id": "162",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot ensured that tools were used safely around me."
+        },
+        {
+          "id": "163",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot actively contributed to a secure working atmosphere."
+        },
+        {
+          "id": "164",
+          "dimension": "Understanding Safety Concerns",
+          "text": "The robot engaged in discussions about safety improvements."
+        },
+        {
+          "id": "165",
+          "dimension": "Understanding Safety Concerns",
+          "text": "It communicated safety measures clearly during our tasks."
+        }
+      ]
+    },
+    "language_patterns": {
+      "positive_framing": 314,
+      "negative_framing": 6,
+      "action_oriented": 40,
+      "perception_oriented": 280
+    }
+  },
+  "sample_items": [
+    {
+      "id": "1",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The robot recognized my need for reassurance."
+    },
+    {
+      "id": "2",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The system recognized when I needed to slow down."
+    },
+    {
+      "id": "3",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The robot recognized when I felt stressed during assembly."
+    },
+    {
+      "id": "4",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The robot picked up on my signs of fatigue."
+    },
+    {
+      "id": "5",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The robot acknowledged my frustration while working together."
+    },
+    {
+      "id": "6",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The system was aware of my emotional needs during tasks."
+    },
+    {
+      "id": "7",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The system identified my need for a break."
+    },
+    {
+      "id": "8",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The robot noted my expressions of relief after completing a task."
+    },
+    {
+      "id": "9",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The system showed awareness of my mood changes."
+    },
+    {
+      "id": "10",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The system understood my emotional responses during collaboration."
+    },
+    {
+      "id": "11",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The robot expressed concern when I seemed uneasy."
+    },
+    {
+      "id": "12",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The robot sensed when I was overwhelmed."
+    },
+    {
+      "id": "13",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The system demonstrated empathy towards my emotional challenges."
+    },
+    {
+      "id": "14",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The robot effectively recognized when I needed encouragement."
+    },
+    {
+      "id": "15",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The system could tell when I was excited about progress."
+    },
+    {
+      "id": "16",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The system adjusted its behavior when I appeared distressed."
+    },
+    {
+      "id": "17",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The robot recognized signs of my satisfaction with the work."
+    },
+    {
+      "id": "18",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The robot empathized with my feelings of doubt."
+    },
+    {
+      "id": "19",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The robot responded appropriately to my emotional state."
+    },
+    {
+      "id": "20",
+      "dimension": "Emotional Recognition in Collaborative Assembly",
+      "text": "The system could tell when I was disengaged from the task."
+    }
+  ]
+}
