@@ -213,24 +213,14 @@ presentation/
 
 ## 🚀 使用方法
 
-### 重新生成数据分析
-```bash
-python presentation/analyze_runs.py
-```
-
 ### 重新生成可视化图表
 ```bash
-python presentation/create_visualizations.py
-```
+# From project root
+python docs/presentation/create_visualizations.py
 
-### 重新生成Baseline对比分析
-```bash
-python presentation/baseline_comparison_analysis.py
-```
-
-### 重新提取Persona示例
-```bash
-python presentation/extract_persona_examples.py
+# Or from docs/presentation directory
+cd docs/presentation
+python create_visualizations.py
 ```
 
 ### 查看展示内容

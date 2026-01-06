@@ -203,13 +203,11 @@
     }
   ],
   "selection_criteria": {
-    "priority": "优先选择多因子结构（n_factors >= 2）的实验",
     "quality_score_components": {
       "internal_consistency": "40% (Cronbach's alpha)",
       "discriminant_ability": "40% (Cohen's d)",
       "item_count_reasonableness": "10% (15-20 items ideal)",
       "statistical_significance": "10% (p < 0.05)"
-    },
-    "factor_structure_preference": "多因子结构（>=2个因子）优先于单因子结构"
+    }
   }
 }

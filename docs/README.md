@@ -19,8 +19,11 @@ This directory contains comprehensive documentation for the EmpathyScale project
 - **[EVALUATION_PROCESS_UNIFICATION.md](./EVALUATION_PROCESS_UNIFICATION.md)**: Unified evaluation process configuration and persona management
 - **[EXPERIMENT_EXECUTION_GUIDE.md](./EXPERIMENT_EXECUTION_GUIDE.md)**: Experiment execution guide and methodology
 
-### Historical Analysis
-- **[analysis/](./analysis/)**: Historical analysis and troubleshooting documents (see [analysis/README.md](./analysis/README.md))
+### Additional Resources
+- **[analysis/](./analysis/)**: Historical analysis documents (see [analysis/README.md](./analysis/README.md))
+- **[final_report_content/](./final_report_content/)**: Final report content materials (see [final_report_content/README.md](./final_report_content/README.md))
+- **[presentation/](./presentation/)**: Presentation materials and visualizations (see [presentation/README.md](./presentation/README.md))
+- **[ProjectRequirements/](./ProjectRequirements/)**: Project requirements and guidelines
 
 ## Documentation Overview
 
