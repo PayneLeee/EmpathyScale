@@ -1,13 +1,18 @@
 """
 Prompt调试工具 - 用于测试和修改agent的prompts
+
+Usage:
+    python tools/debug_prompts.py
 """
 
 import os
 import sys
+from pathlib import Path
 
 # Add the utils directory to the Python path
-sys.path.append(os.path.join(os.path.dirname(__file__), 'utils'))
-from prompt_manager import PromptManager
+project_root = Path(__file__).parent.parent
+sys.path.append(str(project_root / 'utils'))
+from utils.prompt_manager import PromptManager
 
 
 def main():
@@ -163,3 +168,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+

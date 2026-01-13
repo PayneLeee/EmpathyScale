@@ -1,0 +1,367 @@
+\documentclass[12pt,a4paper]{article}
+
+% ---------------- Engine & Chinese font handling ----------------
+\usepackage{iftex}
+\ifXeTeX
+  % XeLaTeX path: high-quality CJK fonts (recommended on Overleaf)
+  \usepackage[UTF8]{ctex}
+  \setCJKmainfont{Noto Serif CJK SC}
+  \setCJKsansfont{Noto Sans CJK SC}
+  \setCJKmonofont{Noto Sans Mono CJK SC}
+\else
+  % pdfLaTeX fallback
+  \usepackage[UTF8, heading=true, scheme=plain]{ctex}
+\fi
+
+% ---------------- Latin fonts & encoding ----------------
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% ---------------- Page & typography ----------------
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{setspace}
+\setstretch{1.1}
+\setlength{\parskip}{0.8em}
+
+% ---------------- Tables & layout ----------------
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{longtable}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
+% ---------------- Section formatting ----------------
+\usepackage{titlesec}
+\titleformat{\section}{\bfseries\large}{\thesection.}{0.5em}{}
+
+% ---------------- Captions ----------------
+\usepackage{caption}
+
+% ---------------- Hyperref (load last) ----------------
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+
+\begin{document}
+
+\title{基于双场景的多智能体共情量表生成测试报告\\[4pt]
+\large Test Report on Empathy Scale Generation under Two Collaboration Scenarios}
+\author{}
+\date{\today}
+\maketitle
+
+\section{引言 / Introduction}
+
+本文测试了三个智能体组在不同人机协作环境下的表现：
+\begin{itemize}
+  \item \textbf{访谈智能体组（Interview Agent Group）}：通过模拟对话收集场景背景信息、交互方式和任务细节，用于刻画人–机协作特征与需求。
+  \item \textbf{文献检索智能体组（Literature Agent Group）}：检索并总结与共情表达、协作模式、具身性（embodiment）相关的研究文献与专家资料，提炼可操作的量表维度与条目启示。
+  \item \textbf{量表生成智能体组（Scale Generation Agent Group）}：综合访谈与文献结果，并参考专家量表（RoPE, PETS等），生成针对特定协作情境的共情量表草案。
+\end{itemize}
+
+测试包括两个场景：\\
+(1) 实体协作装配场景（Co-Assembly）；(2) 虚拟文字交流场景（Chat Collaboration）。
+
+\section{访谈与流程数据总结 / Interview and Process Summary}
+
+\textbf{访谈流程统计：}
+\begin{itemize}
+  \item \textbf{实体装配场景（运行ID: 2025-10-31\_131000）：} 共进行\textbf{5轮}自动访谈，涵盖5个核心问答字段（背景、平台、模态、协作、环境）。访谈聚焦评估具身双臂机器人在协作装配任务中的共情表现。
+  \item \textbf{虚拟文字协作（运行ID: 2025-10-31\_132506）：} 共进行\textbf{5轮}自动访谈，涵盖4个核心问答字段，聚焦非具身聊天智能体的文本–语音协作模式与共写/审改流程。
+\end{itemize}
+
+\textbf{文献检索与筛选统计：}
+\begin{table}[h!]
+\centering
+\caption{文献检索与筛选总况 / Literature Retrieval and Screening Summary}
+\begin{tabular}{lcccc}
+\toprule
+场景 & 检索总数 & 筛查数 & 保留数量 & 代表性论文（Examples）\\
+\midrule
+实体装配（131000） & 102 & 68 & 35 &
+\begin{tabular}[c]{@{}l@{}}\textit{The EmpathiSEr} (2025)\\ \textit{Gaze and Conversation}\\ \textit{in Human-Robot Interaction}\\ \textit{(Anzalone et al., 2021)}\end{tabular} \\
+虚拟协作（132506） & 60 & 54 & 25 &
+\begin{tabular}[c]{@{}l@{}}\textit{The EmpathiSEr} (2025)\\ \textit{Perceived Empathy of Technology Scale}\\ \textit{(PETS, Schmidmaier et al., 2024)}\\ \textit{The Muddy Waters of Modeling}\\ \textit{Empathy in Language} (2025)\end{tabular} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{访谈结果对比 / Comparison of Interview Results}
+
+\begin{table}[h!]
+\centering
+\caption{访谈结果主要差异（Interview Result Differences）}
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{场景} & \textbf{核心内容摘要 / Key Observations} \\
+\midrule
+实体装配场景（131000） &
+共享工位下与\textbf{具身双臂机器人}协作；强调\textit{手势提示、目光对齐、语音提示、工具递接}；关注\textbf{力反馈与触觉接口}、\textbf{制造单元环境下的近距协作与安全联锁}、\textbf{非语言交互模态的识别与响应}。\\
+\addlinespace
+虚拟文字协作（132506） &
+与\textbf{非具身聊天智能体}进行\textit{文本+语音}交流；关注\textbf{共写文档、轮流编辑与评论草案}、\textbf{远程环境下的同步与异步会话}、\textbf{文本中情绪信号的检测与表达}。\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{文献结果对比 / Literature Summary Comparison}
+
+\begin{table}[h!]
+\centering
+\caption{文献检索差异（Differences in Retrieved Literature Summaries）}
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{场景} & \textbf{相关文献倾向 / Literature Emphasis with Examples} \\
+\midrule
+实体装配场景（131000） & 偏向\textit{具身交互与非语言线索}（手势、目光、触觉/递接）、\textit{HRI中的目光与对话}（Anzalone et al., 2021）、\textit{非语言手势中的共情}（Roccella et al., 2024）、\textit{协作装配任务中的共情评估}（Van der Loos et al., 2024）。 \\
+\addlinespace
+虚拟文字协作（132506） & 偏向\textit{非具身聊天智能体的共情}、\textit{文本–语音交互中的情绪信号检测与表达}、\textit{语言建模中的共情挑战}（The Muddy Waters, 2025）、\textit{软件工程导向的共情量表}（The EmpathiSEr, 2025）。 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{量表结果对比及条目全文 / Empathy Scale Comparison with Full Items}
+
+\begin{table}[h!]
+\centering
+\caption{共情量表生成结果（Generated Empathy Scale Differences）}
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{场景} & \textbf{主要量表维度与格式 / Major Dimensions and Format} \\
+\midrule
+实体装配场景（131000） & 包含\textit{认知共情（Cognitive Empathy）}、\textit{情感共情（Affective Empathy）}、\textit{行为共情（Behavioral Empathy）}；5点Likert（1=完全不同意，5=完全同意），9条目。 \\
+\addlinespace
+虚拟文字协作（132506） & 包含\textit{认知共情（Cognitive Empathy）}、\textit{情感共情（Affective Empathy）}、\textit{行为共情（Behavioral Empathy）}；5点Likert（1=完全不同意，5=完全同意），9条目。 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{实体装配场景共情量表条目（Co-Assembly Empathy Scale Items)}
+
+\begin{longtable}{p{0.10\textwidth}p{0.40\textwidth}|p{0.50\textwidth}}
+\caption{Co-Assembly Empathy Scale Items with Design Rationale}\\
+\toprule
+\textbf{维度 / Dimension} & \textbf{条目内容 / Item Content} & \textbf{引用与设计理据 / Source \& Design Rationale} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{维度 / Dimension} & \textbf{条目内容 / Item Content} & \textbf{引用与设计理据 / Source \& Design Rationale} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+
+\textbf{A: 认知共情 / Cognitive Empathy} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+A1. 我感觉机器人理解我的需求。\\
+\textit{I feel the robot understands my needs.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Baron-Cohen \& Wheelwright (2004); Van der Loos et al. (2024)\\
+\textbf{调整依据：} 基于多维共情构建理论（Baron-Cohen \& Wheelwright, 2004）和HRI协作任务中的共情评估研究（Van der Loos et al., 2024）。条目采用\textit{"I feel"}的主观表达，强调用户对机器人理解能力的感知，适配实体协作中的需求识别场景。
+\end{tabular} \\
+
+& 
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+A2. 机器人能够准确感知我的意图。\\
+\textit{The robot perceives my intentions accurately.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Van der Loos et al. (2024); Newell et al. (2023)\\
+\textbf{调整依据：} 条目强调\textit{"准确感知"}，适配实体装配场景中机器人需要从多模态线索（手势、目光、语音）中推断人类意图的特点。措辞体现协作装配任务中的意图理解能力，符合Newell et al. (2023)的HRI共情测量观察。
+\end{tabular} \\
+
+& 
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+A3. 机器人的行为表明它意识到我的想法。\\
+\textit{The robot acts as if it is aware of my thoughts.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Baron-Cohen \& Wheelwright (2004); Van der Loos et al. (2024)\\
+\textbf{调整依据：} 条目强调\textit{"意识到想法"}，体现认知共情的深层次理解。措辞适配实体协作中机器人通过行为表达认知理解的特点，反映从想法到行为的认知共情链条。
+\end{tabular} \\[0.5em]
+
+\textbf{B: 情感共情 / Affective Empathy} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+B1. 机器人以反映我情绪的方式做出反应。\\
+\textit{The robot responds in a way that reflects my emotions.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Baron-Cohen \& Wheelwright (2004); Roccella et al. (2024)\\
+\textbf{调整依据：} 条目强调\textit{"反映情绪"}，适配非语言交互中的情绪响应。措辞由"提供基于情绪状态的适当语言响应"改为"以反映情绪的方式反应"，以适用于非语言交互（Roccella et al., 2024），体现制造环境中的多模态情绪表达。
+\end{tabular} \\
+
+& 
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+B2. 机器人似乎为我感到情绪。\\
+\textit{The robot seems to feel for me.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Baron-Cohen \& Wheelwright (2004); Van der Loos et al. (2024)\\
+\textbf{调整依据：} 条目强调情感共情的核心特征——\textit{"为他人感到"}。措辞直接表达情感共鸣，适配实体协作中人类感知机器人情感关怀的需求。体现实体交互中情感共情的直接表达方式。
+\end{tabular} \\
+
+& 
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+B3. 机器人与我的情绪状态产生共鸣。\\
+\textit{The robot resonates with my emotional state.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Baron-Cohen \& Wheelwright (2004); Van der Loos et al. (2024)\\
+\textbf{调整依据：} 条目强调\textit{"情绪共鸣"}，体现情感共情的动态交互特性。措辞适配实体协作中机器人通过语音、手势、目光等多模态响应与人类情绪同步的特点。
+\end{tabular} \\[0.5em]
+
+\textbf{C: 行为共情 / Behavioral Empathy} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+C1. 机器人适当响应我的非语言手势。\\
+\textit{The robot responds appropriately to my non-verbal gestures.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Anzalone et al. (2021); Roccella et al. (2024)\\
+\textbf{调整依据：} \textit{行为共情}维度捕捉实体协作中的非语言交互。条目强调\textit{"非语言手势响应"}，适配场景中的手势提示交互模态（Anzalone et al., 2021）。措辞体现实体协作中手势识别与响应的行为共情特征（Roccella et al., 2024）。
+\end{tabular} \\
+
+& 
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+C2. 机器人将目光对齐我的关注点。\\
+\textit{The robot aligns its gaze to my focus.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Anzalone et al. (2021); Van der Loos et al. (2024)\\
+\textbf{调整依据：} 条目强调\textit{"目光对齐"}，捕捉实体协作中的关键交互模态（Anzalone et al., 2021）。措辞体现行为共情中的视觉关注对齐，适配装配任务中需要共同关注点的特点，反映制造环境下的协作协调行为。
+\end{tabular} \\
+
+& 
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+C3. 机器人在工具递接中提供及时且合适的行为。\\
+\textit{The robot provides timely and suitable hand-off behavior with the tools.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Van der Loos et al. (2024); Newell et al. (2023)\\
+\textbf{调整依据：} 条目强调\textit{"及时且合适的工具递接"}，适配实体装配场景中的物理协作行为。措辞体现行为共情中的物理交互协调，反映制造环境中工具传递的安全性与及时性要求，符合协作装配任务的行为共情特征。
+\end{tabular} \\
+\end{longtable}
+
+\subsection{虚拟文字协作场景共情量表条目（Chat Collaboration Empathy Scale Items)}
+
+\begin{longtable}{p{0.10\textwidth}p{0.40\textwidth}|p{0.50\textwidth}}
+\caption{Chat Collaboration Empathy Scale Items with Design Rationale}\\
+\toprule
+\textbf{维度 / Dimension} & \textbf{条目内容 / Item Content} & \textbf{引用与设计理据 / Source \& Design Rationale} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{维度 / Dimension} & \textbf{条目内容 / Item Content} & \textbf{引用与设计理据 / Source \& Design Rationale} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+
+\textbf{A: 认知共情 / Cognitive Empathy} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+A1. 聊天智能体理解我的感受和情绪。\\
+\textit{The chat agent understands my feelings and emotions.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Charrier et al. (2019); The EmpathiSEr (2025); Schmidmaier et al. (2024)\\
+\textbf{调整依据：} 认知共情条目从Charrier et al. (2019)适配至文本–语音协作场景（The EmpathiSEr, 2025）。条目强调\textit{"理解感受和情绪"}，适配非具身环境中需要通过文本/语音检测和理解情绪信号的特点。措辞体现文本–语音交互中认知共情的语义理解特征。
+\end{tabular} \\
+
+& 
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+A2. 聊天智能体识别我们对话中的情绪线索。\\
+\textit{The chat agent recognizes emotional cues in our conversation.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Charrier et al. (2019); The EmpathiSEr (2025); The Muddy Waters (2025)\\
+\textbf{调整依据：} 条目强调\textit{"识别对话中的情绪线索"}，适配非具身环境中从文本中检测情绪信号的能力。措辞聚焦文本–语音交互中的情绪线索识别，反映语言建模中情绪检测的挑战（The Muddy Waters, 2025）。
+\end{tabular} \\
+
+& 
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+A3. 聊天智能体根据我的情绪状态调整其回复。\\
+\textit{The chat agent tailors its responses based on my emotional state.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Charrier et al. (2019); The EmpathiSEr (2025); Schmidmaier et al. (2024)\\
+\textbf{调整依据：} 条目强调\textit{"根据情绪状态调整回复"}，体现认知共情中的响应适配能力。措辞适配非具身环境中需要基于推断的情绪状态调整语言回复的特点，反映文本–语音交互中的语义理解与响应生成能力。
+\end{tabular} \\[0.5em]
+
+\textbf{B: 情感共情 / Affective Empathy} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+B1. 聊天智能体对我的情绪表现出情感响应。\\
+\textit{The chat agent shows affective responses to my emotions.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Charrier et al. (2019); The Muddy Waters (2025); Schmidmaier et al. (2024)\\
+\textbf{调整依据：} 情感共情条目来自Charrier et al. (2019)，但修改为聚焦\textit{"语言而非物理的情感响应"}（The Muddy Waters, 2025）。条目强调文本–语音交互中的情感表达，反映非具身环境中通过语言表达共情情感的特点。
+\end{tabular} \\
+
+& 
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+B2. 聊天智能体表达了对我的感受的关切。\\
+\textit{The chat agent expresses concern for my feelings.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Charrier et al. (2019); The Muddy Waters (2025); Schmidmaier et al. (2024)\\
+\textbf{调整依据：} 条目强调\textit{"表达关切"}，适配非具身环境中需要通过语言表达情感关怀的特点。措辞体现文本–语音交互中的情感共情表达，反映从物理展示到语言表达的适配（The Muddy Waters, 2025）。
+\end{tabular} \\
+
+& 
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+B3. 聊天智能体表现出与我的情感共鸣。\\
+\textit{The chat agent demonstrates emotional resonance with me.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Charrier et al. (2019); The EmpathiSEr (2025); Schmidmaier et al. (2024)\\
+\textbf{调整依据：} 条目强调\textit{"情感共鸣"}，体现情感共情的核心特征。措辞适配非具身环境中需要通过语言响应这些情绪信号来表达共情情感的特点（The EmpathiSEr, 2025）。反映文本–语音交互中的情绪共鸣表达方式。
+\end{tabular} \\[0.5em]
+
+\textbf{C: 行为共情 / Behavioral Empathy} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+C1. 聊天智能体以有帮助的方式响应我的情绪。\\
+\textit{The chat agent responds to my emotions in a helpful manner.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Putta et al. (2022); The EmpathiSEr (2025); Schmidmaier et al. (2024)\\
+\textbf{调整依据：} \textit{行为共情}维度强调响应性沟通策略。条目强调\textit{"有帮助的方式响应"}，适配非具身环境中需要通过语言响应体现行为共情的特点。措辞体现文本–语音交互中的帮助性响应能力，符合Putta et al. (2022)的协作上下文考量。
+\end{tabular} \\
+
+& 
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+C2. 聊天智能体根据我的情绪反馈调整其行为。\\
+\textit{The chat agent adapts its behavior according to my emotional feedback.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Putta et al. (2022); The EmpathiSEr (2025); Schmidmaier et al. (2024)\\
+\textbf{调整依据：} 条目强调\textit{"根据情绪反馈调整行为"}，适配非具身环境中需要适应沟通策略的特点。措辞体现行为共情中的响应适配能力，反映文本–语音交互中根据用户情绪状态调整沟通策略的能力（Putta et al., 2022）。
+\end{tabular} \\
+
+& 
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+C3. 聊天智能体在考虑我情绪状态的情况下与我交流时表现出体贴。\\
+\textit{The chat agent shows consideration when communicating with me in light of my emotional state.}
+\end{tabular} &
+\begin{tabular}[t]{@{}p{\linewidth}@{}}
+\textbf{来源：} Putta et al. (2022); The EmpathiSEr (2025); Schmidmaier et al. (2024)\\
+\textbf{调整依据：} 条目强调\textit{"考虑情绪状态的体贴交流"}，适配非具身环境中需要采用敏感沟通策略的特点。措辞体现行为共情中的沟通敏感性，反映文本–语音交互中根据用户情绪状态调整交流方式的能力，符合协作写作任务中的行为共情需求。
+\end{tabular} \\
+\end{longtable}
+
+\section{讨论与结论 / Discussion and Conclusion}
+
+结果显示，三类智能体在两个场景下均体现出\textbf{情境自适应性}。有趣的是，两个场景在最新实验中采用了\textbf{相同的维度结构}（认知共情、情感共情、行为共情），但条目措辞与设计理据存在显著差异，体现了\textit{维度结构的一致性}与\textit{措辞适配的情境特异性}。
+
+\textbf{维度结构的统一性：}两类量表均采用认知、情感、行为三维结构，符合多维共情构建理论（Baron-Cohen \& Wheelwright, 2004）和HRI共情评估研究（Van der Loos et al., 2024; Schmidmaier et al., 2024）。这体现了智能体对共情理论基础的准确把握，以及跨场景维度结构的理论一致性。
+
+\textbf{措辞适配的情境差异：}
+\begin{itemize}
+  \item \textbf{实体装配场景：} 条目强调\textit{非语言交互}（手势、目光、工具递接），行为共情聚焦\textit{物理协作行为}（Anzalone et al., 2021; Roccella et al., 2024）。条目由"提供语言响应"改为"反映情绪的方式"，适配非语言交互（Roccella et al., 2024）。
+  \item \textbf{虚拟文字协作：} 条目强调\textit{文本–语音交互中的情绪信号检测与表达}，行为共情聚焦\textit{沟通策略的适应}（The EmpathiSEr, 2025; The Muddy Waters, 2025）。条目从Charrier et al. (2019)适配，聚焦语言而非物理的情感响应。
+\end{itemize}
+
+\textbf{量表格式选择：}两类量表均采用\textbf{5点Likert量表}，符合HRI环境下的经验建议（Schmidmaier et al., 2024; Charrier et al., 2019），在测量精度与响应负担之间取得平衡。
+
+\noindent\textbf{结论：} 该测试验证了代理链路（访谈–文献–量表）能够自动区分具身与非具身协作环境，生成具有理论一致性（统一维度结构）与情境特异性（差异化措辞）的共情测量工具。设计理据部分清晰展示了维度理论基础、条目措辞适配原则与格式选择依据，为多模态共情测量的自动化生成提供了可行且可追溯的路径。
+
+\end{document}

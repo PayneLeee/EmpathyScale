@@ -1,7 +1,23 @@
+# Core LLM and agent framework
 langchain>=0.3.0
 langchain-openai>=0.3.0
 openai>=2.0.0
-python-dotenv>=1.0.0
-pydantic>=2.7.0
+pydantic>=2.7.0  # Required by langchain
+
+# Configuration and utilities
+python-dotenv>=1.0.0  # Used in tests and configuration
+
+# Research API clients
 requests>=2.31.0
 arxiv>=1.4.0
+
+# Semantic analysis (used in analysis tools and semantic deduplication)
+sentence-transformers>=2.0.0
+
+# Statistical analysis packages for EFA/CFA
+numpy>=1.26.0,<2.0.0  # langchain requires numpy<2.0.0
+scipy>=1.10.0
+pandas>=2.0.0
+scikit-learn>=1.0.0,<1.8.0  # factor-analyzer requires force_all_finite parameter (removed in scikit-learn 1.8.0)
+factor-analyzer>=0.4.0
+semopy>=2.3.0

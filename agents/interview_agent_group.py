@@ -28,7 +28,7 @@ class InterviewAgentGroup:
     This group contains multiple sub-agents for comprehensive information gathering.
     """
     
-    def __init__(self, api_key: str, model_name: str = "gpt-4", prompts_dir: str = None):
+    def __init__(self, api_key: str, model_name: str = "gpt-4o-mini", prompts_dir: str = None):
         """
         Initialize the interview agent group.
         

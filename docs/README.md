@@ -15,8 +15,15 @@ This directory contains comprehensive documentation for the EmpathyScale project
 ### Development Guides
 - **[HOW_TO_ADD_AGENTS.md](./HOW_TO_ADD_AGENTS.md)**: Step-by-step guide for extending the system
 
-### Historical Documentation
-This documentation has been consolidated into the core guides above for better organization. See WORKFLOW.md for literature search agent capabilities.
+### Project-Specific Documentation
+- **[EVALUATION_PROCESS_UNIFICATION.md](./EVALUATION_PROCESS_UNIFICATION.md)**: Unified evaluation process configuration and persona management
+- **[EXPERIMENT_EXECUTION_GUIDE.md](./EXPERIMENT_EXECUTION_GUIDE.md)**: Experiment execution guide and methodology
+
+### Additional Resources
+- **[analysis/](./analysis/)**: Historical analysis documents (see [analysis/README.md](./analysis/README.md))
+- **[final_report_content/](./final_report_content/)**: Final report content materials (see [final_report_content/README.md](./final_report_content/README.md))
+- **[presentation/](./presentation/)**: Presentation materials and visualizations (see [presentation/README.md](./presentation/README.md))
+- **[ProjectRequirements/](./ProjectRequirements/)**: Project requirements and guidelines
 
 ## Documentation Overview
 
@@ -38,8 +45,8 @@ This documentation has been consolidated into the core guides above for better o
 **Purpose**: Understand how agents work together
 
 **Contents**:
-- Agent group responsibilities
-- Execution flow (interview → literature search)
+- Agent group responsibilities (Interview, Literature Search, Scale Generation, Evaluation, Item Selection)
+- Execution flow (interview → literature search → scale generation → evaluation → item selection)
 - Data flow between agents
 - Error handling strategies
 - Optimization approaches

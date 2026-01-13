@@ -1,0 +1,163 @@
+{
+  "collab_robot_assembly": {
+    "run_id": "2025-12-22_215026",
+    "scenario_settings": {
+      "name": "collab_robot_assembly",
+      "assessment_context": "factory assembly, human-robot teammate",
+      "robot_platform": "collaborative arm",
+      "interaction_modalities": "gesture + voice",
+      "collaboration_pattern": "turn-taking assembly",
+      "environmental_setting": "factory floor",
+      "assessment_goals": [
+        "safety-awareness",
+        "adaptive pacing"
+      ],
+      "expected_empathy_forms": [
+        "mirroring hesitation",
+        "proactive assistance"
+      ],
+      "measurement_requirements": [
+        "short Likert"
+      ]
+    },
+    "representative_personas": [
+      {
+        "age": 41,
+        "gender": "male",
+        "education": "university degree",
+        "profession": "operator",
+        "ati_score": 3.4,
+        "tech_experience": "low",
+        "empathy_condition": "empathic",
+        "concrete_interaction_experience": "The collaborative arm noticed when I seemed stressed and adjusted its pace to match mine. It expressed understanding and provided encouraging feedback, making me feel genuinely supported."
+      },
+      {
+        "age": 44,
+        "gender": "female",
+        "education": "university degree",
+        "profession": "operator",
+        "ati_score": 3.7,
+        "tech_experience": "low",
+        "empathy_condition": "empathic",
+        "concrete_interaction_experience": "When I hesitated, the collaborative arm paused and asked if I needed help. It acknowledged my concerns and adapted its behavior accordingly, showing it understood my needs."
+      },
+      {
+        "age": 29,
+        "gender": "female",
+        "education": "doctoral",
+        "profession": "worker",
+        "ati_score": 4.5,
+        "tech_experience": "moderate",
+        "empathy_condition": "empathic",
+        "concrete_interaction_experience": "The collaborative arm recognized my frustration and responded with supportive actions. It adjusted its approach based on my emotional cues, making me feel listened to and valued."
+      }
+    ]
+  },
+  "home_service_robot": {
+    "run_id": "2025-12-22_210718",
+    "scenario_settings": {
+      "name": "home_service_robot",
+      "assessment_context": "home assistant supporting daily tasks",
+      "robot_platform": "mobile service robot",
+      "interaction_modalities": "speech + navigation cues",
+      "collaboration_pattern": "assistive",
+      "environmental_setting": "home",
+      "assessment_goals": [
+        "comfort",
+        "perceived care"
+      ],
+      "expected_empathy_forms": [
+        "detect frustration",
+        "offer reassurance"
+      ],
+      "measurement_requirements": [
+        "non-technical language"
+      ]
+    },
+    "representative_personas": [
+      {
+        "age": 27,
+        "gender": "female",
+        "education": "high school",
+        "profession": "worker",
+        "ati_score": 4.8,
+        "tech_experience": "high",
+        "empathy_condition": "empathic",
+        "concrete_interaction_experience": "The mobile service robot noticed when I seemed stressed and adjusted its pace to match mine. It expressed understanding and provided encouraging feedback, making me feel genuinely supported."
+      },
+      {
+        "age": 38,
+        "gender": "male",
+        "education": "university degree",
+        "profession": "manager",
+        "ati_score": 3.4,
+        "tech_experience": "high",
+        "empathy_condition": "empathic",
+        "concrete_interaction_experience": "When I hesitated, the mobile service robot paused and asked if I needed help. It acknowledged my concerns and adapted its behavior accordingly, showing it understood my needs."
+      },
+      {
+        "age": 43,
+        "gender": "male",
+        "education": "vocational training",
+        "profession": "operator",
+        "ati_score": 4.1,
+        "tech_experience": "moderate",
+        "empathy_condition": "empathic",
+        "concrete_interaction_experience": "The mobile service robot recognized my frustration and responded with supportive actions. It adjusted its approach based on my emotional cues, making me feel listened to and valued."
+      }
+    ]
+  },
+  "counseling_chatbot": {
+    "run_id": "2025-12-22_212205",
+    "scenario_settings": {
+      "name": "counseling_chatbot",
+      "assessment_context": "text-based counseling bot",
+      "robot_platform": "chatbot",
+      "interaction_modalities": "text chat",
+      "collaboration_pattern": "supportive dialogue",
+      "environmental_setting": "remote",
+      "assessment_goals": [
+        "emotional attunement"
+      ],
+      "expected_empathy_forms": [
+        "reflective listening",
+        "validation"
+      ],
+      "measurement_requirements": [
+        "short statements"
+      ]
+    },
+    "representative_personas": [
+      {
+        "age": 27,
+        "gender": "non-binary",
+        "education": "vocational training",
+        "profession": "operator",
+        "ati_score": 3.3,
+        "tech_experience": "moderate",
+        "empathy_condition": "empathic",
+        "concrete_interaction_experience": "The chatbot noticed when I seemed stressed and adjusted its pace to match mine. It expressed understanding and provided encouraging feedback, making me feel genuinely supported."
+      },
+      {
+        "age": 32,
+        "gender": "female",
+        "education": "high school",
+        "profession": "engineer",
+        "ati_score": 4.9,
+        "tech_experience": "moderate",
+        "empathy_condition": "empathic",
+        "concrete_interaction_experience": "When I hesitated, the chatbot paused and asked if I needed help. It acknowledged my concerns and adapted its behavior accordingly, showing it understood my needs."
+      },
+      {
+        "age": 25,
+        "gender": "female",
+        "education": "university degree",
+        "profession": "technician",
+        "ati_score": 3.1,
+        "tech_experience": "moderate",
+        "empathy_condition": "empathic",
+        "concrete_interaction_experience": "The chatbot recognized my frustration and responded with supportive actions. It adjusted its approach based on my emotional cues, making me feel listened to and valued."
+      }
+    ]
+  }
+}

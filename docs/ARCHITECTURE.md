@@ -47,9 +47,22 @@ MultiAgentWorkflow (main.py)
 │       ├── PlatformSpecialistAgent
 │       └── CollaborationExpertAgent
 │
-└── LiteratureSearchAgentGroup
-    ├── LLM Integration (direct ChatOpenAI calls)
-    └── Methods (generate_queries, search_and_screen, extract_findings, etc.)
+├── LiteratureSearchAgentGroup
+│   ├── LLM Integration (direct ChatOpenAI calls)
+│   └── Methods (generate_queries, search_and_screen, extract_findings, etc.)
+│
+├── EmpathyScaleGenerationAgentGroup
+│   ├── Multiple item generators (parallel generation)
+│   ├── Content assessment (LLM-based item quality check)
+│   └── Semantic deduplication (removes redundant items)
+│
+├── EvaluationAgentGroup
+│   ├── PersonaGenerationAgent (generates LLM personas)
+│   └── Evaluation methods (Phase 1 selection, Phase 2 validation)
+│
+└── ItemSelectionAgent
+    ├── Statistical selection (EFA/CFA)
+    └── Random selection (for ablation studies)
 ```
 
 ### Base Agent Group Pattern
@@ -98,6 +111,9 @@ class AgentGroup:
 ```
 agents/interview_agent_group.py ↔ prompts/interview_agent_group.json
 agents/literature_search_agent_group.py ↔ prompts/literature_search_agent_group.json
+agents/empathy_scale_generation_agent_group.py ↔ prompts/empathy_scale_generation_agent_group.json
+agents/evaluation_agent_group.py ↔ prompts/evaluation_agent_group.json
+agents/persona_generation_agent.py ↔ prompts/persona_generation_agent.json
 ```
 
 ## Prompt Management

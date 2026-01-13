@@ -2,15 +2,20 @@
 """
 OpenAI API Key Checker
 Checks if the provided OpenAI API key in config.json is valid and working.
+
+Usage:
+    python tools/check_openai_key.py
 """
 
 import json
 import os
 import sys
 from typing import Dict, Optional
+from pathlib import Path
 
-# Add parent directory to path to import from project
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Add project root to path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
 
 try:
     import openai
@@ -20,8 +25,13 @@ except ImportError:
     sys.exit(1)
 
 
-def load_config(config_path: str = "config.json") -> Dict[str, str]:
+def load_config(config_path: str = None) -> Dict[str, str]:
     """Load configuration from JSON file."""
+    if config_path is None:
+        config_path = project_root / "config.json"
+    else:
+        config_path = Path(config_path)
+    
     try:
         with open(config_path, 'r', encoding='utf-8') as file:
             config = json.load(file)
@@ -145,3 +155,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+

@@ -7,7 +7,8 @@ This document describes how agent groups work together, their individual respons
 The EmpathyScale system uses a sequential multi-agent workflow where agent groups execute in order, with each group's output feeding into the next:
 
 ```
-User Input → Interview Agent → Literature Search Agent → Results Storage
+User Input → Interview Agent → Literature Search Agent → Scale Generation Agent → 
+Evaluation Agent (Phase 1) → Item Selection → Evaluation Agent (Phase 2) → Final Scale
 ```
 
 ## Agent Group Responsibilities
@@ -254,13 +255,68 @@ literature_results = literature_agent.search_and_download(
 - Category-based organization enables targeted retrieval
 - Caches results to avoid redundant API calls
 
+### Scale Generation Agent Group
+
+**Primary Goal**: Generate empathy scale items based on interview and literature findings
+
+**Key Responsibilities**:
+1. **Define construct dimensions** from interview and literature data
+2. **Generate scale items** using multiple parallel generators
+3. **Content assessment** (if enabled): LLM evaluates item quality
+4. **Semantic deduplication**: Remove semantically similar items
+5. **Organize items** by dimensions and constructs
+
+**Data Output**:
+- Scale draft with all generated items
+- Filtered scale draft (after deduplication and assessment)
+- Semantic deduplication statistics
+
+### Evaluation Agent Group
+
+**Primary Goal**: Evaluate scale items using LLM personas
+
+**Key Responsibilities**:
+1. **Phase 1 (Selection)**:
+   - Generate personas (empathic and non-empathic groups)
+   - Evaluate all generated items
+   - Compute statistics for item selection
+2. **Phase 2 (Validation)**:
+   - Generate independent validation personas
+   - Evaluate selected items
+   - Compute final metrics (Cronbach's α, Cohen's d)
+
+**Sub-Components**:
+- **PersonaGenerationAgent**: Generates LLM personas with different empathy conditions
+- Evaluation methods for scoring items
+
+**Data Output**:
+- Phase 1 evaluation results (for item selection)
+- Phase 2 validation results (final metrics)
+- Persona files (saved for reuse)
+
+### Item Selection Agent
+
+**Primary Goal**: Select final items using statistical methods
+
+**Key Methods**:
+1. **Statistical Selection** (EFA/CFA):
+   - Exploratory Factor Analysis (EFA)
+   - Confirmatory Factor Analysis (CFA)
+   - Item-total correlations
+   - Factor loadings
+2. **Random Selection** (for ablation studies):
+   - Random item selection for comparison
+
+**Data Output**:
+- Selected items
+- Selection statistics
+- EFA/CFA results (if applicable)
+
 ## Future Extensions
 
-Potential additional agent groups:
-- **Analysis Agent**: Synthesize interview and literature findings
-- **Scale Generation Agent**: Generate scale items based on findings
-- **Validation Agent**: Propose validation methods
-- **Report Agent**: Generate comprehensive reports
+Potential additional capabilities:
+- **Report Generation Agent**: Generate comprehensive analysis reports
+- **Multi-scenario Comparison Agent**: Compare scales across scenarios
 
 Each would follow the same pattern: receive input, process, produce output, save results.
 

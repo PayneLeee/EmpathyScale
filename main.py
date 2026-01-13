@@ -5,8 +5,10 @@ Main application entry point.
 
 import os
 import sys
+import json
 from typing import Dict
 from datetime import datetime
+from pathlib import Path
 
 # Add the agents and utils directories to the Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'agents'))
@@ -14,6 +16,8 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'utils'))
 
 from interview_agent_group import InterviewAgentGroup, load_config
 from literature_search_agent_group import LiteratureSearchAgentGroup
+from empathy_scale_generation_agent_group import EmpathyScaleGenerationAgentGroup
+from evaluation_agent_group import EvaluationAgentGroup
 from data_manager import DataManager
 
 
@@ -45,6 +49,11 @@ class MultiAgentWorkflow:
         
         # Initialize literature search agent group
         self.agents['literature'] = LiteratureSearchAgentGroup(
+            api_key=self.config["openai_api_key"]
+        )
+        
+        # Initialize empathy scale generation agent group
+        self.agents['scale_generation'] = EmpathyScaleGenerationAgentGroup(
             api_key=self.config["openai_api_key"]
         )
     
@@ -100,6 +109,9 @@ class MultiAgentWorkflow:
         
         # Run literature search after interview
         self._run_literature_search(interview_agent_group)
+        
+        # Run empathy scale generation after literature search
+        self._run_scale_generation()
     
     def _display_interview_summary(self, interview_agent_group: InterviewAgentGroup):
         """Display the interview summary."""
@@ -227,6 +239,97 @@ class MultiAgentWorkflow:
             self.data_manager.save_metadata(self.run_id, metadata)
         
         print(f"\n[Literature] Enhanced search complete - {literature_results.get('pdfs_downloaded', 0)} PDFs downloaded")
+
+    def _run_scale_generation(self):
+        """Run empathy scale generation using prior results and expert PDFs."""
+        if not self.run_id:
+            return
+        scale_agent = self.agents.get('scale_generation')
+        if not scale_agent:
+            print("\n[Scale] Agent not initialized, skipping scale generation")
+            return
+        print("\n" + "=" * 60)
+        print("GENERATING EMPATHY SCALE DRAFT")
+        print("=" * 60)
+        results = scale_agent.generate_scale(self.run_id)
+        if results.get("scale_draft_path"):
+            print(f"[Scale] Draft saved to: {results['scale_draft_path']}")
+            # Run evaluation automatically after generation
+            self._run_evaluation()
+        else:
+            print(f"[Scale] {results.get('error', 'Unknown error')}")
+
+    def _run_evaluation(self, n_participants: int = 25):
+        """Run LLM-simulated participant evaluation for generated scale and baselines."""
+        if not self.run_id:
+            return
+
+        # Load scenario context
+        interview_path = self.data_manager.get_run_path(self.run_id) / "interview_agent_group" / "summary.json"
+        if not interview_path.exists():
+            print("[Eval] interview summary not found; skipping evaluation")
+            return
+        interview_summary = json.loads(interview_path.read_text(encoding="utf-8"))
+
+        # Load generated items
+        scale_dir = self.data_manager.get_run_path(self.run_id) / "empathy_scale_generation_agent_group"
+        draft_path = scale_dir / "scale_draft.md"
+        if not draft_path.exists():
+            print("[Eval] scale_draft.md not found; skipping evaluation")
+            return
+        md_text = draft_path.read_text(encoding="utf-8", errors="replace")
+        items = EmpathyScaleGenerationAgentGroup.parse_scale_markdown(md_text)
+        if not items:
+            print("[Eval] No items parsed from draft; skipping evaluation")
+            return
+
+        eval_agent = EvaluationAgentGroup(api_key=self.config["openai_api_key"])
+        print("\n" + "=" * 60)
+        print("LLM-SIMULATED ITEM TESTING (PETS-style with Personas)")
+        print("=" * 60)
+        
+        # Extract scenario name from interview summary if available
+        scenario_id = interview_summary.get("name") if isinstance(interview_summary, dict) else None
+        if scenario_id:
+            print(f"[Eval] Using scenario_id: {scenario_id}")
+        else:
+            print(f"[Eval] No scenario_id found, generating temporary personas")
+        
+        print(f"[Eval] Each persona rates all {len(items)} items on system empathy (0-100 scale)")
+        result = eval_agent.evaluate_items(self.run_id, items, interview_summary, n_participants=n_participants, scenario_id=scenario_id)
+        print(f"[Eval] Summary saved to: {result.get('summary_path')}")
+
+        # Baseline evaluations (PETS / ROPE) if available
+        txt_dir = Path("agents/expert_pdfs/txt")
+        baselines = {
+            "PETS": txt_dir / "Schmidmaier et al. - 2024 - Perceived Empathy of Technology Scale (PETS) Measuring Empathy of Systems Toward the User.txt",
+            "ROPE": txt_dir / "Charrier et al. - 2019 - The RoPE Scale a Measure of How Empathic a Robot is Perceived.txt",
+        }
+        for label, path in baselines.items():
+            if path.exists():
+                b_res = eval_agent.evaluate_baseline_txt(self.run_id, path, interview_summary, n_participants, label=label)
+                print(f"[Eval] Baseline {label} summary: {b_res.get('summary_path')}")
+
+        self._write_run_readme(items, result.get("summary_path"))
+
+    def _write_run_readme(self, items: list, eval_summary_path: str):
+        """Create a lightweight README for the run."""
+        run_dir = self.data_manager.get_run_path(self.run_id)
+        lines = [
+            f"# Run {self.run_id}",
+            "",
+            "## Artifacts",
+            f"- Scale draft: data/runs/{self.run_id}/empathy_scale_generation_agent_group/scale_draft.md",
+            f"- Evaluation summary: {eval_summary_path}",
+            "- Interview summary: data/runs/{self.run_id}/interview_agent_group/summary.json",
+            "- Literature summary: data/runs/{self.run_id}/literature_search_agent_group/summary.json",
+            "",
+            "## Items (preview)",
+        ]
+        for it in items[:10]:
+            lines.append(f"- [{it.get('dimension','Dim')}] {it.get('item_text')}")
+        readme_path = run_dir / "README.md"
+        readme_path.write_text("\n".join(lines), encoding="utf-8")
 
 
 def main():

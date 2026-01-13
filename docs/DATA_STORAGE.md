@@ -15,21 +15,45 @@ The system uses timestamp-isolated storage where each workflow execution gets a 
 ```
 data/
 ├── latest_run.txt                    # Contains the latest run_id
-└── runs/                             # All run directories
-    └── YYYY-MM-DD_HHMMSS/           # Timestamped run directory
-        ├── metadata.json             # Run metadata (start/end time, status, agent_groups)
-        ├── interview_agent_group/    # Interview phase data
-        │   ├── summary.json          # Structured interview summary
-        │   └── conversation.json     # Full conversation history
-        └── literature_search_agent_group/  # Literature search phase data
-            ├── summary.json          # Minimal essential results (queries, downloaded papers, stats)
-            └── pdfs/                 # Downloaded PDFs (created by download_pdfs method)
-                ├── definitions/      # Papers on empathy definitions
-                │   └── paper_XX_YYYY.pdf
-                ├── behaviors/        # Papers on empathic behaviors
-                │   └── paper_XX_YYYY.pdf
-                └── measurement/      # Papers on measurement methods
-                    └── paper_XX_YYYY.pdf
+├── runs/                             # All run directories
+│   └── YYYY-MM-DD_HHMMSS/           # Timestamped run directory
+│       ├── metadata.json             # Run metadata (start/end time, status, agent_groups)
+│       ├── interview_agent_group/    # Interview phase data
+│       │   ├── summary.json          # Structured interview summary
+│       │   └── conversation.json     # Full conversation history
+│       ├── literature_search_agent_group/  # Literature search phase data
+│       │   ├── summary.json          # Minimal essential results (queries, downloaded papers, stats)
+│       │   └── pdfs/                 # Downloaded PDFs
+│       │       ├── definitions/      # Papers on empathy definitions
+│       │       ├── behaviors/        # Papers on empathic behaviors
+│       │       └── measurement/      # Papers on measurement methods
+│       ├── empathy_scale_generation_agent_group/  # Scale generation phase data
+│       │   ├── scale_draft.md        # Initial scale draft with all items
+│       │   ├── filtered_scale_draft.md  # Filtered scale (after deduplication/assessment)
+│       │   ├── semantic_deduplication_stats.json  # Deduplication statistics
+│       │   └── summary.json          # Generation summary
+│       ├── evaluation_agent_group/   # Evaluation phase data
+│       │   ├── selection/            # Phase 1 evaluation (for item selection)
+│       │   │   ├── empathic/         # Empathic persona group results
+│       │   │   ├── non_empathic/     # Non-empathic persona group results
+│       │   │   └── combined/         # Combined results (if applicable)
+│       │   └── validation/           # Phase 2 evaluation (final validation)
+│       │       ├── evaluation_summary.json
+│       │       └── participant_level_evaluations.json
+│       └── statistical_selection/    # Item selection data
+│           ├── selection_config.json
+│           ├── selection_statistics.json
+│           └── efa_cfa_results.json  # EFA/CFA analysis results (if applicable)
+├── ablation_studies/                 # Ablation study results
+│   └── collab_robot_assembly/
+│       └── ablation_summary.json
+├── baseline_comparison/              # Baseline comparison results
+│   └── [scenario_name]/
+│       └── comparison_report.json
+└── personas/                         # Generated personas (reusable across runs)
+    └── [scenario_name]/
+        ├── selection.json            # Phase 1 personas
+        └── validation.json           # Phase 2 personas
 ```
 
 ## Run Directory Naming
