@@ -7,7 +7,7 @@ import os
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Dict, Any, List, Optional
 
 
 class DataManager:
@@ -97,6 +97,50 @@ class DataManager:
             traceback.print_exc()
             raise
     
+    def save_scenario_brief(self, run_id: str, scenario_brief: Dict[str, Any]) -> str:
+        """Save the structured scenario brief generated from the interview."""
+        run_dir = self.runs_dir / run_id
+        run_dir.mkdir(parents=True, exist_ok=True)
+        path = run_dir / "scenario_brief.json"
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(scenario_brief, f, indent=2, ensure_ascii=False)
+        return str(path)
+
+    def save_relevance_scored_papers(self, run_id: str, papers: List[Dict[str, Any]]) -> str:
+        """Save papers annotated with scenario-specific relevance scores."""
+        lit_dir = self.runs_dir / run_id / "literature_search_agent_group"
+        lit_dir.mkdir(parents=True, exist_ok=True)
+        path = lit_dir / "relevance_scored_papers.json"
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(papers, f, indent=2, ensure_ascii=False)
+        return str(path)
+
+    def save_research_gate_report(self, run_id: str, report: Dict[str, Any]) -> str:
+        """Save research quality gate report (pass/fail, coverage, expansion trace)."""
+        lit_dir = self.runs_dir / run_id / "literature_search_agent_group"
+        lit_dir.mkdir(parents=True, exist_ok=True)
+        path = lit_dir / "research_gate_report.json"
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(report, f, indent=2, ensure_ascii=False)
+        return str(path)
+
+    def load_scenario_brief(self, run_id: str) -> Optional[Dict[str, Any]]:
+        """Load the scenario brief for a run."""
+        path = self.runs_dir / run_id / "scenario_brief.json"
+        if path.exists():
+            with open(path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        return None
+
+    def load_high_relevance_papers(self, run_id: str) -> List[Dict[str, Any]]:
+        """Load the relevance-scored papers for a run."""
+        path = self.runs_dir / run_id / "literature_search_agent_group" / "relevance_scored_papers.json"
+        if path.exists():
+            with open(path, 'r', encoding='utf-8') as f:
+                all_papers = json.load(f)
+            return [p for p in all_papers if p.get("scenario_relevance_score", 0) >= 4]
+        return []
+
     def save_metadata(self, run_id: str, metadata: Dict[str, Any]) -> None:
         """Save run metadata."""
         run_dir = self.runs_dir / run_id

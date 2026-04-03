@@ -61,6 +61,104 @@ class EmpathyScaleGenerationAgentGroup:
                 return json.load(f)
         return {}
 
+    def _load_high_relevance_papers(self, run_id: str) -> List[Dict[str, Any]]:
+        """Load scenario-scored papers and return those with score >= 4."""
+        path = PROJECT_ROOT / f"data/runs/{run_id}/literature_search_agent_group/relevance_scored_papers.json"
+        if path.exists():
+            with open(path, 'r', encoding='utf-8') as f:
+                all_papers = json.load(f)
+            return [p for p in all_papers if p.get("scenario_relevance_score", 0) >= 4]
+        return []
+
+    def _check_evidence_coverage(
+        self, dimensions: List[Dict[str, str]], high_rel_papers: List[Dict[str, Any]]
+    ) -> Dict[str, Any]:
+        """
+        Check whether each dimension has at least one supporting high-relevance paper.
+
+        Matching is keyword-based: a paper is considered evidence for a dimension if
+        its title or abstract contains any significant word from the dimension name.
+
+        Returns a coverage dict with per-dimension evidence lists and a flag
+        indicating whether supplemental research is needed.
+        """
+        coverage: Dict[str, Any] = {"dimensions": {}, "needs_more_research": False}
+
+        for dim in dimensions:
+            dim_name = dim.get("name") or dim.get("dimension") or "Unknown"
+            # Build keyword set from dimension name (ignore short/common words)
+            keywords = {
+                w.lower() for w in re.split(r'[\s\-_/]+', dim_name)
+                if len(w) > 3
+            }
+            supporting: List[str] = []
+            for paper in high_rel_papers:
+                text = (paper.get("title", "") + " " + paper.get("abstract", "")).lower()
+                if any(kw in text for kw in keywords):
+                    supporting.append(paper.get("title", "Unknown"))
+            coverage["dimensions"][dim_name] = {
+                "supporting_paper_count": len(supporting),
+                "supporting_papers": supporting[:5],
+                "has_evidence": len(supporting) > 0,
+            }
+            if len(supporting) == 0:
+                coverage["needs_more_research"] = True
+
+        covered = sum(
+            1 for d in coverage["dimensions"].values() if d["has_evidence"]
+        )
+        total = len(dimensions) or 1
+        coverage["evidence_coverage_score"] = round(covered / total, 2)
+        return coverage
+
+    def _build_evidence_section(
+        self, high_rel_papers: List[Dict[str, Any]], evidence_coverage: Dict[str, Any]
+    ) -> str:
+        """Build a markdown Evidence Base section for the scale draft."""
+        lines = ["## Evidence Base", ""]
+
+        if not high_rel_papers:
+            lines.append(
+                "_No scenario-specific high-relevance papers were found. "
+                "Scale items are grounded in expert reference PDFs only. "
+                "Consider re-running with a more specific scenario description._"
+            )
+            lines.append("")
+            return "\n".join(lines)
+
+        lines.append(
+            f"This scale is supported by **{len(high_rel_papers)} high-relevance papers** "
+            f"(scenario relevance score ≥ 4/5)."
+        )
+        lines.append("")
+        lines.append("### Supporting Papers")
+        for paper in high_rel_papers:
+            title = paper.get("title", "Unknown title")
+            year = paper.get("year", "")
+            score = paper.get("scenario_relevance_score", "—")
+            dims = ", ".join(paper.get("scenario_covered_dimensions", []))
+            reason = paper.get("scenario_relevance_reason", "")
+            lines.append(f"- **{title}** ({year}) — scenario score: {score}/5 | dims: [{dims}]")
+            if reason:
+                lines.append(f"  _{reason}_")
+        lines.append("")
+
+        lines.append("### Evidence Coverage by Dimension")
+        for dim_name, info in evidence_coverage.get("dimensions", {}).items():
+            status = "✓" if info["has_evidence"] else "✗ NO EVIDENCE"
+            count = info["supporting_paper_count"]
+            lines.append(f"- **{dim_name}**: {status} ({count} supporting papers)")
+        lines.append("")
+
+        if evidence_coverage.get("needs_more_research"):
+            lines.append(
+                "> **Note**: One or more dimensions lack direct paper support. "
+                "Running additional literature search passes is recommended."
+            )
+            lines.append("")
+
+        return "\n".join(lines)
+
     def _list_expert_pdfs(self) -> List[str]:
         expert_dir = PROJECT_ROOT / "agents" / "expert_pdfs"
         if not expert_dir.exists():
@@ -134,6 +232,7 @@ class EmpathyScaleGenerationAgentGroup:
         interview = self._load_interview_summary(run_id)
         literature = self._load_literature_summary(run_id)
         expert_pdfs = self._list_expert_pdfs()
+        high_relevance_papers = self._load_high_relevance_papers(run_id)
 
         # Step 1: construct definition
         print("    [LLM Call] Defining empathy constructs...", flush=True)
@@ -156,6 +255,20 @@ class EmpathyScaleGenerationAgentGroup:
         else:
             refined = candidates
             print("    [SKIP] Content assessment disabled", flush=True)
+
+        # Step 3.5a: Evidence coverage check
+        if self.enable_content_assessment:
+            print("    [Evidence] Checking literature evidence coverage per dimension...", flush=True)
+            dimensions_meta = [{"name": blk.get("dimension", "Unknown")} for blk in refined]
+            evidence_coverage = self._check_evidence_coverage(dimensions_meta, high_relevance_papers)
+            print(
+                f"    [Evidence] Coverage score: {evidence_coverage['evidence_coverage_score']:.2f} | "
+                f"needs_more_research: {evidence_coverage['needs_more_research']}",
+                flush=True,
+            )
+        else:
+            dimensions_meta = [{"name": blk.get("dimension", "Unknown")} for blk in refined]
+            evidence_coverage = self._check_evidence_coverage(dimensions_meta, high_relevance_papers)
 
         # Step 3.5: Semantic deduplication (remove semantically similar items before evaluation)
         print("    [Semantic Dedup] Removing semantically similar items...", flush=True)
@@ -205,9 +318,13 @@ class EmpathyScaleGenerationAgentGroup:
             import traceback
             traceback.print_exc()
 
-        # Step 4: assemble markdown
+        # Step 4: assemble markdown (with evidence section)
         print("    [Assembling] Creating scale draft markdown...", flush=True)
-        scale_markdown = self._assemble_markdown(interview, literature, refined, expert_pdfs)
+        scale_markdown = self._assemble_markdown(
+            interview, literature, refined, expert_pdfs,
+            high_relevance_papers=high_relevance_papers,
+            evidence_coverage=evidence_coverage,
+        )
 
         # Save artifacts
         out_dir = PROJECT_ROOT / f"data/runs/{run_id}/empathy_scale_generation_agent_group"
@@ -219,13 +336,16 @@ class EmpathyScaleGenerationAgentGroup:
         summary = {
             "status": "completed",
             "used_expert_pdfs": expert_pdfs,
+            "evidence_coverage": evidence_coverage,
+            "needs_more_research": evidence_coverage.get("needs_more_research", False),
+            "high_relevance_paper_count": len(high_relevance_papers),
             "inputs": {
                 "interview_fields_present": [k for k, v in interview.items() if v],
                 "literature_keys_present": list(literature.keys()),
             },
             "outputs": {
                 "draft_path": str(draft_path),
-            }
+            },
         }
         with open(out_dir / "summary.json", 'w', encoding='utf-8') as f:
             json.dump(summary, f, indent=2, ensure_ascii=False)
@@ -233,6 +353,8 @@ class EmpathyScaleGenerationAgentGroup:
         return {
             "scale_draft_path": str(draft_path),
             "summary": summary,
+            "needs_more_research": evidence_coverage.get("needs_more_research", False),
+            "evidence_coverage": evidence_coverage,
         }
 
     # ---------- New sub-steps ----------
@@ -266,7 +388,11 @@ class EmpathyScaleGenerationAgentGroup:
         refined = agent.refine(candidates, scenario)
         return self._parse_items_from_raw(refined.get("raw"))
 
-    def _assemble_markdown(self, interview, literature, items, expert_pdfs) -> str:
+    def _assemble_markdown(
+        self, interview, literature, items, expert_pdfs,
+        high_relevance_papers: List[Dict[str, Any]] = None,
+        evidence_coverage: Dict[str, Any] = None,
+    ) -> str:
         """
         Assemble markdown directly from items without LLM selection.
         This ensures all items are included in the final draft.
@@ -315,7 +441,15 @@ class EmpathyScaleGenerationAgentGroup:
         md_lines.append("## Scoring")
         md_lines.append("Items will be scored on a Likert scale from 1 to 5. Subscale totals can be calculated by summing items within each dimension.")
         md_lines.append("")
-        
+
+        # Append evidence base section when available
+        if high_relevance_papers is not None or evidence_coverage is not None:
+            evidence_section = self._build_evidence_section(
+                high_relevance_papers or [],
+                evidence_coverage or {},
+            )
+            md_lines.append(evidence_section)
+
         return "\n".join(md_lines)
 
     # ---------- Helpers ----------

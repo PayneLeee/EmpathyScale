@@ -21,16 +21,20 @@ from evaluation_agent_group import EvaluationAgentGroup
 from data_manager import DataManager
 
 
+MIN_HIGH_RELEVANCE_PAPERS = 3   # Minimum required high-relevance papers before scale generation
+RESEARCH_MIN_COVERAGE_SCORE = 0.5  # Minimum scenario coverage score (0-1)
+
+
 class MultiAgentWorkflow:
     """
     Main orchestrator for the multi-agent workflow.
     Currently manages a single interview agent, but designed to be extensible.
     """
-    
+
     def __init__(self, config_path: str = None):
         """
         Initialize the multi-agent workflow.
-        
+
         Args:
             config_path: Path to the configuration file. If None, will auto-detect.
         """
@@ -57,6 +61,61 @@ class MultiAgentWorkflow:
             api_key=self.config["openai_api_key"]
         )
     
+    # ------------------------------------------------------------------
+    # Gate helpers
+    # ------------------------------------------------------------------
+
+    def _scenario_readiness_check(self, scenario_brief: Dict) -> tuple:
+        """
+        Check whether the ScenarioBrief has all required slots filled.
+
+        Returns (passed: bool, report: Dict).
+        """
+        missing = scenario_brief.get("missing_slots", [])
+        readiness = scenario_brief.get("readiness_score", 0.0)
+        passed = scenario_brief.get("is_ready", False)
+        report = {
+            "passed": passed,
+            "readiness_score": readiness,
+            "missing_slots": missing,
+            "required_slots": [
+                "assessment_context", "robot_platform", "interaction_modalities",
+                "environmental_setting", "collaboration_pattern",
+            ],
+        }
+        return passed, report
+
+    def _research_quality_gate(self, research_results: Dict, scenario_brief: Dict) -> tuple:
+        """
+        Check whether the literature search produced sufficient high-relevance results.
+
+        Returns (passed: bool, report: Dict).
+        """
+        gate_report = research_results.get("gate_report", {})
+        high_rel_count = gate_report.get("high_relevance_count", len(research_results.get("high_relevance_papers", [])))
+        coverage = research_results.get("coverage_report", {})
+        coverage_score = coverage.get("coverage_score") or 0.0
+
+        passed = (
+            high_rel_count >= MIN_HIGH_RELEVANCE_PAPERS
+            and (coverage_score >= RESEARCH_MIN_COVERAGE_SCORE or coverage_score == 0.0)
+        )
+
+        report = {
+            "passed": passed,
+            "high_relevance_count": high_rel_count,
+            "min_required": MIN_HIGH_RELEVANCE_PAPERS,
+            "coverage_score": coverage_score,
+            "min_coverage_score": RESEARCH_MIN_COVERAGE_SCORE,
+            "coverage_details": coverage,
+            "expansion_trace": gate_report.get("expansion_trace", []),
+        }
+        return passed, report
+
+    # ------------------------------------------------------------------
+    # Main session
+    # ------------------------------------------------------------------
+
     def run_interview_session(self):
         """Run an interactive interview session."""
         print("=" * 60)
@@ -64,53 +123,89 @@ class MultiAgentWorkflow:
         print("=" * 60)
         print("\nThis system will conduct an interview to understand your")
         print("human-robot collaboration situation.\n")
-        
+
         # Create new run for data storage
         self.run_id = self.data_manager.new_run()
         print(f"[Data] Started run: {self.run_id}\n")
-        
+
         interview_agent_group = self.agents['interview']
-        
+
         # Start the interview
         print("Agent Group:", interview_agent_group.start_interview())
-        
+
         # Interactive loop
         while True:
             try:
                 user_input = input("\nYou: ").strip()
-                
+
                 # Check for exit command
                 if user_input.lower() in ["exit", "quit", "end", "stop"]:
                     print("\n[Interview ended by user]")
                     break
-                
+
                 if not user_input:
                     print("Please provide a response or type 'exit' to end the interview.")
                     continue
-                
+
                 # Process the response
                 response = interview_agent_group.process_response(user_input)
                 print(f"\nAgent: {response}")
-                
+
                 # Check if interview is complete (all required fields collected)
                 if interview_agent_group.is_interview_complete():
                     print("\n[All required information collected. Interview complete!]")
                     break
-                    
+
             except EOFError:
                 print("\n\nInput stream ended. Ending interview session.")
                 break
-        
+
         # Display summary
         self._display_interview_summary(interview_agent_group)
-        
-        # Save data automatically
+
+        # --- Gate 1: Scenario Readiness ---
+        scenario_brief = interview_agent_group.get_scenario_brief()
+        passed, readiness_report = self._scenario_readiness_check(scenario_brief)
+
+        print("\n" + "=" * 60)
+        print("SCENARIO READINESS CHECK")
+        print("=" * 60)
+        print(f"  Readiness score : {readiness_report['readiness_score']:.0%}")
+        if passed:
+            print("  Status          : PASSED — all required slots filled.")
+        else:
+            print(f"  Status          : WARNING — missing slots: {readiness_report['missing_slots']}")
+            print(
+                "  The literature search will proceed, but scenario-specific\n"
+                "  relevance scoring may be less accurate."
+            )
+
+        # Save interview data + scenario_brief
         self._save_interview_data(interview_agent_group)
-        
-        # Run literature search after interview
-        self._run_literature_search(interview_agent_group)
-        
-        # Run empathy scale generation after literature search
+        scenario_brief_path = self.data_manager.save_scenario_brief(self.run_id, scenario_brief)
+        print(f"[Data] Scenario brief saved to: {scenario_brief_path}")
+
+        # --- Literature search (with scenario_brief for high-relevance scoring) ---
+        research_results = self._run_literature_search(interview_agent_group, scenario_brief)
+
+        # --- Gate 2: Research Quality ---
+        if research_results:
+            res_passed, res_report = self._research_quality_gate(research_results, scenario_brief)
+            self.data_manager.save_research_gate_report(self.run_id, res_report)
+            print("\n" + "=" * 60)
+            print("RESEARCH QUALITY GATE")
+            print("=" * 60)
+            print(f"  High-relevance papers : {res_report['high_relevance_count']} (need >= {MIN_HIGH_RELEVANCE_PAPERS})")
+            print(f"  Coverage score        : {res_report['coverage_score']}")
+            if res_passed:
+                print("  Status                : PASSED — sufficient high-relevance literature found.")
+            else:
+                print(
+                    "  Status                : WARNING — fewer high-relevance papers than recommended.\n"
+                    "  Scale items may lack strong scenario-specific evidence."
+                )
+
+        # --- Scale generation ---
         self._run_scale_generation()
     
     def _display_interview_summary(self, interview_agent_group: InterviewAgentGroup):
@@ -203,42 +298,54 @@ class MultiAgentWorkflow:
             traceback.print_exc()
             raise
     
-    def _run_literature_search(self, interview_agent_group: InterviewAgentGroup):
-        """Run enhanced literature search using interview summary."""
+    def _run_literature_search(
+        self, interview_agent_group: InterviewAgentGroup, scenario_brief: Dict = None
+    ) -> Dict:
+        """Run enhanced literature search using interview summary and scenario_brief."""
         if not self.run_id:
-            return
-        
+            return {}
+
         literature_agent = self.agents.get('literature')
         if not literature_agent:
             print("\n[Literature] Agent not initialized, skipping literature search")
-            return
-        
+            return {}
+
         print("\n" + "=" * 60)
         print("STARTING ENHANCED LITERATURE SEARCH")
         print("=" * 60)
-        
-        # Get interview summary
+
         interview_summary = interview_agent_group.get_interview_summary()
-        
-        # Run enhanced literature search
+
+        # Run the full pipeline; pass scenario_brief for high-relevance scoring
         literature_results = literature_agent.search_and_download(
             self.run_id,
-            interview_summary
+            interview_summary,
+            scenario_brief=scenario_brief,
         )
-        
-        # Save minimal essential results (queries, downloaded papers with paths, stats)
+
+        # Persist relevance-scored papers
+        scored_papers = literature_results.get("relevance_scored_papers", [])
+        if scored_papers:
+            scored_path = self.data_manager.save_relevance_scored_papers(self.run_id, scored_papers)
+            print(f"[Data] Relevance-scored papers saved to: {scored_path}")
+
+        # Save essential summary (existing helper)
         self._save_literature_results(self.run_id, literature_results)
-        
-        # Update metadata to record literature search completion
+
+        # Update metadata
         metadata = self.data_manager.load_metadata(self.run_id)
         if metadata:
-            if "interview_agent_group" not in metadata["agent_groups"]:
-                metadata["agent_groups"].append("interview_agent_group")
-            if "literature_search_agent_group" not in metadata["agent_groups"]:
-                metadata["agent_groups"].append("literature_search_agent_group")
+            for grp in ("interview_agent_group", "literature_search_agent_group"):
+                if grp not in metadata["agent_groups"]:
+                    metadata["agent_groups"].append(grp)
             self.data_manager.save_metadata(self.run_id, metadata)
-        
-        print(f"\n[Literature] Enhanced search complete - {literature_results.get('pdfs_downloaded', 0)} PDFs downloaded")
+
+        print(
+            f"\n[Literature] Search complete — "
+            f"{literature_results.get('pdfs_downloaded', 0)} PDFs downloaded, "
+            f"{len(literature_results.get('high_relevance_papers', []))} high-relevance papers."
+        )
+        return literature_results
 
     def _run_scale_generation(self):
         """Run empathy scale generation using prior results and expert PDFs."""
@@ -254,6 +361,15 @@ class MultiAgentWorkflow:
         results = scale_agent.generate_scale(self.run_id)
         if results.get("scale_draft_path"):
             print(f"[Scale] Draft saved to: {results['scale_draft_path']}")
+            # Report evidence coverage
+            ev = results.get("evidence_coverage", {})
+            ev_score = ev.get("evidence_coverage_score", "N/A")
+            print(f"[Scale] Evidence coverage score: {ev_score}")
+            if results.get("needs_more_research"):
+                print(
+                    "[Scale] WARNING: One or more dimensions lack direct paper support.\n"
+                    "        Consider re-running with a more specific scenario to improve literature coverage."
+                )
             # Run evaluation automatically after generation
             self._run_evaluation()
         else:

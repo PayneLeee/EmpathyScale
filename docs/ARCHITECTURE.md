@@ -32,6 +32,62 @@ EmpathyScale uses a **modular multi-agent architecture** with:
 - Consistent naming conventions
 - Uniform prompt structures
 
+## Interview-First Pipeline
+
+The system follows an **interview-first, scenario-driven** pipeline with two explicit quality gates:
+
+```
+User Input
+    │
+    ▼
+InterviewAgentGroup  ──── collects 5 required slots ────►  ScenarioBrief
+    │
+    ▼
+[Gate 1: Scenario Readiness]
+  • All 5 slots filled? (assessment_context, robot_platform,
+    interaction_modalities, environmental_setting, collaboration_pattern)
+  • readiness_score = 1.0 required to pass
+  • Fail → warning shown; pipeline continues with degraded scoring
+    │
+    ▼
+LiteratureSearchAgentGroup
+  ├── generate_queries(scenario_brief)
+  ├── search_and_screen()   ← generic robot-empathy relevance (1-5)
+  ├── compute_scenario_relevance_score()  ← scenario-specific (1-5)
+  ├── high_relevance_filter(threshold=4)
+  ├── query_expansion_loop()  ← retries if < 3 high-relevance papers
+  └── coverage_check()   ← 4-dimension scenario coverage analysis
+    │
+    ▼
+[Gate 2: Research Quality]
+  • high_relevance_count >= 3
+  • coverage_score >= 0.50
+  • Fail → warning; scale generation proceeds but flags needs_more_research
+    │
+    ▼
+EmpathyScaleGenerationAgentGroup
+  ├── _check_evidence_coverage()  ← per-dimension evidence binding
+  ├── Generate items (multi-generator + dedup)
+  └── _assemble_markdown() with embedded Evidence Base section
+    │
+    ▼
+EvaluationAgentGroup + ItemSelectionAgent
+    │
+    ▼
+Artifacts: scale_draft.md, evaluation reports, evidence_coverage
+```
+
+### Gate Descriptions
+
+**Gate 1 – Scenario Readiness** (`main.py._scenario_readiness_check`)
+- Validates that `InterviewAgentGroup.get_scenario_brief()` has all 5 required slots non-null.
+- Non-blocking: pipeline continues with a degraded warning if slots are missing, but scenario-specific scoring will be less accurate.
+
+**Gate 2 – Research Quality** (`main.py._research_quality_gate`)
+- Validates: `high_relevance_papers >= MIN_HIGH_RELEVANCE_PAPERS (3)` AND `coverage_score >= RESEARCH_MIN_COVERAGE_SCORE (0.5)`.
+- Non-blocking: emits a warning and sets `needs_more_research=True` in the scale generation summary.
+- Query expansion (up to 2 retry rounds) runs automatically inside `LiteratureSearchAgentGroup` before this gate is evaluated.
+
 ## Agent Group Structure
 
 ### Hierarchical Organization
@@ -41,6 +97,7 @@ MultiAgentWorkflow (main.py)
 ├── InterviewAgentGroup
 │   ├── Main Agent (LangChain AgentExecutor)
 │   ├── Tools (save_interview_data, get_interview_progress, delegate_to_sub_agent)
+│   ├── get_scenario_brief()  ← NEW: structured ScenarioBrief output
 │   └── Sub-Agents
 │       ├── TaskCollectorAgent
 │       ├── EnvironmentAnalyzerAgent
@@ -49,12 +106,19 @@ MultiAgentWorkflow (main.py)
 │
 ├── LiteratureSearchAgentGroup
 │   ├── LLM Integration (direct ChatOpenAI calls)
+│   ├── compute_scenario_relevance_score()  ← NEW
+│   ├── high_relevance_filter()             ← NEW
+│   ├── coverage_check()                    ← NEW
+│   ├── generate_expansion_queries()        ← NEW
+│   ├── query_expansion_loop()              ← NEW
 │   └── Methods (generate_queries, search_and_screen, extract_findings, etc.)
 │
 ├── EmpathyScaleGenerationAgentGroup
 │   ├── Multiple item generators (parallel generation)
 │   ├── Content assessment (LLM-based item quality check)
-│   └── Semantic deduplication (removes redundant items)
+│   ├── Semantic deduplication (removes redundant items)
+│   ├── _check_evidence_coverage()  ← NEW: per-dimension evidence binding
+│   └── _build_evidence_section()   ← NEW: evidence citations in markdown
 │
 ├── EvaluationAgentGroup
 │   ├── PersonaGenerationAgent (generates LLM personas)
@@ -246,13 +310,24 @@ latest = data_manager.get_latest_run_id()
 ```
 data/runs/YYYY-MM-DD_HHMMSS/
 ├── metadata.json
+├── scenario_brief.json                     ← NEW: structured ScenarioBrief from interview
 ├── interview_agent_group/
 │   ├── summary.json
 │   └── conversation.json
 └── literature_search_agent_group/
     ├── summary.json
+    ├── relevance_scored_papers.json        ← NEW: all screened papers with scenario scores
+    ├── research_gate_report.json           ← NEW: gate pass/fail, coverage, expansion trace
     └── pdfs/...
 ```
+
+**New Artifact Descriptions**:
+
+| Artifact | Method | Contents |
+|---|---|---|
+| `scenario_brief.json` | `DataManager.save_scenario_brief()` | 5 required slots + missing list + readiness_score |
+| `relevance_scored_papers.json` | `DataManager.save_relevance_scored_papers()` | All screened papers with `scenario_relevance_score`, `scenario_covered_dimensions`, `scenario_relevance_reason` |
+| `research_gate_report.json` | `DataManager.save_research_gate_report()` | Gate pass/fail, high_relevance_count, coverage_score, `expansion_trace` (each retry round) |
 
 See [DATA_STORAGE.md](./DATA_STORAGE.md) for detailed structure.
 

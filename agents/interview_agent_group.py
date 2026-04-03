@@ -869,6 +869,41 @@ class InterviewAgentGroup:
         # Interview is complete if we have all required fields AND interaction_modalities (even if inferred)
         return has_all_required and has_interaction_modalities and has_collaboration_pattern
     
+    def get_scenario_brief(self) -> Dict:
+        """
+        Return a standardized ScenarioBrief dict for downstream agents.
+
+        Derives all values from get_interview_summary() and adds metadata about
+        slot completeness so callers can gate-check without re-parsing the summary.
+        """
+        summary = self.get_interview_summary()
+
+        required_slots = [
+            "assessment_context",
+            "robot_platform",
+            "interaction_modalities",
+            "environmental_setting",
+            "collaboration_pattern",
+        ]
+
+        slot_values = {slot: summary.get(slot) for slot in required_slots}
+        missing = [
+            slot for slot, val in slot_values.items()
+            if not val or val in (None, "null", "")
+        ]
+
+        brief = {
+            **slot_values,
+            "assessment_goals": summary.get("assessment_goals", []),
+            "expected_empathy_forms": summary.get("expected_empathy_forms", []),
+            "assessment_challenges": summary.get("assessment_challenges", []),
+            "measurement_requirements": summary.get("measurement_requirements", []),
+            "missing_slots": missing,
+            "readiness_score": round((len(required_slots) - len(missing)) / len(required_slots), 2),
+            "is_ready": len(missing) == 0,
+        }
+        return brief
+
     def reload_prompts(self):
         """Reload prompts for this agent group."""
         self.prompt_manager.reload_agent_group_prompts("interview_agent_group")
