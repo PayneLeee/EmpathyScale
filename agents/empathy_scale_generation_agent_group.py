@@ -17,6 +17,24 @@ from langchain_openai import ChatOpenAI
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'utils'))
 from prompt_manager import PromptManager
 
+try:
+    from workflow_console import sub, sub_done, minor_separator, print_json_panel
+except ImportError:
+    def sub(msg, indent=4):
+        print(f"{' ' * indent}▸ {msg}", flush=True)
+
+    def sub_done(msg, indent=4):
+        print(f"{' ' * indent}✓ {msg}", flush=True)
+
+    def minor_separator(label=None):
+        if label:
+            print(f"    --- {label} ---", flush=True)
+        else:
+            print("    " + "·" * 56, flush=True)
+
+    def print_json_panel(title, obj, max_chars=None):
+        print(f"\n[{title}]\n{obj}\n")
+
 # Local agents
 from scale_generation_agents import (
     ConstructDefinitionAgent,
@@ -234,44 +252,68 @@ class EmpathyScaleGenerationAgentGroup:
         expert_pdfs = self._list_expert_pdfs()
         high_relevance_papers = self._load_high_relevance_papers(run_id)
 
-        # Step 1: construct definition
-        print("    [LLM Call] Defining empathy constructs...", flush=True)
+        minor_separator("Boateng Step 2 — 子过程（内容效度 / 题项池）")
+        sub("2-i   构念界定：结合访谈 + 文献 + 专家 PDF 定义维度（LLM）")
         constructs = self._run_construct_definition(interview)
-        print(f"    [OK] Constructs defined: {len(self._extract_dimensions(constructs.get('raw', '')))} dimensions", flush=True)
+        dim_list = self._extract_dimensions(constructs.get("raw", ""))
+        sub_done(f"维度数 = {len(dim_list)}")
+        print_json_panel(
+            "量表生成 · 构念/维度（Step 2-i，解析自 LLM 输出）",
+            {
+                "dimensions": dim_list,
+                "raw_response_length_chars": len(constructs.get("raw") or ""),
+                "raw_excerpt": (constructs.get("raw") or "")[:2000],
+            },
+            max_chars=14000,
+        )
 
-        # Step 2: multi-generator candidates
-        print(f"    [LLM Call] Generating items with {self.num_item_generators} parallel generator(s)...", flush=True)
+        sub(f"2-ii  题项池生成：{self.num_item_generators} 个生成器并行（LLM）")
         candidates = self._run_multi_item_generation(constructs, interview)
-        # Calculate total number of items across all dimensions
         total_items = sum(len(block.get("items", [])) for block in candidates)
-        print(f"    [OK] Generated {total_items} candidate items across {len(candidates)} dimensions", flush=True)
+        sub_done(f"候选题项 {total_items} 条，跨 {len(candidates)} 个维度块")
+        pool_preview = [
+            {
+                "dimension": b.get("dimension"),
+                "n_items": len(b.get("items", [])),
+                "item_samples": (b.get("items") or [])[:3],
+            }
+            for b in candidates
+        ]
+        print_json_panel("题项池 · 合并后候选（每维条数 + 至多3条样例）", pool_preview, max_chars=16000)
 
-        # Step 3: content assessment (optional)
         if self.enable_content_assessment:
-            print("    [LLM Call] Running content assessment and refinement...", flush=True)
+            sub("2-iii 内容评估与轻度润色（内容效度取向，LLM）")
             refined = self._run_content_assessment(candidates, interview)
             total_refined = sum(len(block.get("items", [])) for block in refined)
-            print(f"    [OK] Refined to {total_refined} items across {len(refined)} dimensions", flush=True)
+            sub_done(f"精炼后 {total_refined} 条题项")
+            refined_preview = [
+                {
+                    "dimension": b.get("dimension"),
+                    "n_items": len(b.get("items", [])),
+                    "item_samples": (b.get("items") or [])[:3],
+                }
+                for b in refined
+            ]
+            print_json_panel("内容评估后 · 题项池（每维条数 + 至多3条样例）", refined_preview, max_chars=16000)
         else:
             refined = candidates
-            print("    [SKIP] Content assessment disabled", flush=True)
+            sub("2-iii 内容评估已关闭，跳过")
 
-        # Step 3.5a: Evidence coverage check
         if self.enable_content_assessment:
-            print("    [Evidence] Checking literature evidence coverage per dimension...", flush=True)
+            sub("2-iv  文献-维度证据覆盖检查（高相关论文 ↔ 维度名匹配）")
             dimensions_meta = [{"name": blk.get("dimension", "Unknown")} for blk in refined]
             evidence_coverage = self._check_evidence_coverage(dimensions_meta, high_relevance_papers)
-            print(
-                f"    [Evidence] Coverage score: {evidence_coverage['evidence_coverage_score']:.2f} | "
-                f"needs_more_research: {evidence_coverage['needs_more_research']}",
-                flush=True,
+            sub_done(
+                f"evidence_coverage_score={evidence_coverage['evidence_coverage_score']:.2f}, "
+                f"needs_more_research={evidence_coverage['needs_more_research']}"
             )
+            print_json_panel("文献-维度证据覆盖（JSON）", evidence_coverage, max_chars=12000)
         else:
             dimensions_meta = [{"name": blk.get("dimension", "Unknown")} for blk in refined]
             evidence_coverage = self._check_evidence_coverage(dimensions_meta, high_relevance_papers)
+            print_json_panel("文献-维度证据覆盖（JSON）", evidence_coverage, max_chars=12000)
 
-        # Step 3.5: Semantic deduplication (remove semantically similar items before evaluation)
-        print("    [Semantic Dedup] Removing semantically similar items...", flush=True)
+        sub("2-v   语义去重（预评估前，可选 sentence-transformers）")
         try:
             from utils.pre_evaluation_semantic_deduplication import remove_semantic_duplicates_before_evaluation
             
@@ -301,7 +343,7 @@ class EmpathyScaleGenerationAgentGroup:
                 refined = [{"dimension": dim, "items": items} for dim, items in refined_by_dim.items()]
                 
                 total_after_dedup = sum(len(block.get("items", [])) for block in refined)
-                print(f"    [OK] After semantic deduplication: {total_after_dedup} items (removed {dedup_stats['n_removed']} semantic duplicates)", flush=True)
+                sub_done(f"去重后 {total_after_dedup} 条（移除语义重复 {dedup_stats['n_removed']}）")
                 
                 # Save deduplication stats
                 out_dir = PROJECT_ROOT / f"data/runs/{run_id}/empathy_scale_generation_agent_group"
@@ -310,16 +352,15 @@ class EmpathyScaleGenerationAgentGroup:
                 with open(dedup_stats_path, 'w', encoding='utf-8') as f:
                     json.dump(dedup_stats, f, indent=2, ensure_ascii=False)
             else:
-                print("    [WARN] No items to deduplicate", flush=True)
+                sub("无可去重题项")
         except ImportError as e:
-            print(f"    [WARN] Semantic deduplication not available ({e}), skipping...", flush=True)
+            sub(f"语义去重不可用（{e}），跳过")
         except Exception as e:
-            print(f"    [WARN] Semantic deduplication failed: {e}, continuing without it...", flush=True)
+            sub(f"语义去重失败（{e}），继续不阻断")
             import traceback
             traceback.print_exc()
 
-        # Step 4: assemble markdown (with evidence section)
-        print("    [Assembling] Creating scale draft markdown...", flush=True)
+        sub("2-vi  组装 Markdown 初稿（含 Evidence Base 段落）")
         scale_markdown = self._assemble_markdown(
             interview, literature, refined, expert_pdfs,
             high_relevance_papers=high_relevance_papers,
@@ -332,6 +373,7 @@ class EmpathyScaleGenerationAgentGroup:
         draft_path = out_dir / "scale_draft.md"
         with open(draft_path, 'w', encoding='utf-8') as f:
             f.write(scale_markdown)
+        sub_done(f"已写入 {draft_path}")
 
         summary = {
             "status": "completed",

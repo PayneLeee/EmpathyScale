@@ -74,8 +74,7 @@ class PersonaGenerationAgent:
         
         # Generate in batches with parallel processing
         num_batches = (n_personas + self.batch_size - 1) // self.batch_size
-        print(f"      [Persona] Generating {n_personas} personas in {num_batches} batches (batch size: {self.batch_size})...", flush=True)
-        print(f"      [Persona] Using {self.max_workers} parallel workers for batch generation", flush=True)
+        print(f"      [Persona] Generating {n_personas} personas in {num_batches} batches…", flush=True)
         
         # Prepare batch tasks
         batch_tasks = []
@@ -105,27 +104,13 @@ class PersonaGenerationAgent:
             total_batches = batch_task["total_batches"]
             
             try:
-                with self._progress_lock:
-                    print(f"      [Persona] Batch {batch_idx}/{total_batches}: generating {batch_size_actual} personas...", flush=True)
-                
                 batch_personas = self._generate_personas_batch(
-                    scenario_context, 
-                    batch_size_actual, 
-                    batch_start_id=batch_start_id
+                    scenario_context, batch_size_actual, batch_start_id=batch_start_id
                 )
-                
                 with self._progress_lock:
                     completed_count[0] += 1
-                    elapsed = time.time() - start_time
-                    avg_time = elapsed / completed_count[0] if completed_count[0] > 0 else 0
-                    remaining = avg_time * (total_batches - completed_count[0])
-                    if completed_count[0] % max(1, total_batches // 5) == 0 or completed_count[0] == total_batches:
-                        print(f"      [Persona] Batch {completed_count[0]}/{total_batches} completed ({elapsed:.1f}s total, ETA: {remaining:.0f}s)", flush=True)
-                
                 return batch_personas
             except Exception as e:
-                with self._progress_lock:
-                    print(f"      [ERROR] Batch {batch_idx} failed: {e}", flush=True)
                 # Fill with default personas for this batch
                 return self._generate_default_personas(batch_size_actual, start_id=batch_start_id)
         
@@ -278,7 +263,7 @@ class PersonaGenerationAgent:
         # 统计empathic和non_empathic数量
         empathic_count = sum(1 for p in personas if p.get("empathy_condition") == "empathic")
         non_empathic_count = sum(1 for p in personas if p.get("empathy_condition") == "non_empathic")
-        print(f"      [Persona] Saved {len(personas)} personas to {persona_file} (empathic: {empathic_count}, non_empathic: {non_empathic_count})", flush=True)
+        print(f"      [Persona] Saved {len(personas)} personas to {persona_file}", flush=True)
     
     def load_personas(self, scenario_id: str, phase: str = "selection") -> List[Dict[str, Any]]:
         """

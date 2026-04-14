@@ -174,11 +174,7 @@ class ItemSelectionAgent:
         
         n_items = len(items)
         
-        # Perform EFA+CFA selection (PETS methodology - no fallback to rating-based selection)
-        print(f"    [Item Selection] Using EFA+CFA method (PETS methodology)")
-        if adaptive_factor_loading and target_range:
-            print(f"    [Item Selection] Adaptive adjustment enabled: target range {target_min}-{target_max} items")
-        print(f"    [Item Selection] No rating-based selection will be performed (not scientifically valid)")
+        # Perform EFA+CFA selection (PETS methodology)
         
         # Extract factor balance configuration (default: enabled)
         enable_factor_balance = selection_config.get("enable_factor_balance", True)
@@ -504,7 +500,6 @@ Respond with ONLY the factor name, nothing else."""
                     factor_items_dict[factor_idx].append(item_map[item_id])
             
             # Interpret and name factors
-            print("    [LLM Call] Interpreting factors and generating names...")
             factor_names = self.interpret_factors(factor_items_dict, scenario)
             
             # Sort factors and output items

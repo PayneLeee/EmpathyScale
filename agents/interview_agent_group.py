@@ -7,8 +7,9 @@ Contains multiple sub-agents for different aspects of information gathering.
 import json
 import os
 import re
+import secrets
 import sys
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 from langchain.agents import AgentExecutor, create_openai_tools_agent
 from langchain.memory import ConversationBufferMemory
@@ -86,6 +87,7 @@ class InterviewAgentGroup:
             "interaction_modalities": None,  # NEW: Emphasis on communication channels
             "collaboration_pattern": None,
             "environmental_setting": None,
+            "scenario_short_label": None,
             "assessment_goals": [],
             "expected_empathy_forms": [],
             "assessment_challenges": [],
@@ -97,7 +99,62 @@ class InterviewAgentGroup:
         
         # Track conversation history for data storage
         self.conversation_history = []
-    
+
+        # If True: structured slots come from **user utterances only** (no LLM guess, no post-process gap-fill).
+        self._strict_user_only_slots: bool = True
+
+        # Set by orchestrator (e.g. main.new_run) so scenario_id / persona filenames stay unique per run
+        self._scenario_run_id: Optional[str] = None
+
+    def set_scenario_run_id(self, run_id: str) -> None:
+        """Bind this interview session to a run folder id; used to build a globally unique scenario ``name``."""
+        self._scenario_run_id = (run_id or "").strip() or None
+
+    def _slugify_scenario_label(self, raw: str, max_len: int = 48) -> str:
+        """Normalize a short scenario label for use inside ``name`` (filesystem-safe slug)."""
+        if not raw or not str(raw).strip():
+            return "scenario"
+        s = str(raw).lower().strip()
+        s = re.sub(r"[^a-z0-9]+", "_", s)
+        s = re.sub(r"_+", "_", s).strip("_")
+        if not s:
+            return "scenario"
+        return s[:max_len].rstrip("_")
+
+    def _derive_scenario_label_from_context(self, summary: Dict) -> str:
+        """Fallback slug when the model/user did not provide scenario_short_label."""
+        ctx = summary.get("assessment_context") or ""
+        ctx = str(ctx).strip()
+        if not ctx:
+            return "scenario"
+        words = re.findall(r"[a-zA-Z0-9]+", ctx[:200])
+        if not words:
+            return self._slugify_scenario_label(ctx[:80])
+        return self._slugify_scenario_label("_".join(words[:6]))
+
+    def _ensure_unique_scenario_name(self, summary: Dict, llm_summary: Dict) -> Dict:
+        """
+        Set ``scenario_label`` (semantic slug) and ``name`` (unique id: slug + run_id).
+
+        Multiple interviews get different ``name`` values because ``run_id`` is unique per run.
+        """
+        label_src = None
+        for key in ("scenario_short_label", "user_scenario_name"):
+            v = llm_summary.get(key) if isinstance(llm_summary, dict) else None
+            if v and str(v).strip() and str(v).lower() not in ("null", "none"):
+                label_src = str(v).strip()
+                break
+        if not label_src:
+            v2 = summary.get("scenario_short_label")
+            if v2 and str(v2).strip():
+                label_src = str(v2).strip()
+
+        slug = self._slugify_scenario_label(label_src) if label_src else self._derive_scenario_label_from_context(summary)
+        run_part = self._scenario_run_id or secrets.token_hex(6)
+        summary["scenario_label"] = slug
+        summary["name"] = f"{slug}_{run_part}"
+        return summary
+
     def _initialize_sub_agents(self) -> Dict[str, any]:
         """
         Initialize sub-agents within this group.
@@ -124,6 +181,16 @@ class InterviewAgentGroup:
             """Save empathy assessment-related interview data to memory."""
             # Parse assessment-related data and save to appropriate fields
             data_lower = data.lower()
+
+            # 0. Optional scenario short label (e.g. user says "Scenario name: collab_arm_cell")
+            if re.search(
+                r"(scenario\s+(short\s+)?name|short\s+name\s+for\s+(this\s+)?scenario)\s*[:：]",
+                data_lower,
+            ):
+                parts = re.split(r"[:：]", data, maxsplit=1)
+                if len(parts) > 1 and parts[1].strip():
+                    self.interview_data["scenario_short_label"] = parts[1].strip()[:120]
+                    return f"Scenario short label saved: {self.interview_data['scenario_short_label']}"
             
             # Check each field in order of priority - more specific first
             # REORDERED: Check context and platform BEFORE interaction modalities to avoid over-capturing
@@ -155,12 +222,6 @@ class InterviewAgentGroup:
                     # Append additional platform details if we already have a platform
                     if data not in self.interview_data["robot_platform"]:
                         self.interview_data["robot_platform"] += ". " + data
-                # Also check if this mentions facial expressions for interaction modalities
-                if ("facial" in data_lower or "expression" in data_lower) and ("expressive" in data_lower or "capabilities" in data_lower):
-                    if not self.interview_data["interaction_modalities"]:
-                        self.interview_data["interaction_modalities"] = "Facial expressions"
-                    elif "facial" not in self.interview_data["interaction_modalities"].lower():
-                        self.interview_data["interaction_modalities"] += ", facial expressions"
             
             # 3. Environmental setting
             elif any(keyword in data_lower for keyword in ["environment", "setting", "workplace"]) and not any(modality_word in data_lower for modality_word in ["interaction modality", "modalities"]):
@@ -232,16 +293,6 @@ class InterviewAgentGroup:
                 if not self.interview_data["interaction_modalities"]:
                     self.interview_data["interaction_modalities"] = data
                 else:
-                    # Ensure facial expressions are also mentioned if they were mentioned in conversation
-                    modalities_lower = self.interview_data["interaction_modalities"].lower()
-                    if "facial" not in modalities_lower and "expression" not in modalities_lower:
-                        # Check if facial expressions were mentioned in the environmental_setting or assessment_context
-                        env_setting = self.interview_data.get("environmental_setting", "")
-                        if env_setting:
-                            env_lower = str(env_setting).lower()
-                            if "facial" in env_lower or ("expressive" in env_lower and "feature" in env_lower):
-                                self.interview_data["interaction_modalities"] += ", facial expressions"
-                    # Append gesture description
                     if self.interview_data["interaction_modalities"][-1] not in ", ":
                         self.interview_data["interaction_modalities"] += ", " + data
                     else:
@@ -294,7 +345,7 @@ class InterviewAgentGroup:
         return [
             Tool(
                 name="save_interview_data",
-                description="ALWAYS use this tool after each user response to save the assessment-related information they provided. This is crucial for generating the interview summary. Use this tool to save any information about assessment context, robot platform, INTERACTION MODALITIES (speech, touch, visual cues like lights/displays - VERY IMPORTANT), collaboration patterns, environmental settings, assessment goals, expected empathy forms, challenges, or measurement requirements.",
+                description="ALWAYS use this tool after each user response. Save **only what the user actually said** (or a tight paraphrase)—do not invent modalities, displays, voice, or venue details they did not mention. Fields: assessment context, robot platform, interaction modalities (only if user stated channels), collaboration, environment, optional scenario short name, goals/challenges if user stated them.",
                 func=save_interview_data
             ),
             Tool(
@@ -386,11 +437,26 @@ class InterviewAgentGroup:
         summary = self.get_interview_summary()
         
         questions = {
-            "assessment_context": "What specific human-robot collaboration scenario are you evaluating? (Briefly describe the tasks humans and robots perform together.)",
-            "robot_platform": "What type of robot is being used? (Briefly describe the robot's form, appearance, or capabilities.)",
-            "environmental_setting": "Where does this collaboration take place? (Briefly describe the physical environment or setting.)",
+            "assessment_context": (
+                "What specific human-robot collaboration scenario are you evaluating? "
+                "Include the main tasks and, if relevant, what happens under time pressure or when something goes wrong—"
+                "that shapes how users read the robot as caring or cold."
+            ),
+            "robot_platform": (
+                "What robot platform is involved? Describe its physical form (e.g. arm(s), mobile base, humanoid), "
+                "rough size and working distance, and whether it has a face, screen, voice, or is mostly silent—"
+                "these determine which empathy cues are even possible."
+            ),
+            "environmental_setting": (
+                "Where does this collaboration happen in concrete terms—not just a building name? "
+                "For example: open bay vs enclosed cell, noise and distractions, who can observe, lighting, safety barriers, "
+                "or pace of the line. Such details affect how people interpret small social cues from the robot."
+            ),
             "interaction_modalities": self._generate_interaction_modalities_question(summary),
-            "collaboration_pattern": "How do humans and robots interact? (Briefly: one-on-one, group, peer-to-peer, etc.)"
+            "collaboration_pattern": (
+                "How do the human and robot share the work—turn-taking, who leads after errors, physical distance, "
+                "and whether coworkers or supervisors typically watch? Social presence changes what counts as empathic behavior."
+            ),
         }
         return questions.get(missing_field, f"Could you provide more information about {missing_field.replace('_', ' ')}?")
     
@@ -401,12 +467,21 @@ class InterviewAgentGroup:
         # Try to infer first
         inferred = self._infer_interaction_modalities(summary)
         
+        empathy_tail = (
+            " For empathy measurement: how does each channel behave in a difficult moment (delay, mis-pick, user hesitation)—"
+            "e.g. voice tone or wording, what appears on a display, whether motion slows or pauses, any haptic cue?"
+        )
         if inferred and robot_platform:
-            # We have inference, ask for confirmation/expansion
-            return f"Based on the robot's capabilities, I infer it might use {inferred}. Can the robot communicate or interact with humans? If yes, through which modalities? (e.g., voice/speech, gestures/movements, indicator lights, screen display, haptic feedback, or none)"
-        else:
-            # No inference possible, ask directly
-            return "Can the robot communicate or interact with humans? If yes, through which modalities? (e.g., voice/speech, gestures/movements, indicator lights, screen display, haptic feedback, or none)"
+            return (
+                f"From what you said about the robot, I infer these interaction channels might matter: {inferred}. "
+                "Please confirm or correct, and add anything missing (voice/TTS, screen or LED patterns, motion speed or gentleness, touch/haptics, or none)."
+                + empathy_tail
+            )
+        return (
+            "How do the human and robot actually exchange information and social cues—voice, screen or lights, motion, touch/haptics, or none? "
+            "Please be specific enough that we could write scale items about feeling understood vs ignored."
+            + empathy_tail
+        )
     
     def process_response(self, user_input: str) -> str:
         """
@@ -430,9 +505,16 @@ class InterviewAgentGroup:
             response = self.agent_executor.invoke({"input": user_input})
             agent_response = response["output"]
             
-            # Check for missing required fields and append targeted question if needed
+            # After tools + summary merge, single source of truth for "what we still need"
             missing_fields = self._get_missing_required_fields()
-            if missing_fields and not self.is_interview_complete():
+            if not missing_fields:
+                # Slots already satisfied (often: one rich user answer + extraction inferred fields).
+                # The chat model may still ask follow-ups because it does not see the JSON summary—
+                # align user-visible text with slot state so we do not redundant 追问.
+                agent_response = self.prompt_manager.get_agent_group_prompt(
+                    "interview_agent_group", "completion_message"
+                )
+            else:
                 # Prioritize interaction_modalities if it's missing
                 first_missing = missing_fields[0]
                 
@@ -514,18 +596,23 @@ class InterviewAgentGroup:
         return ""
     
     def _extract_summary_from_conversation(self) -> Dict:
-        """Use LLM to extract structured summary from conversation history."""
-        if not self.conversation_history or len(self.conversation_history) < 2:
-            # Not enough conversation yet, return current data
-            return self.interview_data.copy()
-        
-        # Format conversation history for LLM
-        conversation_text = ""
+        """Use LLM to extract structured summary from **user** messages only."""
+        if not self.conversation_history:
+            return {}
+
+        # Only **user** turns inform slot truth. Agent lines are questions/paraphrases and must not
+        # be treated as facts (avoids one-turn "complete" when the model imagines filled slots).
+        user_lines: List[str] = []
         for entry in self.conversation_history:
             if entry.get("type") == "user":
-                conversation_text += f"User: {entry.get('content', '')}\n"
-            elif entry.get("type") == "agent":
-                conversation_text += f"Agent: {entry.get('content', '')}\n"
+                t = (entry.get("content") or "").strip()
+                if t:
+                    user_lines.append(t)
+        if not user_lines:
+            return {}
+        conversation_text = "\n".join(
+            f"User (turn {i + 1}): {line}" for i, line in enumerate(user_lines)
+        )
         
         # Get extraction prompt
         extraction_prompt_template = self.prompt_manager.get_agent_group_prompt(
@@ -547,59 +634,83 @@ class InterviewAgentGroup:
             if json_match:
                 extracted_summary = json.loads(json_match.group())
                 return extracted_summary
-            else:
-                # Fallback to keyword-based extraction
-                return self.interview_data.copy()
+            print("[WARNING] Slot extraction: no JSON in model output.")
+            return {}
         except Exception as e:
-            # If LLM extraction fails, fallback to keyword-based
-            print(f"[WARNING] LLM summary extraction failed: {e}. Using keyword-based extraction.")
-            return self.interview_data.copy()
+            print(f"[WARNING] LLM summary extraction failed: {e}")
+            return {}
     
     def get_interview_summary(self) -> Dict:
         """Get a summary of the collected interview data, extracted from conversation history."""
-        # First, try LLM-based extraction from conversation history
-        llm_summary = self._extract_summary_from_conversation()
-        
-        # Merge with keyword-based data (as fallback/supplement)
         keyword_summary = self.interview_data.copy()
-        
-        # Use LLM summary as primary, fill gaps from keyword summary
-        summary = {}
-        for field in ["assessment_context", "robot_platform", "interaction_modalities", 
-                     "collaboration_pattern", "environmental_setting"]:
-            # Prefer LLM-extracted value if it exists and is not null
-            if llm_summary.get(field) and llm_summary[field] not in [None, "null", ""]:
-                summary[field] = llm_summary[field]
-            elif keyword_summary.get(field) and keyword_summary[field] not in [None, ""]:
-                summary[field] = keyword_summary[field]
-            else:
-                summary[field] = None
-        
-        # Special handling for interaction_modalities: infer from robot platform if still missing
-        if (not summary.get("interaction_modalities") or summary.get("interaction_modalities") is None) and summary.get("robot_platform"):
-            inferred = self._infer_interaction_modalities(summary)
-            if inferred:
-                summary["interaction_modalities"] = inferred
-        
-        # For list fields, merge both sources
+        llm_summary: Dict = {}
+        try:
+            llm_summary = self._extract_summary_from_conversation()
+        except Exception as e:
+            print(f"[WARNING] Slot extraction from user messages failed: {e}. Slots left empty until extraction succeeds.")
+
+        slot_fields = [
+            "assessment_context",
+            "robot_platform",
+            "interaction_modalities",
+            "collaboration_pattern",
+            "environmental_setting",
+            "scenario_short_label",
+        ]
+        summary: Dict = {}
+
+        def _clean_slot_value(v: Any) -> Optional[str]:
+            if v is None:
+                return None
+            if isinstance(v, str):
+                s = v.strip()
+                if not s or s.lower() in ("null", "none"):
+                    return None
+                return s
+            return str(v).strip() or None
+
+        if getattr(self, "_strict_user_only_slots", True):
+            # Required slots: **user-stated facts only** (never backfill from save_interview_data paraphrases).
+            for field in slot_fields:
+                summary[field] = _clean_slot_value(llm_summary.get(field))
+        else:
+            for field in slot_fields:
+                if llm_summary.get(field) and llm_summary[field] not in [None, "null", ""]:
+                    summary[field] = llm_summary[field]
+                elif keyword_summary.get(field) and keyword_summary[field] not in [None, ""]:
+                    summary[field] = keyword_summary[field]
+                else:
+                    summary[field] = None
+            if (not summary.get("interaction_modalities")) and summary.get("robot_platform"):
+                inferred = self._infer_interaction_modalities(summary)
+                if inferred:
+                    summary["interaction_modalities"] = inferred
+
         for field in ["assessment_goals", "expected_empathy_forms", "assessment_challenges", "measurement_requirements"]:
             llm_list = llm_summary.get(field, [])
             keyword_list = keyword_summary.get(field, [])
-            if isinstance(llm_list, list) and llm_list:
+            if getattr(self, "_strict_user_only_slots", True):
+                summary[field] = llm_list if isinstance(llm_list, list) and llm_list else []
+            elif isinstance(llm_list, list) and llm_list:
                 summary[field] = llm_list
             elif isinstance(keyword_list, list) and keyword_list:
                 summary[field] = keyword_list
             else:
                 summary[field] = []
-        
-        # Apply post-processing to fill any remaining gaps
-        summary = self._post_process_summary(summary)
-        
+
+        if not getattr(self, "_strict_user_only_slots", True):
+            summary = self._post_process_summary(summary)
+        # Strict mode: skip heuristic gap-fill entirely (no imagined robot/modality/env).
+
+        summary = self._ensure_unique_scenario_name(summary, llm_summary)
+
         return summary
     
     def _post_process_summary(self, summary: Dict) -> Dict:
         """Post-process summary to extract missing information from existing fields."""
-        
+        if getattr(self, "_strict_user_only_slots", True):
+            return summary
+
         # Post-process to extract missing information from comprehensive fields
         # First, try to extract from environmental_setting if it has structured format
         env_setting = summary.get("environmental_setting", "")
@@ -843,31 +954,19 @@ class InterviewAgentGroup:
     def get_conversation_history(self) -> list:
         """Get the full conversation history."""
         return self.conversation_history.copy()
-    
+
     def is_interview_complete(self) -> bool:
-        """Check if sufficient empathy assessment information has been gathered."""
-        summary = self.get_interview_summary()
-        
-        # Required fields for completion
-        required_fields = ["assessment_context", "robot_platform", "environmental_setting"]
-        important_fields = ["interaction_modalities", "collaboration_pattern"]
-        
-        # Check if all required fields are present
-        has_all_required = all(summary.get(field) for field in required_fields)
-        
-        # For interaction_modalities, accept either explicit answer or inferred value
-        interaction_modalities = summary.get("interaction_modalities")
-        has_interaction_modalities = (
-            interaction_modalities and 
-            interaction_modalities not in [None, ""] and
-            interaction_modalities != "null"
-        )
-        
-        # Check other important field
-        has_collaboration_pattern = summary.get("collaboration_pattern") and summary.get("collaboration_pattern") not in [None, ""]
-        
-        # Interview is complete if we have all required fields AND interaction_modalities (even if inferred)
-        return has_all_required and has_interaction_modalities and has_collaboration_pattern
+        """
+        True when structured slots used by ScenarioBrief / gates need no further input.
+
+        Same criterion as which fields get targeted follow-ups in process_response—avoids
+        LLM chat asking questions while extraction already filled every slot (or tools did).
+        """
+        try:
+            return len(self._get_missing_required_fields()) == 0
+        except Exception as e:
+            print(f"[WARNING] is_interview_complete failed: {e}")
+            return False
     
     def get_scenario_brief(self) -> Dict:
         """
@@ -893,6 +992,8 @@ class InterviewAgentGroup:
         ]
 
         brief = {
+            "name": summary.get("name"),
+            "scenario_label": summary.get("scenario_label"),
             **slot_values,
             "assessment_goals": summary.get("assessment_goals", []),
             "expected_empathy_forms": summary.get("expected_empathy_forms", []),

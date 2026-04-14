@@ -18,6 +18,24 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'utils'))
 from research_api import ResearchAPIClient, download_pdf
 from prompt_manager import PromptManager
 
+try:
+    from workflow_console import sub, sub_done, minor_separator, print_json_panel
+except ImportError:
+    def sub(msg, indent=2):
+        print(f"{' ' * indent}▸ {msg}", flush=True)
+
+    def sub_done(msg, indent=2):
+        print(f"{' ' * indent}✓ {msg}", flush=True)
+
+    def minor_separator(label=None):
+        if label:
+            print(f"  --- {label} ---", flush=True)
+        else:
+            print("  " + "·" * 60, flush=True)
+
+    def print_json_panel(title, obj, max_chars=None):
+        print(f"\n[{title}]\n{obj}\n")
+
 # Get project root for absolute paths
 PROJECT_ROOT = Path(__file__).parent.parent.resolve()
 
@@ -124,94 +142,93 @@ class LiteratureSearchAgentGroup:
         if focus_areas is None:
             focus_areas = ["definitions", "behaviors", "measurement"]
         
-        print("\n[Searching databases...]")
-        sys.stdout.flush()
-        
+        minor_separator("多库检索（原始命中，去重前）")
+        sub(f"共 {len(queries)} 条查询；每源最多 20 条/查询")
+
         all_papers = []
-        
-        # Search with all queries - increased max_per_source for broader coverage
+
         for i, query in enumerate(queries, 1):
-            print(f"  Query {i}/{len(queries)}: '{query}'...", end=" ")
-            sys.stdout.flush()
+            sub(f"检索 [{i}/{len(queries)}] 查询语句: {query}")
             papers = self.api_client.search_all(query, max_per_source=20)
             all_papers.extend(papers)
-            print(f"Found {len(papers)} papers")
-        
-        # Basic deduplication
-        print("  Deduplicating papers...", end=" ")
-        sys.stdout.flush()
+            sub_done(f"本查询命中 {len(papers)} 条（累计原始 {len(all_papers)} 条）")
+            for j, p in enumerate(papers[:5], 1):
+                t = (p.get("title") or "")[:76]
+                src = p.get("source") or p.get("venue") or ""
+                sub(f"样例{j}: [{src}] {t}{'…' if len(p.get('title') or '') > 76 else ''}", indent=6)
+            if len(papers) > 5:
+                sub(f"… 另有 {len(papers) - 5} 条本查询命中（略）", indent=6)
+
+        sub("按标题去重 …")
         unique_papers = []
         seen_titles = set()
         for paper in all_papers:
-            title_lower = paper['title'].lower()
+            title_lower = paper["title"].lower()
             if title_lower not in seen_titles:
                 seen_titles.add(title_lower)
                 unique_papers.append(paper)
-        
+
         self.papers = unique_papers
-        print(f"OK - Found {len(unique_papers)} unique papers")
-        
-        # Screen for relevance
-        print("\n[Screening papers for relevance...]")
-        screened = self._screen_relevance(unique_papers, focus_areas)
+        sub_done(f"去重后唯一论文 {len(unique_papers)} 篇（将进入 LLM 初筛，最多评 80 篇）")
+
+        minor_separator("LLM 初筛循环（通用机器人共情/量表相关度 1–5，≥3 保留）")
+        screened = self._screen_relevance(unique_papers, focus_areas, screening_label="初筛")
         
         self.screened_papers = screened
         return screened
     
-    def _screen_relevance(self, papers: List[Dict], focus_areas: List[str]) -> List[Dict]:
-        """Screen papers for relevance using LLM."""
+    def _screen_relevance(
+        self,
+        papers: List[Dict],
+        focus_areas: List[str],
+        screening_label: str = "初筛",
+    ) -> List[Dict]:
+        """Screen papers for relevance using LLM; prints every paper for demo visibility."""
         screened = []
-        
+
         screening_prompt_template = self.prompt_manager.get_agent_group_prompt(
             "literature_search_agent_group",
             "relevance_screening_prompt"
         )
-        
-        for idx, paper in enumerate(papers[:80], 1):  # Screen first 80 for comprehensive coverage
+
+        total = min(len(papers), 80)
+        sub(f"{screening_label}：逐篇调用 LLM 打分（共 {total} 篇）…")
+
+        for idx, paper in enumerate(papers[:80], 1):
             try:
-                title_short = paper.get('title', '')[:60]
-                if idx % 10 == 0 or idx == 1:
-                    print(f"  Screening [{idx}/{min(len(papers), 80)}]: {title_short}...", end=" ")
-                sys.stdout.flush()
-                
-                # Format screening prompt
+                title_full = paper.get("title", "") or ""
+                title_disp = (title_full[:72] + "…") if len(title_full) > 72 else title_full
+
                 prompt = screening_prompt_template.format(
-                    title=paper.get('title', ''),
-                    abstract=paper.get('abstract', '')[:500],
-                    focus=focus_areas[0] if focus_areas else "definitions"
+                    title=paper.get("title", ""),
+                    abstract=paper.get("abstract", "")[:500],
+                    focus=focus_areas[0] if focus_areas else "definitions",
                 )
-                
+
                 response = self.llm.invoke(prompt)
-                
-                # Parse score
-                score = 3  # Default
+
+                score = 3
                 if "SCORE:" in response.content:
-                    match = re.search(r'SCORE:\s*(\d+)', response.content)
+                    match = re.search(r"SCORE:\s*(\d+)", response.content)
                     if match:
                         score = int(match.group(1))
-                
-                # Extract reason
+
                 reason = "Relevance assessment"
                 if "REASON:" in response.content:
-                    match = re.search(r'REASON:\s*(.+)', response.content, re.DOTALL)
+                    match = re.search(r"REASON:\s*(.+)", response.content, re.DOTALL)
                     if match:
                         reason = match.group(1).strip()
-                
-                if score >= 3:  # Accept papers with score 3 or higher for comprehensive coverage
-                    paper['relevance_score'] = score
-                    paper['relevance_reason'] = reason
+
+                kept = score >= 3
+                if kept:
+                    paper["relevance_score"] = score
+                    paper["relevance_reason"] = reason
                     screened.append(paper)
-                    if idx % 10 == 0 or idx == 1:
-                        print(f"[RELEVANT - Score: {score}]")
-                elif idx % 10 == 0 or idx == 1:
-                    print(f"[Not relevant - Score: {score}]")
-            
+
             except Exception as e:
-                print(f"  [ERROR]: {paper.get('title', '')[:50]}...")
                 continue
-        
-        print(f"\nScreening complete: {len(screened)}/{min(len(papers), 80)} papers relevant (score >= 3)")
-        sys.stdout.flush()
+
+        sub_done(f"{screening_label}完成：保留 {len(screened)}/{total} 篇（阈值 ≥3）")
         return screened
     
     def compute_scenario_relevance_score(self, paper: Dict, scenario_brief: Dict) -> tuple:
@@ -367,22 +384,17 @@ class LiteratureSearchAgentGroup:
             if len(high_rel) >= min_high_relevance:
                 break
 
-            print(
-                f"\n  [Query Expansion] Attempt {attempt + 1}/{max_retries}: "
-                f"{len(high_rel)} high-relevance papers found, need {min_high_relevance}."
-            )
-
             coverage = self.coverage_check(high_rel, scenario_brief)
             gaps = coverage.get("gaps", [])
 
             new_queries = self.generate_expansion_queries(scenario_brief, used_queries, gaps)
             if not new_queries:
-                print("  [Query Expansion] No new queries generated; stopping expansion.")
+                sub("补检索：未能生成新查询，结束扩展。")
                 break
 
-            print(f"  [Query Expansion] New queries: {new_queries}")
+            sub(f"补检索：新查询 {len(new_queries)} 条 → {new_queries}")
 
-            # Search with new queries
+            lbl = f"补检·第{attempt + 1}轮"
             new_raw: List[Dict] = []
             for q in new_queries:
                 found = self.api_client.search_all(q, max_per_source=15)
@@ -390,9 +402,12 @@ class LiteratureSearchAgentGroup:
                     if p['title'].lower() not in seen_titles:
                         seen_titles.add(p['title'].lower())
                         new_raw.append(p)
-            print(f"  [Query Expansion] Found {len(new_raw)} new unique papers.")
-
-            new_screened = self._screen_relevance(new_raw, ["definitions", "behaviors", "measurement"]) if new_raw else []
+            sub_done(f"补检索：去重后新论文 {len(new_raw)} 篇，进入「{lbl}」")
+            new_screened = (
+                self._screen_relevance(new_raw, ["definitions", "behaviors", "measurement"], screening_label=lbl)
+                if new_raw
+                else []
+            )
 
             new_scored: List[Dict] = []
             for p in new_screened:
@@ -429,51 +444,51 @@ class LiteratureSearchAgentGroup:
         Returns:
             List of extracted findings
         """
-        print("\n[Extracting key findings from abstracts...]")
-        
+        minor_separator("摘要抽取循环（每篇 LLM → JSON：定义/行为/测量…）")
+        sub(f"将对初筛保留列表中前 {min(len(papers), 50)} 篇逐篇抽取")
+
         extraction_template = self.prompt_manager.get_agent_group_prompt(
             "literature_search_agent_group",
             "extraction_prompt"
         )
-        
+
         findings = []
-        
-        for idx, paper in enumerate(papers[:50], 1):  # Extract from top 50 for comprehensive analysis
+
+        for idx, paper in enumerate(papers[:50], 1):
             try:
-                title_short = paper.get('title', '')[:60]
-                print(f"  Extracting [{idx}/{min(len(papers), 50)}]: {title_short}...", end=" ")
-                sys.stdout.flush()
-                
+                title_short = (paper.get("title", "") or "")[:62]
                 prompt = extraction_template.format(
-                    title=paper.get('title', ''),
-                    abstract=paper.get('abstract', '')
+                    title=paper.get("title", ""),
+                    abstract=paper.get("abstract", ""),
                 )
-                
+
                 response = self.llm.invoke(prompt)
-                
-                # Try to parse JSON from response
+
                 content = response.content.strip()
-                # Find JSON in response
-                json_match = re.search(r'\{.*\}', content, re.DOTALL)
+                json_match = re.search(r"\{.*\}", content, re.DOTALL)
                 if json_match:
                     extracted = json.loads(json_match.group())
-                    extracted['paper_title'] = paper.get('title')
-                    extracted['paper_year'] = paper.get('year')
+                    extracted["paper_title"] = paper.get("title")
+                    extracted["paper_year"] = paper.get("year")
                     findings.append(extracted)
-                    print("[OK]")
-                    sys.stdout.flush()
+                    def_snip = (extracted.get("empathy_definition") or "")[:90]
+                    if len(def_snip) == 90:
+                        def_snip += "…"
+                    beh = extracted.get("behaviors_identified")
+                    beh_one = ""
+                    if isinstance(beh, str) and beh.strip():
+                        beh_one = beh.strip()[:70] + ("…" if len(beh.strip()) > 70 else "")
+                    elif isinstance(beh, list) and beh:
+                        beh_one = str(beh[0])[:70]
+                    meth = str(extracted.get("measurement_methods") or "")[:70]
                 else:
-                    print("[No findings]")
-                    sys.stdout.flush()
-            
+                    findings.append(None)
+
             except Exception as e:
-                print(f"[ERROR: {e}]")
-                sys.stdout.flush()
-                continue
-        
+                findings.append(None)
+
+        findings = [f for f in findings if f is not None]
         self.extracted_findings = findings
-        print(f"\nExtraction complete: {len(findings)} findings extracted")
-        sys.stdout.flush()
         return findings
     
     def download_pdfs(self, papers: List[Dict], run_id: str, categories: List[str] = None) -> List[Dict]:
@@ -491,8 +506,9 @@ class LiteratureSearchAgentGroup:
         if categories is None:
             categories = ["definitions", "behaviors", "measurement"]
         
-        print("\n[Downloading PDFs...]")
-        
+        minor_separator("PDF 下载循环（按 definitions / behaviors / measurement 轮转分类）")
+        sub(f"最多尝试下载前 {min(len(papers), 50)} 篇初筛保留论文")
+
         downloaded = []
         
         for i, paper in enumerate(papers[:50], 1):  # Download up to 50 papers for comprehensive collection
@@ -503,36 +519,26 @@ class LiteratureSearchAgentGroup:
             pdfs_dir = PROJECT_ROOT / f"data/runs/{run_id}/literature_search_agent_group/pdfs/{category}"
             pdfs_dir.mkdir(parents=True, exist_ok=True)
             
-            title_short = paper['title'][:60]
-            print(f"  [{i}/{min(len(papers), 50)}] {category}/{title_short}...")
-            
             if paper.get('url'):
                 year = paper.get('year') or 'unknown'
                 filename = f"paper_{i:02d}_{year}.pdf"
                 filepath = pdfs_dir / filename
-                
+
                 if download_pdf(paper['url'], str(filepath)):
                     paper['local_pdf_path'] = str(filepath)
                     paper['downloaded'] = True
                     paper['downloaded_at'] = datetime.now().isoformat()
                     paper['category'] = category
                     downloaded.append(paper)
-                    print(f"    [OK] Downloaded")
                 else:
                     paper['downloaded'] = False
-                    print(f"    [FAIL] Failed")
             else:
                 paper['downloaded'] = False
-                print(f"    [FAIL] No URL")
         
         self.downloaded = downloaded
-        print(f"\nDownload complete: {len(downloaded)} PDFs successfully downloaded")
-        sys.stdout.flush()
         return downloaded
     
     def organize_results(self) -> Dict:
-        """Organize findings into structured format for scale design."""
-        print("\n[Organizing findings for scale design...]")
         
         organized = {
             "empathy_definitions": [],
@@ -597,18 +603,27 @@ class LiteratureSearchAgentGroup:
         """
         MIN_HIGH_RELEVANCE = 3
 
-        print("\n" + "=" * 70)
-        print("ENHANCED LITERATURE SEARCH PIPELINE")
-        print("=" * 70)
+        minor_separator("Boateng Step 1b — 子过程")
+        lit_input_preview = {
+            k: interview_summary.get(k)
+            for k in (
+                "assessment_context",
+                "robot_platform",
+                "interaction_modalities",
+                "collaboration_pattern",
+                "environmental_setting",
+                "assessment_goals",
+                "expected_empathy_forms",
+                "measurement_requirements",
+            )
+        }
+        print_json_panel("文献检索输入 · 访谈关键字段（JSON）", lit_input_preview, max_chars=10000)
 
-        # Step 1: Generate targeted queries
-        print("\n[Step 1/5] Generating targeted search queries...")
+        sub("1b-i  基于访谈摘要生成检索查询（LLM）")
         queries = self.generate_queries(interview_summary)
-        for i, q in enumerate(queries, 1):
-            print(f"  {i}. {q}")
+        sub_done(f"已生成 {len(queries)} 条查询")
 
-        # Step 2: Search and screen (generic robot empathy relevance)
-        print("\n[Step 2/5] Searching multiple databases and screening...")
+        sub("1b-ii 多源检索（arXiv / Semantic Scholar）与相关性初筛（LLM 1–5 分，≥3 保留）")
         screened = self.search_and_screen(queries)
 
         # ----------------------------------------------------------------
@@ -622,24 +637,24 @@ class LiteratureSearchAgentGroup:
         use_scenario_scoring = scenario_brief and scenario_brief.get("is_ready", False)
 
         if use_scenario_scoring:
-            print(f"\n[Step 2.5] Scoring {len(screened)} screened papers against your scenario...")
+            sub(
+                f"1b-iii 场景相关二次打分（对 {len(screened)} 篇初筛保留论文逐篇 LLM；"
+                "SCENARIO_SCORE 1–5，≥4 记为高相关）"
+            )
             for idx, paper in enumerate(screened, 1):
-                if idx == 1 or idx % 10 == 0 or idx == len(screened):
-                    print(f"  Scoring [{idx}/{len(screened)}]...", end=" ", flush=True)
+                title_full = paper.get("title", "") or ""
+                title_disp = (title_full[:68] + "…") if len(title_full) > 68 else title_full
                 score, dims, reason = self.compute_scenario_relevance_score(paper, scenario_brief)
                 paper["scenario_relevance_score"] = score
                 paper["scenario_covered_dimensions"] = dims
                 paper["scenario_relevance_reason"] = reason
                 scored_papers.append(paper)
-                if idx == 1 or idx % 10 == 0 or idx == len(screened):
-                    print(f"score={score}")
 
             high_relevance_papers = self.high_relevance_filter(scored_papers, threshold=4)
-            print(f"\n  High-relevance papers (scenario score >= 4): {len(high_relevance_papers)}/{len(screened)}")
+            sub_done(f"高相关论文 {len(high_relevance_papers)} / {len(screened)}")
 
-            # Step 2.6: Query expansion if high-relevance count is insufficient
             if len(high_relevance_papers) < MIN_HIGH_RELEVANCE:
-                print(f"\n[Step 2.6] Query expansion (have {len(high_relevance_papers)}, need {MIN_HIGH_RELEVANCE})...")
+                sub(f"1b-iv  补检索循环（当前 {len(high_relevance_papers)} 篇，目标 ≥ {MIN_HIGH_RELEVANCE}）")
                 high_relevance_papers, expansion_trace = self.query_expansion_loop(
                     scenario_brief=scenario_brief,
                     current_high_rel_papers=high_relevance_papers,
@@ -647,38 +662,33 @@ class LiteratureSearchAgentGroup:
                     used_queries=queries,
                     min_high_relevance=MIN_HIGH_RELEVANCE,
                 )
-                print(f"  After expansion: {len(high_relevance_papers)} high-relevance papers.")
+                sub_done(f"补检索结束：高相关论文共 {len(high_relevance_papers)} 篇")
 
-            # Coverage check on final high-relevance set
-            print("\n[Coverage Check] Analysing scenario dimension coverage...")
+            sub("1b-v   覆盖度检查（模态 / 用户群 / 测量 / 场景 四维）")
             coverage_report = self.coverage_check(high_relevance_papers, scenario_brief)
-            print(f"  Coverage score: {coverage_report.get('coverage_score', 0):.2f}")
+            sub_done(f"coverage_score = {coverage_report.get('coverage_score', 0):.2f}")
             if coverage_report.get("gaps"):
-                print(f"  Gaps: {coverage_report['gaps']}")
+                sub(f"覆盖缺口: {coverage_report['gaps']}")
+            print_json_panel("场景覆盖度报告 coverage_report（完整 JSON）", coverage_report, max_chars=8000)
         else:
             # Fallback: treat all screened papers as the high-relevance set
             scored_papers = screened
             high_relevance_papers = screened
             if scenario_brief and not scenario_brief.get("is_ready", False):
-                print(
-                    "\n  [WARNING] scenario_brief is incomplete "
-                    f"(missing: {scenario_brief.get('missing_slots', [])}). "
-                    "Skipping scenario-specific relevance scoring."
+                sub(
+                    "警告：scenario_brief 不完整，跳过场景相关打分；"
+                    f"缺失: {scenario_brief.get('missing_slots', [])}"
                 )
 
-        # ----------------------------------------------------------------
-        # Step 3: Extract findings
-        # ----------------------------------------------------------------
-        print("\n[Step 3/5] Extracting empathy-specific findings...")
+        sub("1b-vi 从摘要抽取结构化发现（定义 / 行为 / 测量方法）")
         findings = self.extract_findings(screened)
 
-        # Step 4: Download PDFs
-        print("\n[Step 4/5] Downloading PDFs by category...")
+        sub("1b-vii 按类别下载 PDF（definitions / behaviors / measurement）")
         downloaded = self.download_pdfs(screened, run_id)
 
-        # Step 5: Organize results
-        print("\n[Step 5/5] Organizing findings for scale design...")
+        sub("1b-viii 归纳 organized_findings 供量表生成使用")
         organized = self.organize_results()
+        sub_done("文献管线子步骤全部完成")
 
         # Build gate report
         gate_report = {
@@ -711,16 +721,38 @@ class LiteratureSearchAgentGroup:
             "coverage_report": coverage_report,
         }
 
-        print("\n" + "=" * 70)
-        print("ENHANCED LITERATURE SEARCH COMPLETE")
-        print(f"  Papers found:          {len(self.papers)}")
-        print(f"  Screened (relevant):   {len(screened)}")
-        print(f"  High-relevance:        {len(high_relevance_papers)}")
-        print(f"  Gate passed:           {gate_report['gate_passed']}")
-        print(f"  Coverage score:        {coverage_report.get('coverage_score', 'N/A')}")
-        print(f"  Findings extracted:    {len(findings)}")
-        print(f"  PDFs downloaded:       {len(downloaded)}")
-        print(f"  Location: data/runs/{run_id}/literature_search_agent_group/")
-        print("=" * 70)
+        minor_separator("Step 1b 统计摘要")
+        sub(f"检索命中论文数: {len(self.papers)}")
+        sub(f"初筛保留: {len(screened)}")
+        sub(f"场景高相关: {len(high_relevance_papers)} | 门控通过: {gate_report['gate_passed']}")
+        sub(f"抽取发现条数: {len(findings)} | PDF 下载成功: {len(downloaded)}")
+        sub_done(f"数据目录 data/runs/{run_id}/literature_search_agent_group/")
+
+        org_preview = {
+            "empathy_definitions_n": len(organized.get("empathy_definitions") or []),
+            "empathy_definitions_sample": (organized.get("empathy_definitions") or [])[:2],
+            "measurement_approaches_n": len(organized.get("measurement_approaches") or []),
+            "measurement_sample": (organized.get("measurement_approaches") or [])[:2],
+            "behaviors_verbal_n": len((organized.get("empathic_behaviors") or {}).get("verbal") or []),
+            "behaviors_nonverbal_n": len((organized.get("empathic_behaviors") or {}).get("nonverbal") or []),
+            "behaviors_adaptive_n": len((organized.get("empathic_behaviors") or {}).get("adaptive") or []),
+        }
+        print_json_panel("文献归纳 organized_findings（终端节选，完整在内存/下游提示词）", org_preview, max_chars=10000)
+
+        print_json_panel(
+            "文献门控与补检索轨迹 gate_report（JSON）",
+            {
+                "gate_passed": gate_report.get("gate_passed"),
+                "high_relevance_count": gate_report.get("high_relevance_count"),
+                "scenario_scoring_enabled": gate_report.get("scenario_scoring_enabled"),
+                "expansion_trace": gate_report.get("expansion_trace"),
+                "totals": {
+                    "papers_unique": gate_report.get("total_papers_found"),
+                    "screened_kept": gate_report.get("total_screened"),
+                    "scenario_scored": gate_report.get("total_scored"),
+                },
+            },
+            max_chars=12000,
+        )
 
         return results
