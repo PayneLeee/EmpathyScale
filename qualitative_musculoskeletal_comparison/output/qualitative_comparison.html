@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>肌肉骨骼场景 · 量表定性对照</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #fff; --text: #1a1a1a; --muted: #666;
+    --good: #0d6b3a; --good-bg: #e8f5ee; --bad: #9b2335; --bad-bg: #fdecef;
+    --accent: #2563eb; --border: #e5e7eb;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--text); line-height: 1.5; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 24px 20px 48px; }
+  h1 { font-size: 1.35rem; margin: 0 0 8px; }
+  .subtitle { color: var(--muted); margin-bottom: 20px; font-size: 0.95rem; }
+  section { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin-bottom: 20px; }
+  h2 { font-size: 1.05rem; margin: 0 0 14px; border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+  .scenario-table th { width: 140px; background: #f8fafc; font-weight: 600; }
+  .scenario-sub h4 { margin: 0 0 6px; font-size: 0.85rem; color: var(--muted); }
+  .analysis-block { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px dashed var(--border); }
+  .analysis-block:last-child { border-bottom: none; }
+  .analysis-summary { font-size: 0.9rem; color: #333; margin: 0 0 8px; }
+  .analysis-block ul { margin: 0 0 10px; padding-left: 1.2rem; font-size: 0.88rem; }
+  .ex-card { background: #fafbfc; border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; margin-top: 8px; }
+  .ex-item { margin: 6px 0 4px; font-size: 0.86rem; }
+  .ex-issue { margin: 0 0 6px; font-size: 0.82rem; color: var(--bad); font-weight: 600; }
+  .lit-note { font-size: 0.8rem; color: #555; margin: 4px 0 0; }
+  .mech-refs { margin: 10px 0; padding-left: 1.2rem; font-size: 0.84rem; }
+  .highlights { margin-top: 10px; }
+  .highlight-row { background: var(--good-bg); border: 1px solid #c8e6d4; border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; }
+  .cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 900px) { .cols3 { grid-template-columns: 1fr; } }
+  .col h3 { font-size: 0.9rem; margin: 0 0 8px; color: var(--accent); }
+  .col ul { margin: 0; padding-left: 1.2rem; font-size: 0.88rem; }
+  .col h4 { font-size: 0.8rem; margin: 12px 0 4px; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th, td { border: 1px solid var(--border); padding: 10px; vertical-align: top; text-align: left; }
+  th { background: #f0f4ff; }
+  .cell-good { background: var(--good-bg); }
+  .cell-bad { background: var(--bad-bg); }
+  .tag { font-size: 0.75rem; color: var(--muted); }
+  .pair-card { border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-bottom: 12px; background: #fafbfc; }
+  .pair-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 800px) { .pair-grid { grid-template-columns: 1fr; } }
+  .pair-grid label { font-size: 0.72rem; font-weight: 600; color: var(--muted); }
+  .pair-grid p { margin: 4px 0 0; font-size: 0.86rem; }
+  .note { margin: 10px 0 0; font-size: 0.85rem; color: #444; }
+  details { margin-top: 12px; }
+  .muted { color: var(--muted); font-size: 0.85rem; }
+  .badge { display: inline-block; background: #eef2ff; color: var(--accent); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-left: 6px; }
+  .prompt-block { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin: 10px 0; font-size: 0.8rem; line-height: 1.45; white-space: pre-wrap; word-break: break-word; max-height: 480px; overflow: auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>肌肉骨骼 · 并肩装配 · 共享料架</h1>
+  <p class="subtitle">九步骤最终量表 · 单提示直出（run_05 最差 / run_02 最好）· PETS 基线 · run 2026-05-11_155408</p>
+
+  <section>
+    <h2>场景设定（本报告评价对象）</h2>
+    <table class="scenario-table"><tr><th>任务情境</th><td>人与肌肉骨骼机器人并肩坐在同一装配工位，共享工具架；人取需判断的精细件，机器人取较重或靠自身的件；时序协调失误会导致同时伸手、挡路或轻微碰撞。</td></tr><tr><th>机器人平台</th><td>肌肉骨骼机器人（非传统刚性机械臂分区作业）</td></tr><tr><th>交互方式</th><td>机器人短句口语（如「我来拿这个」「你先拿」）+ 人通过手臂暂停、让路、改轨迹、收回等动作观察意图</td></tr><tr><th>协作分工</th><td>人负责精细/判断项，机器人负责较重或较近项；靠简短话语与手臂动作线索协调</td></tr><tr><th>环境</th><td>装配工位，共享工具架</td></tr><tr><th>期待的共情表现</th><td>及时表明意图；避让（让路、暂停、收回）；在共享工具架处留出空间</td></tr><tr><th>典型失败模式</th><td>同时伸手拿同一层物料；误以为对方已看到自己的伸手；挡路或擦碰；接触后无暂停、无避让、无解释</td></tr><tr><th>与传统机械臂对比</th><td>刚性臂常有清晰工位边界；本场景机器人与人共享同一取放空间，轨迹与上身距离更接近人际并肩协作。</td></tr></table>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px;font-size:0.88rem;">
+      <div><h4 class="scenario-sub">场景共情机制</h4><ul><li>碰撞/接触后的适应</li><li>共享工位协调</li><li>通过观察动作的隐性协调</li><li>显式沟通与修复</li><li>对身体限制的理解</li></ul></div>
+      <div><h4 class="scenario-sub">风险与约束</h4><ul><li>存在肢体接触/碰撞风险（physical_contact_risk=true）</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>1 · 定性分析：为何九步骤量表更适合本场景</h2>
+    <div class="analysis-block"><h3>PETS：跨情境通用，对本场景过于笼统</h3><p class="analysis-summary">正式量表 10 条（Schmidmaier et al., 2024）；检出 10 条与装配共享工位场景明显不符或过于抽象。</p><ul><li>10 条全部以「系统」为主语，无共享工具架、同时伸手、口头让行等场景要素。</li><li>ER（6 条）测情绪/心理；UT（4 条）测抽象理解/信任— 均难区分「撞架」与「顺畅协调」。</li><li>适合作跨情境基线，不宜作为本装配工位的主测量工具。</li></ul><div class="examples"><div class="ex-card"><p class="ex-issue">评价「系统」是否考虑心理状态，非工位协作行为。</p><p class="ex-item"><span class="tag">PETS·PETS-ER</span> 系统会考虑我的心理状态。</p></div><div class="ex-card"><p class="ex-issue">整体「情商」印象，无法区分撞架与顺畅协调。</p><p class="ex-item"><span class="tag">PETS·PETS-ER</span> 系统显得很有情商。</p></div><div class="ex-card"><p class="ex-issue">情绪表达，与共享料架取放无关。</p><p class="ex-item"><span class="tag">PETS·PETS-ER</span> 系统会表达情绪。</p></div><div class="ex-card"><p class="ex-issue">同情/情绪支持，非工厂并肩协调。</p><p class="ex-item"><span class="tag">PETS·PETS-ER</span> 系统对我表示同情。</p></div><div class="ex-card"><p class="ex-issue">社交兴趣，非可观察协调。</p><p class="ex-item"><span class="tag">PETS·PETS-ER</span> 系统对我表现出兴趣。</p></div></div></div><div class="analysis-block"><h3>单提示直出：主要问题是可核验性与构念漂移</h3><p class="analysis-summary">五次生成约 10–15 条/次（最好 10 条 / 最差 12 条）；核心问题不在条目数量，而在跨五次检出 13 条难核验或构念偏移表述（去重后）。</p><ul><li>可核验性问题：不少句子要求被试推断机器人内在状态（如“是否理解我在场”），难以现场一致评分。</li><li>构念漂移问题：出现“像人类同事/队友”“流畅感”等整体印象，偏离共享工位中的具体协调行为。</li><li>稳定性问题：一次成稿且多为扁平条目列表，缺少文献约束、模拟预试与统计筛选，跨次可比性弱。</li></ul><div class="examples"><div class="ex-card"><p class="ex-issue">用「像人类同事/队友」的整体感受替代可观察的让行、碰后与口头修复。</p><p class="ex-item"><span class="tag">直出·run_05·Items</span> 我感觉机器人考虑了我的个人空间和接近距离，类似于人类同事的行为方式。</p></div><div class="ex-card"><p class="ex-issue">要求推断机器人「意识到」协调失误，而非描述可见的暂停/改轨迹/口头说明。</p><p class="ex-item"><span class="tag">直出·run_03·Items</span> 总体而言，机器人似乎意识到我的存在，并调整其行为以避免干扰我。</p><p class="ex-item"><span class="tag">直出·run_04·Items</span> 机器人的暂停、缩回或路径变化显示它意识到了我同时进行的动作。</p></div><div class="ex-card"><p class="ex-issue">未锚定共享料架、取放动作或碰后恢复等场景要素，表述过泛。</p><p class="ex-item"><span class="tag">直出·run_01·Items</span> 机器人似乎在意我的个人空间和接近距离。</p><p class="ex-item"><span class="tag">直出·run_01·Items</span> 总体而言，机器人的行为让我觉得它考虑到了我的动作和舒适度。</p></div></div></div><div class="analysis-block"><h3>九步骤：好在哪里（机制 + 文献 + 流程）</h3><p class="analysis-summary">最终 10 条（run 2026-05-11_155408）；文献检索 screened 24 篇、高相关 8 篇，其中 4 类机制有对应论文支撑。</p><ul><li>流程：访谈 → 文献机制卡片 → 题项生成与双组模拟 → EFA 保留可施测题量。</li><li>条目：保留场景内真实话术与手臂可预测性，对应同时伸手、挡路、几乎碰撞等失败模式。</li><li>结构：协调沟通（6）+ 共享工位考量（4），比 PETS 更贴场景、比直出更短更稳。</li></ul><ul class="mech-refs"><li><strong>共享工位协调</strong>：共享工位考量维度（伸手位置、同时取物、工位安全感）<br><span class="lit-note">文献：Human Factors Considerations and Metrics in Shared …；Human-Robot Perception in Industrial Environments: …</span></li><li><strong>显式沟通与修复</strong>：「你先拿」「我来拿这个」、误抓后口头修复<br><span class="lit-note">文献：A Virtual Sandbox Approach to Studying the Effect o…</span></li><li><strong>隐性协调（动作可预期）</strong>：手臂轨迹可预判、观察手臂可知取件时机<br><span class="lit-note">文献：Human-robot proxemics；Physical interaction learning: Behavior adaptation …</span></li><li><strong>碰撞/接触情境</strong>：几乎相撞时的有效沟通<br><span class="lit-note">文献：Generating behavioral protocol for human-robot phys…；The path towards contact-based physical human–robot…；Physical interaction learning: Behavior adaptation …</span></li></ul><div class="highlights"><div class="highlight-row"><span class="tag">显式让行</span><p class="ex-item">当我们同时伸手时，机器人会说「你先拿」，让我先取。</p><p class="lit-note">口语让行与 HRI 中的 augmented communication / common ground 研究一致（如 Arntz et al., 2021）。</p></div><div class="highlight-row"><span class="tag">动作可预期</span><p class="ex-item">通过观察它的手臂，我能预判机器人何时会去取工具。</p><p class="lit-note">对应「通过观察动作的隐性协调」；与共享空间中的 proxemics、动作线索研究相呼应。</p></div><div class="highlight-row"><span class="tag">协调修复</span><p class="ex-item">当我们几乎相撞时，我觉得机器人的沟通是有效的。</p><p class="lit-note">对齐碰撞/接触情境下的行为适应与沟通修复文献（physical contact / adaptation 类研究）。</p></div></div></div>
+  </section>
+
+  <section>
+    <h2>2 · 三份量表（最终结果）</h2>
+    <div class="cols3">
+      <div class="col"><h3>九步骤 <span class="badge">10 条</span></h3><h4>协调沟通（6 条）</h4><ul><li>机器人的手臂轨迹使我容易预判它的下一步动作。</li><li>通过观察它的手臂，我能预判机器人何时会去取工具。</li><li>当我们同时伸手时，机器人会说「你先拿」，让我先取。</li><li>机器人说「我来拿这个」等话语，使其意图一目了然。</li><li>误抓之后，机器人的口头回应能迅速让我们重新协调。</li><li>当我们几乎相撞时，我觉得机器人的沟通是有效的。</li></ul><h4>共享工位考量（4 条）</h4><ul><li>机器人的动作表明它理解我需要伸手的位置。</li><li>在同时伸手取物时，机器人的短句减轻了我的挫败感。</li><li>机器人的口头指示让共享工位感觉更安全。</li><li>我很欣赏机器人用口头方式表明它会等我先取。</li></ul></div>
+      <div class="col">
+        <h3>单提示 <span class="badge">最差 run_05</span></h3><h4>条目</h4><ul><li>机器人在伸手取工具前，会给出明确的提前信号（例如“我来拿这个”等语言提示或可见暂停），以便我能预判其动作。</li><li>当我伸手取物品时，机器人通过暂停、缩回或改变路径来避免干扰我的手。</li><li>机器人在任务中在其手臂与我身体之间保持了足够空间，让我感到身体舒适。</li><li>机器人经常和我同时伸手够取同一个料架槽位，导致阻挡或碰撞。(反向计分)</li><li>当我们的轨迹交叉时，机器人没有调整路径或减速，并且毫无解释或暂停地与我发生接触。(反向计分)</li><li>机器人似乎注意到我在共享料架处需要额外空间，并有意为我留出空间。</li><li>机器人的动作（手臂暂停、路径改变、缩回）清晰地表明了其下一步行动，帮助我协调自己的伸手动作。</li><li>在近距离接触或轻微触碰后，机器人通过暂停、移开或说类似“你先拿”的话来回应这一情况。</li><li>我感觉机器人考虑了我的个人空间和接近距离，类似于人类同事的行为方式。</li><li>机器人经常挡住我伸手够取的范围或碰触我，而未尝试避免。(反向计分)</li><li>机器人的语言和视觉信号时机把握得当，我从未对其动作感到意外。</li><li>机器人将共享工作空间视为共享区域，根据我的动作调整自身行为，而不是假设我总是会让开。</li></ul>
+        <h3 style="margin-top:14px">单提示 <span class="badge">最好 run_02</span></h3><h4>条目</h4><ul><li>机器人在伸入共享料架前，会给出明确的信号（语言或视觉），以便我能预判其动作。</li><li>当我们同时伸手到同一区域时，机器人会暂停或退后，让我先取所需物品。</li><li>当我们并排工作时，机器人与我身体保持了舒适的距离。</li><li>如果机器人的手臂靠近我，它会减速或改变路径以避免意外接触。</li><li>机器人似乎注意到我在料架处需要更多空间，并相应地调整其伸手范围。</li><li>在任何轻微碰撞或擦碰后，机器人以似乎带有歉意或谨慎的方式暂停或调整位置。</li><li>机器人的时机配合显得有协作性——它等我完成伸手后，再移入同一空间。</li><li>机器人的手臂轨迹感觉类似于人类协作者的动作——体贴而非机械。</li><li>当机器人说话时（例如“我来拿这个”或“你先拿”），它帮助我理解了其意图并减少了不确定性。</li><li>总体而言，机器人表现得好像理解我的身体存在，并尽量不干扰我的动作。</li></ul>
+      </div>
+      <div class="col"><h3>PETS <span class="badge">10 条</span></h3><h4>PETS-情绪响应（ER）</h4><ul><li>系统会考虑我的心理状态。</li><li>系统显得很有情商。</li><li>系统会表达情绪。</li><li>系统对我表示同情。</li><li>系统对我表现出兴趣。</li><li>系统支持我应对情绪情境。</li></ul><h4>PETS-理解与信任（UT）</h4><ul><li>系统理解我的目标。</li><li>系统理解我的需求。</li><li>我信任该系统。</li><li>系统理解我的意图。</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>3 · 恰当 / 不恰当条目对照</h2>
+    <table><thead><tr><th>主题</th><th>九步骤（恰当）</th><th>对照（不恰当）</th><th>差异</th></tr></thead>
+    <tbody><tr><td>共享工位 / 轮流取件</td><td class='cell-good'>当我们同时伸手时，机器人会说「你先拿」，让我先取。</td><td class='cell-bad'>系统理解我的目标。<br><span class='tag'>PETS-UT</span></td><td>九步骤描述可观察的协作动作；PETS 是抽象目标理解，无法区分「撞架」与「顺畅轮流」。</td></tr><tr><td>口头让行 / 修复</td><td class='cell-good'>机器人说「我来拿这个」等话语，使其意图一目了然。</td><td class='cell-bad'>系统对我表示同情。<br><span class='tag'>PETS-ER</span></td><td>场景里机器人会说「你先拿」；PETS 情绪共情条目与工厂协作机制无关。</td></tr><tr><td>碰撞后恢复</td><td class='cell-good'>当我们几乎相撞时，我觉得机器人的沟通是有效的。</td><td class='cell-bad'>我感觉机器人考虑了我的个人空间和接近距离，类似于人类同事的行为方式。<br><span class='tag'>单提示直出 (run_05)</span></td><td>九步骤锚定「几乎碰撞」时的沟通修复；直出用「像人类同事」式整体感受替代可观察行为链。</td></tr><tr><td>动作可观察性</td><td class='cell-good'>通过观察它的手臂，我能预判机器人何时会去取工具。</td><td class='cell-bad'>系统显得很有情商。<br><span class='tag'>PETS-ER</span></td><td>条目锚定在手臂动作可预测；PETS 评价的是系统「像有情商」的整体印象。</td></tr><tr><td>边界：适度 vs 读心</td><td class='cell-good'>机器人的手臂轨迹使我容易预判它的下一步动作。</td><td class='cell-bad'>总体而言，机器人表现得好像理解我的身体存在，并尽量不干扰我的动作。<br><span class='tag'>单提示直出 (run_02)</span></td><td>九步骤用轨迹/手臂动作表达可预期性；直出要求被试判断机器人「是否理解」在场存在，偏读心式表述。</td></tr><tr><td>信任与协调</td><td class='cell-good'>我很欣赏机器人用口头方式表明它会等我先取。</td><td class='cell-bad'>我信任该系统。<br><span class='tag'>PETS-UT</span></td><td>九步骤把信任建立在言行一致上；PETS 信任条目不说明协作中发生了什么。</td></tr></tbody></table>
+    <p class="muted">主观选定：最差=run_05（含「像人类同事」等整体感受句），最好=run_02（条目相对简洁、场景覆盖较完整）。</p>
+  </section>
+
+  <section><h2>4 · 相似主题并排</h2><div class="pair-card"><h3>理解 vs 协调让行</h3><div class="pair-grid"><div><label>九步骤</label><p>当我们同时伸手时，机器人会说「你先拿」，让我先取。</p></div><div><label>PETS</label><p>系统理解我的需求。</p></div><div><label>单提示直出</label><p>总体而言，机器人表现得好像理解我的身体存在，并尽量不干扰我的动作。</p></div></div><p class="note">同一「体谅」主题：九步骤绑定具体话语与工位动作；直出/PETS 难反映共享料架冲突。</p></div><div class="pair-card"><h3>接触后行为</h3><div class="pair-grid"><div><label>九步骤</label><p>当我们几乎相撞时，我觉得机器人的沟通是有效的。</p></div><div><label>PETS</label><p>系统会考虑我的心理状态。</p></div><div><label>单提示直出</label><p>我感觉机器人考虑了我的个人空间和接近距离，类似于人类同事的行为方式。</p></div></div><p class="note">碰撞/接触场景应测行为响应，而非「像同事」式整体感受。</p></div></section>
+  <section><h2>5 · 单提示五次定性小结</h2><ul><li>五次直出多为扁平「Items」列表，无稳定维度划分，未经文献检索、模拟评估与统计筛选。</li><li>条目数量约 10–15 条/次，随生成波动。</li><li>最差样本（run_05）仍含「像人类同事」式整体感受句，难在现场逐项核验。</li></ul></section>
+  <section><details><summary>九步骤证据链（收起）</summary><ul><li><code>data/runs/2026-05-11_155408/interview_agent_group/summary.json</code></li><li><code>data/runs/2026-05-11_155408/literature_search_agent_group/summary.json</code></li><li><code>data/runs/2026-05-11_155408/empathy_scale_generation_agent_group/scale_draft.md</code></li><li><code>data/runs/2026-05-11_155408/empathy_scale_generation_agent_group/filtered_scale_draft.md</code></li><li><code>data/runs/2026-05-11_155408/evaluation_agent_group/validation/evaluation_summary.json</code></li></ul></details></section>
+
+  <section>
+    <h2>附录 · 单提示直出提示词</h2>
+    <p class="muted">五次单提示直出（run_05 / run_02 等）均使用同一段提示词；场景正文与上文「场景设定」同源。
+    模型：<code>deepseek-v4-flash</code> · temperature 0.85 · seeds [42, 43, 44, 45, 46]</p>
+    <details open>
+      <summary>完整提示词（英文，与发送给模型一致）</summary>
+      <pre class="prompt-block">Design a perceived-empathy Likert scale for the human–robot collaboration scenario below.
+
+Assessment context: Human and musculoskeletal robot sit side by side at an assembly workstation, sharing a tool rack. Human does fine manipulation requiring judgment; robot handles heavier or closer items. Timing/coordination errors can lead to simultaneous reaching, blocking, and minor physical contact or collision.
+Robot platform: musculoskeletal robot
+Interaction: [&quot;verbal (robot speaks short phrases like &#x27;我来拿这个&#x27; or &#x27;你先拿&#x27;)&quot;, &#x27;visual (human observes robot arm pauses, yields, changes path, or retracts)&#x27;]
+Collaboration: Human takes finer, judgment-required items; robot takes heavier or items closer to its side.
+Environment: assembly workstation with shared tool rack
+Expected empathy forms: timely indication of intent; yielding or giving way; leaving space for human at the shared tool rack; considering human&#x27;s spatial comfort and proximity
+Failure modes: both reaching for the same shelf part at the same time; one party assuming the other has seen their reach; blocking or brushing against the human; contact without any pause, avoidance, or explanation
+Contrast vs rigid arm: Traditional rigid robot arms have clear work boundaries; human does not share the same pick-up area. This musculoskeletal robot sits right next to the human, sharing the same space, making arm trajectories and upper‑body distance feel more like human‑human collaboration.
+
+Output Markdown only. Format example (illustrative structure only—not instructions on how to organize the scale):
+
+# Empathy Scale
+
+## Purpose
+
+## Items
+- ...</pre>
+    </details>
+    <p class="muted">存档路径：<code>qualitative_musculoskeletal_comparison/direct_llm_runs/prompt_used.txt</code></p>
+  </section>
+</div>
+</body>
+</html>

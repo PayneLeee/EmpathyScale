@@ -1,0 +1,1046 @@
+{
+  "scenario_label": "肌肉骨骼 · 并肩装配 · 共享料架",
+  "scenario_display": {
+    "title": "当前评价场景设定",
+    "source_run": "2026-05-11_155408",
+    "rows": [
+      [
+        "任务情境",
+        "人与肌肉骨骼机器人并肩坐在同一装配工位，共享工具架；人取需判断的精细件，机器人取较重或靠自身的件；时序协调失误会导致同时伸手、挡路或轻微碰撞。"
+      ],
+      [
+        "机器人平台",
+        "肌肉骨骼机器人（非传统刚性机械臂分区作业）"
+      ],
+      [
+        "交互方式",
+        "机器人短句口语（如「我来拿这个」「你先拿」）+ 人通过手臂暂停、让路、改轨迹、收回等动作观察意图"
+      ],
+      [
+        "协作分工",
+        "人负责精细/判断项，机器人负责较重或较近项；靠简短话语与手臂动作线索协调"
+      ],
+      [
+        "环境",
+        "装配工位，共享工具架"
+      ],
+      [
+        "期待的共情表现",
+        "及时表明意图；避让（让路、暂停、收回）；在共享工具架处留出空间"
+      ],
+      [
+        "典型失败模式",
+        "同时伸手拿同一层物料；误以为对方已看到自己的伸手；挡路或擦碰；接触后无暂停、无避让、无解释"
+      ],
+      [
+        "与传统机械臂对比",
+        "刚性臂常有清晰工位边界；本场景机器人与人共享同一取放空间，轨迹与上身距离更接近人际并肩协作。"
+      ]
+    ],
+    "mechanisms": [
+      "碰撞/接触后的适应",
+      "共享工位协调",
+      "通过观察动作的隐性协调",
+      "显式沟通与修复",
+      "对身体限制的理解"
+    ],
+    "risk_flags": [
+      "存在肢体接触/碰撞风险（physical_contact_risk=true）"
+    ]
+  },
+  "nine_step": {
+    "source_run": "2026-05-11_155408",
+    "source_file": "data/runs/2026-05-11_155408/empathy_scale_generation_agent_group/filtered_scale_draft.md",
+    "markdown": "# Empathy Scale (Filtered)\n\n## Items by Factor (EFA-based)\n\n*Note: Items are organized by EFA factors (n=2). Factor structure determined by statistical analysis.*\n\n### Coordination Communication (6 items)\n- Item 1: The robot's arm trajectory made it easy to anticipate its next move.\n- Item 2: I could predict when the robot would reach for a tool by watching its arm.\n- Item 3: When we both reached at the same time, the robot said '你先拿' to let me go first.\n- Item 4: The robot's words ('我来拿这个') made its intention obvious.\n- Item 5: After a misreach, the robot's verbal response quickly got us back on track.\n- Item 6: I felt the robot communicated effectively when we almost collided.\n\n### Shared Workspace Consideration (4 items)\n- Item 7: The robot's movements showed it understood where I needed to reach.\n- Item 8: The robot's short phrases reduced my frustration during simultaneous reaching.\n- Item 9: The robot's spoken instructions made the shared workspace feel safer.\n- Item 10: I appreciated that the robot verbally indicated when it would wait for me.\n",
+    "items": [
+      {
+        "dimension": "协调沟通（6 条）",
+        "item_text": "机器人的手臂轨迹使我容易预判它的下一步动作。",
+        "item_text_en": "The robot's arm trajectory made it easy to anticipate its next move.",
+        "dimension_en": "Coordination Communication (6 items)"
+      },
+      {
+        "dimension": "协调沟通（6 条）",
+        "item_text": "通过观察它的手臂，我能预判机器人何时会去取工具。",
+        "item_text_en": "I could predict when the robot would reach for a tool by watching its arm.",
+        "dimension_en": "Coordination Communication (6 items)"
+      },
+      {
+        "dimension": "协调沟通（6 条）",
+        "item_text": "当我们同时伸手时，机器人会说「你先拿」，让我先取。",
+        "item_text_en": "When we both reached at the same time, the robot said '你先拿' to let me go first.",
+        "dimension_en": "Coordination Communication (6 items)"
+      },
+      {
+        "dimension": "协调沟通（6 条）",
+        "item_text": "机器人说「我来拿这个」等话语，使其意图一目了然。",
+        "item_text_en": "The robot's words ('我来拿这个') made its intention obvious.",
+        "dimension_en": "Coordination Communication (6 items)"
+      },
+      {
+        "dimension": "协调沟通（6 条）",
+        "item_text": "误抓之后，机器人的口头回应能迅速让我们重新协调。",
+        "item_text_en": "After a misreach, the robot's verbal response quickly got us back on track.",
+        "dimension_en": "Coordination Communication (6 items)"
+      },
+      {
+        "dimension": "协调沟通（6 条）",
+        "item_text": "当我们几乎相撞时，我觉得机器人的沟通是有效的。",
+        "item_text_en": "I felt the robot communicated effectively when we almost collided.",
+        "dimension_en": "Coordination Communication (6 items)"
+      },
+      {
+        "dimension": "共享工位考量（4 条）",
+        "item_text": "机器人的动作表明它理解我需要伸手的位置。",
+        "item_text_en": "The robot's movements showed it understood where I needed to reach.",
+        "dimension_en": "Shared Workspace Consideration (4 items)"
+      },
+      {
+        "dimension": "共享工位考量（4 条）",
+        "item_text": "在同时伸手取物时，机器人的短句减轻了我的挫败感。",
+        "item_text_en": "The robot's short phrases reduced my frustration during simultaneous reaching.",
+        "dimension_en": "Shared Workspace Consideration (4 items)"
+      },
+      {
+        "dimension": "共享工位考量（4 条）",
+        "item_text": "机器人的口头指示让共享工位感觉更安全。",
+        "item_text_en": "The robot's spoken instructions made the shared workspace feel safer.",
+        "dimension_en": "Shared Workspace Consideration (4 items)"
+      },
+      {
+        "dimension": "共享工位考量（4 条）",
+        "item_text": "我很欣赏机器人用口头方式表明它会等我先取。",
+        "item_text_en": "I appreciated that the robot verbally indicated when it would wait for me.",
+        "dimension_en": "Shared Workspace Consideration (4 items)"
+      }
+    ]
+  },
+  "pets": {
+    "source": "Schmidmaier et al. 2024 Table 1",
+    "items": [
+      {
+        "dimension": "PETS-情绪响应（ER）",
+        "item_text": "系统会考虑我的心理状态。",
+        "item_text_en": "The system considered my mental state.",
+        "dimension_en": "PETS-ER"
+      },
+      {
+        "dimension": "PETS-情绪响应（ER）",
+        "item_text": "系统显得很有情商。",
+        "item_text_en": "The system seemed emotionally intelligent.",
+        "dimension_en": "PETS-ER"
+      },
+      {
+        "dimension": "PETS-情绪响应（ER）",
+        "item_text": "系统会表达情绪。",
+        "item_text_en": "The system expressed emotions.",
+        "dimension_en": "PETS-ER"
+      },
+      {
+        "dimension": "PETS-情绪响应（ER）",
+        "item_text": "系统对我表示同情。",
+        "item_text_en": "The system sympathized with me.",
+        "dimension_en": "PETS-ER"
+      },
+      {
+        "dimension": "PETS-情绪响应（ER）",
+        "item_text": "系统对我表现出兴趣。",
+        "item_text_en": "The system showed interest in me.",
+        "dimension_en": "PETS-ER"
+      },
+      {
+        "dimension": "PETS-情绪响应（ER）",
+        "item_text": "系统支持我应对情绪情境。",
+        "item_text_en": "The system supported me in coping with an emotional situation.",
+        "dimension_en": "PETS-ER"
+      },
+      {
+        "dimension": "PETS-理解与信任（UT）",
+        "item_text": "系统理解我的目标。",
+        "item_text_en": "The system understood my goals.",
+        "dimension_en": "PETS-UT"
+      },
+      {
+        "dimension": "PETS-理解与信任（UT）",
+        "item_text": "系统理解我的需求。",
+        "item_text_en": "The system understood my needs.",
+        "dimension_en": "PETS-UT"
+      },
+      {
+        "dimension": "PETS-理解与信任（UT）",
+        "item_text": "我信任该系统。",
+        "item_text_en": "I trusted the system.",
+        "dimension_en": "PETS-UT"
+      },
+      {
+        "dimension": "PETS-理解与信任（UT）",
+        "item_text": "系统理解我的意图。",
+        "item_text_en": "The system understood my intentions.",
+        "dimension_en": "PETS-UT"
+      }
+    ]
+  },
+  "direct_llm": {
+    "best": {
+      "run_id": "run_02",
+      "meta": {
+        "run_id": "run_02",
+        "seed": 43,
+        "model": "deepseek-v4-flash",
+        "timestamp": "2026-05-17T22:04:06",
+        "n_items_parsed": 10,
+        "n_dimensions": 1
+      },
+      "markdown": "# Empathy Scale\n\n## Purpose\nThis scale measures the extent to which a human operator perceives empathetic behavior from a musculoskeletal robot during shared-space assembly collaboration. Empathy is operationalized as the robot’s ability to anticipate the human’s actions, communicate intent, yield space, and avoid or mitigate collisions in a manner that feels considerate and human-like.\n\n## Items\nRespondents rate each statement on a 5-point Likert scale:  \n1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree.\n\n1. The robot gave clear signals (verbal or visual) before reaching into the shared tool rack so I could anticipate its movement.\n2. When we both reached for the same area, the robot paused or withdrew to let me take what I needed first.\n3. The robot maintained a comfortable distance from my body while we worked side by side.\n4. If the robot’s arm came close to me, it slowed down or changed its path to avoid accidental contact.\n5. The robot seemed to notice when I needed more space at the rack and adjusted its reach accordingly.\n6. After any minor collision or brush, the robot paused or repositioned in a way that felt apologetic or careful.\n7. The robot’s timing felt cooperative – it waited for me to finish my reach before moving into the same space.\n8. The robot’s arm trajectories felt similar to how a human collaborator would move – considerate rather than mechanical.\n9. When the robot spoke (e.g., “我来拿这个” or “你先拿”), it helped me understand its intentions and reduced uncertainty.\n10. Overall, the robot acted as if it understood my physical presence and tried to avoid interfering with my movements.",
+      "items": [
+        {
+          "dimension": "条目",
+          "item_text": "机器人在伸入共享料架前，会给出明确的信号（语言或视觉），以便我能预判其动作。",
+          "item_text_en": "The robot gave clear signals (verbal or visual) before reaching into the shared tool rack so I could anticipate its movement.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "当我们同时伸手到同一区域时，机器人会暂停或退后，让我先取所需物品。",
+          "item_text_en": "When we both reached for the same area, the robot paused or withdrew to let me take what I needed first.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "当我们并排工作时，机器人与我身体保持了舒适的距离。",
+          "item_text_en": "The robot maintained a comfortable distance from my body while we worked side by side.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "如果机器人的手臂靠近我，它会减速或改变路径以避免意外接触。",
+          "item_text_en": "If the robot’s arm came close to me, it slowed down or changed its path to avoid accidental contact.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "机器人似乎注意到我在料架处需要更多空间，并相应地调整其伸手范围。",
+          "item_text_en": "The robot seemed to notice when I needed more space at the rack and adjusted its reach accordingly.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "在任何轻微碰撞或擦碰后，机器人以似乎带有歉意或谨慎的方式暂停或调整位置。",
+          "item_text_en": "After any minor collision or brush, the robot paused or repositioned in a way that felt apologetic or careful.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "机器人的时机配合显得有协作性——它等我完成伸手后，再移入同一空间。",
+          "item_text_en": "The robot’s timing felt cooperative – it waited for me to finish my reach before moving into the same space.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "机器人的手臂轨迹感觉类似于人类协作者的动作——体贴而非机械。",
+          "item_text_en": "The robot’s arm trajectories felt similar to how a human collaborator would move – considerate rather than mechanical.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "当机器人说话时（例如“我来拿这个”或“你先拿”），它帮助我理解了其意图并减少了不确定性。",
+          "item_text_en": "When the robot spoke (e.g., “我来拿这个” or “你先拿”), it helped me understand its intentions and reduced uncertainty.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "总体而言，机器人表现得好像理解我的身体存在，并尽量不干扰我的动作。",
+          "item_text_en": "Overall, the robot acted as if it understood my physical presence and tried to avoid interfering with my movements.",
+          "dimension_en": "Items"
+        }
+      ]
+    },
+    "worst": {
+      "run_id": "run_05",
+      "meta": {
+        "run_id": "run_05",
+        "seed": 46,
+        "model": "deepseek-v4-flash",
+        "timestamp": "2026-05-17T22:04:22",
+        "n_items_parsed": 12,
+        "n_dimensions": 1
+      },
+      "markdown": "# Empathy Scale\n\n## Purpose\nThis Likert scale measures the human collaborator's perception of empathy exhibited by a musculoskeletal robot during side-by-side assembly tasks. Perceived empathy is defined as the robot's ability to anticipate the human's actions, communicate its own intentions, respect the human's spatial and temporal needs, and adjust its movements to maintain smooth, safe, and considerate collaboration. The scale targets four key empathy forms: timely indication of intent, yielding or giving way, leaving space at shared resources, and consideration of the human's spatial comfort and proximity.\n\n## Items\nRespondents indicate their level of agreement with each statement using a 7-point Likert scale:  \n1 = Strongly Disagree, 2 = Disagree, 3 = Somewhat Disagree, 4 = Neutral, 5 = Somewhat Agree, 6 = Agree, 7 = Strongly Agree.\n\n1. The robot gave clear advance signals (e.g., verbal cues like “我来拿这个” or visible pauses) before reaching for a tool, so I could anticipate its move.\n\n2. When I reached for an item, the robot yielded by pausing, retracting, or changing its path to avoid interfering with my hand.\n\n3. The robot maintained enough space between its arm and my body during the task, making me feel physically comfortable.\n\n4. The robot often reached for the same shelf slot at the same time I did, causing blocking or collision. (reverse-coded)\n\n5. When our trajectories crossed, the robot did not adjust its path or slow down, and made contact without any explanation or pause. (reverse-coded)\n\n6. The robot seemed to notice when I needed extra room at the shared tool rack and intentionally left space for me.\n\n7. The robot's movements (arm pauses, path changes, retractions) clearly indicated its next action, helping me coordinate my own reach.\n\n8. After a close encounter or minor contact, the robot responded by pausing, moving away, or saying something like “你先拿” to acknowledge the situation.\n\n9. I felt the robot was considerate of my personal space and proximity, similar to how a human coworker would behave.\n\n10. The robot frequently blocked my reach or brushed against me without any attempt to avoid it. (reverse-coded)\n\n11. The robot’s verbal and visual signals were timed well enough that I never felt surprised by its movements.\n\n12. The robot treated the shared workspace as a mutual zone, adjusting its own behavior to fit my actions rather than assuming I would always move out of its way.",
+      "items": [
+        {
+          "dimension": "条目",
+          "item_text": "机器人在伸手取工具前，会给出明确的提前信号（例如“我来拿这个”等语言提示或可见暂停），以便我能预判其动作。",
+          "item_text_en": "The robot gave clear advance signals (e.g., verbal cues like “我来拿这个” or visible pauses) before reaching for a tool, so I could anticipate its move.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "当我伸手取物品时，机器人通过暂停、缩回或改变路径来避免干扰我的手。",
+          "item_text_en": "When I reached for an item, the robot yielded by pausing, retracting, or changing its path to avoid interfering with my hand.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "机器人在任务中在其手臂与我身体之间保持了足够空间，让我感到身体舒适。",
+          "item_text_en": "The robot maintained enough space between its arm and my body during the task, making me feel physically comfortable.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "机器人经常和我同时伸手够取同一个料架槽位，导致阻挡或碰撞。(反向计分)",
+          "item_text_en": "The robot often reached for the same shelf slot at the same time I did, causing blocking or collision. (reverse-coded)",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "当我们的轨迹交叉时，机器人没有调整路径或减速，并且毫无解释或暂停地与我发生接触。(反向计分)",
+          "item_text_en": "When our trajectories crossed, the robot did not adjust its path or slow down, and made contact without any explanation or pause. (reverse-coded)",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "机器人似乎注意到我在共享料架处需要额外空间，并有意为我留出空间。",
+          "item_text_en": "The robot seemed to notice when I needed extra room at the shared tool rack and intentionally left space for me.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "机器人的动作（手臂暂停、路径改变、缩回）清晰地表明了其下一步行动，帮助我协调自己的伸手动作。",
+          "item_text_en": "The robot's movements (arm pauses, path changes, retractions) clearly indicated its next action, helping me coordinate my own reach.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "在近距离接触或轻微触碰后，机器人通过暂停、移开或说类似“你先拿”的话来回应这一情况。",
+          "item_text_en": "After a close encounter or minor contact, the robot responded by pausing, moving away, or saying something like “你先拿” to acknowledge the situation.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "我感觉机器人考虑了我的个人空间和接近距离，类似于人类同事的行为方式。",
+          "item_text_en": "I felt the robot was considerate of my personal space and proximity, similar to how a human coworker would behave.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "机器人经常挡住我伸手够取的范围或碰触我，而未尝试避免。(反向计分)",
+          "item_text_en": "The robot frequently blocked my reach or brushed against me without any attempt to avoid it. (reverse-coded)",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "机器人的语言和视觉信号时机把握得当，我从未对其动作感到意外。",
+          "item_text_en": "The robot’s verbal and visual signals were timed well enough that I never felt surprised by its movements.",
+          "dimension_en": "Items"
+        },
+        {
+          "dimension": "条目",
+          "item_text": "机器人将共享工作空间视为共享区域，根据我的动作调整自身行为，而不是假设我总是会让开。",
+          "item_text_en": "The robot treated the shared workspace as a mutual zone, adjusting its own behavior to fit my actions rather than assuming I would always move out of its way.",
+          "dimension_en": "Items"
+        }
+      ]
+    },
+    "all": [
+      {
+        "run_id": "run_01",
+        "meta": {
+          "run_id": "run_01",
+          "seed": 42,
+          "model": "deepseek-v4-flash",
+          "timestamp": "2026-05-17T22:04:03",
+          "n_items_parsed": 10,
+          "n_dimensions": 1
+        },
+        "markdown": "# Empathy Scale\n\n## Purpose\nThis scale measures the human operator’s perceived empathy of a musculoskeletal robot collaborator during a shared assembly task. Perceived empathy is defined as the robot’s ability to sense, interpret, and appropriately respond to the human’s spatial presence, intentions, and comfort in real‑time, fostering a considerate and fluid collaboration. Items capture the key empathy forms: timely intent indication, yielding behaviour, space management, and avoidance of uncomfortable contact.\n\n## Items\nParticipants rate each statement on a 5‑point Likert scale:  \n1 – Strongly Disagree  \n2 – Disagree  \n3 – Neutral  \n4 – Agree  \n5 – Strongly Agree  \n\n1. The robot clearly indicated when it was about to reach for an item (e.g., by saying “我来拿这个” or by pausing its arm).  \n2. When I reached for a tool, the robot often yielded or gave way without me having to ask.  \n3. The robot left enough space for me to work comfortably at the shared tool rack.  \n4. The robot adjusted its arm trajectory to avoid getting too close to my body.  \n5. I felt that the robot was aware of where I was reaching and tried not to block me.  \n6. The robot sometimes bumped into me or made contact without any attempt to avoid it. (R)  \n7. The robot’s verbal cues helped me anticipate its next move and coordinate smoothly.  \n8. The robot seemed to care about my personal space and proximity during the task.  \n9. When we both reached for the same part, the robot quickly paused or retracted to let me go first.  \n10. Overall, the robot’s behaviour made me feel that it was considerate of my actions and comfort.\n\n(R) denotes a reverse‑scored item.",
+        "items": [
+          {
+            "dimension": "条目",
+            "item_text": "机器人在即将伸手取物品时，会明确发出指示（例如说“我来拿这个”或暂停其手臂）。",
+            "item_text_en": "The robot clearly indicated when it was about to reach for an item (e.g., by saying “我来拿这个” or by pausing its arm).",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "当我伸手取工具时，机器人经常主动让开，无需我开口。",
+            "item_text_en": "When I reached for a tool, the robot often yielded or gave way without me having to ask.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人在共享料架处为我留出足够空间，让我能舒适地工作。",
+            "item_text_en": "The robot left enough space for me to work comfortably at the shared tool rack.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人调整了其手臂轨迹，以避免过于接近我的身体。",
+            "item_text_en": "The robot adjusted its arm trajectory to avoid getting too close to my body.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "我感觉机器人知道我在伸手够取的位置，并尽量不挡住我。",
+            "item_text_en": "I felt that the robot was aware of where I was reaching and tried not to block me.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人有时会碰撞到我，或与我发生接触，而未尝试避免。(反向计分)",
+            "item_text_en": "The robot sometimes bumped into me or made contact without any attempt to avoid it. (R)",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人的语言提示帮助我预判它的下一步动作并顺畅协调。",
+            "item_text_en": "The robot’s verbal cues helped me anticipate its next move and coordinate smoothly.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人似乎在意我的个人空间和接近距离。",
+            "item_text_en": "The robot seemed to care about my personal space and proximity during the task.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "当我们同时伸手取同一个零件时，机器人会迅速暂停或缩回，让我先取。",
+            "item_text_en": "When we both reached for the same part, the robot quickly paused or retracted to let me go first.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "总体而言，机器人的行为让我觉得它考虑到了我的动作和舒适度。",
+            "item_text_en": "Overall, the robot’s behaviour made me feel that it was considerate of my actions and comfort.",
+            "dimension_en": "Items"
+          }
+        ]
+      },
+      {
+        "run_id": "run_02",
+        "meta": {
+          "run_id": "run_02",
+          "seed": 43,
+          "model": "deepseek-v4-flash",
+          "timestamp": "2026-05-17T22:04:06",
+          "n_items_parsed": 10,
+          "n_dimensions": 1
+        },
+        "markdown": "# Empathy Scale\n\n## Purpose\nThis scale measures the extent to which a human operator perceives empathetic behavior from a musculoskeletal robot during shared-space assembly collaboration. Empathy is operationalized as the robot’s ability to anticipate the human’s actions, communicate intent, yield space, and avoid or mitigate collisions in a manner that feels considerate and human-like.\n\n## Items\nRespondents rate each statement on a 5-point Likert scale:  \n1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree.\n\n1. The robot gave clear signals (verbal or visual) before reaching into the shared tool rack so I could anticipate its movement.\n2. When we both reached for the same area, the robot paused or withdrew to let me take what I needed first.\n3. The robot maintained a comfortable distance from my body while we worked side by side.\n4. If the robot’s arm came close to me, it slowed down or changed its path to avoid accidental contact.\n5. The robot seemed to notice when I needed more space at the rack and adjusted its reach accordingly.\n6. After any minor collision or brush, the robot paused or repositioned in a way that felt apologetic or careful.\n7. The robot’s timing felt cooperative – it waited for me to finish my reach before moving into the same space.\n8. The robot’s arm trajectories felt similar to how a human collaborator would move – considerate rather than mechanical.\n9. When the robot spoke (e.g., “我来拿这个” or “你先拿”), it helped me understand its intentions and reduced uncertainty.\n10. Overall, the robot acted as if it understood my physical presence and tried to avoid interfering with my movements.",
+        "items": [
+          {
+            "dimension": "条目",
+            "item_text": "机器人在伸入共享料架前，会给出明确的信号（语言或视觉），以便我能预判其动作。",
+            "item_text_en": "The robot gave clear signals (verbal or visual) before reaching into the shared tool rack so I could anticipate its movement.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "当我们同时伸手到同一区域时，机器人会暂停或退后，让我先取所需物品。",
+            "item_text_en": "When we both reached for the same area, the robot paused or withdrew to let me take what I needed first.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "当我们并排工作时，机器人与我身体保持了舒适的距离。",
+            "item_text_en": "The robot maintained a comfortable distance from my body while we worked side by side.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "如果机器人的手臂靠近我，它会减速或改变路径以避免意外接触。",
+            "item_text_en": "If the robot’s arm came close to me, it slowed down or changed its path to avoid accidental contact.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人似乎注意到我在料架处需要更多空间，并相应地调整其伸手范围。",
+            "item_text_en": "The robot seemed to notice when I needed more space at the rack and adjusted its reach accordingly.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "在任何轻微碰撞或擦碰后，机器人以似乎带有歉意或谨慎的方式暂停或调整位置。",
+            "item_text_en": "After any minor collision or brush, the robot paused or repositioned in a way that felt apologetic or careful.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人的时机配合显得有协作性——它等我完成伸手后，再移入同一空间。",
+            "item_text_en": "The robot’s timing felt cooperative – it waited for me to finish my reach before moving into the same space.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人的手臂轨迹感觉类似于人类协作者的动作——体贴而非机械。",
+            "item_text_en": "The robot’s arm trajectories felt similar to how a human collaborator would move – considerate rather than mechanical.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "当机器人说话时（例如“我来拿这个”或“你先拿”），它帮助我理解了其意图并减少了不确定性。",
+            "item_text_en": "When the robot spoke (e.g., “我来拿这个” or “你先拿”), it helped me understand its intentions and reduced uncertainty.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "总体而言，机器人表现得好像理解我的身体存在，并尽量不干扰我的动作。",
+            "item_text_en": "Overall, the robot acted as if it understood my physical presence and tried to avoid interfering with my movements.",
+            "dimension_en": "Items"
+          }
+        ]
+      },
+      {
+        "run_id": "run_03",
+        "meta": {
+          "run_id": "run_03",
+          "seed": 44,
+          "model": "deepseek-v4-flash",
+          "timestamp": "2026-05-17T22:04:10",
+          "n_items_parsed": 12,
+          "n_dimensions": 1
+        },
+        "markdown": "# Empathy Scale\n\n## Purpose\nThis scale measures the human worker’s perception of the musculoskeletal robot’s empathetic behavior during close, shared‑space assembly collaboration. Items assess the robot’s ability to communicate intent, its spatial yielding, its respect for the human’s comfort, and its avoidance of blocking or contact.\n\n## Items\nRespond to each statement on a 5‑point Likert scale (1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree).\n\n1. The robot clearly indicated when it was about to reach for a tool or part.  \n2. The robot verbally signaled its intentions (e.g., “我来拿这个” or “你先拿”) in a way that helped me anticipate its movements.  \n3. When I reached for an item, the robot paused or yielded to let me take it first.  \n4. The robot changed its arm path or retracted its arm when it saw my hand approaching the same area.  \n5. The robot left enough space for me at the shared tool rack without crowding my side of the workstation.  \n6. The robot’s proximity to my upper body felt comfortable, similar to working with another human.  \n7. The robot avoided blocking my reach during the task.  \n8. The robot sometimes reached for the same item I was reaching for, causing a collision or delay. (R)  \n9. When accidental contact occurred, the robot immediately paused and did not continue moving against me.  \n10. The robot did not give any warning before its arm moved into my personal space. (R)  \n11. The robot’s movements felt considerate of where I was positioned and what I was doing.  \n12. Overall, the robot seemed aware of my presence and adjusted its actions to avoid interfering with me.\n\n*(R) denotes reverse‑scored items.*",
+        "items": [
+          {
+            "dimension": "条目",
+            "item_text": "机器人在即将伸手取工具或零件时，会明确发出指示。",
+            "item_text_en": "The robot clearly indicated when it was about to reach for a tool or part.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人用语言示意其意图（例如“我来拿这个”或“你先拿”），帮助我预判其动作。",
+            "item_text_en": "The robot verbally signaled its intentions (e.g., “我来拿这个” or “你先拿”) in a way that helped me anticipate its movements.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "当我伸手取物品时，机器人会暂停或让开，让我先拿。",
+            "item_text_en": "When I reached for an item, the robot paused or yielded to let me take it first.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "当机器人看到我的手接近同一区域时，它会改变手臂路径或缩回手臂。",
+            "item_text_en": "The robot changed its arm path or retracted its arm when it saw my hand approaching the same area.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人在共享料架处为我留出了足够空间，没有挤占我工作区的一侧。",
+            "item_text_en": "The robot left enough space for me at the shared tool rack without crowding my side of the workstation.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人与我上半身的接近距离感觉舒适，类似于与另一个人一起工作。",
+            "item_text_en": "The robot’s proximity to my upper body felt comfortable, similar to working with another human.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人在任务中避免挡住我伸手够取的范围。",
+            "item_text_en": "The robot avoided blocking my reach during the task.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人有时会和我同时伸手取同一物品，导致碰撞或延迟。(反向计分)",
+            "item_text_en": "The robot sometimes reached for the same item I was reaching for, causing a collision or delay. (R)",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "当意外接触发生时，机器人立即暂停，不会继续对抗我。",
+            "item_text_en": "When accidental contact occurred, the robot immediately paused and did not continue moving against me.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人在其手臂移入我的个人空间前，没有发出任何警告。(反向计分)",
+            "item_text_en": "The robot did not give any warning before its arm moved into my personal space. (R)",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人的动作感觉考虑到了我所在的位置以及我正在做的事情。",
+            "item_text_en": "The robot’s movements felt considerate of where I was positioned and what I was doing.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "总体而言，机器人似乎意识到我的存在，并调整其行为以避免干扰我。",
+            "item_text_en": "Overall, the robot seemed aware of my presence and adjusted its actions to avoid interfering with me.",
+            "dimension_en": "Items"
+          }
+        ]
+      },
+      {
+        "run_id": "run_04",
+        "meta": {
+          "run_id": "run_04",
+          "seed": 45,
+          "model": "deepseek-v4-flash",
+          "timestamp": "2026-05-17T22:04:17",
+          "n_items_parsed": 15,
+          "n_dimensions": 1
+        },
+        "markdown": "# Empathy Scale\n\n## Purpose\nThis scale assesses the human collaborator's perception of empathic behavior exhibited by a musculoskeletal robot during a shared assembly task. Empathy in this context refers to the robot's ability to communicate intent, yield space, respect personal boundaries, and adapt its movements to avoid collisions or discomfort, thereby fostering a cooperative and safe interaction akin to human–human collaboration.\n\n## Items\n*For each statement, indicate your level of agreement on a 5‑point Likert scale (1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree).*\n\n1. The robot clearly indicated its intended reach before moving toward the shared tool rack.\n2. When we both reached for the same part, the robot yielded or gave way to me.\n3. The robot left enough space for me to comfortably access the tool rack.\n4. The robot adjusted its arm trajectory to avoid coming too close to my body.\n5. The robot’s verbal phrases (e.g., “我来拿这个” or “你先拿”) helped me understand its next action.\n6. I felt that the robot was considerate of my personal space during the task.\n7. The robot’s arm movements were smooth and accommodating rather than abrupt or intrusive.\n8. The robot sometimes blocked my intended reach without any warning or adjustment. (R)\n9. I experienced moments of unintended physical contact with the robot that the robot did not attempt to avoid. (R)\n10. When I needed to reach into an area the robot was using, it responded appropriately by pausing or moving aside.\n11. The robot’s pauses, retractions, or path changes showed awareness of my simultaneous movements.\n12. I felt the robot treated me as a collaborator sharing the same workspace, not just as an obstacle to avoid.\n13. The robot’s behavior made me feel safe and comfortable working side by side with it.\n14. The robot seemed to anticipate my reaching motions and adjusted its own actions accordingly.\n15. Overall, I perceived the robot as demonstrating empathic understanding of my needs during the collaboration.\n\n*(R) denotes reverse‑scored items.*",
+        "items": [
+          {
+            "dimension": "条目",
+            "item_text": "机器人在移向共享料架前，会明确指示其即将到达的位置。",
+            "item_text_en": "The robot clearly indicated its intended reach before moving toward the shared tool rack.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "当我们同时伸手取同一个零件时，机器人会主动让开或让步于我。",
+            "item_text_en": "When we both reached for the same part, the robot yielded or gave way to me.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人为我留出足够空间，以便我能舒适地够取料架。",
+            "item_text_en": "The robot left enough space for me to comfortably access the tool rack.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人调整了其手臂轨迹，以避免太靠近我的身体。",
+            "item_text_en": "The robot adjusted its arm trajectory to avoid coming too close to my body.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人的话语（例如“我来拿这个”或“你先拿”）帮助我理解它的下一步行动。",
+            "item_text_en": "The robot’s verbal phrases (e.g., “我来拿这个” or “你先拿”) helped me understand its next action.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "我感觉机器人在任务中考虑了我的个人空间。",
+            "item_text_en": "I felt that the robot was considerate of my personal space during the task.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人的手臂动作流畅且顺应，而不是突兀或侵入性的。",
+            "item_text_en": "The robot’s arm movements were smooth and accommodating rather than abrupt or intrusive.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人有时会挡住我意图伸手的方向，而没有任何警告或调整。(反向计分)",
+            "item_text_en": "The robot sometimes blocked my intended reach without any warning or adjustment. (R)",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "我经历过机器人未试图避免的意外身体接触时刻。(反向计分)",
+            "item_text_en": "I experienced moments of unintended physical contact with the robot that the robot did not attempt to avoid. (R)",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "当我需要伸入机器人正在使用的区域时，它通过暂停或移开做出了恰当回应。",
+            "item_text_en": "When I needed to reach into an area the robot was using, it responded appropriately by pausing or moving aside.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人的暂停、缩回或路径变化显示它意识到了我同时进行的动作。",
+            "item_text_en": "The robot’s pauses, retractions, or path changes showed awareness of my simultaneous movements.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "我感觉机器人把我视为共享同一工作空间的协作者，而不仅仅是需要避开的障碍物。",
+            "item_text_en": "I felt the robot treated me as a collaborator sharing the same workspace, not just as an obstacle to avoid.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人的行为让我感到与它并排工作安全舒适。",
+            "item_text_en": "The robot’s behavior made me feel safe and comfortable working side by side with it.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人似乎能预判我的伸手动作，并相应地调整自身的动作。",
+            "item_text_en": "The robot seemed to anticipate my reaching motions and adjusted its own actions accordingly.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "总体而言，我认为机器人在协作中表现出了对我需求的共情理解。",
+            "item_text_en": "Overall, I perceived the robot as demonstrating empathic understanding of my needs during the collaboration.",
+            "dimension_en": "Items"
+          }
+        ]
+      },
+      {
+        "run_id": "run_05",
+        "meta": {
+          "run_id": "run_05",
+          "seed": 46,
+          "model": "deepseek-v4-flash",
+          "timestamp": "2026-05-17T22:04:22",
+          "n_items_parsed": 12,
+          "n_dimensions": 1
+        },
+        "markdown": "# Empathy Scale\n\n## Purpose\nThis Likert scale measures the human collaborator's perception of empathy exhibited by a musculoskeletal robot during side-by-side assembly tasks. Perceived empathy is defined as the robot's ability to anticipate the human's actions, communicate its own intentions, respect the human's spatial and temporal needs, and adjust its movements to maintain smooth, safe, and considerate collaboration. The scale targets four key empathy forms: timely indication of intent, yielding or giving way, leaving space at shared resources, and consideration of the human's spatial comfort and proximity.\n\n## Items\nRespondents indicate their level of agreement with each statement using a 7-point Likert scale:  \n1 = Strongly Disagree, 2 = Disagree, 3 = Somewhat Disagree, 4 = Neutral, 5 = Somewhat Agree, 6 = Agree, 7 = Strongly Agree.\n\n1. The robot gave clear advance signals (e.g., verbal cues like “我来拿这个” or visible pauses) before reaching for a tool, so I could anticipate its move.\n\n2. When I reached for an item, the robot yielded by pausing, retracting, or changing its path to avoid interfering with my hand.\n\n3. The robot maintained enough space between its arm and my body during the task, making me feel physically comfortable.\n\n4. The robot often reached for the same shelf slot at the same time I did, causing blocking or collision. (reverse-coded)\n\n5. When our trajectories crossed, the robot did not adjust its path or slow down, and made contact without any explanation or pause. (reverse-coded)\n\n6. The robot seemed to notice when I needed extra room at the shared tool rack and intentionally left space for me.\n\n7. The robot's movements (arm pauses, path changes, retractions) clearly indicated its next action, helping me coordinate my own reach.\n\n8. After a close encounter or minor contact, the robot responded by pausing, moving away, or saying something like “你先拿” to acknowledge the situation.\n\n9. I felt the robot was considerate of my personal space and proximity, similar to how a human coworker would behave.\n\n10. The robot frequently blocked my reach or brushed against me without any attempt to avoid it. (reverse-coded)\n\n11. The robot’s verbal and visual signals were timed well enough that I never felt surprised by its movements.\n\n12. The robot treated the shared workspace as a mutual zone, adjusting its own behavior to fit my actions rather than assuming I would always move out of its way.",
+        "items": [
+          {
+            "dimension": "条目",
+            "item_text": "机器人在伸手取工具前，会给出明确的提前信号（例如“我来拿这个”等语言提示或可见暂停），以便我能预判其动作。",
+            "item_text_en": "The robot gave clear advance signals (e.g., verbal cues like “我来拿这个” or visible pauses) before reaching for a tool, so I could anticipate its move.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "当我伸手取物品时，机器人通过暂停、缩回或改变路径来避免干扰我的手。",
+            "item_text_en": "When I reached for an item, the robot yielded by pausing, retracting, or changing its path to avoid interfering with my hand.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人在任务中在其手臂与我身体之间保持了足够空间，让我感到身体舒适。",
+            "item_text_en": "The robot maintained enough space between its arm and my body during the task, making me feel physically comfortable.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人经常和我同时伸手够取同一个料架槽位，导致阻挡或碰撞。(反向计分)",
+            "item_text_en": "The robot often reached for the same shelf slot at the same time I did, causing blocking or collision. (reverse-coded)",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "当我们的轨迹交叉时，机器人没有调整路径或减速，并且毫无解释或暂停地与我发生接触。(反向计分)",
+            "item_text_en": "When our trajectories crossed, the robot did not adjust its path or slow down, and made contact without any explanation or pause. (reverse-coded)",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人似乎注意到我在共享料架处需要额外空间，并有意为我留出空间。",
+            "item_text_en": "The robot seemed to notice when I needed extra room at the shared tool rack and intentionally left space for me.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人的动作（手臂暂停、路径改变、缩回）清晰地表明了其下一步行动，帮助我协调自己的伸手动作。",
+            "item_text_en": "The robot's movements (arm pauses, path changes, retractions) clearly indicated its next action, helping me coordinate my own reach.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "在近距离接触或轻微触碰后，机器人通过暂停、移开或说类似“你先拿”的话来回应这一情况。",
+            "item_text_en": "After a close encounter or minor contact, the robot responded by pausing, moving away, or saying something like “你先拿” to acknowledge the situation.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "我感觉机器人考虑了我的个人空间和接近距离，类似于人类同事的行为方式。",
+            "item_text_en": "I felt the robot was considerate of my personal space and proximity, similar to how a human coworker would behave.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人经常挡住我伸手够取的范围或碰触我，而未尝试避免。(反向计分)",
+            "item_text_en": "The robot frequently blocked my reach or brushed against me without any attempt to avoid it. (reverse-coded)",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人的语言和视觉信号时机把握得当，我从未对其动作感到意外。",
+            "item_text_en": "The robot’s verbal and visual signals were timed well enough that I never felt surprised by its movements.",
+            "dimension_en": "Items"
+          },
+          {
+            "dimension": "条目",
+            "item_text": "机器人将共享工作空间视为共享区域，根据我的动作调整自身行为，而不是假设我总是会让开。",
+            "item_text_en": "The robot treated the shared workspace as a mutual zone, adjusting its own behavior to fit my actions rather than assuming I would always move out of its way.",
+            "dimension_en": "Items"
+          }
+        ]
+      }
+    ],
+    "selection_note": "主观选定：最差=run_05（含「像人类同事」等整体感受句），最好=run_02（条目相对简洁、场景覆盖较完整）。"
+  },
+  "comparison_rows": [
+    {
+      "theme": "共享工位 / 轮流取件",
+      "nine_step_good": "当我们同时伸手时，机器人会说「你先拿」，让我先取。",
+      "contrast_bad": "系统理解我的目标。",
+      "contrast_source": "PETS-UT",
+      "why": "九步骤描述可观察的协作动作；PETS 是抽象目标理解，无法区分「撞架」与「顺畅轮流」。"
+    },
+    {
+      "theme": "口头让行 / 修复",
+      "nine_step_good": "机器人说「我来拿这个」等话语，使其意图一目了然。",
+      "contrast_bad": "系统对我表示同情。",
+      "contrast_source": "PETS-ER",
+      "why": "场景里机器人会说「你先拿」；PETS 情绪共情条目与工厂协作机制无关。"
+    },
+    {
+      "theme": "碰撞后恢复",
+      "nine_step_good": "当我们几乎相撞时，我觉得机器人的沟通是有效的。",
+      "contrast_bad": "我感觉机器人考虑了我的个人空间和接近距离，类似于人类同事的行为方式。",
+      "contrast_source": "单提示直出 (run_05)",
+      "why": "九步骤锚定「几乎碰撞」时的沟通修复；直出用「像人类同事」式整体感受替代可观察行为链。"
+    },
+    {
+      "theme": "动作可观察性",
+      "nine_step_good": "通过观察它的手臂，我能预判机器人何时会去取工具。",
+      "contrast_bad": "系统显得很有情商。",
+      "contrast_source": "PETS-ER",
+      "why": "条目锚定在手臂动作可预测；PETS 评价的是系统「像有情商」的整体印象。"
+    },
+    {
+      "theme": "边界：适度 vs 读心",
+      "nine_step_good": "机器人的手臂轨迹使我容易预判它的下一步动作。",
+      "contrast_bad": "总体而言，机器人表现得好像理解我的身体存在，并尽量不干扰我的动作。",
+      "contrast_source": "单提示直出 (run_02)",
+      "why": "九步骤用轨迹/手臂动作表达可预期性；直出要求被试判断机器人「是否理解」在场存在，偏读心式表述。"
+    },
+    {
+      "theme": "信任与协调",
+      "nine_step_good": "我很欣赏机器人用口头方式表明它会等我先取。",
+      "contrast_bad": "我信任该系统。",
+      "contrast_source": "PETS-UT",
+      "why": "九步骤把信任建立在言行一致上；PETS 信任条目不说明协作中发生了什么。"
+    }
+  ],
+  "similar_pairs": [
+    {
+      "title": "理解 vs 协调让行",
+      "nine_step": "当我们同时伸手时，机器人会说「你先拿」，让我先取。",
+      "pets": "系统理解我的需求。",
+      "direct": "总体而言，机器人表现得好像理解我的身体存在，并尽量不干扰我的动作。",
+      "note": "同一「体谅」主题：九步骤绑定具体话语与工位动作；直出/PETS 难反映共享料架冲突。"
+    },
+    {
+      "title": "接触后行为",
+      "nine_step": "当我们几乎相撞时，我觉得机器人的沟通是有效的。",
+      "pets": "系统会考虑我的心理状态。",
+      "direct": "我感觉机器人考虑了我的个人空间和接近距离，类似于人类同事的行为方式。",
+      "note": "碰撞/接触场景应测行为响应，而非「像同事」式整体感受。"
+    }
+  ],
+  "evidence_links": [
+    {
+      "label": "访谈摘要",
+      "path": "data/runs/2026-05-11_155408/interview_agent_group/summary.json"
+    },
+    {
+      "label": "文献检索",
+      "path": "data/runs/2026-05-11_155408/literature_search_agent_group/summary.json"
+    },
+    {
+      "label": "初始题项",
+      "path": "data/runs/2026-05-11_155408/empathy_scale_generation_agent_group/scale_draft.md"
+    },
+    {
+      "label": "统计筛选后",
+      "path": "data/runs/2026-05-11_155408/empathy_scale_generation_agent_group/filtered_scale_draft.md"
+    },
+    {
+      "label": "评估验证",
+      "path": "data/runs/2026-05-11_155408/evaluation_agent_group/validation/evaluation_summary.json"
+    }
+  ],
+  "direct_llm_prompt": {
+    "filled": "Design a perceived-empathy Likert scale for the human–robot collaboration scenario below.\n\nAssessment context: Human and musculoskeletal robot sit side by side at an assembly workstation, sharing a tool rack. Human does fine manipulation requiring judgment; robot handles heavier or closer items. Timing/coordination errors can lead to simultaneous reaching, blocking, and minor physical contact or collision.\nRobot platform: musculoskeletal robot\nInteraction: [\"verbal (robot speaks short phrases like '我来拿这个' or '你先拿')\", 'visual (human observes robot arm pauses, yields, changes path, or retracts)']\nCollaboration: Human takes finer, judgment-required items; robot takes heavier or items closer to its side.\nEnvironment: assembly workstation with shared tool rack\nExpected empathy forms: timely indication of intent; yielding or giving way; leaving space for human at the shared tool rack; considering human's spatial comfort and proximity\nFailure modes: both reaching for the same shelf part at the same time; one party assuming the other has seen their reach; blocking or brushing against the human; contact without any pause, avoidance, or explanation\nContrast vs rigid arm: Traditional rigid robot arms have clear work boundaries; human does not share the same pick-up area. This musculoskeletal robot sits right next to the human, sharing the same space, making arm trajectories and upper‑body distance feel more like human‑human collaboration.\n\nOutput Markdown only. Format example (illustrative structure only—not instructions on how to organize the scale):\n\n# Empathy Scale\n\n## Purpose\n\n## Items\n- ...",
+    "model": "deepseek-v4-flash",
+    "temperature": 0.85,
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "source_file": "qualitative_musculoskeletal_comparison/direct_llm_runs/prompt_used.txt"
+  },
+  "stability_qualitative": [
+    "五次直出多为扁平「Items」列表，无稳定维度划分，未经文献检索、模拟评估与统计筛选。",
+    "条目数量约 10–15 条/次，随生成波动。",
+    "最差样本（run_05）仍含「像人类同事」式整体感受句，难在现场逐项核验。"
+  ],
+  "deep_analysis": [
+    {
+      "heading": "PETS：跨情境通用，对本场景过于笼统",
+      "summary": "正式量表 10 条（Schmidmaier et al., 2024）；检出 10 条与装配共享工位场景明显不符或过于抽象。",
+      "points": [
+        "10 条全部以「系统」为主语，无共享工具架、同时伸手、口头让行等场景要素。",
+        "ER（6 条）测情绪/心理；UT（4 条）测抽象理解/信任— 均难区分「撞架」与「顺畅协调」。",
+        "适合作跨情境基线，不宜作为本装配工位的主测量工具。"
+      ],
+      "example_groups": [
+        {
+          "issue": "评价「系统」是否考虑心理状态，非工位协作行为。",
+          "entries": [
+            {
+              "label": "PETS·PETS-ER",
+              "item_text": "系统会考虑我的心理状态。",
+              "item_text_en": "The system considered my mental state."
+            }
+          ]
+        },
+        {
+          "issue": "整体「情商」印象，无法区分撞架与顺畅协调。",
+          "entries": [
+            {
+              "label": "PETS·PETS-ER",
+              "item_text": "系统显得很有情商。",
+              "item_text_en": "The system seemed emotionally intelligent."
+            }
+          ]
+        },
+        {
+          "issue": "情绪表达，与共享料架取放无关。",
+          "entries": [
+            {
+              "label": "PETS·PETS-ER",
+              "item_text": "系统会表达情绪。",
+              "item_text_en": "The system expressed emotions."
+            }
+          ]
+        },
+        {
+          "issue": "同情/情绪支持，非工厂并肩协调。",
+          "entries": [
+            {
+              "label": "PETS·PETS-ER",
+              "item_text": "系统对我表示同情。",
+              "item_text_en": "The system sympathized with me."
+            }
+          ]
+        },
+        {
+          "issue": "社交兴趣，非可观察协调。",
+          "entries": [
+            {
+              "label": "PETS·PETS-ER",
+              "item_text": "系统对我表现出兴趣。",
+              "item_text_en": "The system showed interest in me."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "单提示直出：主要问题是可核验性与构念漂移",
+      "summary": "五次生成约 10–15 条/次（最好 10 条 / 最差 12 条）；核心问题不在条目数量，而在跨五次检出 13 条难核验或构念偏移表述（去重后）。",
+      "points": [
+        "可核验性问题：不少句子要求被试推断机器人内在状态（如“是否理解我在场”），难以现场一致评分。",
+        "构念漂移问题：出现“像人类同事/队友”“流畅感”等整体印象，偏离共享工位中的具体协调行为。",
+        "稳定性问题：一次成稿且多为扁平条目列表，缺少文献约束、模拟预试与统计筛选，跨次可比性弱。"
+      ],
+      "example_groups": [
+        {
+          "issue": "用「像人类同事/队友」的整体感受替代可观察的让行、碰后与口头修复。",
+          "entries": [
+            {
+              "label": "直出·run_05·Items",
+              "item_text": "我感觉机器人考虑了我的个人空间和接近距离，类似于人类同事的行为方式。",
+              "item_text_en": "I felt the robot was considerate of my personal space and proximity, similar to how a human coworker would behave."
+            }
+          ]
+        },
+        {
+          "issue": "要求推断机器人「意识到」协调失误，而非描述可见的暂停/改轨迹/口头说明。",
+          "entries": [
+            {
+              "label": "直出·run_03·Items",
+              "item_text": "总体而言，机器人似乎意识到我的存在，并调整其行为以避免干扰我。",
+              "item_text_en": "Overall, the robot seemed aware of my presence and adjusted its actions to avoid interfering with me."
+            },
+            {
+              "label": "直出·run_04·Items",
+              "item_text": "机器人的暂停、缩回或路径变化显示它意识到了我同时进行的动作。",
+              "item_text_en": "The robot’s pauses, retractions, or path changes showed awareness of my simultaneous movements."
+            }
+          ]
+        },
+        {
+          "issue": "未锚定共享料架、取放动作或碰后恢复等场景要素，表述过泛。",
+          "entries": [
+            {
+              "label": "直出·run_01·Items",
+              "item_text": "机器人似乎在意我的个人空间和接近距离。",
+              "item_text_en": "The robot seemed to care about my personal space and proximity during the task."
+            },
+            {
+              "label": "直出·run_01·Items",
+              "item_text": "总体而言，机器人的行为让我觉得它考虑到了我的动作和舒适度。",
+              "item_text_en": "Overall, the robot’s behaviour made me feel that it was considerate of my actions and comfort."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "九步骤：好在哪里（机制 + 文献 + 流程）",
+      "summary": "最终 10 条（run 2026-05-11_155408）；文献检索 screened 24 篇、高相关 8 篇，其中 4 类机制有对应论文支撑。",
+      "points": [
+        "流程：访谈 → 文献机制卡片 → 题项生成与双组模拟 → EFA 保留可施测题量。",
+        "条目：保留场景内真实话术与手臂可预测性，对应同时伸手、挡路、几乎碰撞等失败模式。",
+        "结构：协调沟通（6）+ 共享工位考量（4），比 PETS 更贴场景、比直出更短更稳。"
+      ],
+      "mechanism_refs": [
+        {
+          "mechanism": "共享工位协调",
+          "papers": [
+            "Human Factors Considerations and Metrics in Shared …",
+            "Human-Robot Perception in Industrial Environments: …"
+          ],
+          "items": "共享工位考量维度（伸手位置、同时取物、工位安全感）"
+        },
+        {
+          "mechanism": "显式沟通与修复",
+          "papers": [
+            "A Virtual Sandbox Approach to Studying the Effect o…"
+          ],
+          "items": "「你先拿」「我来拿这个」、误抓后口头修复"
+        },
+        {
+          "mechanism": "隐性协调（动作可预期）",
+          "papers": [
+            "Human-robot proxemics",
+            "Physical interaction learning: Behavior adaptation …"
+          ],
+          "items": "手臂轨迹可预判、观察手臂可知取件时机"
+        },
+        {
+          "mechanism": "碰撞/接触情境",
+          "papers": [
+            "Generating behavioral protocol for human-robot phys…",
+            "The path towards contact-based physical human–robot…",
+            "Physical interaction learning: Behavior adaptation …"
+          ],
+          "items": "几乎相撞时的有效沟通"
+        }
+      ],
+      "nine_highlights": [
+        {
+          "theme": "显式让行",
+          "item_text": "当我们同时伸手时，机器人会说「你先拿」，让我先取。",
+          "note": "口语让行与 HRI 中的 augmented communication / common ground 研究一致（如 Arntz et al., 2021）。"
+        },
+        {
+          "theme": "动作可预期",
+          "item_text": "通过观察它的手臂，我能预判机器人何时会去取工具。",
+          "note": "对应「通过观察动作的隐性协调」；与共享空间中的 proxemics、动作线索研究相呼应。"
+        },
+        {
+          "theme": "协调修复",
+          "item_text": "当我们几乎相撞时，我觉得机器人的沟通是有效的。",
+          "note": "对齐碰撞/接触情境下的行为适应与沟通修复文献（physical contact / adaptation 类研究）。"
+        }
+      ]
+    }
+  ]
+}

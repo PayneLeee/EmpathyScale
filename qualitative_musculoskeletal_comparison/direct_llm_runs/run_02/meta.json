@@ -1,0 +1,8 @@
+{
+  "run_id": "run_02",
+  "seed": 43,
+  "model": "deepseek-v4-flash",
+  "timestamp": "2026-05-17T22:04:06",
+  "n_items_parsed": 10,
+  "n_dimensions": 1
+}

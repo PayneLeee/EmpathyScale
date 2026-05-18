@@ -1,0 +1,19 @@
+Design a perceived-empathy Likert scale for the human–robot collaboration scenario below.
+
+Assessment context: Human and musculoskeletal robot sit side by side at an assembly workstation, sharing a tool rack. Human does fine manipulation requiring judgment; robot handles heavier or closer items. Timing/coordination errors can lead to simultaneous reaching, blocking, and minor physical contact or collision.
+Robot platform: musculoskeletal robot
+Interaction: ["verbal (robot speaks short phrases like '我来拿这个' or '你先拿')", 'visual (human observes robot arm pauses, yields, changes path, or retracts)']
+Collaboration: Human takes finer, judgment-required items; robot takes heavier or items closer to its side.
+Environment: assembly workstation with shared tool rack
+Expected empathy forms: timely indication of intent; yielding or giving way; leaving space for human at the shared tool rack; considering human's spatial comfort and proximity
+Failure modes: both reaching for the same shelf part at the same time; one party assuming the other has seen their reach; blocking or brushing against the human; contact without any pause, avoidance, or explanation
+Contrast vs rigid arm: Traditional rigid robot arms have clear work boundaries; human does not share the same pick-up area. This musculoskeletal robot sits right next to the human, sharing the same space, making arm trajectories and upper‑body distance feel more like human‑human collaboration.
+
+Output Markdown only. Format example (illustrative structure only—not instructions on how to organize the scale):
+
+# Empathy Scale
+
+## Purpose
+
+## Items
+- ...
