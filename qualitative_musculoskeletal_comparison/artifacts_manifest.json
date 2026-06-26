@@ -1,0 +1,11 @@
+{
+  "nine_step_run": "2026-05-11_155408",
+  "interview_run": "2026-05-11_155408",
+  "files": {
+    "访谈摘要": "data/runs/2026-05-11_155408/interview_agent_group/summary.json",
+    "文献检索": "data/runs/2026-05-11_155408/literature_search_agent_group/summary.json",
+    "初始题项": "data/runs/2026-05-11_155408/empathy_scale_generation_agent_group/scale_draft.md",
+    "统计筛选后": "data/runs/2026-05-11_155408/empathy_scale_generation_agent_group/filtered_scale_draft.md",
+    "评估验证": "data/runs/2026-05-11_155408/evaluation_agent_group/validation/evaluation_summary.json"
+  }
+}

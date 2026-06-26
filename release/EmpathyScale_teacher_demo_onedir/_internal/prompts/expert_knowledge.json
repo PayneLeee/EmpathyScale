@@ -1,0 +1,76 @@
+{
+  "summary": "**EXPERT KNOWLEDGE FROM ESTABLISHED EMPATHY SCALES**\n\n**PETS Scale (Schmidmaier et al., 2024) - Final 10-item, 2-factor structure:**\n- **Factor 1: Emotional Responsiveness (PETS-ER)** - 6 items focusing on emotional recognition, expression, support, and affective aspects\n  Examples: \"The system considered my mental state\", \"The system seemed emotionally intelligent\", \"The system expressed emotions\", \"The system sympathized with me\", \"The system showed interest in me\", \"The system supported me in coping with an emotional situation\"\n- **Factor 2: Understanding and Trust (PETS-UT)** - 4 items focusing on cognitive understanding, goal/need/intention comprehension, and trust building\n  Examples: \"The system understood my goals\", \"The system understood my needs\", \"I trusted the system\", \"The system understood my intentions\"\n\n**Key Insights:**\n1. **Factor Distinction**: Emotional/Affective (ER) vs Cognitive/Understanding (UT) are statistically separable dimensions. The two factors represent distinct empathy components that can be differentiated through factor analysis (oblique rotation, factors are correlated but distinct).\n2. **Item Selection Method**: PETS used EFA with factor loading >= 0.75 threshold. Final factor distribution (6 vs 4 items) emerged naturally from statistical analysis, NOT forced balance. The goal is to ensure each factor has sufficient items (minimum 2-3 for CFA), but perfect balance is not required.\n3. **Coverage Strategy**: Each factor represents distinct empathy components - ensure your dimensions follow similar semantic separation. Items within a dimension should measure related aspects (e.g., all emotional vs all cognitive), but should cover different semantic nuances.\n\n**Empathy Components (from established literature - PETS, RoPE, Putta et al.):**\n- **Cognitive Empathy**: Understanding mental states, perspectives, goals, needs, intentions (maps to PETS-UT factor)\n- **Affective Empathy**: Sharing emotional experiences, emotional responsiveness, recognition, expression (maps to PETS-ER factor)\n- **Compassionate Empathy**: Taking action to help, supportive behavior, proactive assistance (can appear in either factor depending on context)\n\n**Dimension Balance Strategy:**\n- Generate 15-20 candidate items per dimension to ensure sufficient pool for statistical selection\n- The statistical selection process (EFA/CFA) will determine final item count per factor\n- Factor balance should emerge from data quality and statistical relationships, not be artificially forced\n- Each factor should have at least 2-3 items (technical requirement for CFA), but perfect balance is not necessary\n\n**Critical Requirement for Item Generation:**\nWhen generating items for multiple dimensions, ensure each dimension focuses on DIFFERENT empathy aspects (emotional/affective vs cognitive/understanding). Avoid semantic overlap between dimensions to enable statistical separation in factor analysis.",
+  "pets_factors": {
+    "PETS-ER": {
+      "name": "Emotional Responsiveness",
+      "description": "Assesses the system's ability to recognize, express, and respond to user emotions and affective states",
+      "key_aspects": [
+        "emotional recognition",
+        "emotional expression",
+        "emotional support",
+        "affective responsiveness",
+        "sympathy and empathy expression"
+      ],
+      "example_items": [
+        "The system considered my mental state",
+        "The system seemed emotionally intelligent",
+        "The system expressed emotions",
+        "The system sympathized with me",
+        "The system showed interest in me",
+        "The system supported me in coping with an emotional situation"
+      ],
+      "final_item_count": 6
+    },
+    "PETS-UT": {
+      "name": "Understanding and Trust",
+      "description": "Assesses the system's cognitive understanding of user goals, needs, intentions, and the trust relationship",
+      "key_aspects": [
+        "cognitive understanding",
+        "goal comprehension",
+        "need comprehension",
+        "intention understanding",
+        "trust building"
+      ],
+      "example_items": [
+        "The system understood my goals",
+        "The system understood my needs",
+        "I trusted the system",
+        "The system understood my intentions"
+      ],
+      "final_item_count": 4
+    }
+  },
+  "empathy_components": {
+    "cognitive_empathy": {
+      "definition": "The ability to understand and represent the mental states of others, including their feelings, perspectives, and experiences",
+      "subcategories": [
+        "empathic understanding (awareness of another person's unique experience)",
+        "empathic response (communicating understanding of feelings and motives)",
+        "perspective-taking",
+        "goal/need/intention comprehension"
+      ],
+      "maps_to_pets_factor": "PETS-UT"
+    },
+    "affective_empathy": {
+      "definition": "The ability to share the affective experience of others, eliciting automatic emotional responses",
+      "subcategories": [
+        "emotional recognition",
+        "emotional expression",
+        "emotional responsiveness",
+        "sympathy"
+      ],
+      "maps_to_pets_factor": "PETS-ER"
+    },
+    "compassionate_empathy": {
+      "definition": "The ability to go beyond understanding and sharing feelings by taking action to help others",
+      "subcategories": [
+        "supportive behavior",
+        "helping actions",
+        "proactive assistance"
+      ],
+      "maps_to_pets_factor": "Can appear in either PETS-ER or PETS-UT depending on context"
+    }
+  }
+}
+
+

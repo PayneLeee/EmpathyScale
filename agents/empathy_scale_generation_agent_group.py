@@ -17,6 +17,24 @@ from langchain_openai import ChatOpenAI
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'utils'))
 from prompt_manager import PromptManager
 
+try:
+    from workflow_console import sub, sub_done, minor_separator, print_json_panel
+except ImportError:
+    def sub(msg, indent=4):
+        print(f"{' ' * indent}▸ {msg}", flush=True)
+
+    def sub_done(msg, indent=4):
+        print(f"{' ' * indent}✓ {msg}", flush=True)
+
+    def minor_separator(label=None):
+        if label:
+            print(f"    --- {label} ---", flush=True)
+        else:
+            print("    " + "·" * 56, flush=True)
+
+    def print_json_panel(title, obj, max_chars=None):
+        print(f"\n[{title}]\n{obj}\n")
+
 # Local agents
 from scale_generation_agents import (
     ConstructDefinitionAgent,
@@ -60,6 +78,104 @@ class EmpathyScaleGenerationAgentGroup:
             with open(path, 'r', encoding='utf-8') as f:
                 return json.load(f)
         return {}
+
+    def _load_high_relevance_papers(self, run_id: str) -> List[Dict[str, Any]]:
+        """Load scenario-scored papers and return those with score >= 4."""
+        path = PROJECT_ROOT / f"data/runs/{run_id}/literature_search_agent_group/relevance_scored_papers.json"
+        if path.exists():
+            with open(path, 'r', encoding='utf-8') as f:
+                all_papers = json.load(f)
+            return [p for p in all_papers if p.get("scenario_relevance_score", 0) >= 4]
+        return []
+
+    def _check_evidence_coverage(
+        self, dimensions: List[Dict[str, str]], high_rel_papers: List[Dict[str, Any]]
+    ) -> Dict[str, Any]:
+        """
+        Check whether each dimension has at least one supporting high-relevance paper.
+
+        Matching is keyword-based: a paper is considered evidence for a dimension if
+        its title or abstract contains any significant word from the dimension name.
+
+        Returns a coverage dict with per-dimension evidence lists and a flag
+        indicating whether supplemental research is needed.
+        """
+        coverage: Dict[str, Any] = {"dimensions": {}, "needs_more_research": False}
+
+        for dim in dimensions:
+            dim_name = dim.get("name") or dim.get("dimension") or "Unknown"
+            # Build keyword set from dimension name (ignore short/common words)
+            keywords = {
+                w.lower() for w in re.split(r'[\s\-_/]+', dim_name)
+                if len(w) > 3
+            }
+            supporting: List[str] = []
+            for paper in high_rel_papers:
+                text = (paper.get("title", "") + " " + paper.get("abstract", "")).lower()
+                if any(kw in text for kw in keywords):
+                    supporting.append(paper.get("title", "Unknown"))
+            coverage["dimensions"][dim_name] = {
+                "supporting_paper_count": len(supporting),
+                "supporting_papers": supporting[:5],
+                "has_evidence": len(supporting) > 0,
+            }
+            if len(supporting) == 0:
+                coverage["needs_more_research"] = True
+
+        covered = sum(
+            1 for d in coverage["dimensions"].values() if d["has_evidence"]
+        )
+        total = len(dimensions) or 1
+        coverage["evidence_coverage_score"] = round(covered / total, 2)
+        return coverage
+
+    def _build_evidence_section(
+        self, high_rel_papers: List[Dict[str, Any]], evidence_coverage: Dict[str, Any]
+    ) -> str:
+        """Build a markdown Evidence Base section for the scale draft."""
+        lines = ["## Evidence Base", ""]
+
+        if not high_rel_papers:
+            lines.append(
+                "_No scenario-specific high-relevance papers were found. "
+                "Scale items are grounded in expert reference PDFs only. "
+                "Consider re-running with a more specific scenario description._"
+            )
+            lines.append("")
+            return "\n".join(lines)
+
+        lines.append(
+            f"This scale is supported by **{len(high_rel_papers)} high-relevance papers** "
+            f"(scenario relevance score ≥ 4/5)."
+        )
+        lines.append("")
+        lines.append("### Supporting Papers")
+        for paper in high_rel_papers:
+            title = paper.get("title", "Unknown title")
+            year = paper.get("year", "")
+            score = paper.get("scenario_relevance_score", "—")
+            dims = ", ".join(paper.get("scenario_covered_dimensions", []))
+            reason = paper.get("scenario_relevance_reason", "")
+            lines.append(f"- **{title}** ({year}) — scenario score: {score}/5 | dims: [{dims}]")
+            if reason:
+                lines.append(f"  _{reason}_")
+        lines.append("")
+
+        lines.append("### Evidence Coverage by Dimension")
+        for dim_name, info in evidence_coverage.get("dimensions", {}).items():
+            status = "✓" if info["has_evidence"] else "✗ NO EVIDENCE"
+            count = info["supporting_paper_count"]
+            lines.append(f"- **{dim_name}**: {status} ({count} supporting papers)")
+        lines.append("")
+
+        if evidence_coverage.get("needs_more_research"):
+            lines.append(
+                "> **Note**: One or more dimensions lack direct paper support. "
+                "Running additional literature search passes is recommended."
+            )
+            lines.append("")
+
+        return "\n".join(lines)
 
     def _list_expert_pdfs(self) -> List[str]:
         expert_dir = PROJECT_ROOT / "agents" / "expert_pdfs"
@@ -134,31 +250,70 @@ class EmpathyScaleGenerationAgentGroup:
         interview = self._load_interview_summary(run_id)
         literature = self._load_literature_summary(run_id)
         expert_pdfs = self._list_expert_pdfs()
+        high_relevance_papers = self._load_high_relevance_papers(run_id)
 
-        # Step 1: construct definition
-        print("    [LLM Call] Defining empathy constructs...", flush=True)
+        minor_separator("Boateng Step 2 — 子过程（内容效度 / 题项池）")
+        sub("2-i   构念界定：结合访谈 + 文献 + 专家 PDF 定义维度（LLM）")
         constructs = self._run_construct_definition(interview)
-        print(f"    [OK] Constructs defined: {len(self._extract_dimensions(constructs.get('raw', '')))} dimensions", flush=True)
+        dim_list = self._extract_dimensions(constructs.get("raw", ""))
+        sub_done(f"维度数 = {len(dim_list)}")
+        print_json_panel(
+            "量表生成 · 构念/维度（Step 2-i，解析自 LLM 输出）",
+            {
+                "dimensions": dim_list,
+                "raw_response_length_chars": len(constructs.get("raw") or ""),
+                "raw_excerpt": (constructs.get("raw") or "")[:2000],
+            },
+            max_chars=14000,
+        )
 
-        # Step 2: multi-generator candidates
-        print(f"    [LLM Call] Generating items with {self.num_item_generators} parallel generator(s)...", flush=True)
+        sub(f"2-ii  题项池生成：{self.num_item_generators} 个生成器并行（LLM）")
         candidates = self._run_multi_item_generation(constructs, interview)
-        # Calculate total number of items across all dimensions
         total_items = sum(len(block.get("items", [])) for block in candidates)
-        print(f"    [OK] Generated {total_items} candidate items across {len(candidates)} dimensions", flush=True)
+        sub_done(f"候选题项 {total_items} 条，跨 {len(candidates)} 个维度块")
+        pool_preview = [
+            {
+                "dimension": b.get("dimension"),
+                "n_items": len(b.get("items", [])),
+                "item_samples": (b.get("items") or [])[:3],
+            }
+            for b in candidates
+        ]
+        print_json_panel("题项池 · 合并后候选（每维条数 + 至多3条样例）", pool_preview, max_chars=16000)
 
-        # Step 3: content assessment (optional)
         if self.enable_content_assessment:
-            print("    [LLM Call] Running content assessment and refinement...", flush=True)
+            sub("2-iii 内容评估与轻度润色（内容效度取向，LLM）")
             refined = self._run_content_assessment(candidates, interview)
             total_refined = sum(len(block.get("items", [])) for block in refined)
-            print(f"    [OK] Refined to {total_refined} items across {len(refined)} dimensions", flush=True)
+            sub_done(f"精炼后 {total_refined} 条题项")
+            refined_preview = [
+                {
+                    "dimension": b.get("dimension"),
+                    "n_items": len(b.get("items", [])),
+                    "item_samples": (b.get("items") or [])[:3],
+                }
+                for b in refined
+            ]
+            print_json_panel("内容评估后 · 题项池（每维条数 + 至多3条样例）", refined_preview, max_chars=16000)
         else:
             refined = candidates
-            print("    [SKIP] Content assessment disabled", flush=True)
+            sub("2-iii 内容评估已关闭，跳过")
 
-        # Step 3.5: Semantic deduplication (remove semantically similar items before evaluation)
-        print("    [Semantic Dedup] Removing semantically similar items...", flush=True)
+        if self.enable_content_assessment:
+            sub("2-iv  文献-维度证据覆盖检查（高相关论文 ↔ 维度名匹配）")
+            dimensions_meta = [{"name": blk.get("dimension", "Unknown")} for blk in refined]
+            evidence_coverage = self._check_evidence_coverage(dimensions_meta, high_relevance_papers)
+            sub_done(
+                f"evidence_coverage_score={evidence_coverage['evidence_coverage_score']:.2f}, "
+                f"needs_more_research={evidence_coverage['needs_more_research']}"
+            )
+            print_json_panel("文献-维度证据覆盖（JSON）", evidence_coverage, max_chars=12000)
+        else:
+            dimensions_meta = [{"name": blk.get("dimension", "Unknown")} for blk in refined]
+            evidence_coverage = self._check_evidence_coverage(dimensions_meta, high_relevance_papers)
+            print_json_panel("文献-维度证据覆盖（JSON）", evidence_coverage, max_chars=12000)
+
+        sub("2-v   语义去重（预评估前，可选 sentence-transformers）")
         try:
             from utils.pre_evaluation_semantic_deduplication import remove_semantic_duplicates_before_evaluation
             
@@ -188,7 +343,7 @@ class EmpathyScaleGenerationAgentGroup:
                 refined = [{"dimension": dim, "items": items} for dim, items in refined_by_dim.items()]
                 
                 total_after_dedup = sum(len(block.get("items", [])) for block in refined)
-                print(f"    [OK] After semantic deduplication: {total_after_dedup} items (removed {dedup_stats['n_removed']} semantic duplicates)", flush=True)
+                sub_done(f"去重后 {total_after_dedup} 条（移除语义重复 {dedup_stats['n_removed']}）")
                 
                 # Save deduplication stats
                 out_dir = PROJECT_ROOT / f"data/runs/{run_id}/empathy_scale_generation_agent_group"
@@ -197,17 +352,20 @@ class EmpathyScaleGenerationAgentGroup:
                 with open(dedup_stats_path, 'w', encoding='utf-8') as f:
                     json.dump(dedup_stats, f, indent=2, ensure_ascii=False)
             else:
-                print("    [WARN] No items to deduplicate", flush=True)
+                sub("无可去重题项")
         except ImportError as e:
-            print(f"    [WARN] Semantic deduplication not available ({e}), skipping...", flush=True)
+            sub(f"语义去重不可用（{e}），跳过")
         except Exception as e:
-            print(f"    [WARN] Semantic deduplication failed: {e}, continuing without it...", flush=True)
+            sub(f"语义去重失败（{e}），继续不阻断")
             import traceback
             traceback.print_exc()
 
-        # Step 4: assemble markdown
-        print("    [Assembling] Creating scale draft markdown...", flush=True)
-        scale_markdown = self._assemble_markdown(interview, literature, refined, expert_pdfs)
+        sub("2-vi  组装 Markdown 初稿（含 Evidence Base 段落）")
+        scale_markdown = self._assemble_markdown(
+            interview, literature, refined, expert_pdfs,
+            high_relevance_papers=high_relevance_papers,
+            evidence_coverage=evidence_coverage,
+        )
 
         # Save artifacts
         out_dir = PROJECT_ROOT / f"data/runs/{run_id}/empathy_scale_generation_agent_group"
@@ -215,17 +373,21 @@ class EmpathyScaleGenerationAgentGroup:
         draft_path = out_dir / "scale_draft.md"
         with open(draft_path, 'w', encoding='utf-8') as f:
             f.write(scale_markdown)
+        sub_done(f"已写入 {draft_path}")
 
         summary = {
             "status": "completed",
             "used_expert_pdfs": expert_pdfs,
+            "evidence_coverage": evidence_coverage,
+            "needs_more_research": evidence_coverage.get("needs_more_research", False),
+            "high_relevance_paper_count": len(high_relevance_papers),
             "inputs": {
                 "interview_fields_present": [k for k, v in interview.items() if v],
                 "literature_keys_present": list(literature.keys()),
             },
             "outputs": {
                 "draft_path": str(draft_path),
-            }
+            },
         }
         with open(out_dir / "summary.json", 'w', encoding='utf-8') as f:
             json.dump(summary, f, indent=2, ensure_ascii=False)
@@ -233,6 +395,8 @@ class EmpathyScaleGenerationAgentGroup:
         return {
             "scale_draft_path": str(draft_path),
             "summary": summary,
+            "needs_more_research": evidence_coverage.get("needs_more_research", False),
+            "evidence_coverage": evidence_coverage,
         }
 
     # ---------- New sub-steps ----------
@@ -266,7 +430,11 @@ class EmpathyScaleGenerationAgentGroup:
         refined = agent.refine(candidates, scenario)
         return self._parse_items_from_raw(refined.get("raw"))
 
-    def _assemble_markdown(self, interview, literature, items, expert_pdfs) -> str:
+    def _assemble_markdown(
+        self, interview, literature, items, expert_pdfs,
+        high_relevance_papers: List[Dict[str, Any]] = None,
+        evidence_coverage: Dict[str, Any] = None,
+    ) -> str:
         """
         Assemble markdown directly from items without LLM selection.
         This ensures all items are included in the final draft.
@@ -315,7 +483,15 @@ class EmpathyScaleGenerationAgentGroup:
         md_lines.append("## Scoring")
         md_lines.append("Items will be scored on a Likert scale from 1 to 5. Subscale totals can be calculated by summing items within each dimension.")
         md_lines.append("")
-        
+
+        # Append evidence base section when available
+        if high_relevance_papers is not None or evidence_coverage is not None:
+            evidence_section = self._build_evidence_section(
+                high_relevance_papers or [],
+                evidence_coverage or {},
+            )
+            md_lines.append(evidence_section)
+
         return "\n".join(md_lines)
 
     # ---------- Helpers ----------

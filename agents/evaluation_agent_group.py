@@ -18,6 +18,16 @@ from langchain_openai import ChatOpenAI
 from openai import APIConnectionError
 
 from utils.prompt_manager import PromptManager
+
+try:
+    from workflow_console import minor_separator, sub
+except ImportError:
+    def minor_separator(label=None):
+        if label:
+            print(f"      --- {label} ---", flush=True)
+
+    def sub(msg, indent=6):
+        print(f"{' ' * indent}▸ {msg}", flush=True)
 from agents.scale_generation_agents import retry_llm_call
 from agents.persona_generation_agent import PersonaGenerationAgent
 
@@ -78,58 +88,35 @@ class EvaluationAgentGroup:
             out_dir = PROJECT_ROOT / f"data/runs/{run_id}/evaluation_agent_group"
         out_dir.mkdir(parents=True, exist_ok=True)
 
+        minor_separator(f"评估输出目录: {out_dir.name}")
+        sub(f"Boateng Step 3–4：{n_participants} Personas × {len(items)} items（phase={phase}）", indent=6)
+
         # Load or generate personas
         if personas is None:
             if scenario_id:
-                # Load or generate personas based on phase
-                # Phase 1 (selection): uses {scenario} personas with phase="selection"
-                # Phase 2 (validation): uses {scenario} personas with phase="validation" (independent group)
                 persona_agent = PersonaGenerationAgent(api_key=self.api_key, prompts_dir=self.prompt_manager.prompts_dir)
                 personas = persona_agent.load_personas(scenario_id, phase=phase)
                 if personas is None:
-                    # Generate new personas and save them with the specified phase
-                    print(f"      [Persona] Generating {n_participants} personas for scenario '{scenario_id}' (phase: {phase})...", flush=True)
+                    personas = persona_agent.generate_personas(scenario_context, n_participants)
+                    persona_agent.save_personas(scenario_id, personas, phase=phase)
+                elif len(personas) < n_participants:
                     personas = persona_agent.generate_personas(scenario_context, n_participants)
                     persona_agent.save_personas(scenario_id, personas, phase=phase)
                 else:
-                    # Check if we have enough personas
-                    if len(personas) < n_participants:
-                        # Regenerate personas if not enough
-                        print(f"      [Persona] Only {len(personas)} personas available, but {n_participants} requested.", flush=True)
-                        print(f"      [Persona] Regenerating {n_participants} personas for scenario '{scenario_id}' (phase: {phase})...", flush=True)
-                        personas = persona_agent.generate_personas(scenario_context, n_participants)
-                        persona_agent.save_personas(scenario_id, personas, phase=phase)
-                    else:
-                        print(f"      [Persona] Using existing {len(personas)} personas for scenario '{scenario_id}' (phase: {phase})", flush=True)
-                        personas = personas[:n_participants]
+                    personas = personas[:n_participants]
             else:
-                # Generate temporary personas (not saved)
-                print(f"      [Persona] Generating temporary personas (not saved)...", flush=True)
                 persona_agent = PersonaGenerationAgent(api_key=self.api_key, prompts_dir=self.prompt_manager.prompts_dir)
                 personas = persona_agent.generate_personas(scenario_context, n_participants)
         else:
-            print(f"      [Persona] Using provided personas", flush=True)
-            # Ensure we have the right number
-            if len(personas) < n_participants:
-                print(f"      [Persona] Warning: Only {len(personas)} personas provided, but {n_participants} requested. Using available personas.", flush=True)
-            else:
-                personas = personas[:n_participants]
+            personas = personas[:n_participants] if len(personas) >= n_participants else personas
 
-        print(f"      Evaluating {len(items)} items with {len(personas)} personas (0-100 scale)", flush=True)
-        print(f"      Each persona will rate all {len(items)} items", flush=True)
-        
         # Determine if batching is needed
         use_batching = len(items) > self.items_batch_size
-        if use_batching:
-            num_batches = (len(items) + self.items_batch_size - 1) // self.items_batch_size
-            print(f"      Items will be processed in {num_batches} batch(es) ({self.items_batch_size} items per batch)", flush=True)
-        
-        print(f"      Using {self.max_workers} parallel workers for persona evaluation", flush=True)
-        
+
         participant_data = []
         start_time = time.time()
-        completed_count = [0]  # Use list for closure modification
-        
+        completed_count = [0]
+
         def process_persona(persona_with_idx):
             """Process a single persona (with batching if needed)."""
             idx, persona = persona_with_idx
@@ -142,19 +129,12 @@ class EvaluationAgentGroup:
                     participant_result = self._simulate_participant_with_persona(
                         items, scenario_context, persona
                     )
-                
                 with self._progress_lock:
                     completed_count[0] += 1
-                    elapsed = time.time() - start_time
-                    avg_time = elapsed / completed_count[0] if completed_count[0] > 0 else 0
-                    remaining = avg_time * (len(personas) - completed_count[0])
-                    if completed_count[0] % 5 == 0 or completed_count[0] == len(personas):
-                        print(f"      Persona {completed_count[0]}/{len(personas)} completed ({elapsed:.1f}s total, ETA: {remaining:.0f}s)", flush=True)
-                
                 return participant_result
             except Exception as e:
                 with self._progress_lock:
-                    print(f"      [ERROR] Persona {idx} failed: {e}", flush=True)
+                    completed_count[0] += 1
                 # Return error structure matching expected format
                 persona_id = persona.get("persona_id", idx)
                 complete_persona = persona.copy()
@@ -192,7 +172,6 @@ class EvaluationAgentGroup:
         # Sort by persona_id to maintain consistency
         participant_data.sort(key=lambda x: x.get("persona_id", 0))
         
-        print("      [Summarizing] Computing statistics...", flush=True)
         summary = self._summarize(participant_data, items)
 
         with open(out_dir / "participant_level_evaluations.json", "w", encoding="utf-8") as f:
@@ -208,11 +187,18 @@ class EvaluationAgentGroup:
             "summary_path": str(out_dir / "evaluation_summary.json"),
         }
 
-    def evaluate_baseline_txt(self, run_id: str, txt_path: Path, scenario_context: Dict[str, Any],
-                              n_participants: int = 25, scenario_id: str = None, label: str = "baseline") -> Dict[str, Any]:
-        print(f"      [Baseline] Loading {label} items from {txt_path.name}...", flush=True)
+    def evaluate_baseline_txt(
+        self,
+        run_id: str,
+        txt_path: Path,
+        scenario_context: Dict[str, Any],
+        n_participants: int = 25,
+        scenario_id: str = None,
+        label: str = "baseline",
+        print_label: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        pl = print_label if print_label is not None else label
         items = self._items_from_plain_text(txt_path)
-        print(f"      [Baseline] Found {len(items)} items for {label}", flush=True)
         out_dir = PROJECT_ROOT / f"data/runs/{run_id}/evaluation_agent_group/baselines/{label}"
         return self.evaluate_items(run_id, items, scenario_context, n_participants, scenario_id=scenario_id, out_dir=out_dir)
 
@@ -241,24 +227,16 @@ class EvaluationAgentGroup:
             start_idx = batch_idx * self.items_batch_size
             end_idx = min(start_idx + self.items_batch_size, len(items))
             batch_items = items[start_idx:end_idx]
-            
-            # Add logging for batch processing (thread-safe)
-            with self._progress_lock:
-                print(f"      [Persona {persona_id}] Processing batch {batch_idx + 1}/{num_batches} ({len(batch_items)} items, items {start_idx + 1}-{end_idx})...", flush=True)
-            
+
             # Process this batch
             batch_result = self._simulate_participant_with_persona(
-                batch_items, scenario_context, persona, 
-                item_offset=start_idx  # Pass offset for correct item_id
+                batch_items, scenario_context, persona,
+                item_offset=start_idx
             )
-            
+
             # Collect ratings from this batch
             batch_ratings = batch_result.get("ratings", [])
             all_ratings.extend(batch_ratings)
-            
-            # Log batch completion (thread-safe)
-            with self._progress_lock:
-                print(f"      [Persona {persona_id}] Batch {batch_idx + 1}/{num_batches} completed ({len(batch_ratings)} ratings collected)", flush=True)
         
         # Merge results - use the last batch result as template and update ratings
         merged_result = batch_result.copy()

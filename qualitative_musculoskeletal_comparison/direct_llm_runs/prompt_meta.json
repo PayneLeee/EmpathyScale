@@ -1,0 +1,12 @@
+{
+  "model": "deepseek-v4-flash",
+  "temperature": 0.85,
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "scenario_source": "C:\\Users\\13552\\Desktop\\EmpathyScale\\qualitative_musculoskeletal_comparison\\data\\scenario_input.json"
+}

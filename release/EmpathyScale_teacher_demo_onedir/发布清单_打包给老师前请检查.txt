@@ -1,0 +1,15 @@
+发布清单（给老师前）
+===================
+
+请确认以下文件放在同一目录后再压缩发送：
+
+必需：
+- `EmpathyScale.exe`
+- `README_老师使用说明.txt`
+- `常见问题_含VPN提示.txt`
+- `启动网页端.bat`
+
+备注：
+- 当前仓库默认生成的 exe 路径为：`dist\\EmpathyScale.exe`
+- 可将 `dist\\EmpathyScale.exe` 复制到本 `release` 目录后再打包发送
+- 本版本默认进入老师演示档位，并使用 `deepseek-v4-flash`

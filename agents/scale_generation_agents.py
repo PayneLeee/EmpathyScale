@@ -203,7 +203,7 @@ class ContentAssessmentAgent:
         # Note: 100 items ≈ 2000 tokens input, safe for API calls
         MAX_ITEMS_PER_BATCH = 100
         if total_items > MAX_ITEMS_PER_BATCH:
-            print(f"    [INFO] Processing {total_items} items in batches (max {MAX_ITEMS_PER_BATCH} per batch)...", flush=True)
+
             
             # Collect all items with their dimensions
             all_items_with_dim = []
@@ -233,8 +233,7 @@ class ContentAssessmentAgent:
                         candidate_lines.append(f"- {it}")
                 
                 full_prompt = f"{prompt}\n\nScenario:\n{scenario_text}\n\nCandidates:\n" + "\n".join(candidate_lines)
-                
-                print(f"    [INFO] Processing batch {batch_start//MAX_ITEMS_PER_BATCH + 1}/{(len(all_items_with_dim)-1)//MAX_ITEMS_PER_BATCH + 1} ({len(batch)} items)...", flush=True)
+
                 resp = retry_llm_call(lambda: self.llm.invoke(full_prompt).content.strip())
                 
                 # Parse this batch's response and merge
