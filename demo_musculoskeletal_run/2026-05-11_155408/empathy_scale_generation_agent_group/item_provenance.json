@@ -1,0 +1,1709 @@
+[
+  {
+    "dimension": "Spatial Coordination Understanding",
+    "items": [
+      {
+        "dimension": "Spatial Coordination Understanding",
+        "item_text": "The robot paused its arm to let me reach first.",
+        "related_factors": [
+          "shared workspace coordination",
+          "implicit coordination through action observation",
+          "bodily limitation understanding",
+          "side-by-side",
+          "shared",
+          "visual cues",
+          "embodied motion",
+          "human-like morphology",
+          "assembly",
+          "tool rack",
+          "factory"
+        ],
+        "scenario_mechanism": "The robot's implicit coordination through pauses, path changes, and yielding signals, and its understanding of the human's spatial comfort and bodily constraints when sharing a tool rack.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+            "Human-robot proxemics"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive focus on goal/need/intention comprehension, adapted to spatial negotiation and bodily limitation understanding in a shared workspace."
+        },
+        "generation_reason": "Measures Spatial Coordination Understanding in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Spatial Coordination Understanding",
+        "item_text": "I could tell the robot was aware of my working area.",
+        "related_factors": [
+          "shared workspace coordination",
+          "implicit coordination through action observation",
+          "bodily limitation understanding",
+          "side-by-side",
+          "shared",
+          "visual cues",
+          "embodied motion",
+          "human-like morphology",
+          "assembly",
+          "tool rack",
+          "factory"
+        ],
+        "scenario_mechanism": "The robot's implicit coordination through pauses, path changes, and yielding signals, and its understanding of the human's spatial comfort and bodily constraints when sharing a tool rack.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+            "Human-robot proxemics"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive focus on goal/need/intention comprehension, adapted to spatial negotiation and bodily limitation understanding in a shared workspace."
+        },
+        "generation_reason": "Measures Spatial Coordination Understanding in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Spatial Coordination Understanding",
+        "item_text": "The robot changed its path to avoid reaching at the same time as me.",
+        "related_factors": [
+          "shared workspace coordination",
+          "implicit coordination through action observation",
+          "bodily limitation understanding",
+          "side-by-side",
+          "shared",
+          "visual cues",
+          "embodied motion",
+          "human-like morphology",
+          "assembly",
+          "tool rack",
+          "factory"
+        ],
+        "scenario_mechanism": "The robot's implicit coordination through pauses, path changes, and yielding signals, and its understanding of the human's spatial comfort and bodily constraints when sharing a tool rack.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+            "Human-robot proxemics"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive focus on goal/need/intention comprehension, adapted to spatial negotiation and bodily limitation understanding in a shared workspace."
+        },
+        "generation_reason": "Measures Spatial Coordination Understanding in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Spatial Coordination Understanding",
+        "item_text": "The robot left enough space for me to access the tool rack.",
+        "related_factors": [
+          "shared workspace coordination",
+          "implicit coordination through action observation",
+          "bodily limitation understanding",
+          "side-by-side",
+          "shared",
+          "visual cues",
+          "embodied motion",
+          "human-like morphology",
+          "assembly",
+          "tool rack",
+          "factory"
+        ],
+        "scenario_mechanism": "The robot's implicit coordination through pauses, path changes, and yielding signals, and its understanding of the human's spatial comfort and bodily constraints when sharing a tool rack.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+            "Human-robot proxemics"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive focus on goal/need/intention comprehension, adapted to spatial negotiation and bodily limitation understanding in a shared workspace."
+        },
+        "generation_reason": "Measures Spatial Coordination Understanding in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Spatial Coordination Understanding",
+        "item_text": "The robot's movements showed it understood where I needed to reach.",
+        "related_factors": [
+          "shared workspace coordination",
+          "implicit coordination through action observation",
+          "bodily limitation understanding",
+          "side-by-side",
+          "shared",
+          "visual cues",
+          "embodied motion",
+          "human-like morphology",
+          "assembly",
+          "tool rack",
+          "factory"
+        ],
+        "scenario_mechanism": "The robot's implicit coordination through pauses, path changes, and yielding signals, and its understanding of the human's spatial comfort and bodily constraints when sharing a tool rack.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+            "Human-robot proxemics"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive focus on goal/need/intention comprehension, adapted to spatial negotiation and bodily limitation understanding in a shared workspace."
+        },
+        "generation_reason": "Measures Spatial Coordination Understanding in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Spatial Coordination Understanding",
+        "item_text": "I felt the robot respected my personal space at the workstation.",
+        "related_factors": [
+          "shared workspace coordination",
+          "implicit coordination through action observation",
+          "bodily limitation understanding",
+          "side-by-side",
+          "shared",
+          "visual cues",
+          "embodied motion",
+          "human-like morphology",
+          "assembly",
+          "tool rack",
+          "factory"
+        ],
+        "scenario_mechanism": "The robot's implicit coordination through pauses, path changes, and yielding signals, and its understanding of the human's spatial comfort and bodily constraints when sharing a tool rack.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+            "Human-robot proxemics"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive focus on goal/need/intention comprehension, adapted to spatial negotiation and bodily limitation understanding in a shared workspace."
+        },
+        "generation_reason": "Measures Spatial Coordination Understanding in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Spatial Coordination Understanding",
+        "item_text": "The robot yielded when I started to reach for a part.",
+        "related_factors": [
+          "shared workspace coordination",
+          "implicit coordination through action observation",
+          "bodily limitation understanding",
+          "side-by-side",
+          "shared",
+          "visual cues",
+          "embodied motion",
+          "human-like morphology",
+          "assembly",
+          "tool rack",
+          "factory"
+        ],
+        "scenario_mechanism": "The robot's implicit coordination through pauses, path changes, and yielding signals, and its understanding of the human's spatial comfort and bodily constraints when sharing a tool rack.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+            "Human-robot proxemics"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive focus on goal/need/intention comprehension, adapted to spatial negotiation and bodily limitation understanding in a shared workspace."
+        },
+        "generation_reason": "Measures Spatial Coordination Understanding in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Spatial Coordination Understanding",
+        "item_text": "The robot's arm trajectory made it easy to anticipate its next move.",
+        "related_factors": [
+          "shared workspace coordination",
+          "implicit coordination through action observation",
+          "bodily limitation understanding",
+          "side-by-side",
+          "shared",
+          "visual cues",
+          "embodied motion",
+          "human-like morphology",
+          "assembly",
+          "tool rack",
+          "factory"
+        ],
+        "scenario_mechanism": "The robot's implicit coordination through pauses, path changes, and yielding signals, and its understanding of the human's spatial comfort and bodily constraints when sharing a tool rack.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+            "Human-robot proxemics"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive focus on goal/need/intention comprehension, adapted to spatial negotiation and bodily limitation understanding in a shared workspace."
+        },
+        "generation_reason": "Measures Spatial Coordination Understanding in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Spatial Coordination Understanding",
+        "item_text": "The robot adjusted its reach to avoid blocking my hand.",
+        "related_factors": [
+          "shared workspace coordination",
+          "implicit coordination through action observation",
+          "bodily limitation understanding",
+          "side-by-side",
+          "shared",
+          "visual cues",
+          "embodied motion",
+          "human-like morphology",
+          "assembly",
+          "tool rack",
+          "factory"
+        ],
+        "scenario_mechanism": "The robot's implicit coordination through pauses, path changes, and yielding signals, and its understanding of the human's spatial comfort and bodily constraints when sharing a tool rack.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+            "Human-robot proxemics"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive focus on goal/need/intention comprehension, adapted to spatial negotiation and bodily limitation understanding in a shared workspace."
+        },
+        "generation_reason": "Measures Spatial Coordination Understanding in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Spatial Coordination Understanding",
+        "item_text": "I could predict when the robot would reach for a tool by watching its arm.",
+        "related_factors": [
+          "shared workspace coordination",
+          "implicit coordination through action observation",
+          "bodily limitation understanding",
+          "side-by-side",
+          "shared",
+          "visual cues",
+          "embodied motion",
+          "human-like morphology",
+          "assembly",
+          "tool rack",
+          "factory"
+        ],
+        "scenario_mechanism": "The robot's implicit coordination through pauses, path changes, and yielding signals, and its understanding of the human's spatial comfort and bodily constraints when sharing a tool rack.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+            "Human-robot proxemics"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive focus on goal/need/intention comprehension, adapted to spatial negotiation and bodily limitation understanding in a shared workspace."
+        },
+        "generation_reason": "Measures Spatial Coordination Understanding in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Spatial Coordination Understanding",
+        "item_text": "The robot seemed to know when I needed a particular tool.",
+        "related_factors": [
+          "shared workspace coordination",
+          "implicit coordination through action observation",
+          "bodily limitation understanding",
+          "side-by-side",
+          "shared",
+          "visual cues",
+          "embodied motion",
+          "human-like morphology",
+          "assembly",
+          "tool rack",
+          "factory"
+        ],
+        "scenario_mechanism": "The robot's implicit coordination through pauses, path changes, and yielding signals, and its understanding of the human's spatial comfort and bodily constraints when sharing a tool rack.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+            "Human-robot proxemics"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive focus on goal/need/intention comprehension, adapted to spatial negotiation and bodily limitation understanding in a shared workspace."
+        },
+        "generation_reason": "Measures Spatial Coordination Understanding in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Spatial Coordination Understanding",
+        "item_text": "The robot's pauses helped us coordinate who takes which part.",
+        "related_factors": [
+          "shared workspace coordination",
+          "implicit coordination through action observation",
+          "bodily limitation understanding",
+          "side-by-side",
+          "shared",
+          "visual cues",
+          "embodied motion",
+          "human-like morphology",
+          "assembly",
+          "tool rack",
+          "factory"
+        ],
+        "scenario_mechanism": "The robot's implicit coordination through pauses, path changes, and yielding signals, and its understanding of the human's spatial comfort and bodily constraints when sharing a tool rack.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+            "Human-robot proxemics"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive focus on goal/need/intention comprehension, adapted to spatial negotiation and bodily limitation understanding in a shared workspace."
+        },
+        "generation_reason": "Measures Spatial Coordination Understanding in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      }
+    ]
+  },
+  {
+    "dimension": "Collision-Responsive Adaptation",
+    "items": [
+      {
+        "dimension": "Collision-Responsive Adaptation",
+        "item_text": "When we bumped, the robot immediately retracted its arm.",
+        "related_factors": [
+          "collision/contact adaptation",
+          "physical contact/collision",
+          "haptic/contact",
+          "language",
+          "musculoskeletal",
+          "collaborative arm"
+        ],
+        "scenario_mechanism": "The robot's collision-triggered adaptive behaviors (e.g., retracting arm, saying a short apology) that demonstrate sensitivity to contact and emotional consideration for the human's safety and comfort.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-ER factor (Emotional Responsiveness) guided the focus on emotional recognition, expression, and support, adapted to the specific context of physical contact and robot's reactive care."
+        },
+        "generation_reason": "Measures Collision-Responsive Adaptation in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Collision-Responsive Adaptation",
+        "item_text": "The robot apologized verbally after accidental contact.",
+        "related_factors": [
+          "collision/contact adaptation",
+          "physical contact/collision",
+          "haptic/contact",
+          "language",
+          "musculoskeletal",
+          "collaborative arm"
+        ],
+        "scenario_mechanism": "The robot's collision-triggered adaptive behaviors (e.g., retracting arm, saying a short apology) that demonstrate sensitivity to contact and emotional consideration for the human's safety and comfort.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-ER factor (Emotional Responsiveness) guided the focus on emotional recognition, expression, and support, adapted to the specific context of physical contact and robot's reactive care."
+        },
+        "generation_reason": "Measures Collision-Responsive Adaptation in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Collision-Responsive Adaptation",
+        "item_text": "I felt the robot cared about my safety when it stopped after touching me.",
+        "related_factors": [
+          "collision/contact adaptation",
+          "physical contact/collision",
+          "haptic/contact",
+          "language",
+          "musculoskeletal",
+          "collaborative arm"
+        ],
+        "scenario_mechanism": "The robot's collision-triggered adaptive behaviors (e.g., retracting arm, saying a short apology) that demonstrate sensitivity to contact and emotional consideration for the human's safety and comfort.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-ER factor (Emotional Responsiveness) guided the focus on emotional recognition, expression, and support, adapted to the specific context of physical contact and robot's reactive care."
+        },
+        "generation_reason": "Measures Collision-Responsive Adaptation in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Collision-Responsive Adaptation",
+        "item_text": "The robot's quick reaction to contact reassured me.",
+        "related_factors": [
+          "collision/contact adaptation",
+          "physical contact/collision",
+          "haptic/contact",
+          "language",
+          "musculoskeletal",
+          "collaborative arm"
+        ],
+        "scenario_mechanism": "The robot's collision-triggered adaptive behaviors (e.g., retracting arm, saying a short apology) that demonstrate sensitivity to contact and emotional consideration for the human's safety and comfort.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-ER factor (Emotional Responsiveness) guided the focus on emotional recognition, expression, and support, adapted to the specific context of physical contact and robot's reactive care."
+        },
+        "generation_reason": "Measures Collision-Responsive Adaptation in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Collision-Responsive Adaptation",
+        "item_text": "After a collision, the robot adjusted its movement to avoid repeating it.",
+        "related_factors": [
+          "collision/contact adaptation",
+          "physical contact/collision",
+          "haptic/contact",
+          "language",
+          "musculoskeletal",
+          "collaborative arm"
+        ],
+        "scenario_mechanism": "The robot's collision-triggered adaptive behaviors (e.g., retracting arm, saying a short apology) that demonstrate sensitivity to contact and emotional consideration for the human's safety and comfort.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-ER factor (Emotional Responsiveness) guided the focus on emotional recognition, expression, and support, adapted to the specific context of physical contact and robot's reactive care."
+        },
+        "generation_reason": "Measures Collision-Responsive Adaptation in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Collision-Responsive Adaptation",
+        "item_text": "The robot seemed sensitive to physical contact with me.",
+        "related_factors": [
+          "collision/contact adaptation",
+          "physical contact/collision",
+          "haptic/contact",
+          "language",
+          "musculoskeletal",
+          "collaborative arm"
+        ],
+        "scenario_mechanism": "The robot's collision-triggered adaptive behaviors (e.g., retracting arm, saying a short apology) that demonstrate sensitivity to contact and emotional consideration for the human's safety and comfort.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-ER factor (Emotional Responsiveness) guided the focus on emotional recognition, expression, and support, adapted to the specific context of physical contact and robot's reactive care."
+        },
+        "generation_reason": "Measures Collision-Responsive Adaptation in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Collision-Responsive Adaptation",
+        "item_text": "I felt the robot was considerate when it pulled back after a bump.",
+        "related_factors": [
+          "collision/contact adaptation",
+          "physical contact/collision",
+          "haptic/contact",
+          "language",
+          "musculoskeletal",
+          "collaborative arm"
+        ],
+        "scenario_mechanism": "The robot's collision-triggered adaptive behaviors (e.g., retracting arm, saying a short apology) that demonstrate sensitivity to contact and emotional consideration for the human's safety and comfort.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-ER factor (Emotional Responsiveness) guided the focus on emotional recognition, expression, and support, adapted to the specific context of physical contact and robot's reactive care."
+        },
+        "generation_reason": "Measures Collision-Responsive Adaptation in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Collision-Responsive Adaptation",
+        "item_text": "The robot's response to accidental touch made me feel respected.",
+        "related_factors": [
+          "collision/contact adaptation",
+          "physical contact/collision",
+          "haptic/contact",
+          "language",
+          "musculoskeletal",
+          "collaborative arm"
+        ],
+        "scenario_mechanism": "The robot's collision-triggered adaptive behaviors (e.g., retracting arm, saying a short apology) that demonstrate sensitivity to contact and emotional consideration for the human's safety and comfort.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-ER factor (Emotional Responsiveness) guided the focus on emotional recognition, expression, and support, adapted to the specific context of physical contact and robot's reactive care."
+        },
+        "generation_reason": "Measures Collision-Responsive Adaptation in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Collision-Responsive Adaptation",
+        "item_text": "When our arms touched, the robot paused and then moved more carefully.",
+        "related_factors": [
+          "collision/contact adaptation",
+          "physical contact/collision",
+          "haptic/contact",
+          "language",
+          "musculoskeletal",
+          "collaborative arm"
+        ],
+        "scenario_mechanism": "The robot's collision-triggered adaptive behaviors (e.g., retracting arm, saying a short apology) that demonstrate sensitivity to contact and emotional consideration for the human's safety and comfort.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-ER factor (Emotional Responsiveness) guided the focus on emotional recognition, expression, and support, adapted to the specific context of physical contact and robot's reactive care."
+        },
+        "generation_reason": "Measures Collision-Responsive Adaptation in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Collision-Responsive Adaptation",
+        "item_text": "The robot's behavior after contact showed it understood my discomfort.",
+        "related_factors": [
+          "collision/contact adaptation",
+          "physical contact/collision",
+          "haptic/contact",
+          "language",
+          "musculoskeletal",
+          "collaborative arm"
+        ],
+        "scenario_mechanism": "The robot's collision-triggered adaptive behaviors (e.g., retracting arm, saying a short apology) that demonstrate sensitivity to contact and emotional consideration for the human's safety and comfort.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-ER factor (Emotional Responsiveness) guided the focus on emotional recognition, expression, and support, adapted to the specific context of physical contact and robot's reactive care."
+        },
+        "generation_reason": "Measures Collision-Responsive Adaptation in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Collision-Responsive Adaptation",
+        "item_text": "I trusted the robot more because of how it handled unintended contact.",
+        "related_factors": [
+          "collision/contact adaptation",
+          "physical contact/collision",
+          "haptic/contact",
+          "language",
+          "musculoskeletal",
+          "collaborative arm"
+        ],
+        "scenario_mechanism": "The robot's collision-triggered adaptive behaviors (e.g., retracting arm, saying a short apology) that demonstrate sensitivity to contact and emotional consideration for the human's safety and comfort.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-ER factor (Emotional Responsiveness) guided the focus on emotional recognition, expression, and support, adapted to the specific context of physical contact and robot's reactive care."
+        },
+        "generation_reason": "Measures Collision-Responsive Adaptation in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Collision-Responsive Adaptation",
+        "item_text": "The robot's immediate retraction after a bump felt protective.",
+        "related_factors": [
+          "collision/contact adaptation",
+          "physical contact/collision",
+          "haptic/contact",
+          "language",
+          "musculoskeletal",
+          "collaborative arm"
+        ],
+        "scenario_mechanism": "The robot's collision-triggered adaptive behaviors (e.g., retracting arm, saying a short apology) that demonstrate sensitivity to contact and emotional consideration for the human's safety and comfort.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "The path towards contact-based physical human–robot interaction",
+            "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-ER factor (Emotional Responsiveness) guided the focus on emotional recognition, expression, and support, adapted to the specific context of physical contact and robot's reactive care."
+        },
+        "generation_reason": "Measures Collision-Responsive Adaptation in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      }
+    ]
+  },
+  {
+    "dimension": "Explicit Communication Repair",
+    "items": [
+      {
+        "dimension": "Explicit Communication Repair",
+        "item_text": "When we both reached at the same time, the robot said '你先拿' to let me go first.",
+        "related_factors": [
+          "explicit communication and repair",
+          "language",
+          "visual cues",
+          "shared workspace coordination",
+          "side-by-side"
+        ],
+        "scenario_mechanism": "The robot's use of short verbal phrases to resolve simultaneous reaching conflicts, demonstrating understanding of the human's intentions and rebuilding trust after coordination breakdown.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+            "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+            "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive and trust-building aspects of explicit repair, emphasizing comprehension of human goals and restoration of reliable interaction."
+        },
+        "generation_reason": "Measures Explicit Communication Repair in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Explicit Communication Repair",
+        "item_text": "The robot's verbal phrases helped resolve coordination conflicts.",
+        "related_factors": [
+          "explicit communication and repair",
+          "language",
+          "visual cues",
+          "shared workspace coordination",
+          "side-by-side"
+        ],
+        "scenario_mechanism": "The robot's use of short verbal phrases to resolve simultaneous reaching conflicts, demonstrating understanding of the human's intentions and rebuilding trust after coordination breakdown.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+            "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+            "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive and trust-building aspects of explicit repair, emphasizing comprehension of human goals and restoration of reliable interaction."
+        },
+        "generation_reason": "Measures Explicit Communication Repair in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Explicit Communication Repair",
+        "item_text": "I found the robot's spoken cues clear when we needed to take turns.",
+        "related_factors": [
+          "explicit communication and repair",
+          "language",
+          "visual cues",
+          "shared workspace coordination",
+          "side-by-side"
+        ],
+        "scenario_mechanism": "The robot's use of short verbal phrases to resolve simultaneous reaching conflicts, demonstrating understanding of the human's intentions and rebuilding trust after coordination breakdown.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+            "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+            "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive and trust-building aspects of explicit repair, emphasizing comprehension of human goals and restoration of reliable interaction."
+        },
+        "generation_reason": "Measures Explicit Communication Repair in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Explicit Communication Repair",
+        "item_text": "The robot's words ('我来拿这个') made its intention obvious.",
+        "related_factors": [
+          "explicit communication and repair",
+          "language",
+          "visual cues",
+          "shared workspace coordination",
+          "side-by-side"
+        ],
+        "scenario_mechanism": "The robot's use of short verbal phrases to resolve simultaneous reaching conflicts, demonstrating understanding of the human's intentions and rebuilding trust after coordination breakdown.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+            "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+            "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive and trust-building aspects of explicit repair, emphasizing comprehension of human goals and restoration of reliable interaction."
+        },
+        "generation_reason": "Measures Explicit Communication Repair in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Explicit Communication Repair",
+        "item_text": "After a misreach, the robot's verbal response quickly got us back on track.",
+        "related_factors": [
+          "explicit communication and repair",
+          "language",
+          "visual cues",
+          "shared workspace coordination",
+          "side-by-side"
+        ],
+        "scenario_mechanism": "The robot's use of short verbal phrases to resolve simultaneous reaching conflicts, demonstrating understanding of the human's intentions and rebuilding trust after coordination breakdown.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+            "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+            "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive and trust-building aspects of explicit repair, emphasizing comprehension of human goals and restoration of reliable interaction."
+        },
+        "generation_reason": "Measures Explicit Communication Repair in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Explicit Communication Repair",
+        "item_text": "The robot's short phrases reduced my frustration during simultaneous reaching.",
+        "related_factors": [
+          "explicit communication and repair",
+          "language",
+          "visual cues",
+          "shared workspace coordination",
+          "side-by-side"
+        ],
+        "scenario_mechanism": "The robot's use of short verbal phrases to resolve simultaneous reaching conflicts, demonstrating understanding of the human's intentions and rebuilding trust after coordination breakdown.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+            "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+            "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive and trust-building aspects of explicit repair, emphasizing comprehension of human goals and restoration of reliable interaction."
+        },
+        "generation_reason": "Measures Explicit Communication Repair in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Explicit Communication Repair",
+        "item_text": "I felt the robot communicated effectively when we almost collided.",
+        "related_factors": [
+          "explicit communication and repair",
+          "language",
+          "visual cues",
+          "shared workspace coordination",
+          "side-by-side"
+        ],
+        "scenario_mechanism": "The robot's use of short verbal phrases to resolve simultaneous reaching conflicts, demonstrating understanding of the human's intentions and rebuilding trust after coordination breakdown.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+            "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+            "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive and trust-building aspects of explicit repair, emphasizing comprehension of human goals and restoration of reliable interaction."
+        },
+        "generation_reason": "Measures Explicit Communication Repair in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Explicit Communication Repair",
+        "item_text": "The robot's verbal repair statements restored smooth collaboration.",
+        "related_factors": [
+          "explicit communication and repair",
+          "language",
+          "visual cues",
+          "shared workspace coordination",
+          "side-by-side"
+        ],
+        "scenario_mechanism": "The robot's use of short verbal phrases to resolve simultaneous reaching conflicts, demonstrating understanding of the human's intentions and rebuilding trust after coordination breakdown.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+            "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+            "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive and trust-building aspects of explicit repair, emphasizing comprehension of human goals and restoration of reliable interaction."
+        },
+        "generation_reason": "Measures Explicit Communication Repair in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Explicit Communication Repair",
+        "item_text": "When coordination failed, the robot's words helped me understand what to do next.",
+        "related_factors": [
+          "explicit communication and repair",
+          "language",
+          "visual cues",
+          "shared workspace coordination",
+          "side-by-side"
+        ],
+        "scenario_mechanism": "The robot's use of short verbal phrases to resolve simultaneous reaching conflicts, demonstrating understanding of the human's intentions and rebuilding trust after coordination breakdown.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+            "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+            "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive and trust-building aspects of explicit repair, emphasizing comprehension of human goals and restoration of reliable interaction."
+        },
+        "generation_reason": "Measures Explicit Communication Repair in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Explicit Communication Repair",
+        "item_text": "The robot's spoken instructions made the shared workspace feel safer.",
+        "related_factors": [
+          "explicit communication and repair",
+          "language",
+          "visual cues",
+          "shared workspace coordination",
+          "side-by-side"
+        ],
+        "scenario_mechanism": "The robot's use of short verbal phrases to resolve simultaneous reaching conflicts, demonstrating understanding of the human's intentions and rebuilding trust after coordination breakdown.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+            "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+            "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive and trust-building aspects of explicit repair, emphasizing comprehension of human goals and restoration of reliable interaction."
+        },
+        "generation_reason": "Measures Explicit Communication Repair in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Explicit Communication Repair",
+        "item_text": "I appreciated that the robot verbally indicated when it would wait for me.",
+        "related_factors": [
+          "explicit communication and repair",
+          "language",
+          "visual cues",
+          "shared workspace coordination",
+          "side-by-side"
+        ],
+        "scenario_mechanism": "The robot's use of short verbal phrases to resolve simultaneous reaching conflicts, demonstrating understanding of the human's intentions and rebuilding trust after coordination breakdown.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+            "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+            "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive and trust-building aspects of explicit repair, emphasizing comprehension of human goals and restoration of reliable interaction."
+        },
+        "generation_reason": "Measures Explicit Communication Repair in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      },
+      {
+        "dimension": "Explicit Communication Repair",
+        "item_text": "The robot's use of phrases like '你先拿' showed it understood my need to reach.",
+        "related_factors": [
+          "explicit communication and repair",
+          "language",
+          "visual cues",
+          "shared workspace coordination",
+          "side-by-side"
+        ],
+        "scenario_mechanism": "The robot's use of short verbal phrases to resolve simultaneous reaching conflicts, demonstrating understanding of the human's intentions and rebuilding trust after coordination breakdown.",
+        "source_basis": {
+          "retrieved_literature": [
+            "Generating behavioral protocol for human-robot physical-contact interaction",
+            "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+            "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+            "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+          ],
+          "supporting_evidence_cards": [
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "shared_workspace",
+              "measurement_implication": "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "collision_contact",
+              "measurement_implication": "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "implicit_coordination",
+              "measurement_implication": "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions."
+            },
+            {
+              "paper_title": "Generating behavioral protocol for human-robot physical-contact interaction",
+              "mechanism_type": "communication_repair",
+              "measurement_implication": "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair."
+            }
+          ],
+          "expert_guidance": "PETS-UT factor (Understanding and Trust) informed the cognitive and trust-building aspects of explicit repair, emphasizing comprehension of human goals and restoration of reliable interaction."
+        },
+        "generation_reason": "Measures Explicit Communication Repair in this scenario.",
+        "literature_basis_status": "fallback_reasoning"
+      }
+    ]
+  }
+]

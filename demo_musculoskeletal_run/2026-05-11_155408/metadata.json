@@ -1,0 +1,9 @@
+{
+  "run_id": "2026-05-11_155408",
+  "start_time": "2026-05-11T15:54:08.517957",
+  "end_time": "2026-05-11T15:56:12.974279",
+  "status": "completed",
+  "agent_groups": [
+    "interview_agent_group"
+  ]
+}

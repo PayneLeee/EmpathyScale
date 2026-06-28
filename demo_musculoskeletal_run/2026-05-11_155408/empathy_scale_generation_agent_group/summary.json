@@ -1,0 +1,704 @@
+{
+  "status": "completed",
+  "used_expert_pdfs": [
+    "Boateng et al. - 2018 - Best Practices for Developing and Validating Scales for Health, Social, and Behavioral Research A P.pdf",
+    "Charrier et al. - 2019 - The RoPE Scale a Measure of How Empathic a Robot is Perceived.pdf",
+    "Putta et al. - 2022 - Empathy scale adaptation for artificial agents a review with a new subscale proposal.pdf",
+    "Schmidmaier et al. - 2024 - Perceived Empathy of Technology Scale (PETS) Measuring Empathy of Systems Toward the User.pdf"
+  ],
+  "evidence_coverage": {
+    "dimensions": {
+      "Spatial Coordination Understanding": {
+        "supporting_paper_count": 0,
+        "supporting_papers": [],
+        "has_evidence": false
+      },
+      "Collision-Responsive Adaptation": {
+        "supporting_paper_count": 1,
+        "supporting_papers": [
+          "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+        ],
+        "has_evidence": true
+      },
+      "Explicit Communication Repair": {
+        "supporting_paper_count": 0,
+        "supporting_papers": [],
+        "has_evidence": false
+      }
+    },
+    "needs_more_research": true,
+    "evidence_coverage_score": 0.33
+  },
+  "needs_more_research": true,
+  "high_relevance_paper_count": 5,
+  "scenario_specific_factors": {
+    "interaction_modes": [
+      "side-by-side"
+    ],
+    "resource_relations": [
+      "shared"
+    ],
+    "communication_modes": [
+      "language",
+      "visual cues",
+      "haptic/contact"
+    ],
+    "robot_type": [
+      "musculoskeletal",
+      "collaborative arm"
+    ],
+    "risk_factors": [
+      "physical contact/collision"
+    ],
+    "embodied_cues": [
+      "embodied motion",
+      "human-like morphology"
+    ],
+    "task_context_terms": [
+      "assembly",
+      "tool rack",
+      "factory"
+    ],
+    "role_constraints": [],
+    "physical_contact_risk": true,
+    "empathy_mechanisms": [
+      "collision/contact adaptation",
+      "shared workspace coordination",
+      "implicit coordination through action observation",
+      "explicit communication and repair",
+      "bodily limitation understanding"
+    ],
+    "all_factor_labels": [
+      "side-by-side",
+      "shared",
+      "language",
+      "visual cues",
+      "haptic/contact",
+      "musculoskeletal",
+      "collaborative arm",
+      "physical contact/collision",
+      "embodied motion",
+      "human-like morphology",
+      "assembly",
+      "tool rack",
+      "factory",
+      "collision/contact adaptation",
+      "shared workspace coordination",
+      "implicit coordination through action observation",
+      "explicit communication and repair",
+      "bodily limitation understanding"
+    ]
+  },
+  "mechanism_coverage_report": {
+    "covered": [
+      "collision/contact adaptation",
+      "shared workspace coordination",
+      "implicit coordination through action observation",
+      "explicit communication and repair",
+      "bodily limitation understanding"
+    ],
+    "weakly_covered": [],
+    "missing": [],
+    "paper_links": {
+      "shared workspace coordination": [
+        "Generating behavioral protocol for human-robot physical-contact interaction",
+        "The path towards contact-based physical human–robot interaction",
+        "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+        "Human Factors Considerations and Metrics in Shared Space Human-Robot Collaboration: A Systematic Review",
+        "Human-robot proxemics",
+        "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+        "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+      ],
+      "collision/contact adaptation": [
+        "Generating behavioral protocol for human-robot physical-contact interaction",
+        "The path towards contact-based physical human–robot interaction",
+        "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+        "Human Factors Considerations and Metrics in Shared Space Human-Robot Collaboration: A Systematic Review",
+        "Human-robot proxemics",
+        "Bilateral human-robot interaction with physical contact"
+      ],
+      "explicit communication and repair": [
+        "Generating behavioral protocol for human-robot physical-contact interaction",
+        "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+        "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+        "Towards Effective Interface Designs for Collaborative HRI in Manufacturing",
+        "A Virtual Sandbox Approach to Studying the Effect of Augmented Communication on Human-Robot Collaboration"
+      ],
+      "implicit coordination through action observation": [
+        "Generating behavioral protocol for human-robot physical-contact interaction",
+        "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+        "Human-robot proxemics",
+        "A Virtual Sandbox Approach to Studying the Effect of Augmented Communication on Human-Robot Collaboration"
+      ],
+      "bodily limitation understanding": [
+        "The path towards contact-based physical human–robot interaction",
+        "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+        "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver"
+      ]
+    }
+  },
+  "constructs": [
+    {
+      "construct": "Spatial Coordination Understanding",
+      "name": "Spatial Coordination Understanding",
+      "description": "Perceived ability of the robot to understand and respect the human's spatial needs, working area, and bodily limitations in the shared workspace, including smooth turn-taking and anticipation of reach conflicts.",
+      "general_empathy_component": "understanding",
+      "related_factors": [
+        "shared workspace coordination",
+        "implicit coordination through action observation",
+        "bodily limitation understanding",
+        "side-by-side",
+        "shared",
+        "visual cues",
+        "embodied motion",
+        "human-like morphology",
+        "assembly",
+        "tool rack",
+        "factory"
+      ],
+      "scenario_mechanism": "The robot's implicit coordination through pauses, path changes, and yielding signals, and its understanding of the human's spatial comfort and bodily constraints when sharing a tool rack.",
+      "supporting_mechanism_cards": [
+        "shared workspace coordination",
+        "implicit coordination through action observation",
+        "bodily limitation understanding"
+      ],
+      "retrieved_literature_basis": [
+        "Generating behavioral protocol for human-robot physical-contact interaction",
+        "The path towards contact-based physical human–robot interaction",
+        "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+        "Human-robot proxemics"
+      ],
+      "expert_guidance_used": "PETS-UT factor (Understanding and Trust) informed the cognitive focus on goal/need/intention comprehension, adapted to spatial negotiation and bodily limitation understanding in a shared workspace.",
+      "literature_basis_status": "retrieved"
+    },
+    {
+      "construct": "Collision-Responsive Adaptation",
+      "name": "Collision-Responsive Adaptation",
+      "description": "Perceived emotional responsiveness and supportive adaptation of the robot when unintended physical contact occurs, including immediate retraction, verbal apology, and considerate behavior that reassures the human.",
+      "general_empathy_component": "emotional_responsiveness",
+      "related_factors": [
+        "collision/contact adaptation",
+        "physical contact/collision",
+        "haptic/contact",
+        "language",
+        "musculoskeletal",
+        "collaborative arm"
+      ],
+      "scenario_mechanism": "The robot's collision-triggered adaptive behaviors (e.g., retracting arm, saying a short apology) that demonstrate sensitivity to contact and emotional consideration for the human's safety and comfort.",
+      "supporting_mechanism_cards": [
+        "collision/contact adaptation"
+      ],
+      "retrieved_literature_basis": [
+        "Generating behavioral protocol for human-robot physical-contact interaction",
+        "The path towards contact-based physical human–robot interaction",
+        "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact"
+      ],
+      "expert_guidance_used": "PETS-ER factor (Emotional Responsiveness) guided the focus on emotional recognition, expression, and support, adapted to the specific context of physical contact and robot's reactive care.",
+      "literature_basis_status": "retrieved"
+    },
+    {
+      "construct": "Explicit Communication Repair",
+      "name": "Explicit Communication Repair",
+      "description": "Perceived effectiveness and clarity of the robot's explicit verbal repair strategies (e.g., '你先拿', '你来拿') when implicit coordination fails, restoring smooth turn-taking and reducing human frustration.",
+      "general_empathy_component": "trust",
+      "related_factors": [
+        "explicit communication and repair",
+        "language",
+        "visual cues",
+        "shared workspace coordination",
+        "side-by-side"
+      ],
+      "scenario_mechanism": "The robot's use of short verbal phrases to resolve simultaneous reaching conflicts, demonstrating understanding of the human's intentions and rebuilding trust after coordination breakdown.",
+      "supporting_mechanism_cards": [
+        "explicit communication and repair"
+      ],
+      "retrieved_literature_basis": [
+        "Generating behavioral protocol for human-robot physical-contact interaction",
+        "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+        "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+        "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+      ],
+      "expert_guidance_used": "PETS-UT factor (Understanding and Trust) informed the cognitive and trust-building aspects of explicit repair, emphasizing comprehension of human goals and restoration of reliable interaction.",
+      "literature_basis_status": "retrieved"
+    }
+  ],
+  "scale_factor_validation": {
+    "n_constructs": 3,
+    "n_items": 36,
+    "factor_coverage": {
+      "side-by-side": {
+        "constructs": [
+          "Spatial Coordination Understanding",
+          "Explicit Communication Repair"
+        ],
+        "items": [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+          "Item 4",
+          "Item 5",
+          "Item 6",
+          "Item 7",
+          "Item 8",
+          "Item 9",
+          "Item 10",
+          "Item 11",
+          "Item 12",
+          "Item 25",
+          "Item 26",
+          "Item 27",
+          "Item 28",
+          "Item 29",
+          "Item 30",
+          "Item 31",
+          "Item 32",
+          "Item 33",
+          "Item 34",
+          "Item 35",
+          "Item 36"
+        ]
+      },
+      "shared": {
+        "constructs": [
+          "Spatial Coordination Understanding",
+          "Explicit Communication Repair"
+        ],
+        "items": [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+          "Item 4",
+          "Item 5",
+          "Item 6",
+          "Item 7",
+          "Item 8",
+          "Item 9",
+          "Item 10",
+          "Item 11",
+          "Item 12",
+          "Item 13",
+          "Item 14",
+          "Item 15",
+          "Item 16",
+          "Item 17",
+          "Item 18",
+          "Item 19",
+          "Item 20",
+          "Item 21",
+          "Item 22",
+          "Item 23",
+          "Item 24",
+          "Item 25",
+          "Item 26",
+          "Item 27",
+          "Item 28",
+          "Item 29",
+          "Item 30",
+          "Item 31",
+          "Item 32",
+          "Item 33",
+          "Item 34",
+          "Item 35",
+          "Item 36"
+        ]
+      },
+      "language": {
+        "constructs": [
+          "Collision-Responsive Adaptation",
+          "Explicit Communication Repair"
+        ],
+        "items": [
+          "Item 13",
+          "Item 14",
+          "Item 15",
+          "Item 16",
+          "Item 17",
+          "Item 18",
+          "Item 19",
+          "Item 20",
+          "Item 21",
+          "Item 22",
+          "Item 23",
+          "Item 24",
+          "Item 25",
+          "Item 26",
+          "Item 27",
+          "Item 28",
+          "Item 29",
+          "Item 30",
+          "Item 31",
+          "Item 32",
+          "Item 33",
+          "Item 34",
+          "Item 35",
+          "Item 36"
+        ]
+      },
+      "visual cues": {
+        "constructs": [
+          "Spatial Coordination Understanding",
+          "Explicit Communication Repair"
+        ],
+        "items": [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+          "Item 4",
+          "Item 5",
+          "Item 6",
+          "Item 7",
+          "Item 8",
+          "Item 9",
+          "Item 10",
+          "Item 11",
+          "Item 12",
+          "Item 25",
+          "Item 26",
+          "Item 27",
+          "Item 28",
+          "Item 29",
+          "Item 30",
+          "Item 31",
+          "Item 32",
+          "Item 33",
+          "Item 34",
+          "Item 35",
+          "Item 36"
+        ]
+      },
+      "haptic/contact": {
+        "constructs": [
+          "Collision-Responsive Adaptation"
+        ],
+        "items": [
+          "Item 13",
+          "Item 14",
+          "Item 15",
+          "Item 16",
+          "Item 17",
+          "Item 18",
+          "Item 19",
+          "Item 20",
+          "Item 21",
+          "Item 22",
+          "Item 23",
+          "Item 24"
+        ]
+      },
+      "musculoskeletal": {
+        "constructs": [
+          "Collision-Responsive Adaptation"
+        ],
+        "items": [
+          "Item 13",
+          "Item 14",
+          "Item 15",
+          "Item 16",
+          "Item 17",
+          "Item 18",
+          "Item 19",
+          "Item 20",
+          "Item 21",
+          "Item 22",
+          "Item 23",
+          "Item 24"
+        ]
+      },
+      "collaborative arm": {
+        "constructs": [
+          "Collision-Responsive Adaptation"
+        ],
+        "items": [
+          "Item 13",
+          "Item 14",
+          "Item 15",
+          "Item 16",
+          "Item 17",
+          "Item 18",
+          "Item 19",
+          "Item 20",
+          "Item 21",
+          "Item 22",
+          "Item 23",
+          "Item 24"
+        ]
+      },
+      "physical contact/collision": {
+        "constructs": [
+          "Collision-Responsive Adaptation"
+        ],
+        "items": [
+          "Item 13",
+          "Item 14",
+          "Item 15",
+          "Item 16",
+          "Item 17",
+          "Item 18",
+          "Item 19",
+          "Item 20",
+          "Item 21",
+          "Item 22",
+          "Item 23",
+          "Item 24"
+        ]
+      },
+      "embodied motion": {
+        "constructs": [
+          "Spatial Coordination Understanding"
+        ],
+        "items": [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+          "Item 4",
+          "Item 5",
+          "Item 6",
+          "Item 7",
+          "Item 8",
+          "Item 9",
+          "Item 10",
+          "Item 11",
+          "Item 12"
+        ]
+      },
+      "human-like morphology": {
+        "constructs": [
+          "Spatial Coordination Understanding"
+        ],
+        "items": [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+          "Item 4",
+          "Item 5",
+          "Item 6",
+          "Item 7",
+          "Item 8",
+          "Item 9",
+          "Item 10",
+          "Item 11",
+          "Item 12"
+        ]
+      },
+      "assembly": {
+        "constructs": [
+          "Spatial Coordination Understanding"
+        ],
+        "items": [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+          "Item 4",
+          "Item 5",
+          "Item 6",
+          "Item 7",
+          "Item 8",
+          "Item 9",
+          "Item 10",
+          "Item 11",
+          "Item 12"
+        ]
+      },
+      "tool rack": {
+        "constructs": [
+          "Spatial Coordination Understanding"
+        ],
+        "items": [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+          "Item 4",
+          "Item 5",
+          "Item 6",
+          "Item 7",
+          "Item 8",
+          "Item 9",
+          "Item 10",
+          "Item 11",
+          "Item 12"
+        ]
+      },
+      "factory": {
+        "constructs": [
+          "Spatial Coordination Understanding"
+        ],
+        "items": [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+          "Item 4",
+          "Item 5",
+          "Item 6",
+          "Item 7",
+          "Item 8",
+          "Item 9",
+          "Item 10",
+          "Item 11",
+          "Item 12"
+        ]
+      },
+      "collision/contact adaptation": {
+        "constructs": [
+          "Collision-Responsive Adaptation"
+        ],
+        "items": [
+          "Item 13",
+          "Item 14",
+          "Item 15",
+          "Item 16",
+          "Item 17",
+          "Item 18",
+          "Item 19",
+          "Item 20",
+          "Item 21",
+          "Item 22",
+          "Item 23",
+          "Item 24"
+        ]
+      },
+      "shared workspace coordination": {
+        "constructs": [
+          "Spatial Coordination Understanding",
+          "Explicit Communication Repair"
+        ],
+        "items": [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+          "Item 4",
+          "Item 5",
+          "Item 6",
+          "Item 7",
+          "Item 8",
+          "Item 9",
+          "Item 10",
+          "Item 11",
+          "Item 12",
+          "Item 25",
+          "Item 26",
+          "Item 27",
+          "Item 28",
+          "Item 29",
+          "Item 30",
+          "Item 31",
+          "Item 32",
+          "Item 33",
+          "Item 34",
+          "Item 35",
+          "Item 36"
+        ]
+      },
+      "implicit coordination through action observation": {
+        "constructs": [
+          "Spatial Coordination Understanding"
+        ],
+        "items": [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+          "Item 4",
+          "Item 5",
+          "Item 6",
+          "Item 7",
+          "Item 8",
+          "Item 9",
+          "Item 10",
+          "Item 11",
+          "Item 12"
+        ]
+      },
+      "explicit communication and repair": {
+        "constructs": [
+          "Explicit Communication Repair"
+        ],
+        "items": [
+          "Item 25",
+          "Item 26",
+          "Item 27",
+          "Item 28",
+          "Item 29",
+          "Item 30",
+          "Item 31",
+          "Item 32",
+          "Item 33",
+          "Item 34",
+          "Item 35",
+          "Item 36"
+        ]
+      },
+      "bodily limitation understanding": {
+        "constructs": [
+          "Spatial Coordination Understanding"
+        ],
+        "items": [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+          "Item 4",
+          "Item 5",
+          "Item 6",
+          "Item 7",
+          "Item 8",
+          "Item 9",
+          "Item 10",
+          "Item 11",
+          "Item 12"
+        ]
+      }
+    },
+    "missing_factor_coverage": [],
+    "constructs_missing_required_metadata": [],
+    "items_with_related_factors_ratio": 1.0,
+    "items_with_generation_reason_ratio": 1.0,
+    "behavior_specific_item_ratio": 0.67,
+    "demo_required_groups": {
+      "collision/contact": true,
+      "shared workspace": true,
+      "implicit coordination": true
+    },
+    "passed": true
+  },
+  "inputs": {
+    "interview_fields_present": [
+      "assessment_context",
+      "robot_platform",
+      "interaction_modalities",
+      "collaboration_pattern",
+      "environmental_setting",
+      "expected_empathy_forms",
+      "contrast_points",
+      "failure_modes",
+      "scenario_label",
+      "name",
+      "scenario_specific_factors",
+      "literature_evidence_cards",
+      "mechanism_cards",
+      "mechanism_coverage_report",
+      "retrieved_literature_basis"
+    ],
+    "literature_keys_present": [
+      "total_papers_found",
+      "screened_papers",
+      "extracted_findings",
+      "high_relevance_count",
+      "strict_high_relevance_count",
+      "search_queries",
+      "factor_intents",
+      "scenario_specific_factors",
+      "high_relevance_papers",
+      "organized_findings",
+      "coverage_report",
+      "gate_report",
+      "relevance_scored_papers",
+      "measurement_usefulness_summary",
+      "mechanism_coverage_report",
+      "top_supporting_papers",
+      "supporting_paper_count",
+      "ranked_supporting_paper_count",
+      "literature_evidence_card_count"
+    ]
+  },
+  "outputs": {
+    "draft_path": "C:\\Users\\13552\\Desktop\\EmpathyScale\\data\\runs\\2026-05-11_155408\\empathy_scale_generation_agent_group\\scale_draft.md"
+  }
+}

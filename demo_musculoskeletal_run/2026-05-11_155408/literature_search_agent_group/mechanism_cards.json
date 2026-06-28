@@ -1,0 +1,234 @@
+[
+  {
+    "mechanism_type": "shared_workspace",
+    "mechanism": "shared workspace coordination",
+    "supported_by": [
+      "Generating behavioral protocol for human-robot physical-contact interaction",
+      "The path towards contact-based physical human–robot interaction",
+      "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+      "Human Factors Considerations and Metrics in Shared Space Human-Robot Collaboration: A Systematic Review",
+      "Human-robot proxemics",
+      "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+      "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+    ],
+    "scenario_link": [
+      "Directly applicable: the assembly workstation has a shared tool rack; such negotiation is central to the interaction.",
+      "In the assembly workstation with shared tool rack, similar spatial interference (e.g., simultaneous reaching) is a key risk; this mechanism directly informs items about coordination quality.",
+      "In the assembly workstation, sharing a tool rack forces spatial negotiation – this finding supports measuring adaptability and cooperative spacing.",
+      "In the target scenario, human and robot share a tool rack and work side-by-side, making shared workspace dynamics a central factor for empathy measurement (e.g., understanding of spatial constraints, adaptation to the other's movements).",
+      "In the target scenario, the shared tool rack and side-by-side layout create frequent proxemic negotiations; understanding human distance preferences is key to designing empathetic coordination.",
+      "In an assembly workstation with a shared tool rack, clear communication of intent helps both agents avoid simultaneous reaching and physical collisions.",
+      "Directly mirrors target scenario: human and musculoskeletal robot share a tool rack, so items can probe how well the robot coordinates tool retrieval."
+    ],
+    "measurement_implications": [
+      "Scale items could assess perceived ease of sharing workspace, frequency of interference, or comfort with robot's spatial negotiation.",
+      "Scale items can assess perceived smoothness of coordination, frequency of unintended contact, or human's sense of spatial comfort when working side-by-side with the robot.",
+      "Scale items could assess perceived spatial comfort and coordination smoothness (e.g., 'The robot moved in a way that respected my working area').",
+      "Scale constructs should capture perceived coordination, spatial awareness, and mutual adjustment in a shared physical workspace, particularly when resources (e.g., tool rack) are shared.",
+      "Scale items could assess human comfort with shared spatial zones, perceived invasion of personal space, or willingness to let the robot work in close proximity.",
+      "Scale items can evaluate perceived workspace awareness (e.g., 'The robot seemed aware of my presence in the shared space') and coordination quality.",
+      "Scale constructs should assess perceived smoothness of coordination, anticipation of partner's actions, and comfort with shared resource access."
+    ],
+    "related_factors": [
+      "side-by-side",
+      "shared",
+      "language",
+      "visual cues",
+      "haptic/contact",
+      "musculoskeletal",
+      "collaborative arm",
+      "physical contact/collision",
+      "embodied motion",
+      "human-like morphology",
+      "assembly",
+      "tool rack",
+      "factory",
+      "collision/contact adaptation",
+      "shared workspace coordination",
+      "implicit coordination through action observation",
+      "explicit communication and repair",
+      "bodily limitation understanding"
+    ],
+    "supporting_paper_count": 7
+  },
+  {
+    "mechanism_type": "collision_contact",
+    "mechanism": "collision/contact adaptation",
+    "supported_by": [
+      "Generating behavioral protocol for human-robot physical-contact interaction",
+      "The path towards contact-based physical human–robot interaction",
+      "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+      "Human Factors Considerations and Metrics in Shared Space Human-Robot Collaboration: A Systematic Review",
+      "Human-robot proxemics",
+      "Bilateral human-robot interaction with physical contact"
+    ],
+    "scenario_link": [
+      "Relevant because the scenario involves risk of physical contact/collision; such adaptation mechanisms directly influence empathy impressions.",
+      "In the given scenario, minor physical contact is expected; this mechanism helps construct items on emotional responsiveness and perceived robot politeness or care.",
+      "In the scenario, minor collisions are inevitable – this mechanism directly informs items on perceived care and safety during contact.",
+      "The scenario involves timing/coordination errors leading to minor physical contact, so measuring emotional responsiveness and trust in the robot's safe behavior is critical.",
+      "The target scenario explicitly includes risk of physical contact; evaluating how the robot adapts post-collision is central to empathy mechanisms like collision/contact adaptation.",
+      "In side-by-side assembly with shared tools, minor collisions are likely; measuring human trust in the robot's collision-avoidance or recovery behaviors is directly relevant."
+    ],
+    "measurement_implications": [
+      "Items could gauge human perception of robot's sensitivity to contact, responsiveness to mistakes, and emotional consideration.",
+      "Items could measure human's emotional response to collisions (e.g., surprise, comfort), perceived robot awareness, or attribution of intention after contact.",
+      "Items can capture response to physical contact: e.g., 'I felt the robot cared about my safety when it stopped after touching me'.",
+      "Items should assess the human's comfort, trust, and emotional response to potential physical contact/collision, as well as their perception of the robot's adaptation to avoid or mitigate contact.",
+      "Items can probe how humans perceive the robot's reaction to collisions (e.g., 'The robot adjusted its motion after we bumped into each other') and the emotional impact (e.g., frustration or reassurance).",
+      "Scale items could assess how the human perceives the robot's response to accidental contact (e.g., 'The robot tried to avoid hurting me when we bumped')."
+    ],
+    "related_factors": [
+      "side-by-side",
+      "shared",
+      "language",
+      "visual cues",
+      "haptic/contact",
+      "musculoskeletal",
+      "collaborative arm",
+      "physical contact/collision",
+      "embodied motion",
+      "human-like morphology",
+      "assembly",
+      "tool rack",
+      "factory",
+      "collision/contact adaptation",
+      "shared workspace coordination",
+      "implicit coordination through action observation",
+      "explicit communication and repair",
+      "bodily limitation understanding"
+    ],
+    "supporting_paper_count": 6
+  },
+  {
+    "mechanism_type": "communication_repair",
+    "mechanism": "explicit communication and repair",
+    "supported_by": [
+      "Generating behavioral protocol for human-robot physical-contact interaction",
+      "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+      "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+      "Towards Effective Interface Designs for Collaborative HRI in Manufacturing",
+      "A Virtual Sandbox Approach to Studying the Effect of Augmented Communication on Human-Robot Collaboration"
+    ],
+    "scenario_link": [
+      "The scenario includes verbal phrases like '你先拿'; such repair mechanisms are directly observable and affect trust and emotional responsiveness.",
+      "In the shared assembly workstation, when the robot refuses to reach for a tool simultaneously (to avoid collision), its explanation (e.g., 'I'll wait until you finish') can maintain trust and smooth coordination.",
+      "In the assembly scenario, if simultaneous reaching risk is detected, the robot could say 'Let me hand you this part first, then you pick the small screw'—a constructive suggestion that improves coordination and reduces physical contact.",
+      "In a side-by-side assembly task with shared tool rack, explicit verbal phrases (e.g., 'I'll take this') combined with visual cues (e.g., arm orientation) could reduce timing/coordination errors and collisions.",
+      "Human observes robot's verbal pauses and yield signals; items can measure whether robot's communicative repair fosters trust and reduces discomfort during collisions.",
+      "In the assembly scenario, physical contact/collision is a risk; the robot's explicit verbal yield or repair (like '你先拿') directly mirrors the repair mechanism studied."
+    ],
+    "measurement_implications": [
+      "Items could measure perceived effectiveness of robot's conflict resolution, clarity of communication, or human's relief after repair.",
+      "Scale items can probe how well the robot explains its actions (e.g., 'The robot gave a clear reason when it could not do what I asked'), and how that affects trust, cooperation, and perceived empathy.",
+      "Items can assess the robot's tendency to suggest alternative actions (e.g., 'When the robot cannot comply, it offers another helpful way to achieve the goal'), which reflects adaptive support and empathy.",
+      "Scale items can assess how clearly the robot conveys its intended actions (e.g., 'The robot’s verbal and visual cues made its next move predictable').",
+      "Scale items should evaluate the perceived clarity, timeliness, and appropriateness of robot's verbal repair cues during conflicts.",
+      "Items could capture the perceived effectiveness of the robot's verbal repair, e.g., 'When we collided, the robot's verbal response helped us get back on track.'"
+    ],
+    "related_factors": [
+      "side-by-side",
+      "shared",
+      "language",
+      "visual cues",
+      "haptic/contact",
+      "musculoskeletal",
+      "collaborative arm",
+      "physical contact/collision",
+      "embodied motion",
+      "human-like morphology",
+      "assembly",
+      "tool rack",
+      "factory",
+      "collision/contact adaptation",
+      "shared workspace coordination",
+      "implicit coordination through action observation",
+      "explicit communication and repair",
+      "bodily limitation understanding"
+    ],
+    "supporting_paper_count": 5
+  },
+  {
+    "mechanism_type": "implicit_coordination",
+    "mechanism": "implicit coordination through action observation",
+    "supported_by": [
+      "Generating behavioral protocol for human-robot physical-contact interaction",
+      "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+      "Human-robot proxemics",
+      "A Virtual Sandbox Approach to Studying the Effect of Augmented Communication on Human-Robot Collaboration"
+    ],
+    "scenario_link": [
+      "The scenario includes visual observation of robot arm pauses, yields, and path changes; implicit coordination is key to empathy through embodied cues.",
+      "Visual cues are central in the scenario – this finding supports items on implicit coordination via motion observation.",
+      "In the assembly scenario, the robot's musculoskeletal motions provide rich visual cues; implicit coordination through action observation is a primary mechanism for empathetic interaction.",
+      "In the side-by-side assembly with a shared tool rack, the human's observation of the robot's arm yielding, pausing, or retracting provides similar implicit cues for coordination."
+    ],
+    "measurement_implications": [
+      "Items could assess human's ability to read robot motion cues, perceived predictability, or ease of anticipating robot actions.",
+      "Scale constructs can measure perceived anticipation and non-verbal understanding: e.g., 'I could predict what the robot would do by watching its movements'.",
+      "Scale items could assess whether humans feel the robot's motions are predictable and whether they can rely on visual cues to avoid conflict (e.g., 'I could tell when the robot was about to reach for a tool').",
+      "Scale items could assess the human's perceived ability to read the robot's motion-based intentions, e.g., 'I could tell where the robot was reaching next from its movements.'"
+    ],
+    "related_factors": [
+      "side-by-side",
+      "shared",
+      "language",
+      "visual cues",
+      "haptic/contact",
+      "musculoskeletal",
+      "collaborative arm",
+      "physical contact/collision",
+      "embodied motion",
+      "human-like morphology",
+      "assembly",
+      "tool rack",
+      "factory",
+      "collision/contact adaptation",
+      "shared workspace coordination",
+      "implicit coordination through action observation",
+      "explicit communication and repair",
+      "bodily limitation understanding"
+    ],
+    "supporting_paper_count": 4
+  },
+  {
+    "mechanism_type": "embodiment",
+    "mechanism": "bodily limitation understanding",
+    "supported_by": [
+      "The path towards contact-based physical human–robot interaction",
+      "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+      "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver"
+    ],
+    "scenario_link": [
+      "In this scenario, visual cues from the musculoskeletal robot (e.g., arm retraction) are primary; embodiment mechanism supports items on legibility and predictability of robot actions.",
+      "The musculoskeletal robot’s appearance may shape empathy attributions – items should capture the effect of embodiment on perceived social presence.",
+      "A musculoskeletal robot with human-like morphology can use similar embodied cues (e.g., head orientation, arm trajectory) to signal reaching or yielding, reducing ambiguity in shared workspace."
+    ],
+    "measurement_implications": [
+      "Scale constructs can capture how well the human understands the robot's intentions from its motion (understanding), and whether they perceive the robot as 'considerate' or 'responsive' (supportive adaptation).",
+      "Items could probe perceived humanness and intentionality: e.g., 'The robot’s movements felt natural and human-like'.",
+      "Items can probe whether the robot’s body language (e.g., gaze direction, arm pointing) helps the human anticipate its actions (e.g., 'I could tell what the robot would do next from its movements')."
+    ],
+    "related_factors": [
+      "side-by-side",
+      "shared",
+      "language",
+      "visual cues",
+      "haptic/contact",
+      "musculoskeletal",
+      "collaborative arm",
+      "physical contact/collision",
+      "embodied motion",
+      "human-like morphology",
+      "assembly",
+      "tool rack",
+      "factory",
+      "collision/contact adaptation",
+      "shared workspace coordination",
+      "implicit coordination through action observation",
+      "explicit communication and repair",
+      "bodily limitation understanding"
+    ],
+    "supporting_paper_count": 3
+  }
+]

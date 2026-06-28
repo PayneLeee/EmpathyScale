@@ -1,0 +1,629 @@
+{
+  "n_items": 33,
+  "n_participants": 50,
+  "item_statistics": [
+    {
+      "item_id": 1,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "The robot paused its arm to let me reach first.",
+      "rating_statistics": {
+        "mean": 66.6,
+        "std": 23.46,
+        "min": 10.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 2,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "I could tell the robot was aware of my working area.",
+      "rating_statistics": {
+        "mean": 64.5,
+        "std": 26.16,
+        "min": 5.0,
+        "max": 92.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 3,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "The robot changed its path to avoid reaching at the same time as me.",
+      "rating_statistics": {
+        "mean": 64.42,
+        "std": 22.95,
+        "min": 10.0,
+        "max": 93.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 4,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "The robot left enough space for me to access the tool rack.",
+      "rating_statistics": {
+        "mean": 64.7,
+        "std": 20.47,
+        "min": 20.0,
+        "max": 90.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 5,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "The robot's movements showed it understood where I needed to reach.",
+      "rating_statistics": {
+        "mean": 61.88,
+        "std": 27.62,
+        "min": 5.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 6,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "I felt the robot respected my personal space at the workstation.",
+      "rating_statistics": {
+        "mean": 56.68,
+        "std": 32.51,
+        "min": 5.0,
+        "max": 96.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 7,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "The robot yielded when I started to reach for a part.",
+      "rating_statistics": {
+        "mean": 66.5,
+        "std": 23.04,
+        "min": 5.0,
+        "max": 91.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 8,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "The robot's arm trajectory made it easy to anticipate its next move.",
+      "rating_statistics": {
+        "mean": 61.16,
+        "std": 17.15,
+        "min": 20.0,
+        "max": 88.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 9,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "The robot adjusted its reach to avoid blocking my hand.",
+      "rating_statistics": {
+        "mean": 65.3,
+        "std": 22.58,
+        "min": 5.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 10,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "I could predict when the robot would reach for a tool by watching its arm.",
+      "rating_statistics": {
+        "mean": 58.22,
+        "std": 18.58,
+        "min": 10.0,
+        "max": 90.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 11,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "The robot seemed to know when I needed a particular tool.",
+      "rating_statistics": {
+        "mean": 44.68,
+        "std": 27.14,
+        "min": 5.0,
+        "max": 90.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 12,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "The robot's pauses helped us coordinate who takes which part.",
+      "rating_statistics": {
+        "mean": 68.66,
+        "std": 19.83,
+        "min": 10.0,
+        "max": 92.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 13,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "When we bumped, the robot immediately retracted its arm.",
+      "rating_statistics": {
+        "mean": 46.28,
+        "std": 31.41,
+        "min": 5.0,
+        "max": 97.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 14,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "The robot apologized verbally after accidental contact.",
+      "rating_statistics": {
+        "mean": 17.6,
+        "std": 27.26,
+        "min": 0.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 15,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "I felt the robot cared about my safety when it stopped after touching me.",
+      "rating_statistics": {
+        "mean": 23.46,
+        "std": 26.99,
+        "min": 5.0,
+        "max": 96.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 16,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "The robot's quick reaction to contact reassured me.",
+      "rating_statistics": {
+        "mean": 25.92,
+        "std": 27.02,
+        "min": 5.0,
+        "max": 94.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 17,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "After a collision, the robot adjusted its movement to avoid repeating it.",
+      "rating_statistics": {
+        "mean": 38.24,
+        "std": 30.78,
+        "min": 5.0,
+        "max": 93.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 18,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "The robot seemed sensitive to physical contact with me.",
+      "rating_statistics": {
+        "mean": 31.56,
+        "std": 26.7,
+        "min": 5.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 19,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "I felt the robot was considerate when it pulled back after a bump.",
+      "rating_statistics": {
+        "mean": 22.14,
+        "std": 27.64,
+        "min": 5.0,
+        "max": 96.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 20,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "The robot's response to accidental touch made me feel respected.",
+      "rating_statistics": {
+        "mean": 19.48,
+        "std": 28.47,
+        "min": 0.0,
+        "max": 97.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 21,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "I trusted the robot more because of how it handled unintended contact.",
+      "rating_statistics": {
+        "mean": 26.78,
+        "std": 27.59,
+        "min": 0.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 22,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "The robot's immediate retraction after a bump felt protective.",
+      "rating_statistics": {
+        "mean": 24.5,
+        "std": 27.12,
+        "min": 5.0,
+        "max": 98.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 23,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "When we both reached at the same time, the robot said '你先拿' to let me go first.",
+      "rating_statistics": {
+        "mean": 67.28,
+        "std": 25.62,
+        "min": 10.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 24,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "The robot's verbal phrases helped resolve coordination conflicts.",
+      "rating_statistics": {
+        "mean": 68.6,
+        "std": 21.95,
+        "min": 20.0,
+        "max": 93.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 25,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "I found the robot's spoken cues clear when we needed to take turns.",
+      "rating_statistics": {
+        "mean": 68.96,
+        "std": 19.98,
+        "min": 20.0,
+        "max": 92.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 26,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "The robot's words ('我来拿这个') made its intention obvious.",
+      "rating_statistics": {
+        "mean": 67.92,
+        "std": 23.66,
+        "min": 10.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 27,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "After a misreach, the robot's verbal response quickly got us back on track.",
+      "rating_statistics": {
+        "mean": 59.66,
+        "std": 24.41,
+        "min": 10.0,
+        "max": 94.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 28,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "The robot's short phrases reduced my frustration during simultaneous reaching.",
+      "rating_statistics": {
+        "mean": 52.84,
+        "std": 27.75,
+        "min": 5.0,
+        "max": 96.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 29,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "I felt the robot communicated effectively when we almost collided.",
+      "rating_statistics": {
+        "mean": 55.34,
+        "std": 25.42,
+        "min": 10.0,
+        "max": 93.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 30,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "The robot's verbal repair statements restored smooth collaboration.",
+      "rating_statistics": {
+        "mean": 66.38,
+        "std": 23.63,
+        "min": 10.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 31,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "When coordination failed, the robot's words helped me understand what to do next.",
+      "rating_statistics": {
+        "mean": 64.26,
+        "std": 22.34,
+        "min": 10.0,
+        "max": 92.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 32,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "The robot's spoken instructions made the shared workspace feel safer.",
+      "rating_statistics": {
+        "mean": 57.04,
+        "std": 26.42,
+        "min": 5.0,
+        "max": 94.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 33,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "I appreciated that the robot verbally indicated when it would wait for me.",
+      "rating_statistics": {
+        "mean": 59.84,
+        "std": 26.71,
+        "min": 10.0,
+        "max": 96.0,
+        "n": 50
+      }
+    }
+  ],
+  "overall_mean_rating": 51.74,
+  "low_rating_items": [
+    {
+      "item_id": 11,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "The robot seemed to know when I needed a particular tool.",
+      "rating_statistics": {
+        "mean": 44.68,
+        "std": 27.14,
+        "min": 5.0,
+        "max": 90.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 13,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "When we bumped, the robot immediately retracted its arm.",
+      "rating_statistics": {
+        "mean": 46.28,
+        "std": 31.41,
+        "min": 5.0,
+        "max": 97.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 14,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "The robot apologized verbally after accidental contact.",
+      "rating_statistics": {
+        "mean": 17.6,
+        "std": 27.26,
+        "min": 0.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 15,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "I felt the robot cared about my safety when it stopped after touching me.",
+      "rating_statistics": {
+        "mean": 23.46,
+        "std": 26.99,
+        "min": 5.0,
+        "max": 96.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 16,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "The robot's quick reaction to contact reassured me.",
+      "rating_statistics": {
+        "mean": 25.92,
+        "std": 27.02,
+        "min": 5.0,
+        "max": 94.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 17,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "After a collision, the robot adjusted its movement to avoid repeating it.",
+      "rating_statistics": {
+        "mean": 38.24,
+        "std": 30.78,
+        "min": 5.0,
+        "max": 93.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 18,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "The robot seemed sensitive to physical contact with me.",
+      "rating_statistics": {
+        "mean": 31.56,
+        "std": 26.7,
+        "min": 5.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 19,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "I felt the robot was considerate when it pulled back after a bump.",
+      "rating_statistics": {
+        "mean": 22.14,
+        "std": 27.64,
+        "min": 5.0,
+        "max": 96.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 20,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "The robot's response to accidental touch made me feel respected.",
+      "rating_statistics": {
+        "mean": 19.48,
+        "std": 28.47,
+        "min": 0.0,
+        "max": 97.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 21,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "I trusted the robot more because of how it handled unintended contact.",
+      "rating_statistics": {
+        "mean": 26.78,
+        "std": 27.59,
+        "min": 0.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 22,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "The robot's immediate retraction after a bump felt protective.",
+      "rating_statistics": {
+        "mean": 24.5,
+        "std": 27.12,
+        "min": 5.0,
+        "max": 98.0,
+        "n": 50
+      }
+    }
+  ],
+  "high_variance_items": [
+    {
+      "item_id": 6,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "I felt the robot respected my personal space at the workstation.",
+      "rating_statistics": {
+        "mean": 56.68,
+        "std": 32.51,
+        "min": 5.0,
+        "max": 96.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 13,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "When we bumped, the robot immediately retracted its arm.",
+      "rating_statistics": {
+        "mean": 46.28,
+        "std": 31.41,
+        "min": 5.0,
+        "max": 97.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 17,
+      "dimension": "Collision-Responsive Adaptation",
+      "item_text": "After a collision, the robot adjusted its movement to avoid repeating it.",
+      "rating_statistics": {
+        "mean": 38.24,
+        "std": 30.78,
+        "min": 5.0,
+        "max": 93.0,
+        "n": 50
+      }
+    }
+  ],
+  "scale_range": "0-100 (strongly disagree to strongly agree)",
+  "persona_diversity": {
+    "age_distribution": {
+      "mean": 34.44,
+      "std": 6.65,
+      "min": 25.0,
+      "max": 44.0,
+      "n": 50
+    },
+    "gender_distribution": {
+      "male": 12,
+      "non-binary": 22,
+      "female": 16
+    },
+    "education_distribution": {
+      "high school": 8,
+      "university degree": 24,
+      "vocational training": 10,
+      "doctoral": 8
+    },
+    "ati_score_distribution": {
+      "mean": 4.06,
+      "std": 0.6,
+      "min": 3.1,
+      "max": 5.0,
+      "n": 50
+    },
+    "profession_distribution": {
+      "operator": 14,
+      "technician": 12,
+      "engineer": 6,
+      "manager": 10,
+      "worker": 8
+    }
+  },
+  "validation_metrics": {
+    "discriminant_ability": {
+      "empathic_mean": 58.9,
+      "non_empathic_mean": 44.58,
+      "t_statistic": 9.791,
+      "p_value": 0.0,
+      "cohens_d": 0.482,
+      "significant": true,
+      "n_empathic": 825,
+      "n_non_empathic": 825
+    },
+    "internal_consistency": {
+      "alpha": 0.981,
+      "ci_lower": 0.583,
+      "ci_upper": 1.0,
+      "n_items": 33,
+      "n_participants": 50
+    }
+  }
+}
