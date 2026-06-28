@@ -1,0 +1,436 @@
+{
+  "n_constructs": 3,
+  "n_items": 36,
+  "factor_coverage": {
+    "side-by-side": {
+      "constructs": [
+        "Spatial Coordination Understanding",
+        "Explicit Communication Repair"
+      ],
+      "items": [
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4",
+        "Item 5",
+        "Item 6",
+        "Item 7",
+        "Item 8",
+        "Item 9",
+        "Item 10",
+        "Item 11",
+        "Item 12",
+        "Item 25",
+        "Item 26",
+        "Item 27",
+        "Item 28",
+        "Item 29",
+        "Item 30",
+        "Item 31",
+        "Item 32",
+        "Item 33",
+        "Item 34",
+        "Item 35",
+        "Item 36"
+      ]
+    },
+    "shared": {
+      "constructs": [
+        "Spatial Coordination Understanding",
+        "Explicit Communication Repair"
+      ],
+      "items": [
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4",
+        "Item 5",
+        "Item 6",
+        "Item 7",
+        "Item 8",
+        "Item 9",
+        "Item 10",
+        "Item 11",
+        "Item 12",
+        "Item 13",
+        "Item 14",
+        "Item 15",
+        "Item 16",
+        "Item 17",
+        "Item 18",
+        "Item 19",
+        "Item 20",
+        "Item 21",
+        "Item 22",
+        "Item 23",
+        "Item 24",
+        "Item 25",
+        "Item 26",
+        "Item 27",
+        "Item 28",
+        "Item 29",
+        "Item 30",
+        "Item 31",
+        "Item 32",
+        "Item 33",
+        "Item 34",
+        "Item 35",
+        "Item 36"
+      ]
+    },
+    "language": {
+      "constructs": [
+        "Collision-Responsive Adaptation",
+        "Explicit Communication Repair"
+      ],
+      "items": [
+        "Item 13",
+        "Item 14",
+        "Item 15",
+        "Item 16",
+        "Item 17",
+        "Item 18",
+        "Item 19",
+        "Item 20",
+        "Item 21",
+        "Item 22",
+        "Item 23",
+        "Item 24",
+        "Item 25",
+        "Item 26",
+        "Item 27",
+        "Item 28",
+        "Item 29",
+        "Item 30",
+        "Item 31",
+        "Item 32",
+        "Item 33",
+        "Item 34",
+        "Item 35",
+        "Item 36"
+      ]
+    },
+    "visual cues": {
+      "constructs": [
+        "Spatial Coordination Understanding",
+        "Explicit Communication Repair"
+      ],
+      "items": [
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4",
+        "Item 5",
+        "Item 6",
+        "Item 7",
+        "Item 8",
+        "Item 9",
+        "Item 10",
+        "Item 11",
+        "Item 12",
+        "Item 25",
+        "Item 26",
+        "Item 27",
+        "Item 28",
+        "Item 29",
+        "Item 30",
+        "Item 31",
+        "Item 32",
+        "Item 33",
+        "Item 34",
+        "Item 35",
+        "Item 36"
+      ]
+    },
+    "haptic/contact": {
+      "constructs": [
+        "Collision-Responsive Adaptation"
+      ],
+      "items": [
+        "Item 13",
+        "Item 14",
+        "Item 15",
+        "Item 16",
+        "Item 17",
+        "Item 18",
+        "Item 19",
+        "Item 20",
+        "Item 21",
+        "Item 22",
+        "Item 23",
+        "Item 24"
+      ]
+    },
+    "musculoskeletal": {
+      "constructs": [
+        "Collision-Responsive Adaptation"
+      ],
+      "items": [
+        "Item 13",
+        "Item 14",
+        "Item 15",
+        "Item 16",
+        "Item 17",
+        "Item 18",
+        "Item 19",
+        "Item 20",
+        "Item 21",
+        "Item 22",
+        "Item 23",
+        "Item 24"
+      ]
+    },
+    "collaborative arm": {
+      "constructs": [
+        "Collision-Responsive Adaptation"
+      ],
+      "items": [
+        "Item 13",
+        "Item 14",
+        "Item 15",
+        "Item 16",
+        "Item 17",
+        "Item 18",
+        "Item 19",
+        "Item 20",
+        "Item 21",
+        "Item 22",
+        "Item 23",
+        "Item 24"
+      ]
+    },
+    "physical contact/collision": {
+      "constructs": [
+        "Collision-Responsive Adaptation"
+      ],
+      "items": [
+        "Item 13",
+        "Item 14",
+        "Item 15",
+        "Item 16",
+        "Item 17",
+        "Item 18",
+        "Item 19",
+        "Item 20",
+        "Item 21",
+        "Item 22",
+        "Item 23",
+        "Item 24"
+      ]
+    },
+    "embodied motion": {
+      "constructs": [
+        "Spatial Coordination Understanding"
+      ],
+      "items": [
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4",
+        "Item 5",
+        "Item 6",
+        "Item 7",
+        "Item 8",
+        "Item 9",
+        "Item 10",
+        "Item 11",
+        "Item 12"
+      ]
+    },
+    "human-like morphology": {
+      "constructs": [
+        "Spatial Coordination Understanding"
+      ],
+      "items": [
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4",
+        "Item 5",
+        "Item 6",
+        "Item 7",
+        "Item 8",
+        "Item 9",
+        "Item 10",
+        "Item 11",
+        "Item 12"
+      ]
+    },
+    "assembly": {
+      "constructs": [
+        "Spatial Coordination Understanding"
+      ],
+      "items": [
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4",
+        "Item 5",
+        "Item 6",
+        "Item 7",
+        "Item 8",
+        "Item 9",
+        "Item 10",
+        "Item 11",
+        "Item 12"
+      ]
+    },
+    "tool rack": {
+      "constructs": [
+        "Spatial Coordination Understanding"
+      ],
+      "items": [
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4",
+        "Item 5",
+        "Item 6",
+        "Item 7",
+        "Item 8",
+        "Item 9",
+        "Item 10",
+        "Item 11",
+        "Item 12"
+      ]
+    },
+    "factory": {
+      "constructs": [
+        "Spatial Coordination Understanding"
+      ],
+      "items": [
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4",
+        "Item 5",
+        "Item 6",
+        "Item 7",
+        "Item 8",
+        "Item 9",
+        "Item 10",
+        "Item 11",
+        "Item 12"
+      ]
+    },
+    "collision/contact adaptation": {
+      "constructs": [
+        "Collision-Responsive Adaptation"
+      ],
+      "items": [
+        "Item 13",
+        "Item 14",
+        "Item 15",
+        "Item 16",
+        "Item 17",
+        "Item 18",
+        "Item 19",
+        "Item 20",
+        "Item 21",
+        "Item 22",
+        "Item 23",
+        "Item 24"
+      ]
+    },
+    "shared workspace coordination": {
+      "constructs": [
+        "Spatial Coordination Understanding",
+        "Explicit Communication Repair"
+      ],
+      "items": [
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4",
+        "Item 5",
+        "Item 6",
+        "Item 7",
+        "Item 8",
+        "Item 9",
+        "Item 10",
+        "Item 11",
+        "Item 12",
+        "Item 25",
+        "Item 26",
+        "Item 27",
+        "Item 28",
+        "Item 29",
+        "Item 30",
+        "Item 31",
+        "Item 32",
+        "Item 33",
+        "Item 34",
+        "Item 35",
+        "Item 36"
+      ]
+    },
+    "implicit coordination through action observation": {
+      "constructs": [
+        "Spatial Coordination Understanding"
+      ],
+      "items": [
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4",
+        "Item 5",
+        "Item 6",
+        "Item 7",
+        "Item 8",
+        "Item 9",
+        "Item 10",
+        "Item 11",
+        "Item 12"
+      ]
+    },
+    "explicit communication and repair": {
+      "constructs": [
+        "Explicit Communication Repair"
+      ],
+      "items": [
+        "Item 25",
+        "Item 26",
+        "Item 27",
+        "Item 28",
+        "Item 29",
+        "Item 30",
+        "Item 31",
+        "Item 32",
+        "Item 33",
+        "Item 34",
+        "Item 35",
+        "Item 36"
+      ]
+    },
+    "bodily limitation understanding": {
+      "constructs": [
+        "Spatial Coordination Understanding"
+      ],
+      "items": [
+        "Item 1",
+        "Item 2",
+        "Item 3",
+        "Item 4",
+        "Item 5",
+        "Item 6",
+        "Item 7",
+        "Item 8",
+        "Item 9",
+        "Item 10",
+        "Item 11",
+        "Item 12"
+      ]
+    }
+  },
+  "missing_factor_coverage": [],
+  "constructs_missing_required_metadata": [],
+  "items_with_related_factors_ratio": 1.0,
+  "items_with_generation_reason_ratio": 1.0,
+  "behavior_specific_item_ratio": 0.67,
+  "demo_required_groups": {
+    "collision/contact": true,
+    "shared workspace": true,
+    "implicit coordination": true
+  },
+  "passed": true
+}

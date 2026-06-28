@@ -1,0 +1,221 @@
+{
+  "n_items": 10,
+  "n_participants": 50,
+  "item_statistics": [
+    {
+      "item_id": 1,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "The robot's movements showed it understood where I needed to reach.",
+      "rating_statistics": {
+        "mean": 59.04,
+        "std": 25.09,
+        "min": 10.0,
+        "max": 92.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 2,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "The robot's arm trajectory made it easy to anticipate its next move.",
+      "rating_statistics": {
+        "mean": 60.66,
+        "std": 17.79,
+        "min": 25.0,
+        "max": 90.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 3,
+      "dimension": "Spatial Coordination Understanding",
+      "item_text": "I could predict when the robot would reach for a tool by watching its arm.",
+      "rating_statistics": {
+        "mean": 58.68,
+        "std": 17.37,
+        "min": 20.0,
+        "max": 88.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 4,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "When we both reached at the same time, the robot said '你先拿' to let me go first.",
+      "rating_statistics": {
+        "mean": 68.5,
+        "std": 23.91,
+        "min": 10.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 5,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "The robot's words ('我来拿这个') made its intention obvious.",
+      "rating_statistics": {
+        "mean": 67.92,
+        "std": 21.33,
+        "min": 15.0,
+        "max": 92.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 6,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "After a misreach, the robot's verbal response quickly got us back on track.",
+      "rating_statistics": {
+        "mean": 54.52,
+        "std": 24.81,
+        "min": 10.0,
+        "max": 88.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 7,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "The robot's short phrases reduced my frustration during simultaneous reaching.",
+      "rating_statistics": {
+        "mean": 48.1,
+        "std": 33.16,
+        "min": 5.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 8,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "I felt the robot communicated effectively when we almost collided.",
+      "rating_statistics": {
+        "mean": 53.76,
+        "std": 27.74,
+        "min": 10.0,
+        "max": 90.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 9,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "The robot's spoken instructions made the shared workspace feel safer.",
+      "rating_statistics": {
+        "mean": 54.28,
+        "std": 31.77,
+        "min": 5.0,
+        "max": 92.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 10,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "I appreciated that the robot verbally indicated when it would wait for me.",
+      "rating_statistics": {
+        "mean": 59.92,
+        "std": 29.13,
+        "min": 10.0,
+        "max": 95.0,
+        "n": 50
+      }
+    }
+  ],
+  "overall_mean_rating": 58.54,
+  "low_rating_items": [
+    {
+      "item_id": 7,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "The robot's short phrases reduced my frustration during simultaneous reaching.",
+      "rating_statistics": {
+        "mean": 48.1,
+        "std": 33.16,
+        "min": 5.0,
+        "max": 95.0,
+        "n": 50
+      }
+    }
+  ],
+  "high_variance_items": [
+    {
+      "item_id": 7,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "The robot's short phrases reduced my frustration during simultaneous reaching.",
+      "rating_statistics": {
+        "mean": 48.1,
+        "std": 33.16,
+        "min": 5.0,
+        "max": 95.0,
+        "n": 50
+      }
+    },
+    {
+      "item_id": 9,
+      "dimension": "Explicit Communication Repair",
+      "item_text": "The robot's spoken instructions made the shared workspace feel safer.",
+      "rating_statistics": {
+        "mean": 54.28,
+        "std": 31.77,
+        "min": 5.0,
+        "max": 92.0,
+        "n": 50
+      }
+    }
+  ],
+  "scale_range": "0-100 (strongly disagree to strongly agree)",
+  "persona_diversity": {
+    "age_distribution": {
+      "mean": 37.12,
+      "std": 5.8,
+      "min": 25.0,
+      "max": 45.0,
+      "n": 50
+    },
+    "gender_distribution": {
+      "non-binary": 20,
+      "male": 10,
+      "female": 20
+    },
+    "education_distribution": {
+      "doctoral": 12,
+      "vocational training": 12,
+      "university degree": 14,
+      "high school": 12
+    },
+    "ati_score_distribution": {
+      "mean": 4.03,
+      "std": 0.63,
+      "min": 3.0,
+      "max": 4.9,
+      "n": 50
+    },
+    "profession_distribution": {
+      "manager": 10,
+      "technician": 10,
+      "operator": 16,
+      "engineer": 2,
+      "worker": 12
+    }
+  },
+  "validation_metrics": {
+    "discriminant_ability": {
+      "empathic_mean": 69.58,
+      "non_empathic_mean": 47.5,
+      "t_statistic": 10.389,
+      "p_value": 0.0,
+      "cohens_d": 0.931,
+      "significant": true,
+      "n_empathic": 250,
+      "n_non_empathic": 250
+    },
+    "internal_consistency": {
+      "alpha": 0.936,
+      "ci_lower": 0.523,
+      "ci_upper": 1.0,
+      "n_items": 10,
+      "n_participants": 50
+    }
+  }
+}

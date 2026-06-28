@@ -1,0 +1,67 @@
+{
+  "strategy": "efa_cfa",
+  "method": "efa_cfa",
+  "target_range": [
+    10,
+    20
+  ],
+  "target_range_status": "within_target",
+  "n_factors": 2,
+  "n_selected_items": 10,
+  "factor_distribution": {
+    "Factor2": 4,
+    "Factor1": 6
+  },
+  "min_item_total_corr": 0.3,
+  "max_skewness": 1.0,
+  "max_kurtosis": 3.0,
+  "max_inter_corr": 0.8,
+  "min_factor_loading": 0.75,
+  "min_items_per_factor": 2,
+  "use_cfa": true,
+  "cfa_rmsea_threshold": 0.08,
+  "cfa_tli_threshold": 0.95,
+  "cfa_cfi_threshold": 0.95,
+  "cfa_srmr_threshold": 0.08,
+  "filtering_steps": {
+    "initial_n_items": 33,
+    "after_item_total_corr": 33,
+    "after_distribution_check": 19,
+    "after_inter_corr": 19,
+    "after_efa": 11,
+    "final_n_items": 10
+  },
+  "enforce_dimension_fidelity": true,
+  "min_dimensions_after_selection": 2,
+  "min_items_per_dimension_after_selection": 2,
+  "max_dimension_fidelity_replacements": 6,
+  "efa_results": {
+    "bartlett_test": {
+      "chi_square": 1763.2655569939745,
+      "p_value": 3.530262491519942e-262,
+      "significant": true
+    },
+    "kmo_test": {
+      "kmo_all": 0.8784973907115058,
+      "kmo_model": 0.8828740300178144,
+      "adequate": true
+    },
+    "eigenvalues": [
+      12.870852640543818,
+      3.6428771465488503
+    ]
+  },
+  "cfa_results": {
+    "fit_indices": {
+      "RMSEA": Infinity,
+      "TLI": 0.0,
+      "CFI": 0.0,
+      "SRMR": Infinity,
+      "adequate": false
+    },
+    "iterations": 2,
+    "removed_items": [
+      3
+    ]
+  }
+}

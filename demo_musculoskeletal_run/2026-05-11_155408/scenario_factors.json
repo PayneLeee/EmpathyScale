@@ -1,0 +1,58 @@
+{
+  "interaction_modes": [
+    "side-by-side"
+  ],
+  "resource_relations": [
+    "shared"
+  ],
+  "communication_modes": [
+    "language",
+    "visual cues",
+    "haptic/contact"
+  ],
+  "robot_type": [
+    "musculoskeletal",
+    "collaborative arm"
+  ],
+  "risk_factors": [
+    "physical contact/collision"
+  ],
+  "embodied_cues": [
+    "embodied motion",
+    "human-like morphology"
+  ],
+  "task_context_terms": [
+    "assembly",
+    "tool rack",
+    "factory"
+  ],
+  "role_constraints": [],
+  "physical_contact_risk": true,
+  "empathy_mechanisms": [
+    "collision/contact adaptation",
+    "shared workspace coordination",
+    "implicit coordination through action observation",
+    "explicit communication and repair",
+    "bodily limitation understanding"
+  ],
+  "all_factor_labels": [
+    "side-by-side",
+    "shared",
+    "language",
+    "visual cues",
+    "haptic/contact",
+    "musculoskeletal",
+    "collaborative arm",
+    "physical contact/collision",
+    "embodied motion",
+    "human-like morphology",
+    "assembly",
+    "tool rack",
+    "factory",
+    "collision/contact adaptation",
+    "shared workspace coordination",
+    "implicit coordination through action observation",
+    "explicit communication and repair",
+    "bodily limitation understanding"
+  ]
+}

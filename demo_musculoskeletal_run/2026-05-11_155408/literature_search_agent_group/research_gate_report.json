@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-05-11T17:05:49.374540",
+  "scenario_scoring_enabled": true,
+  "strict_high_relevance_threshold": 4,
+  "min_high_relevance_required": 3,
+  "strict_high_relevance_count": 14,
+  "support_paper_count": 8,
+  "high_relevance_count": 8,
+  "gate_mode": "support_papers",
+  "gate_passed": true,
+  "coverage_report": {
+    "modality_coverage": true,
+    "user_group_coverage": true,
+    "measurement_coverage": true,
+    "context_coverage": true,
+    "gaps": [
+      "No paper explicitly addresses the specific verbal phrases in Chinese used by the robot (e.g., '我来拿这个', '你先拿').",
+      "Lack of focus on coordination errors and simultaneous reaching scenarios that lead to blocking and minor physical contact.",
+      "The musculoskeletal robot platform's unique characteristics (e.g., compliance, joint structure) are not directly examined.",
+      "The shared tool rack layout and its influence on timing and coordination are not explicitly modeled or studied."
+    ],
+    "coverage_score": 0.8
+  },
+  "expansion_trace": [],
+  "total_papers_found": 602,
+  "total_screened": 24,
+  "total_scored": 24
+}

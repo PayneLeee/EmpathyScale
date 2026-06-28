@@ -1,0 +1,48 @@
+{
+  "covered": [
+    "collision/contact adaptation",
+    "shared workspace coordination",
+    "implicit coordination through action observation",
+    "explicit communication and repair",
+    "bodily limitation understanding"
+  ],
+  "weakly_covered": [],
+  "missing": [],
+  "paper_links": {
+    "shared workspace coordination": [
+      "Generating behavioral protocol for human-robot physical-contact interaction",
+      "The path towards contact-based physical human–robot interaction",
+      "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+      "Human Factors Considerations and Metrics in Shared Space Human-Robot Collaboration: A Systematic Review",
+      "Human-robot proxemics",
+      "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+      "Towards Effective Interface Designs for Collaborative HRI in Manufacturing"
+    ],
+    "collision/contact adaptation": [
+      "Generating behavioral protocol for human-robot physical-contact interaction",
+      "The path towards contact-based physical human–robot interaction",
+      "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+      "Human Factors Considerations and Metrics in Shared Space Human-Robot Collaboration: A Systematic Review",
+      "Human-robot proxemics",
+      "Bilateral human-robot interaction with physical contact"
+    ],
+    "explicit communication and repair": [
+      "Generating behavioral protocol for human-robot physical-contact interaction",
+      "When Robots Say No: The Empathic Ethical Disobedience Benchmark",
+      "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver",
+      "Towards Effective Interface Designs for Collaborative HRI in Manufacturing",
+      "A Virtual Sandbox Approach to Studying the Effect of Augmented Communication on Human-Robot Collaboration"
+    ],
+    "implicit coordination through action observation": [
+      "Generating behavioral protocol for human-robot physical-contact interaction",
+      "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+      "Human-robot proxemics",
+      "A Virtual Sandbox Approach to Studying the Effect of Augmented Communication on Human-Robot Collaboration"
+    ],
+    "bodily limitation understanding": [
+      "The path towards contact-based physical human–robot interaction",
+      "Physical interaction learning: Behavior adaptation in cooperative human-robot tasks involving physical contact",
+      "Advantages of Multimodal versus Verbal-Only Robot-to-Human Communication with an Anthropomorphic Robotic Mock Driver"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "assessment_context": "Human and musculoskeletal robot sit side by side at an assembly workstation, sharing a tool rack. Human does fine manipulation requiring judgment; robot handles heavier or closer items. Timing/coordination errors can lead to simultaneous reaching, blocking, and minor physical contact or collision.",
+  "robot_platform": "musculoskeletal robot",
+  "interaction_modalities": "[\"verbal (robot speaks short phrases like '我来拿这个' or '你先拿')\", 'visual (human observes robot arm pauses, yields, changes path, or retracts)']",
+  "collaboration_pattern": "Human takes finer, judgment-required items; robot takes heavier or items closer to its side.",
+  "environmental_setting": "assembly workstation with shared tool rack",
+  "scenario_short_label": null,
+  "assessment_goals": [],
+  "expected_empathy_forms": [
+    "timely indication of intent",
+    "yielding or giving way",
+    "leaving space for human at the shared tool rack",
+    "considering human's spatial comfort and proximity"
+  ],
+  "assessment_challenges": [],
+  "measurement_requirements": [],
+  "contrast_points": [
+    "Traditional rigid robot arms have clear work boundaries; human does not share the same pick-up area. This musculoskeletal robot sits right next to the human, sharing the same space, making arm trajectories and upper‑body distance feel more like human‑human collaboration."
+  ],
+  "failure_modes": [
+    "both reaching for the same shelf part at the same time",
+    "one party assuming the other has seen their reach",
+    "blocking or brushing against the human",
+    "contact without any pause, avoidance, or explanation"
+  ],
+  "scenario_label": "human_and_musculoskeletal_robot_sit_side",
+  "name": "human_and_musculoskeletal_robot_sit_side_2026-05-11_155408"
+}

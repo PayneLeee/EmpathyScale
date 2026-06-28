@@ -1,0 +1,13 @@
+{
+  "n_original_items": 33,
+  "n_selected_items": 10,
+  "selection_ratio": 0.30303030303030304,
+  "selected_mean_rating": 60.12,
+  "selected_std_rating": 4.78,
+  "original_mean_rating": 51.74,
+  "original_std_rating": 17.56,
+  "dimension_distribution": {
+    "Spatial Coordination Understanding": 3,
+    "Explicit Communication Repair": 7
+  }
+}
