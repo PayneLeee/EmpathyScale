@@ -201,6 +201,8 @@ def render_html(data: Dict[str, Any]) -> str:
   details {{ margin-top: 12px; }}
   .muted {{ color: var(--muted); font-size: 0.85rem; }}
   .badge {{ display: inline-block; background: #eef2ff; color: var(--accent); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-left: 6px; }}
+  .link-row {{ margin: -8px 0 18px; font-size: 0.9rem; }}
+  .link-row a {{ color: var(--accent); font-weight: 600; }}
   .prompt-block {{ background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin: 10px 0; font-size: 0.8rem; line-height: 1.45; white-space: pre-wrap; word-break: break-word; max-height: 480px; overflow: auto; }}
 </style>
 </head>
@@ -208,6 +210,7 @@ def render_html(data: Dict[str, Any]) -> str:
 <div class="wrap">
   <h1>{esc(data['scenario_label'])}</h1>
   <p class="subtitle">九步骤最终量表 · 单提示直出（{esc(worst_id)} 最差 / {esc(best_id)} 最好）· PETS 基线 · run {source_run}</p>
+  <p class="link-row"><a href="auto_generation_demo.html">查看自动生成过程 HTML 视频</a></p>
 
   <section>
     <h2>场景设定（本报告评价对象）</h2>
