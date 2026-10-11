@@ -11,7 +11,7 @@ This `v1/` folder is a self-contained snapshot of our work on the EmpathyScale m
 - **密钥 / Secrets**：`config.json`、`key.txt` 未纳入。请自行准备 `config.json`（复制 `config.example.json` 并填入 `openai_api_key` / `model_name`）。
 - **运行数据 / Run data**：`data/`（模拟施测、CFA、NMI 产物）可重新生成，为精简仓库未带上。重跑 `run_largeN_validation.py` + `run_largeN_selection_only.py` 可复现。
 - **虚拟环境与缓存 / Venvs & caches**：`venv/`、`__pycache__/`、`*.pyc` 已排除。
-- **WorkBuddy 相关文件**：无——本目录只含项目源码。
+- **AI 助手运行时/中间产物**：无——本目录只含项目源码。
 
 ## 快速开始 / Quick start
 1. `pip install -r requirements.txt`
