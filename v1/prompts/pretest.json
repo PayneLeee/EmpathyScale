@@ -1,0 +1,5 @@
+{
+  "name": "pretest",
+  "description": "预测试模拟用户答题，检测歧义",
+  "template": "你是一名普通用户，正在参与一项关于「人机共情」的量表测试。请阅读以下题项，并从用户的角度理解它的含义，然后回答：你理解这道题在问什么？你是否能清晰判断它属于哪个维度？是否存在歧义？\n\n## 场景背景\n{scenario}\n\n## 可选的维度列表\n{dimension_names}\n\n## 待测题项\n题目：{item_text}\n所属维度：{item_dimension}\n\n请判断：\n1. 用户是否能正确理解这道题的意图？\n2. 用户的答题方向是否可能偏离维度定义？\n3. 是否存在语言歧义或难以理解的地方？\n\n## 输出格式（仅输出 JSON）\n{{\"has_ambiguity\": true或false, \"reason\": \"歧义原因\", \"simulated_understanding\": \"用户可能理解的方向\", \"suggested_revision\": \"修改建议（如有）\"}}"
+}

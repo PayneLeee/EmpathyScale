@@ -1,0 +1,679 @@
+{
+  "collab_robot_assembly": {
+    "generated": {
+      "run_id": "2025-12-22_215026",
+      "n_items": 16,
+      "alpha": 0.992,
+      "cohens_d": 4.634,
+      "items": [
+        {
+          "item_id": 1,
+          "dimension": "Proactive Support and Guidance (11 items)",
+          "item_text": "The robot proactively suggested solutions to problems."
+        },
+        {
+          "item_id": 2,
+          "dimension": "Proactive Support and Guidance (11 items)",
+          "item_text": "The robot provided timely help during complex tasks."
+        },
+        {
+          "item_id": 3,
+          "dimension": "Proactive Support and Guidance (11 items)",
+          "item_text": "The robot checked in on my progress regularly."
+        },
+        {
+          "item_id": 4,
+          "dimension": "Proactive Support and Guidance (11 items)",
+          "item_text": "The robot offered assistance without me needing to ask."
+        },
+        {
+          "item_id": 5,
+          "dimension": "Proactive Support and Guidance (11 items)",
+          "item_text": "The robot helped me regain focus when I lost track."
+        },
+        {
+          "item_id": 6,
+          "dimension": "Proactive Support and Guidance (11 items)",
+          "item_text": "The robot ensured I had everything I needed to succeed."
+        },
+        {
+          "item_id": 7,
+          "dimension": "Proactive Support and Guidance (11 items)",
+          "item_text": "The robot's support made me feel safer at work."
+        },
+        {
+          "item_id": 8,
+          "dimension": "Proactive Support and Guidance (11 items)",
+          "item_text": "The robot comprehended the specific tasks I prioritized."
+        },
+        {
+          "item_id": 9,
+          "dimension": "Proactive Support and Guidance (11 items)",
+          "item_text": "The robot understood both my short-term and long-term goals."
+        },
+        {
+          "item_id": 10,
+          "dimension": "Proactive Support and Guidance (11 items)",
+          "item_text": "The robot adapted its approach based on my feedback."
+        },
+        {
+          "item_id": 11,
+          "dimension": "Proactive Support and Guidance (11 items)",
+          "item_text": "The robot interpreted my signals about task completion."
+        },
+        {
+          "item_id": 12,
+          "dimension": "Emotional Awareness and Support (5 items)",
+          "item_text": "The robot's actions showed it understood my emotional state."
+        },
+        {
+          "item_id": 13,
+          "dimension": "Emotional Awareness and Support (5 items)",
+          "item_text": "The robot showed awareness of my stress levels."
+        },
+        {
+          "item_id": 14,
+          "dimension": "Emotional Awareness and Support (5 items)",
+          "item_text": "The robot recognized when I needed encouragement."
+        },
+        {
+          "item_id": 15,
+          "dimension": "Emotional Awareness and Support (5 items)",
+          "item_text": "The robot's responses felt attuned to my mood."
+        },
+        {
+          "item_id": 16,
+          "dimension": "Emotional Awareness and Support (5 items)",
+          "item_text": "The robot encouraged me to keep going when I hesitated."
+        }
+      ]
+    },
+    "PETS": {
+      "n_items": 10,
+      "alpha": 0.953,
+      "cohens_d": 1.953,
+      "items": [
+        {
+          "item_id": 1,
+          "dimension": "PETS-ER",
+          "item_text": "The system considered my mental state."
+        },
+        {
+          "item_id": 2,
+          "dimension": "PETS-ER",
+          "item_text": "The system seemed emotionally intelligent."
+        },
+        {
+          "item_id": 3,
+          "dimension": "PETS-ER",
+          "item_text": "The system expressed emotions."
+        },
+        {
+          "item_id": 4,
+          "dimension": "PETS-ER",
+          "item_text": "The system sympathized with me."
+        },
+        {
+          "item_id": 5,
+          "dimension": "PETS-ER",
+          "item_text": "The system showed interest in me."
+        },
+        {
+          "item_id": 6,
+          "dimension": "PETS-ER",
+          "item_text": "The system supported me in coping with an emotional situation."
+        },
+        {
+          "item_id": 7,
+          "dimension": "PETS-UT",
+          "item_text": "The system understood my goals."
+        },
+        {
+          "item_id": 8,
+          "dimension": "PETS-UT",
+          "item_text": "The system understood my needs."
+        },
+        {
+          "item_id": 9,
+          "dimension": "PETS-UT",
+          "item_text": "I trusted the system."
+        },
+        {
+          "item_id": 10,
+          "dimension": "PETS-UT",
+          "item_text": "The system understood my intentions."
+        }
+      ]
+    },
+    "RoPE": {
+      "n_items": 16,
+      "alpha": 0.859,
+      "cohens_d": 1.07,
+      "items": [
+        {
+          "item_id": 1,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot appreciates exactly how the things I experience feel to me."
+        },
+        {
+          "item_id": 2,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot knows me and my needs."
+        },
+        {
+          "item_id": 3,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot cares about my feelings."
+        },
+        {
+          "item_id": 4,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot does not understand me."
+        },
+        {
+          "item_id": 5,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot perceives and accepts my individual characteristics."
+        },
+        {
+          "item_id": 6,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot usually understands the whole of what I mean."
+        },
+        {
+          "item_id": 7,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot reacts to my words but does not see the way I feel."
+        },
+        {
+          "item_id": 8,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot seems to feel bad when I am sad or disappointed."
+        },
+        {
+          "item_id": 9,
+          "dimension": "Empathic Response",
+          "item_text": "Whether thoughts or feelings I express are \"good\" or \"bad\" makes no difference to the robot's actions toward me."
+        },
+        {
+          "item_id": 10,
+          "dimension": "Empathic Response",
+          "item_text": "No matter what I tell about myself, the robot acts just the same."
+        },
+        {
+          "item_id": 11,
+          "dimension": "Empathic Response",
+          "item_text": "The robot comforts me when I am upset."
+        },
+        {
+          "item_id": 12,
+          "dimension": "Empathic Response",
+          "item_text": "The robot encourages me."
+        },
+        {
+          "item_id": 13,
+          "dimension": "Empathic Response",
+          "item_text": "The robot praises me when I have done something well."
+        },
+        {
+          "item_id": 14,
+          "dimension": "Empathic Response",
+          "item_text": "The robot helps me when I need it."
+        },
+        {
+          "item_id": 15,
+          "dimension": "Empathic Response",
+          "item_text": "The robot knows when I want to talk and lets me do so."
+        },
+        {
+          "item_id": 16,
+          "dimension": "Empathic Response",
+          "item_text": "The robot's response to me is so fixed and automatic that I do not get through to it."
+        }
+      ]
+    }
+  },
+  "home_service_robot": {
+    "generated": {
+      "run_id": "2025-12-22_210718",
+      "n_items": 12,
+      "alpha": 0.993,
+      "cohens_d": 5.238,
+      "items": [
+        {
+          "item_id": 1,
+          "dimension": "User Understanding and Support (8 items)",
+          "item_text": "I trusted the robot's judgment in understanding my needs."
+        },
+        {
+          "item_id": 2,
+          "dimension": "User Understanding and Support (8 items)",
+          "item_text": "The system recognized when I required additional help."
+        },
+        {
+          "item_id": 3,
+          "dimension": "User Understanding and Support (8 items)",
+          "item_text": "The system accurately interpreted my goals during tasks."
+        },
+        {
+          "item_id": 4,
+          "dimension": "User Understanding and Support (8 items)",
+          "item_text": "The robot accurately interpreted my intentions."
+        },
+        {
+          "item_id": 5,
+          "dimension": "User Understanding and Support (8 items)",
+          "item_text": "The system anticipated my needs before I articulated them."
+        },
+        {
+          "item_id": 6,
+          "dimension": "User Understanding and Support (8 items)",
+          "item_text": "The system was responsive to my changing requirements."
+        },
+        {
+          "item_id": 7,
+          "dimension": "User Understanding and Support (8 items)",
+          "item_text": "The system understood how to help me achieve my goals."
+        },
+        {
+          "item_id": 8,
+          "dimension": "User Understanding and Support (8 items)",
+          "item_text": "The robot acknowledged my need for clarity in instructions."
+        },
+        {
+          "item_id": 9,
+          "dimension": "Motivational Support (2 items)",
+          "item_text": "The robot motivated me to continue when I hesitated."
+        },
+        {
+          "item_id": 10,
+          "dimension": "Motivational Support (2 items)",
+          "item_text": "The system actively supported me through difficult moments."
+        },
+        {
+          "item_id": 11,
+          "dimension": "Emotional Awareness (2 items)",
+          "item_text": "The robot expressed understanding when I was stressed."
+        },
+        {
+          "item_id": 12,
+          "dimension": "Emotional Awareness (2 items)",
+          "item_text": "The system identified when I was feeling anxious."
+        }
+      ]
+    },
+    "PETS": {
+      "n_items": 10,
+      "alpha": 0.955,
+      "cohens_d": 2.005,
+      "items": [
+        {
+          "item_id": 1,
+          "dimension": "PETS-ER",
+          "item_text": "The system considered my mental state."
+        },
+        {
+          "item_id": 2,
+          "dimension": "PETS-ER",
+          "item_text": "The system seemed emotionally intelligent."
+        },
+        {
+          "item_id": 3,
+          "dimension": "PETS-ER",
+          "item_text": "The system expressed emotions."
+        },
+        {
+          "item_id": 4,
+          "dimension": "PETS-ER",
+          "item_text": "The system sympathized with me."
+        },
+        {
+          "item_id": 5,
+          "dimension": "PETS-ER",
+          "item_text": "The system showed interest in me."
+        },
+        {
+          "item_id": 6,
+          "dimension": "PETS-ER",
+          "item_text": "The system supported me in coping with an emotional situation."
+        },
+        {
+          "item_id": 7,
+          "dimension": "PETS-UT",
+          "item_text": "The system understood my goals."
+        },
+        {
+          "item_id": 8,
+          "dimension": "PETS-UT",
+          "item_text": "The system understood my needs."
+        },
+        {
+          "item_id": 9,
+          "dimension": "PETS-UT",
+          "item_text": "I trusted the system."
+        },
+        {
+          "item_id": 10,
+          "dimension": "PETS-UT",
+          "item_text": "The system understood my intentions."
+        }
+      ]
+    },
+    "RoPE": {
+      "n_items": 16,
+      "alpha": 0.855,
+      "cohens_d": 0.998,
+      "items": [
+        {
+          "item_id": 1,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot appreciates exactly how the things I experience feel to me."
+        },
+        {
+          "item_id": 2,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot knows me and my needs."
+        },
+        {
+          "item_id": 3,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot cares about my feelings."
+        },
+        {
+          "item_id": 4,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot does not understand me."
+        },
+        {
+          "item_id": 5,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot perceives and accepts my individual characteristics."
+        },
+        {
+          "item_id": 6,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot usually understands the whole of what I mean."
+        },
+        {
+          "item_id": 7,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot reacts to my words but does not see the way I feel."
+        },
+        {
+          "item_id": 8,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot seems to feel bad when I am sad or disappointed."
+        },
+        {
+          "item_id": 9,
+          "dimension": "Empathic Response",
+          "item_text": "Whether thoughts or feelings I express are \"good\" or \"bad\" makes no difference to the robot's actions toward me."
+        },
+        {
+          "item_id": 10,
+          "dimension": "Empathic Response",
+          "item_text": "No matter what I tell about myself, the robot acts just the same."
+        },
+        {
+          "item_id": 11,
+          "dimension": "Empathic Response",
+          "item_text": "The robot comforts me when I am upset."
+        },
+        {
+          "item_id": 12,
+          "dimension": "Empathic Response",
+          "item_text": "The robot encourages me."
+        },
+        {
+          "item_id": 13,
+          "dimension": "Empathic Response",
+          "item_text": "The robot praises me when I have done something well."
+        },
+        {
+          "item_id": 14,
+          "dimension": "Empathic Response",
+          "item_text": "The robot helps me when I need it."
+        },
+        {
+          "item_id": 15,
+          "dimension": "Empathic Response",
+          "item_text": "The robot knows when I want to talk and lets me do so."
+        },
+        {
+          "item_id": 16,
+          "dimension": "Empathic Response",
+          "item_text": "The robot's response to me is so fixed and automatic that I do not get through to it."
+        }
+      ]
+    }
+  },
+  "counseling_chatbot": {
+    "generated": {
+      "run_id": "2025-12-22_212205",
+      "n_items": 15,
+      "alpha": 0.999,
+      "cohens_d": 15.473,
+      "items": [
+        {
+          "item_id": 1,
+          "dimension": "Emotional Supportiveness (13 items)",
+          "item_text": "I sensed that the chatbot was in tune with my emotions."
+        },
+        {
+          "item_id": 2,
+          "dimension": "Emotional Supportiveness (13 items)",
+          "item_text": "The chatbot expressed compassion throughout our dialogue."
+        },
+        {
+          "item_id": 3,
+          "dimension": "Emotional Supportiveness (13 items)",
+          "item_text": "The chatbot's supportive tone helped ease my worries."
+        },
+        {
+          "item_id": 4,
+          "dimension": "Emotional Supportiveness (13 items)",
+          "item_text": "The chatbot demonstrated emotional intelligence in our conversation."
+        },
+        {
+          "item_id": 5,
+          "dimension": "Emotional Supportiveness (13 items)",
+          "item_text": "The system validated my feelings effectively in the dialogue."
+        },
+        {
+          "item_id": 6,
+          "dimension": "Emotional Supportiveness (13 items)",
+          "item_text": "The chatbot's empathy made our interaction feel personal."
+        },
+        {
+          "item_id": 7,
+          "dimension": "Emotional Supportiveness (13 items)",
+          "item_text": "The system acknowledged my emotional struggles."
+        },
+        {
+          "item_id": 8,
+          "dimension": "Emotional Supportiveness (13 items)",
+          "item_text": "The system offered encouragement that resonated with my feelings."
+        },
+        {
+          "item_id": 9,
+          "dimension": "Emotional Supportiveness (13 items)",
+          "item_text": "The system seemed to care about my emotional well-being."
+        },
+        {
+          "item_id": 10,
+          "dimension": "Emotional Supportiveness (13 items)",
+          "item_text": "The system comforted me when I was feeling down."
+        },
+        {
+          "item_id": 11,
+          "dimension": "Emotional Supportiveness (13 items)",
+          "item_text": "The chatbot seemed aware of my stress levels."
+        },
+        {
+          "item_id": 12,
+          "dimension": "Emotional Supportiveness (13 items)",
+          "item_text": "The system acknowledged my feelings during our interaction."
+        },
+        {
+          "item_id": 13,
+          "dimension": "Emotional Supportiveness (13 items)",
+          "item_text": "The chatbot expressed a desire to help me feel better."
+        },
+        {
+          "item_id": 14,
+          "dimension": "Emotional Support (2 items)",
+          "item_text": "The system offered comforting words when I was upset."
+        },
+        {
+          "item_id": 15,
+          "dimension": "Emotional Support (2 items)",
+          "item_text": "The chatbot provided comforting responses when I was upset."
+        }
+      ]
+    },
+    "PETS": {
+      "n_items": 10,
+      "alpha": 0.956,
+      "cohens_d": 2.328,
+      "items": [
+        {
+          "item_id": 1,
+          "dimension": "PETS-ER",
+          "item_text": "The system considered my mental state."
+        },
+        {
+          "item_id": 2,
+          "dimension": "PETS-ER",
+          "item_text": "The system seemed emotionally intelligent."
+        },
+        {
+          "item_id": 3,
+          "dimension": "PETS-ER",
+          "item_text": "The system expressed emotions."
+        },
+        {
+          "item_id": 4,
+          "dimension": "PETS-ER",
+          "item_text": "The system sympathized with me."
+        },
+        {
+          "item_id": 5,
+          "dimension": "PETS-ER",
+          "item_text": "The system showed interest in me."
+        },
+        {
+          "item_id": 6,
+          "dimension": "PETS-ER",
+          "item_text": "The system supported me in coping with an emotional situation."
+        },
+        {
+          "item_id": 7,
+          "dimension": "PETS-UT",
+          "item_text": "The system understood my goals."
+        },
+        {
+          "item_id": 8,
+          "dimension": "PETS-UT",
+          "item_text": "The system understood my needs."
+        },
+        {
+          "item_id": 9,
+          "dimension": "PETS-UT",
+          "item_text": "I trusted the system."
+        },
+        {
+          "item_id": 10,
+          "dimension": "PETS-UT",
+          "item_text": "The system understood my intentions."
+        }
+      ]
+    },
+    "RoPE": {
+      "n_items": 16,
+      "alpha": 0.884,
+      "cohens_d": 1.143,
+      "items": [
+        {
+          "item_id": 1,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot appreciates exactly how the things I experience feel to me."
+        },
+        {
+          "item_id": 2,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot knows me and my needs."
+        },
+        {
+          "item_id": 3,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot cares about my feelings."
+        },
+        {
+          "item_id": 4,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot does not understand me."
+        },
+        {
+          "item_id": 5,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot perceives and accepts my individual characteristics."
+        },
+        {
+          "item_id": 6,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot usually understands the whole of what I mean."
+        },
+        {
+          "item_id": 7,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot reacts to my words but does not see the way I feel."
+        },
+        {
+          "item_id": 8,
+          "dimension": "Empathic Understanding",
+          "item_text": "The robot seems to feel bad when I am sad or disappointed."
+        },
+        {
+          "item_id": 9,
+          "dimension": "Empathic Response",
+          "item_text": "Whether thoughts or feelings I express are \"good\" or \"bad\" makes no difference to the robot's actions toward me."
+        },
+        {
+          "item_id": 10,
+          "dimension": "Empathic Response",
+          "item_text": "No matter what I tell about myself, the robot acts just the same."
+        },
+        {
+          "item_id": 11,
+          "dimension": "Empathic Response",
+          "item_text": "The robot comforts me when I am upset."
+        },
+        {
+          "item_id": 12,
+          "dimension": "Empathic Response",
+          "item_text": "The robot encourages me."
+        },
+        {
+          "item_id": 13,
+          "dimension": "Empathic Response",
+          "item_text": "The robot praises me when I have done something well."
+        },
+        {
+          "item_id": 14,
+          "dimension": "Empathic Response",
+          "item_text": "The robot helps me when I need it."
+        },
+        {
+          "item_id": 15,
+          "dimension": "Empathic Response",
+          "item_text": "The robot knows when I want to talk and lets me do so."
+        },
+        {
+          "item_id": 16,
+          "dimension": "Empathic Response",
+          "item_text": "The robot's response to me is so fixed and automatic that I do not get through to it."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,241 @@
+See discussions, stats, and author profiles for this publication at: https://www.researchgate.net/publication/332468402
+The RoPE Scale: a Measure of How Empathic a Robot is Perceived
+Conference Paper · March 2019
+DOI: 10.1109/HRI.2019.8673082
+CITATIONS
+20
+READS
+2,128
+6 authors, including:
+Laurianne Charrier
+Université Lumiere Lyon 1
+3 PUBLICATIONS   63 CITATIONS   
+SEE PROFILE
+Alexandre Galdeano
+AIbstract
+3 PUBLICATIONS   31 CITATIONS   
+SEE PROFILE
+Amélie Cordier
+University of Lyon
+73 PUBLICATIONS   551 CITATIONS   
+SEE PROFILE
+All content following this page was uploaded by Alexandre Galdeano on 25 March 2020.
+The user has requested enhancement of the downloaded file.
+The RoPE Scale: a Measure of How Empathic a
+Robot is Perceived
+Laurianne Charrier∗†, Alisa Rieger∗†, Alexandre Galdeano∗†, Amélie Cordier †, Mathieu Lefort ∗, and Salima Hassas ∗
+∗Univ Lyon, Université Lyon 1, CNRS, LIRIS, F-69621, Villeurbanne, France
+Email: [lcharrier, agaldean, mlefort, shassas]@liris.cnrs.fr
+†20 Boulevard Eugène Deruelle, 69003 Lyon
+Email: [laurianne.charrier, alisa.rieger, alexandre.galdeano, amelie.cordier]@hoomano.com
+Abstract—To be accepted in our everyday life and to be valuable
+interaction partners, robots should be able to display emotional
+and empathic behaviors. That is why there has been a great
+focus on developing empathy in robots in recent years. However,
+there is no consensus on how to measure how much a robot is
+considered to be empathic. In this context, we decided to construct
+a questionnaire which speciﬁcally measures the perception of a
+robot’s empathy in human-robot interaction (HRI). Therefore we
+conducted pretests to generate items. These were validated by
+experts and will be further validated in an experimental setting.
+Keywords—Human-Robot Interaction; Social Robots; Perceived
+Empathy; Psychometrics.
+I. I NTRODUCTION
+According to [7], empathy “might have a crucial role in human
+communication” and “might serve as the origin of the motivation
+for altruistic behavior and cooperation”. Empathy—as deﬁned
+in the cognitive psychology and HRI literature—is “a complex
+process whereby one understands and/or shares an entity’s frame
+of reference, and/or reacts appropriately without having doubts
+about which frame of reference belongs to whom” [ 4], and an
+essential component of interaction. Empathic capabilities can be
+separated into two analytic categories: (1) the capabilities that
+are emotional, with the ability to share the affective experience
+of someone else; (2) the capabilities that are cognitive, with the
+ability to represent and understand the mental states of someone
+else and their perspective [ 4]. Cognitive empathy has many
+subcategories, including empathic comprehension and empathic
+response. Empathic comprehension, sometimes called empathic
+understanding, describes the ability to become aware of and to
+understand another person’s unique experience and feelings [14].
+Empathic response describes how one communicates their
+attempts at understanding someone else’s frame of reference,
+including their feelings and motives [2].
+Being empathic seems to be a component of human interaction
+which is greatly linked to how positive we are perceived by our
+interlocutor. In order for social robots to accomplish what they
+are made for, i.e. to “perform social interactions in a Human-like
+way” [4], they need to know what humans feel and what their
+mental states are, so that they can adapt their behavior [ 12]. As
+said by [ 12], there is a need for means to assess how empathic
+a robot is perceived.
+II. R ELATED WORK
+There are various ways of measuring human-human empathy
+in the literature. The Barrett-Lennart Relationship Inventory
+(BLRI) [1] is one of the “most widely used client-rated measure
+of empathy” [8]. It can also be a self-rated measure of empathic
+understanding. An other widely used self-rated measure of
+empathic concern and perspective taking is the Interpersonal
+Reactivity Index (IRI) [
+6]. Other questionnaires that measure
+the empathy quotient of a person can be found [11], [9].
+Perceived empathy in human-human interaction can be
+measured with the Accurate Empathy Scale (AES) [ 15] which
+is, as an observer-rated measure, commonly used in context of
+therapy with the evaluation of the therapist’s empathy. Other
+questionnaires are used to measure perceived empathy [ 1], [13].
+In search of applicable metrics for perceived empathy of
+robots in HRI, we found that in the HRI research community
+the concept of empathy in robots is measured mostly using
+homemade questionnaires and few self reported measures [ 3],
+[16] which have not been clearly evaluated in term of validity
+and reproducibility. Frequently, metrics for measuring human
+empathy were only slightly changed and applied without
+previous validation [12]. Moreover, these approaches come with
+various biases, as involving cognitive abilities that robots do
+not have (e.g., saying that it is playing a role), whereas human
+empathy and robot empathy are, although with similarities, still
+two different concepts that can not be measured in the same
+way [4], [12].
+To promote the comparability of HRI empathy experiments
+and to get results as unbiased as possible, it is necessary to
+have standardized and validated methods of measuring the
+perceived empathy of robots [
+12]. From our literature review,
+we conclude that the HRI research community lacks attempts
+to ﬁnd standardized metrics for perceived empathy in robots,
+and—for that reason—we propose such a metric.
+III. G ENERATION OF ITEMS
+The Robot’s Perceived Empathy (RoPE) scale is composed
+of 18 items divided in two scales: empathic understanding
+and empathic response (see Tab. I) with four ﬁller (i.e., catch)
+items. The scales are based on the results of a previous pilot
+study with an exploratory approach [
+4]. Items are based on
+978-1-5386-8555-6/19/$31.00 ©2019 IEEE 
+656
+id Empathic Understanding subscale items (EU)
+EU1 The robot appreciates exactly how the things I experience feel to me.
+EU2 The robot knows me and my needs.
+EU3 The robot cares about my feelings.
+EU4 (−) The robot does not understand me.
+EU5 The robot perceives and accepts my individual characteristics.
+EU6 The robot usually understands the whole of what I mean.
+EU7 (−) The robot reacts to my words but does not see the way I feel.
+EU8 The robot seems to feel bad when I am sad or disappointed.
+id Empathic Response subscale items (ER)
+ER1 (−) Whether thoughts or feelings I express are “good” or “bad” makes
+no difference to the robot’s actions toward me.
+ER2 (−) No matter what I tell about myself, the robot acts just the same.
+ER3 The robot comforts me when I am upset.
+ER4 The robot encourages me.
+ER5 The robot praises me when I have done something well.
+ER6 The robot helps me when I need it.
+ER7 The robot knows when I want to talk and lets me do so.
+ER8 (−) The robot‘s response to me is so ﬁxed and automatic that I do not
+get through to it.
+id Filler items (FI)
+FI1 The way the robot acts feels natural.
+FI2 The robot knows what it is doing.
+FI3 The robot is responsible for its actions.
+FI4 When I interact with the robot, I feel anxious.
+Table I
+THE ITEMS COMPOSING THE ROPE SCALE . TO CALCULATE THE SUBSCALES ’
+SCORE , SUM THE VALUE OF EACH ITEMS AFTER HAVING MULTIPLIED BY −1
+THE VALUE OF THE ITEMS MARKED BY (−).
+human empathy metrics [ 1], [ 6] adapted to robots, avoiding
+unexpected formulations that involve capacities that robots
+clearly do not have. We veriﬁed the relevance of each item
+of the French versionaccording to the concept of the scale it
+represents by the valuation of 15 experts in cognitive sciences
+or other social sciences, and 10 experts in robotics or artiﬁcial
+intelligence. According to their advice, three items have been
+modiﬁed to stick as close as possible to the concepts of empathic
+understanding, and then conﬁrmed by another group of experts.
+Expert validation of the English version ?? of the questionnaire
+has to be done to conﬁrm the modiﬁcations in both languages.
+IV. F UTURE WORK
+In a future experiment, we plan to evaluate the reliability
+and validity of the French version of our metric. For this
+experiment, we will use Anki’s Cozmo robot because it can
+display emotions easily and without the use of speech which
+could induce biases [
+5]. We will ﬁlm an interaction between
+Cozmo and a person, who will tell Cozmo about their vacation.
+This interaction will be ﬁlmed twice. During both of them,
+Cozmo will display its emotions through its face and its behavior
+in a Wizard of Oz setup. In the ﬁrst video, Cozmo will react
+empathically and display its understanding of the person’s state
+of mind and emotions. In the second one, Cozmo will only
+display neutral and emotionless reactions signalizing that it
+is following the conversation, merely nodding. We will select
+two groups of about 150 French-speaking participants within
+a broad age span and from diverse demographic backgrounds,
+following the French population quotas. This sample size has
+been calculated as the minimum to be sensitive to small to
+medium-sized effects with a great statistical power [ 10]. Each
+video will be submitted with a questionnaire to a group. Forms
+will be sent twice, several weeks apart, to ensure with a test-
+retest task that the metric is reliable. Reliability, validity and
+sensibility of the measure will be tested in various statistical
+ways to validate the quality of the French version of the scale.
+V. C ONCLUSION
+We proposed a new measure of perceived empathy in HRI
+and validated the items of the French version with experts from
+cognitive sciences and robotics. There are obviously still many
+things to do to get to the point of having a valid metric, such
+as reliability, sensibility, and generalizability tests. The purpose
+of this metric is to improve the reproduciblity, validity, and
+comparability of robotic empathy research.
+ACKNOWLEDGEMENTS
+This research was supported by the French Association
+Nationale de la Recherche et de la Technologie(ANRT) contract
+2017/0226 and the joint laboratory B EHAVIORS .AI funded by
+the French Agence Nationale de la Recherche(ANR) contract
+ANR-16-LCV2-0003-01.
+REFERENCES
+[1] G. Barrett-Lennard, “The relationship inventory: A technique for measuring
+therapeutic dimensions of an interpersonal relationship,” in Mimeographed
+paper read at the Annual Conference of the Southwestern Psychological
+Association in St. Augustine, Florida, 1959.
+[2] S. Bavolek, “Developing empathy in families,” Retrived from www.
+nurturing/parenting. com, 2003.
+[3] T. W. Bickmore, “Relational agents: Effecting change through human-
+computer relationships,” Ph.D. dissertation, Massachusetts Institute of
+Technology, 2003.
+[4] L. Charrier, A. Galdeano, A. Cordier, and M. Lefort, “Empathy display
+inﬂuence on human-robot interactions: a pilot study,” in Workshop on
+Towards Intelligent Social Robots: From Naive Robots to Robot Sapiens
+at the 2018 IEEE/RSJ IROS Conference, 2018.
+[5] C. R. Crowelly, M. Villanoy, M. Scheutzz, and P. Schermerhornz,
+“Gendered voice and robot entities: perceptions and reactions of male
+and female subjects,” in 2009 IEEE/RSJ IROS Conference, 2009, pp.
+3735–3741.
+[6] M. H. Davis, Interpersonal reactivity index. Edwin Mellen Press, 1980.
+[7] F. De Vignemont and T. Singer, “The empathic brain: how, when and
+why?” Trends in cognitive sciences, vol. 10, no. 10, pp. 435–441, 2006.
+[8] R. Elliott, A. C. Bohart, J. C. Watson, and L. S. Greenberg, “Empathy.”
+Psychotherapy, vol. 48, no. 1, p. 43, 2011.
+[9] D. Jolliffe and D. P. Farrington, “Development and validation of the basic
+empathy scale,” Journal of adolescence, vol. 29, no. 4, pp. 589–611, 2006.
+[10] D. Lakens, “Calculating and reporting effect sizes to facilitate cumulative
+science: a practical primer for ttests and anovas. front psychol. 2013; 4:
+863,” 2013.
+[11] E. J. Lawrence, P. Shaw, D. Baker, S. Baron-Cohen, and A. S. David,
+“Measuring empathy: reliability and validity of the empathy quotient,”
+Psychological medicine, vol. 34, no. 5, pp. 911–920, 2004.
+[12] T. Nomura, “Empathy as signalling feedback between humanoid robots
+and humans,” Humanoid Robotics: A Reference, pp. 1–10, 2016.
+[13] R. E. Plank, A. P. Minton, and D. A. Reid, “A short measure of perceived
+empathy,” Psychological reports, vol. 79, no. 3, pp. 1219–1226, 1996.
+[14] P. F. Schmid, “Comprehension: the art of not-knowing. dialogical and
+ethical perspectives on empathy as dialogue in personal and person-centred
+relationships,” Empathy, pp. 53–71, 2001.
+[15] C. B. Truax, “A scale for the rating of accurate empathy,” The therapeutic
+relationship and its impact, pp. 555–568, 1967.
+[16] A. van Ruiten, D. Haitas, P. Bingley, H. Hoonhout, B. Meerbeek, and
+J. Terken, “Attitude of elderly towards a robotic game-and-train-buddy:
+evaluation of empathy and objective control,” in Proceedings of the
+Doctoral consortium, in the scope of ACII2007 Conference, 2007.
+657
+View publication stats

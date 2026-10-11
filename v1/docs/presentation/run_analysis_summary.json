@@ -1,0 +1,66 @@
+{
+  "overview": {
+    "total_runs": 17,
+    "runs_with_interview": 17,
+    "runs_with_literature": 17,
+    "runs_with_scale": 17,
+    "runs_with_evaluation": 17,
+    "runs_with_selection": 17
+  },
+  "scenarios": {
+    "collab_robot_assembly": 11,
+    "home_service_robot": 3,
+    "counseling_chatbot": 3
+  },
+  "scale_statistics": {
+    "total_runs_with_scales": 17,
+    "mean_items_per_scale": 111.47058823529412,
+    "min_items": 44,
+    "max_items": 191,
+    "unique_dimensions": [
+      "Proactive Assistance in Safety Awareness",
+      "Proactive Support in Turn-Taking Interactions",
+      "Proactive Support and Assistance",
+      "Emotional Support in Turn-Taking Assembly",
+      "Supportive Interaction in Daily Tasks",
+      "Understanding of Goals and Intentions",
+      "Proactive Assistance and Safety Awareness",
+      "Emotional Recognition in Home Assistance",
+      "Trust and Understanding in Turn-Taking Interactions",
+      "Adaptive Communication for Safety Awareness",
+      "Adaptive Navigation Cues for Emotional Comfort",
+      "Proactive Assistance in Turn-Taking Interactions",
+      "Understanding of Safety and Task Intentions",
+      "Emotional Attunement in Text-Based Counseling",
+      "Understanding User Needs in Daily Tasks",
+      "Emotional Recognition in Collaborative Assembly",
+      "Emotional Mirroring in Collaborative Assembly",
+      "Emotional Support through Speech Interaction",
+      "Emotional Attunement in Text-Based Dialogue",
+      "Understanding User Needs and Intentions",
+      "Cognitive Understanding of User Needs",
+      "Trust and Safety Awareness",
+      "Emotional Support in Collaborative Assembly",
+      "Trust and Safety Awareness in Collaborative Tasks",
+      "Proactive Assistance and Support",
+      "Cognitive Understanding of Assembly Goals",
+      "Proactive Assistance in Adaptive Pacing",
+      "Supportive Interaction Dynamics",
+      "Reflective Listening and Validation",
+      "Adaptive Navigation Cues for Emotional Engagement",
+      "Understanding Safety Concerns"
+    ]
+  },
+  "evaluation_statistics": {
+    "total_evaluations": 17,
+    "mean_participants": 200,
+    "mean_rating": 41.85235294117647,
+    "mean_internal_consistency": 0.9676470588235294
+  },
+  "selection_statistics": {
+    "total_selections": 17,
+    "mean_original_items": 111.47058823529412,
+    "mean_selected_items": 16.235294117647058,
+    "mean_selection_ratio": 0.1857861451450881
+  }
+}
